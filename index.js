@@ -16,6 +16,10 @@ app.get('(/index.html)?', function(req, res) {
     res.render('index');
 });
 
+app.get('/profile(-page.html)?', function(req, res) {
+    res.render('profile');
+});
+
 app.get('/equipment(-form.html)?', function(req, res) {
     res.render('equipment-form');
 });
