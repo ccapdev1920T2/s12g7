@@ -1,0 +1,112 @@
+.panel {
+    padding: 16px 24px;
+}
+
+.panel .panel-label {
+    font-family: 'Muli', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    height: 48px;
+    /* border: solid #E1EFE5 1px; */
+    border-radius: 10px;
+    background-color: #f7f7f7;
+    color: #232941;
+    margin-bottom: 16px;
+}
+
+
+.locker {
+    padding: 16px;
+    border: solid #E1EFE5 1px;
+    border-radius: 10px;
+    transition: ease 0.2s;
+}
+
+.locker:not(.locker-status-vacant) {
+    background-color: #f7f7f7;
+}
+
+.locker.locker-status-manage-vacant,
+.locker.locker-status-manage-occupied,
+.locker.locker-status-manage-broken,
+.locker.locker-status-manage-uncleared {
+    background-color: #fff;
+}
+
+.locker.locker-status-vacant:hover,
+.locker.locker-status-manage-vacant:hover,
+.locker.locker-status-manage-occupied:hover,
+.locker.locker-status-manage-broken:hover,
+.locker.locker-status-manage-uncleared:hover {
+    cursor: pointer;
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(124, 204, 145, 0.2);
+}
+
+.locker.locker-status-vacant:active,
+.locker.locker-status-vacant:focus,
+.locker.locker-status-manage-vacant:active,
+.locker.locker-status-manage-vacant:focus,
+.locker.locker-status-manage-occupied:active,
+.locker.locker-status-manage-occupied:focus,
+.locker.locker-status-manage-broken:active,
+.locker.locker-status-manage-broken:focus,
+.locker.locker-status-manage-uncleared:active,
+.locker.locker-status-manage-uncleared:focus {
+    transform: translateY(0);
+    box-shadow: none;
+    background-color: #E1EFE5;
+    transition: 0.1s ease;
+}
+
+.locker.locker-status-vacant.selected {
+    background-color: #53B098;
+    color: #fff;
+}
+
+.locker.locker-status-vacant.selected i {
+    color: #fff;
+}
+
+.locker i {
+    font-size: 14px;
+}
+
+.locker.locker-status-uncleared, 
+.locker.locker-status-occupied, 
+.locker.locker-status-broken {
+    color: rgb(189, 192, 197);
+}
+
+.locker.locker-status-vacant i,
+i.locker-status-vacant,
+.locker.locker-status-manage-vacant i,
+i.locker-status-manage-vacant {
+    color: #53B098;
+}
+
+.locker.locker-status-occupied i,
+i.locker-status-occupied,
+.locker.locker-status-manage-occupied i,
+i.locker-status-manage-occupied {
+    color: #e65946;
+}
+
+.locker.locker-status-uncleared i,
+i.locker-status-uncleared,
+.locker.locker-status-manage-uncleared i,
+i.locker-status-manage-uncleared {
+    color: #e2b740;
+}
+
+.locker.locker-status-broken i,
+i.locker-status-broken,
+.locker.locker-status-manage-broken i,
+i.locker-status-manage-broken {
+    color: #8b8a92;
+}
+
+.label-legend {
+    color: #232941;
+    margin: 16px 24px 0 24px;
+}

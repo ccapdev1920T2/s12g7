@@ -1,0 +1,100 @@
+#avatar {
+    background: url(../static/profile-img.jpg) center no-repeat;
+    background-size: cover;
+    
+    height: 150px;
+    width: 150px;
+    border-radius: 100%;
+    border: solid #fff 5px;
+    box-shadow: 0px 2px 4px rgba(110, 163, 124, 0.3);
+}
+
+.profile-head h5 {
+    color: #545662;
+    font-size: 26px;
+}
+
+.profile-head h6 {
+    color: #7CCC91;
+    font-size: 16px;
+}
+
+.profile-head {
+    margin-top: 1%;
+    font-weight: 600;
+    border: none;
+}
+
+label {
+    color: #545662;
+    font-weight: 600;
+}
+
+
+.profile-card {
+    position: relative;
+    background-color: #fff;
+    border: solid #E1EFE5 1px;
+    border-radius: 16px;
+    box-shadow: 0px 2px 4px rgba(110, 163, 124, 0.3);
+    /* min-height: 100px; */
+    margin-bottom: 30px;
+    margin-top: 50px;
+    /* overflow: hidden; */
+}
+
+.profile-header-bg {
+    background: url(../static/profile-img.jpg) 50% 50% no-repeat;
+    height: 150%;
+    width: 150%;
+    margin: -25%;
+    /* position: absolute;
+    top:0;
+    bottom: 0; */
+    /* z-index: 0; */
+    filter: blur(25px) brightness(0.6);
+    -webkit-filter: blur(25px) brightness(0.6);
+}
+
+.profile-bg-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+@media (min-width: 1200px) {
+    .profile-card .profile-header, .profile-bg-container {
+        border-radius: 16px 0 0 16px;
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .profile-card .profile-header, .profile-bg-container {
+        border-radius: 16px 16px 0 0;
+    }
+}
+
+/* .profile-card .profile-header {
+    background-color: #53B098;
+    background-image: linear-gradient(154.33deg, #7CCC91 20.81%, #53B098 52.32%);
+    background: url(../static/profile-img.jpg) center no-repeat;
+} */
+
+.profile-card .profile-picture {
+    transform: translateY(-50px);
+    margin-bottom: -50px;
+}
+
+.profile-card .profile-name, .profile-card .profile-type {
+    font-family: 'Muli', sans-serif;
+    color: #f7f7f7;
+}
+
+.profile-card .profile-info {
+    background-color: #fff;
+}
+
+.profile-card .profile-info th {
+    font-size: 1.2rem;
+}

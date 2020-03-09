@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+
+  <!-- Custom Styles -->
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/styles-locker.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/9d250896cd.js" crossorigin="anonymous"></script>
+
+  <title>Manage Lockers</title>
+  <link rel="icon" href="static/dummy-logo.png">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="main-container row">
+      <nav class="col-md-3 col-lg-2 sidebar">
+        <div class="sidebar-sticky d-flex flex-column justify-content-between">
+
+          <div class="">
+            <div class="d-flex">
+              <div class="sidebar-brand">
+                <a class="brand d-flex align-items-center" href="index.html">
+                  <img class="brand-logo" src="static/dummy-logo.png"></img>
+                  pahiram
+                </a>
+              </div>
+              <button class="btn nav-btn ml-auto">
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
+  
+            <div class="profile-container mb-4">
+              <a class="d-flex flex-column justify-content-center" href="profile-page.html">
+                <div class="profile-img mb-1 mx-auto"></div>
+                <div class="profile-name text-center">Jane Doe</div>
+              </a>
+            </div>
+            <div class="d-flex justify-content-center my-3">
+              <a type="button" href="index.html" class="btn btn-white btn-round 
+                  btn-main d-flex align-items-center justify-content-center">
+                Rent & Reserve
+              </a>
+            </div>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="my-reservations-page.html">
+                  <i class="fas fa-sticky-note pr-3"></i>
+                  My Reservations
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="terms-page.html">
+                  <i class="fas fa-window-restore pr-3"></i>
+                  Terms
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about-us-page.html">
+                  <i class="fas fa-address-card pr-3"></i>
+                  About Us
+                </a>
+              </li>
+            </ul>
+            <div class="nav-section-header">
+              Administrator
+            </div>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="manage-reservations-page.html">
+                  <i class="fas fa-pen pr-3"></i>
+                  Manage Reservations
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link active" href="manage-lockers-page.html">
+                  <i class="fas fa-columns pr-3"></i>
+                  Manage Lockers
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="manage-equipment-page.html">
+                  <i class="fas fa-plug pr-3"></i>
+                  Manage Equipment
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="sign-out">
+            <a href="login-page.html"><i class="fas fa-sign-out-alt pr-2"></i>Sign Out</a>
+          </div>
+
+        </div>
+      </nav>
+
+      <div class="main col-md-9 col-lg-10 ml-sm-auto p-0">
+        <nav class="navbar navbar-expand-md navbar-light sticky-top">
+          <button class="navbar-toggler btn nav-btn" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
+          <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img class="brand-logo" src="static/dummy-logo.png">
+            pahiram
+          </a>
+        </nav>
+
+        <main role="main" class="pt-3 px-4">
+
+          <form class="form row px-0 col-lg-10 align-items-end mx-auto" action="POST">
+
+            <div class="col-12 d-flex justify-content-between mb-5">
+
+              <h1>Manage lockers</h1>
+              <div>
+                <a id="addPanel" data-toggle="modal" href="#addPanelModal" class="btn btn-secondary btn-lg my-auto"><i
+                    class="fas fa-plus"></i> Add panel</a>
+                </a>
+                <!-- <a id="delPanel" data-toggle="modal" href="#delPanelModal" class="btn btn-dark btn-lg px-3">
+                  <p class="m-1"><i class="fas fa-trash-alt"></i> Remove panel</p>
+                </a> -->
+              </div>
+            </div>
+
+            <div class="col-lg-10 row align-items-end mx-auto">
+
+              <div class="form-group-container col-lg-8">
+                <div class="form-group form-card select-form">
+                  <label for="bldg">Building</label>
+                  <select class="form-control" id="bldg">
+                    <option>Andrew Gonzalez Hall</option>
+                    <option>Gokongwei Building</option>
+                    <option>La Salle Hall</option>
+                    <option>Miguel Hall</option>
+                    <option>Enrique M. Razon Sports Center</option>
+                    <option>Velasco Hall</option>
+                    <option>Yuchengco Hall</option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="form-group-container col-lg-4">
+                <div class="form-group form-card select-form">
+                  <label for="floor">Floor level</label>
+                  <select class="form-control" id="floor">
+                    <option>1/F</option>
+                    <option>2/F</option>
+                    <option>3/F</option>
+                    <option>15/F</option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="form-group-container col-lg-12">
+                <div class="form-group form-card equipment-types pb-4">
+                  <label class="form-control-placeholder col-12">Manage lockers</label>
+                  <div class="label-legend">
+                    <div class="row">
+                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center">
+                        <i class="locker-status-manage-vacant fas fa-circle ml-auto"></i> - vacant
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center">
+                        <i class="locker-status-manage-occupied fas fa-circle ml-auto"></i>- occupied
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center">
+                        <i class="locker-status-manage-broken fas fa-circle ml-auto"></i> - broken
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center">
+                        <i class="locker-status-manage-uncleared fas fa-circle ml-auto"></i> - uncleared
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mx-auto panel">
+                    <div class="col-12 panel-label d-flex align-items-center justify-content-between">
+                      <div>
+                        Small Panel 1 (220-231)
+                      </div>
+                      <a class="delete-panel btn btn-white" data-toggle="modal" href="#delPanelModal">
+                        <i class="fas fa-trash"></i>
+                      </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
+                        #220
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-occupied d-flex align-items-center">
+                        #221
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-uncleared d-flex align-items-center">
+                        #222
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-broken d-flex align-items-center">
+                        #223
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
+                        #224
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
+                        #225
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
+                        #226
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-occupied d-flex align-items-center">
+                        #227
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-occupied d-flex align-items-center">
+                        #228
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
+                        #229
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
+                        #230
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-uncleared d-flex align-items-center">
+                        #231
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+  
+  
+                    <div class="col-12 panel-label d-flex align-items-center justify-content-between">
+                      <div>
+                        Small Panel 2 (208-219)
+                      </div>
+                      <a class="delete-panel btn btn-white" data-toggle="modal" href="#delPanelModal">
+                        <i class="fas fa-trash"></i>
+                      </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
+                        #208
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
+                        #209
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-uncleared d-flex align-items-center">
+                        #210
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
+                        #211
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-occupied d-flex align-items-center">
+                        #212
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-occupied d-flex align-items-center">
+                        #213
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
+                        #214
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-occupied d-flex align-items-center">
+                        #215
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
+                        #216
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-broken d-flex align-items-center">
+                        #217
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 locker-container mb-4">
+                      <div class="locker locker-status-manage-broken d-flex align-items-center">
+                        #218
+                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+          </form>
+
+
+        </main>
+        <footer class="py-5 pt-5 text-muted text-center text-small">
+          <p class="mb-1">De La Salle University - Manila</p>
+          <p class="mb-1">Pahiram Services</p>
+        </footer>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="modal fade" id="setStatusModal" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="statusModalLabel">Locker #</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body col-lg-10 mx-auto">
+          <div class="form-group">
+            <label for="status">Select status:</label>
+            <select class="form-control" id="status">
+              <option value="locker-status-manage-vacant">Vacant</option>
+              <option value="locker-status-manage-occupied">Occupied</option>
+              <option value="locker-status-manage-broken">Broken</option>
+              <option value="locker-status-manage-uncleared">Uncleared</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="statusSubmit">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addPanelModal" tabindex="-1" role="dialog" aria-labelledby="panelModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="panelModalLabel">Add Locker Panel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body col-lg-10 mx-auto">
+          <form class="form-horizontal">
+            <div class="form-group form-inline input-group">
+              <label for="addPanelNumber" class="col-lg-4 justify-content-start">Panel #:</label>
+              <input type="number" class="form-control col-lg-8" placeholder="Enter panel number" id="addPanelNumber">
+            </div>
+            <div class="form-group form-inline input-group">
+              <label for="panelType" class="col-lg-4 justify-content-start">Type:</label>
+              <select class="form-control col-lg-8" id="panelType">
+                <option>Big panel</option>
+                <option>Small panel</option>
+              </select>
+            </div>
+            <div class="form-group form-inline input-group">
+              <label for="panelBldg" class="col-lg-4 justify-content-start">Building:</label>
+              <select class="form-control col-lg-8" id="panelBldg">
+                <option>Andrew Gonzalez Hall</option>
+                <option>Gokongwei Building</option>
+                <option>La Salle Hall</option>
+                <option>Miguel Hall</option>
+                <option>Enrique M. Razon Sports Center</option>
+                <option>Velasco Hall</option>
+                <option>Yuchengco Hall</option>
+              </select>
+            </div>
+            <div class="form-group form-inline input-group">
+              <label for="panelFloor" class="col-lg-4 justify-content-start">Floor:</label>
+              <select class="form-control col-lg-8" id="panelFloor">
+                <option>1/F</option>
+                <option>2/F</option>
+                <option>3/F</option>
+                <option>15/F</option>
+              </select>
+            </div>
+            <div class="form-group form-inline input-group">
+              <label for="low Range" class="col-lg-4 justify-content-start">Range:</label>
+              <input type="number" class="form-control col-lg-3" placeholder="From" id="lowRange">
+              <div class="col-lg-2 m-auto text-center">to</div>
+              <input type="number" class="form-control col-lg-3" placeholder="To" id="highRange">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="panelsubmit">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="delPanelModal" tabindex="-1" role="dialog" aria-labelledby="panelModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="panelModalLabel">Delete Panel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body col-lg-10 mx-auto">
+          <h5>Do you really want to delete this panel?</h1>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="panelsubmit">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/styles.js"></script>
+  <script type="text/javascript" src="js/styles-locker.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      var lockers = $(".locker");
+
+      $(".locker").each(function () {
+        $(this).attr("data-toggle", "modal");
+        $(this).attr("data-target", "#setStatusModal");
+        $(this).attr("data-lockernumber", $(this).text());
+      });
+    });
+
+    $('#setStatusModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget); // Button that triggered the modal
+      var lockernumber = button.data('lockernumber'); // Extract info from data-* attributes
+      var statusIcon = button.find('.locker-status-icon');
+      var classList = button.attr('class').split(' ');
+      $(statusIcon).addClass(classList[1]);
+      var modal = $(this);
+
+      modal.find('.modal-title').text('Locker ' + lockernumber + '');
+      modal.find('.modal-title').append('<i class="locker-status-icon fas fa-circle ml-auto ' + classList[1] + '"></i>');
+      modal.find('#status').val(classList[1]);
+    });
+
+  </script>
+</body>
+
+</html>

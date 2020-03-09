@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+
+  <!-- Custom Styles -->
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/styles-profile-page.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/9d250896cd.js" crossorigin="anonymous"></script>
+
+  <title>Profile Page</title>
+  <link rel="icon" href="static/dummy-logo.png">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="main-container row">
+      <nav class="col-md-3 col-lg-2 sidebar">
+        <div class="sidebar-sticky d-flex flex-column justify-content-between">
+
+          <div class="">
+            <div class="d-flex">
+              <div class="sidebar-brand">
+                <a class="brand d-flex align-items-center" href="index.html">
+                  <img class="brand-logo" src="static/dummy-logo.png">
+                  pahiram
+                </a>
+              </div>
+              <button class="btn nav-btn ml-auto">
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
+
+            <div class="profile-container active mb-4">
+              <a class="d-flex flex-column justify-content-center" href="profile-page.html">
+                <div class="profile-img mb-1 mx-auto"></div>
+                <div class="profile-name text-center">Jane Doe</div>
+              </a>
+            </div>
+            <div class="d-flex justify-content-center my-3">
+              <a type="button" href="index.html" class="btn btn-white btn-round 
+                  btn-main d-flex align-items-center justify-content-center">
+                Rent & Reserve
+              </a>
+            </div>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="my-reservations-page.html">
+                  <i class="fas fa-sticky-note pr-3"></i>
+                  My Reservations
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="terms-page.html">
+                  <i class="fas fa-window-restore pr-3"></i>
+                  Terms
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about-us-page.html">
+                  <i class="fas fa-address-card pr-3"></i>
+                  About Us
+                </a>
+              </li>
+            </ul>
+            <div class="nav-section-header">
+              Administrator
+            </div>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="manage-reservations-page.html">
+                  <i class="fas fa-pen pr-3"></i>
+                  Manage Reservations
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="manage-lockers-page.html">
+                  <i class="fas fa-columns pr-3"></i>
+                  Manage Lockers
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="manage-equipment-page.html">
+                  <i class="fas fa-plug pr-3"></i>
+                  Manage Equipment
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="sign-out">
+            <a href="login-page.html"><i class="fas fa-sign-out-alt pr-2"></i>Sign Out</a>
+          </div>
+
+        </div>
+      </nav>
+
+      <div class="main col-md-9 col-lg-10 ml-sm-auto p-0">
+        <nav class="navbar navbar-expand-md navbar-light sticky-top">
+          <button class="navbar-toggler btn nav-btn" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
+          <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img class="brand-logo" src="static/dummy-logo.png">
+            pahiram
+          </a>
+        </nav>
+
+
+        <main role="main" class="pt-3 px-4">
+
+          <div class="row col-lg-10 align-items-end mx-auto px-0">
+
+            <h1 class="mb-4 col-12">My Account</h1>
+
+            <div class="col-lg-10 mx-auto">
+              <div class="profile-card row mx-auto">
+
+                <div class="col-xl-5 profile-bg-container px-0">
+                  <div class="profile-header-bg"></div>
+                </div>
+
+                <div class="col-xl-5 profile-header px-0">
+                  <div id="avatar" class="profile-picture mx-auto"></div>
+                  <div class="profile-head d-flex flex-column align-items-center pt-3 pb-5">
+                    <h5 class="profile-name mb-0">Jane Doe</h5>
+                    <h6 class="profile-type mb-4">Student</h6>
+                    <a id="editProfile" data-toggle="modal" href="#editProfileModal"
+                      class="btn btn-white btn-round">Edit Profile</a>
+                  </div>
+                </div>
+                <div class="col-xl-7 d-flex align-items-center px-0">
+                  <div class="table-responsive profile-info px-5 py-lg-0 py-5">
+                    <table class="table table-borderless">
+                      <tbody>
+                        <tr>
+                          <th scope="row">ID number</th>
+                          <td>11641193</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">College</th>
+                          <td>CCS</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Degree program</th>
+                          <td>BS-CS</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Email address</th>
+                          <td>jane_doe@dlsu.edu.ph</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Contact number</th>
+                          <td>+63 915 723 1189</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </main>
+
+
+
+        <footer class="py-5 pt-5 text-muted text-center text-small">
+          <p class="mb-1">De La Salle University - Manila</p>
+          <p class="mb-1">Pahiram Services</p>
+        </footer>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="profileModalLabel">Edit Profile</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body col-lg-10 mx-auto">
+          <form class="form-horizontal">
+            <div class="form-group form-inline input-group">
+              <label for="picture" class="col-lg-4 justify-content-start">Image upload (.jpg/.png)</label>
+              <input type="file" class="form-control-file col-lg-8" id="picture">
+            </div>
+            <div class="form-group form-inline input-group">
+              <label for="contact" class="col-lg-4 justify-content-start">Contact #:</label>
+              <input type="number" class="form-control col-lg-8" id="contact" placeholder="Enter new contact number">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="submit">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/styles.js"></script>
+  <script type="text/javascript" src="js/styles-profile.js"></script>
+</body>
+
+</html>

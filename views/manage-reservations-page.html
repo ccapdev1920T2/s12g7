@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+
+  <!-- Custom Styles -->
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/styles-index.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/9d250896cd.js" crossorigin="anonymous"></script>
+
+  <title>Manage Reservations</title>
+  <link rel="icon" href="static/dummy-logo.png">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="main-container row">
+      <nav class="col-md-3 col-lg-2 sidebar">
+        <div class="sidebar-sticky d-flex flex-column justify-content-between">
+
+          <div class="">
+            <div class="d-flex">
+              <div class="sidebar-brand">
+                <a class="brand d-flex align-items-center" href="index.html">
+                  <img class="brand-logo" src="static/dummy-logo.png"></img>
+                  pahiram
+                </a>
+              </div>
+              <button class="btn nav-btn ml-auto">
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
+  
+            <div class="profile-container mb-4">
+              <a class="d-flex flex-column justify-content-center" href="profile-page.html">
+                <div class="profile-img mb-1 mx-auto"></div>
+                <div class="profile-name text-center">Jane Doe</div>
+              </a>
+            </div>
+            <div class="d-flex justify-content-center my-3">
+              <a type="button" href="index.html" class="btn btn-white btn-round 
+                  btn-main d-flex align-items-center justify-content-center">
+                Rent & Reserve
+              </a>
+            </div>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="my-reservations-page.html">
+                  <i class="fas fa-sticky-note pr-3"></i>
+                  My Reservations
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="terms-page.html">
+                  <i class="fas fa-window-restore pr-3"></i>
+                  Terms
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about-us-page.html">
+                  <i class="fas fa-address-card pr-3"></i>
+                  About Us
+                </a>
+              </li>
+            </ul>
+            <div class="nav-section-header">
+              Administrator
+            </div>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="manage-reservations-page.html">
+                  <i class="fas fa-pen pr-3"></i>
+                  Manage Reservations
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="manage-lockers-page.html">
+                  <i class="fas fa-columns pr-3"></i>
+                  Manage Lockers
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="manage-equipment-page.html">
+                  <i class="fas fa-plug pr-3"></i>
+                  Manage Equipment
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="sign-out">
+            <a href="login-page.html"><i class="fas fa-sign-out-alt pr-2"></i>Sign Out</a>
+          </div>
+
+        </div>
+      </nav>
+
+      <div class="main col-md-9 col-lg-10 ml-sm-auto p-0">
+        <nav class="navbar navbar-expand-md navbar-light sticky-top">
+          <button class="navbar-toggler btn nav-btn" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
+          <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img class="brand-logo" src="static/dummy-logo.png">
+            pahiram
+          </a>
+        </nav>
+
+        <main role="main" class="pt-3 px-4">
+
+          <div class="row px-0 col-lg-10 align-items-end mx-auto">
+
+            <h1 class="col-12 mb-5">Manage reservations</h1>
+
+            <div class="col-12 mb-5">
+              <ul class="nav nav-tabs">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button"
+                    aria-haspopup="true" aria-expanded="false">Active Rentals</a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item active" data-toggle="tab" href="#activeLockers">Lockers</a>
+                    <a class="dropdown-item" data-toggle="tab" href="#activeEquipment">Equipment</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                    aria-expanded="false">Past Rentals</a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" data-toggle="tab" href="#pastLockers">Lockers</a>
+                    <a class="dropdown-item" data-toggle="tab" href="#pastEquipment">Equipment</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-12">
+              <div class="tab-content">
+                <div id="activeLockers" class="tab-pane active">
+                  <div class="container">
+                    <h5 class="">Locker rentals</h5>
+                    <div class="d-flex justify-content-between align-items-center pb-3">
+                      <div>
+                        <div class="input-group right-inner-addon px-0">
+                          <div class="form-group form-line">
+                            <input type="search" id="ALsearchBox" class="form-control" required>
+                            <label class="form-control-placeholder" for="ALsearchBox"><i class="fas fa-search"></i> Search
+                              filter</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <a href="#" class="btn btn-tertiary"><i class="fas fa-chevron-left"></i></a>
+                        <span class="mx-3"> 0 - 5 of 5 </span>
+                        <a href="#" class="btn btn-tertiary"><i class="fas fa-chevron-right"></i></a>
+                      </div>
+                    </div>
+  
+                    <div class="table-responsive">
+                      <table class="table table-hover">
+                        <thead class="">
+                          <tr class="active head">
+                            <th>ID number</th>
+                            <th>Date requested</th>
+                            <th>Locker number</th>
+                            <th>Panel type</th>
+                            <th>Location</th>
+                            <th>Balance</th>
+                            <th>Status</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody id="ALtable">
+                          <tr>
+                            <td>11642343</td>
+                            <td>02/24/2020</td>
+                            <td>612</td>
+                            <td>Big</td>
+                            <td>1st, St. Anne</td>
+                            <td>Php 0.00</td>
+                            <td><div class="badge badge-pill status-on-rent">on rent</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+                          </tr>
+                          <tr>
+                            <td>11856410</td>
+                            <td>02/26/2020</td>
+                            <td>415</td>
+                            <td>Small</td>
+                            <td>3rd, St. Joseph</td>
+                            <td>Php 70.00</td>
+                            <td><div class="badge badge-pill status-pickup-pay">to pay</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+
+                          </tr>
+                          <tr>
+                            <td>11143624</td>
+                            <td>02/28/2020</td>
+                            <td>216</td>
+                            <td>Big</td>
+                            <td>4th, Velasco</td>
+                            <td>Php 0.00</td>
+                            <td><div class="badge badge-pill status-on-rent">on rent</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+
+                          </tr>
+                          <tr>
+                            <td>11221122</td>
+                            <td>02/29/2020</td>
+                            <td>976</td>
+                            <td>Big</td>
+                            <td>6th, Faculty Center</td>
+                            <td>Php 0.00</td>
+                            <td><div class="badge badge-pill status-on-rent">on rent</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+
+                          </tr>
+                          <tr>
+                            <td>11557876</td>
+                            <td>03/02/2020</td>
+                            <td>784</td>
+                            <td>Small</td>
+                            <td>2nd, William Hall</td>
+                            <td>Php 200.00</td>
+                            <td><div class="badge badge-pill status-uncleared">uncleared</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+  
+                <div id="activeEquipment" class="tab-pane fade">
+                  <div class="container">
+                    <h5>Equipment rentals</h5>
+  
+                    <div class="d-flex justify-content-between align-items-center pb-3">
+                      <div>
+                        <div class="input-group right-inner-addon px-0">
+                          <div class="form-group form-line">
+                            <input type="search" id="AEsearchBox" class="form-control" required>
+                            <label class="form-control-placeholder" for="AEsearchBox"><i class="fas fa-search"></i> Search
+                              filter</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <a href="#" class="btn btn-tertiary"><i class="fas fa-chevron-left"></i></a>
+                        <span class="mx-3"> 0 - 5 of 5 </span>
+                        <a href="#" class="btn btn-tertiary"><i class="fas fa-chevron-right"></i></a>
+                      </div>
+                    </div>
+  
+                    <div class="table-responsive">
+                      <table class="table table-hover">
+                        <thead class="">
+                          <tr class="active">
+                            <th>ID number</th>
+                            <th>Date requested</th>
+                            <th>Equipment</th>
+                            <th>Time needed</th>
+                            <th>Reason for borrowing</th>
+                            <th>Balance</th>
+                            <th>Status</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody id="AEtable">
+                          <tr>
+                            <td>11242343</td>
+                            <td>02/24/2020</td>
+                            <td>LAN cable</td>
+                            <td>9:15am</td>
+                            <td>Laptop wifi is broken, need internet to do my homework.</td>
+                            <td>Php 0.00</td>
+                            <td><div class="badge badge-pill status-pending">pending</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+                          </tr>
+                          <tr>
+                            <td>1165641</td>
+                            <td>02/26/2020</td>
+                            <td>Extension cord</td>
+                            <td>11:00am</td>
+                            <td>Will use it for Ivy's surprise birthday party !!!</td>
+                            <td>Php 0.00</td>
+                            <td><div class="badge badge-pill status-on-rent">on rent</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+                          </tr>
+                          <tr>
+                            <td>11743624</td>
+                            <td>02/28/2020</td>
+                            <td>VGA cable</td>
+                            <td>7:30am</td>
+                            <td>Classroom movie viewing.</td>
+                            <td>Php 120.00</td>
+                            <td><div class="badge badge-pill status-uncleared">uncleared</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+                          </tr>
+                          <tr>
+                            <td>11521122</td>
+                            <td>02/29/2020</td>
+                            <td>Flash drive</td>
+                            <td>4:15pm</td>
+                            <td>Have to download something from computer lab.</td>
+                            <td>Php 0.00</td>
+                            <td><div class="badge badge-pill status-on-rent">on rent</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+                          </tr>
+                          <tr>
+                            <td>11929876</td>
+                            <td>03/02/2020</td>
+                            <td>HDMI cable</td>
+                            <td>12:45pm</td>
+                            <td>For gaming with my friends.</td>
+                            <td>Php 0.00</td>
+                            <td><div class="badge badge-pill status-on-rent">on rent</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+  
+                  </div>
+                </div>
+  
+                <div id="pastLockers" class="tab-pane fade">
+                  <div class="container">
+                    <h5>Locker rentals</h5>
+                    
+                    <div class="d-flex justify-content-between align-items-center pb-3">
+                      <div>
+                        <div class="input-group right-inner-addon px-0">
+                          <div class="form-group form-line">
+                            <input type="search" id="PLsearchBox" class="form-control" required>
+                            <label class="form-control-placeholder" for="PLsearchBox"><i class="fas fa-search"></i> Search
+                              filter</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <a href="#" class="btn btn-tertiary"><i class="fas fa-chevron-left"></i></a>
+                        <span class="mx-3"> 0 - 5 of 5 </span>
+                        <a href="#" class="btn btn-tertiary"><i class="fas fa-chevron-right"></i></a>
+                      </div>
+                    </div>
+  
+                    <div class="table-responsive">
+                      <table class="table table-hover">
+                        <thead class="">
+                          <tr class="active">
+                            <th>ID number</th>
+                            <th>Date requested</th>
+                            <th>Locker number</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody id="PLtable">
+                          <tr>
+                            <td>11342343</td>
+                            <td>02/29/2020</td>
+                            <td>403</td>
+                            <td>4th, St. Andrews</td>
+                            <td><div class="badge badge-pill status-returned">returned</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+                          </tr>
+                          <tr>
+                            <td>11756413</td>
+                            <td>02/29/2020</td>
+                            <td>232</td>
+                            <td>3th, Gokongwei</td>
+                            <td><div class="badge badge-pill status-returned">returned</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+                          </tr>
+                          <tr>
+                            <td>11643624</td>
+                            <td>02/29/2020</td>
+                            <td>511</td>
+                            <td>1st, St. La Salle</td>
+                            <td><div class="badge badge-pill status-returned">returned</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+                          </tr>
+                          <tr>
+                            <td>11821122</td>
+                            <td>02/29/2020</td>
+                            <td>607</td>
+                            <td>4th, St. Joseph</td>
+                            <td><div class="badge badge-pill status-returned">returned</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+                          </tr>
+                          <tr>
+                            <td>11229876</td>
+                            <td>02/29/2020</td>
+                            <td>113</td>
+                            <td>2nd, Razon Sports Complex</td>
+                            <td><div class="badge badge-pill status-returned">returned</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+  
+                  </div>
+                </div>
+  
+                <div id="pastEquipment" class="tab-pane fade">
+                  <div class="container">
+                    <h5>Equipment rentals</h5>
+                    <div class="d-flex justify-content-between align-items-center pb-3">
+                      <div>
+                        <div class="input-group right-inner-addon px-0">
+                          <div class="form-group form-line">
+                            <input type="search" id="PEsearchBox" class="form-control" required>
+                            <label class="form-control-placeholder" for="PEsearchBox"><i class="fas fa-search"></i> Search
+                              filter</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <a href="#" class="btn btn-tertiary"><i class="fas fa-chevron-left"></i></a>
+                        <span class="mx-3"> 0 - 5 of 5 </span>
+                        <a href="#" class="btn btn-tertiary"><i class="fas fa-chevron-right"></i></a>
+                      </div>
+                    </div>
+  
+                    <div class="table-responsive">
+                      <table class="table table-hover">
+                        <thead class="">
+                          <tr class="active">
+                            <th>ID number</th>
+                            <th>Date reserved</th>
+                            <th>Equipment</th>
+                            <th>Time needed</th>
+                            <th>Reason for borrowing</th>
+                            <th>Status</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody id="PEtable">
+                          <tr>
+                            <td>11342343</td>
+                            <td>02/24/2020</td>
+                            <td>LAN cable</td>
+                            <td>9:15am</td>
+                            <td>Laptop wifi is broken, need internet to do my homework.</td>
+                            <td><div class="badge badge-pill status-returned">returned</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+                          </tr>
+                          <tr>
+                            <td>11756416</td>
+                            <td>02/26/2020</td>
+                            <td>Extension cord</td>
+                            <td>4:15pm</td>
+                            <td>Will use it for Ivy's surprise birthday party !!!</td>
+                            <td><div class="badge badge-pill status-returned">returned</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+                          </tr>
+                          <tr>
+                            <td>11643624</td>
+                            <td>02/28/2020</td>
+                            <td>VGA cable</td>
+                            <td>2:30pm</td>
+                            <td>Classroom movie viewing.</td>
+                            <td><div class="badge badge-pill status-returned">returned</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+                          </tr>
+                          <tr>
+                            <td>11821122</td>
+                            <td>02/29/2020</td>
+                            <td>Flash drive</td>
+                            <td>11:00am</td>
+                            <td>Have to download something from computer lab.</td>
+                            <td><div class="badge badge-pill status-returned">returned</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+                          </tr>
+                          <tr>
+                            <td>11229876</td>
+                            <td>03/02/2020</td>
+                            <td>HDMI cable</td>
+                            <td>9:15am</td>
+                            <td>For gaming with my friends.</td>
+                            <td><div class="badge badge-pill status-returned">returned</div></td>
+                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i class="fas fa-edit"></i> edit</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <footer class="py-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">De La Salle University - Manila</p>
+            <p class="mb-1">Pahiram Services</p>
+          </footer>
+
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editReservationStatusModal" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="statusModalLabel">Update Reservation Status</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body col-lg-10 mx-auto">
+          <form class="form-horizontal">
+            <div class="form-group form-inline input-group">
+              <label for="status" class="col-lg-4 justify-content-start">Type:</label>
+              <select class="form-control col-lg-8" id="status">
+                <option value="status-manage-occupied">Pending</option>
+                <option value="status-manage-broken">To Pay</option>
+                <option value="status-manage-vacant">On Rent</option>
+                <option value="status-manage-uncleared">Returned</option>
+                <option value="status-manage-uncleared">Uncleared</option>
+                <option value="status-manage-uncleared">Denied</option>
+              </select>
+            </div>
+            <div class="form-group form-inline input-group">
+              <label for="remarks" class="col-lg-4 justify-content-start">Remarks</label>
+              <input type="text" class="form-control col-lg-8" placeholder="Enter Remarks"
+                id="remarks">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="statusSubmit">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/styles.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $("#ALsearchBox").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#ALtable tr").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+      $("#AEsearchBox").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#AEtable tr").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+      $("#PLsearchBox").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#PLtable tr").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+      $("#PEsearchBox").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#PEtable tr").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

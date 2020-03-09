@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+
+  <!-- Custom Styles -->
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/styles-equipment.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/9d250896cd.js" crossorigin="anonymous"></script>
+
+  <title>Rent Equipment</title>
+  <link rel="icon" href="static/dummy-logo.png">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="main-container row">
+      <nav class="col-md-3 col-lg-2 sidebar">
+        <div class="sidebar-sticky d-flex flex-column justify-content-between">
+
+          <div class="">
+            <div class="d-flex">
+              <div class="sidebar-brand">
+                <a class="brand d-flex align-items-center" href="index.html">
+                  <img class="brand-logo" src="static/dummy-logo.png"></img>
+                  pahiram
+                </a>
+              </div>
+              <button class="btn nav-btn ml-auto">
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
+  
+            <div class="profile-container mb-4">
+              <a class="d-flex flex-column justify-content-center" href="profile-page.html">
+                <div class="profile-img mb-1 mx-auto"></div>
+                <div class="profile-name text-center">Jane Doe</div>
+              </a>
+            </div>
+            <div class="d-flex justify-content-center my-3">
+              <a type="button" href="index.html" class="btn btn-white btn-round 
+                  btn-main active d-flex align-items-center justify-content-center">
+                Rent & Reserve
+              </a>
+            </div>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="my-reservations-page.html">
+                  <i class="fas fa-sticky-note pr-3"></i>
+                  My Reservations
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="terms-page.html">
+                  <i class="fas fa-window-restore pr-3"></i>
+                  Terms
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about-us-page.html">
+                  <i class="fas fa-address-card pr-3"></i>
+                  About Us
+                </a>
+              </li>
+            </ul>
+            <div class="nav-section-header">
+              Administrator
+            </div>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="manage-reservations-page.html">
+                  <i class="fas fa-pen pr-3"></i>
+                  Manage Reservations
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="manage-lockers-page.html">
+                  <i class="fas fa-columns pr-3"></i>
+                  Manage Lockers
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="manage-equipment-page.html">
+                  <i class="fas fa-plug pr-3"></i>
+                  Manage Equipment
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="sign-out">
+            <a href="login-page.html"><i class="fas fa-sign-out-alt pr-2"></i>Sign Out</a>
+          </div>
+
+        </div>
+      </nav>
+
+      <div class="main col-md-9 col-lg-10 ml-sm-auto p-0">
+        <nav class="navbar navbar-expand-md navbar-light sticky-top">
+          <button class="navbar-toggler btn nav-btn" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
+          <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img class="brand-logo" src="static/dummy-logo.png">
+            pahiram
+          </a>
+        </nav>
+
+        <main role="main" class="pt-3 px-4">
+
+          <form class="form row col-lg-10 mx-auto px-0" action="POST">
+
+            <h1 class="mb-5 col-12">Rent equipment</h1>
+
+            <div class="col-lg-10 row align-items-end mx-auto">
+
+              <div class="form-group-container col-lg-12">
+                <div class="form-group form-card equipment-types pb-4">
+                  <label class="form-control-placeholder col-12">Choose an equipment to borrow</label>
+                  <label class="label-desc col-12">Only one equipment can be borrowed per request.</label>
+                  <div class="row px-4 mx-auto">
+                    <div class="col-lg-4 col-md-6 col-6 d-flex flex-column align-items-center" >
+                      <div class="equipment-element" id="lan-cable"></div>
+                      <button class="btn btn-toggle" id="lan-btn" data-toggle="button" aria-pressed="false" type="button">
+                        LAN cable
+                      </button>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-6 d-flex flex-column align-items-center" >
+                      <div class="equipment-element" id="extension-cord"></div>
+                      <button class="btn btn-toggle" id="extension-btn" data-toggle="button" aria-pressed="false" type="button">
+                        Extension cord
+                      </button>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-6 d-flex flex-column align-items-center" >
+                      <div class="equipment-element" id="vga-cable"></div>
+                      <button class="btn btn-toggle" id="vga-btn" data-toggle="button" aria-pressed="false" type="button">
+                        VGA cable
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="form-group-container col-lg-8">
+                <div class="form-group form-card">
+                  <label class="form-control-placeholder d-block" for="reason">Reason for borrowing the equipment</label>
+                  <label class="label-desc d-block">(e.g. I need this for my presentation in CCAPDEV)</label>
+                  <input type="text" id="reason" class="form-control" required>
+                </div>
+              </div>
+  
+              <div class="form-group-container col-lg-4">
+                <div class="form-group form-card select-form">
+                  <label class="d-block" for="borrow-time">Time needed</label>
+                  <label class="label-desc d-block">next school day</label>
+                  <select class="form-control" id="borrow-time">
+                    <option>7:30am</option>
+                    <option>9:15am</option>
+                    <option>11:00am</option>
+                    <option>12:45pm</option>
+                    <option>2:30pm</option>
+                    <option>4:15pm</option>
+                    <option>6:00pm</option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="form-group-container row col-12 mx-auto justify-content-end align-items-center">
+                <div class="form-check mr-4 d-flex align-items-center">
+                  <input type="checkbox" class="form-check-input my-auto" id="checkTerms" required>
+                  <label class="form-check-label ml-2" for="checkTerms">
+                    I agree to the <a data-toggle="modal" href="#equipmentTermsModal">Terms and Conditions</a>.
+                  </label>
+                </div>
+                <a href="index.html" class="btn btn-outline btn-lg mr-4">Go back</a>
+                <input class="btn btn-primary btn-lg" type="submit">
+              </div>
+
+            </div>
+
+
+          </form>
+
+        </main>
+        
+            <footer class="py-5 pt-5 text-muted text-center text-small">
+              <p class="mb-1">De La Salle University - Manila</p>
+              <p class="mb-1">Pahiram Services</p>
+            </footer>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="modal fade" id="equipmentTermsModal" tabindex="-1" role="dialog" aria-labelledby="equipmentModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="equipmentModalLabel">Terms and Conditions</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body col-lg-10 mx-auto">
+          <h5>Equipment service</h5>
+          <ol class="list-group list-group-flush">
+            <li class="list-group-item">1. A user can borrow up to 2 pieces of equipment per reserved date.</li>
+            <li class="list-group-item">2. All equipment are to be collected and returned to the Computer Studies Government office.</li>
+            <li class="list-group-item">3. There is no time limit in borrowing equipment as long as it is returned before 6pm.</li>
+            <li class="list-group-item">4. Equipment will be tested before borrowing and upon returning. </li>
+            <li class="list-group-item">5. Charges may apply to the following:
+                <ul>
+                    <li>Php 50.00 - For returning borrowed materials beyond 6pm.</li>
+                    <li>Php 150.00 - For damaged/loss equipment.</li>
+                </ul>
+            </li>
+            <li class="list-group-item">6. Unreturned equipment will impose fee incrementing by Php 20.00 per day.</li>
+            <li class="list-group-item">7. Damaged/loss equipment should be replaced immediately.</li>
+            <li class="list-group-item">8. Failure to comply with the terms will result in restricted use of pahiram's equipment borrowing service.</li>                            
+          </ol>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/styles.js"></script>
+  <script type="text/javascript" src="js/styles-equipment.js"></script>
+</body>
+
+</html>

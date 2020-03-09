@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+
+  <!-- Custom Styles -->
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/styles-my-reservations.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/9d250896cd.js" crossorigin="anonymous"></script>
+
+  <title>My Reservations</title>
+  <link rel="icon" href="static/dummy-logo.png">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="main-container row">
+      <nav class="col-md-3 col-lg-2 sidebar">
+        <div class="sidebar-sticky d-flex flex-column justify-content-between">
+
+          <div class="">
+            <div class="d-flex">
+              <div class="sidebar-brand">
+                <a class="brand d-flex align-items-center" href="index.html">
+                  <img class="brand-logo" src="static/dummy-logo.png"></img>
+                  pahiram
+                </a>
+              </div>
+              <button class="btn nav-btn ml-auto">
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
+  
+            <div class="profile-container mb-4">
+              <a class="d-flex flex-column justify-content-center" href="profile-page.html">
+                <div class="profile-img mb-1 mx-auto"></div>
+                <div class="profile-name text-center">Jane Doe</div>
+              </a>
+            </div>
+            <div class="d-flex justify-content-center my-3">
+              <a type="button" href="index.html" class="btn btn-white btn-round 
+                  btn-main d-flex align-items-center justify-content-center">
+                Rent & Reserve
+              </a>
+            </div>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="my-reservations-page.html">
+                  <i class="fas fa-sticky-note pr-3"></i>
+                  My Reservations
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="terms-page.html">
+                  <i class="fas fa-window-restore pr-3"></i>
+                  Terms
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about-us-page.html">
+                  <i class="fas fa-address-card pr-3"></i>
+                  About Us
+                </a>
+              </li>
+            </ul>
+            <div class="nav-section-header">
+              Administrator
+            </div>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="manage-reservations-page.html">
+                  <i class="fas fa-pen pr-3"></i>
+                  Manage Reservations
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="manage-lockers-page.html">
+                  <i class="fas fa-columns pr-3"></i>
+                  Manage Lockers
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="manage-equipment-page.html">
+                  <i class="fas fa-plug pr-3"></i>
+                  Manage Equipment
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="sign-out">
+            <a href="login-page.html"><i class="fas fa-sign-out-alt pr-2"></i>Sign Out</a>
+          </div>
+
+        </div>
+      </nav>
+
+      <div class="main col-md-9 col-lg-10 ml-sm-auto p-0">
+        <nav class="navbar navbar-expand-md navbar-light sticky-top">
+          <button class="navbar-toggler btn nav-btn" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
+          <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img class="brand-logo" src="static/dummy-logo.png">
+            pahiram
+          </a>
+        </nav>
+
+        <main role="main" class="pt-3 px-4">
+
+          <div class="row px-0 col-lg-10 align-items-end mx-auto">
+
+            <h1 class="mb-5 col-12">My reservations</h1>
+
+            <div class="col-12 mb-5">
+              <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#activeRequests">Active Requests</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#pastRequests">Past Requests</a>
+                </li>
+              </ul>
+            </div>
+            <div class="tab-content col-12">
+              <div id="activeRequests" class="tab-pane active">
+                <div class="row">
+                  <!-- equipment 1 -->
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card equal-height status-pending">
+                      <h5 class="card-header">Extension Cord</h5>
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-borderless">
+                            <tbody>
+                              <tr>
+                                <th scope="row">Date</th>
+                                <td>07 Mar 2020</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Remarks</th>
+                                <td>N/A</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="card-footer d-flex justify-content-between align-items-center">
+                        <a class="" data-toggle="modal" href="#">Cancel</a>
+                        <span class="badge badge-pill">Pending</span>
+                        <div class="color-container"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card equal-height status-pending">
+                      <h5 class="card-header">VGA Cable</h5>
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-borderless">
+                            <tbody>
+                              <tr>
+                                <th scope="row">Date</th>
+                                <td>03 Mar 2020</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Remarks</th>
+                                <td>N/A</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="card-footer d-flex justify-content-between align-items-center">
+                        <a class="" data-toggle="modal" href="#">Cancel</a>
+                        <span class="badge badge-pill">Pending</span>
+                        <div class="color-container"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card equal-height status-pickup-pay">
+                      <h5 class="card-header">LAN Cable</h5>
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-borderless">
+                            <tbody>
+                              <tr>
+                                <th scope="row">Date</th>
+                                <td>01 Mar 2020</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Remarks</th>
+                                <td>Proceed to G504 for pickup.</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="card-footer d-flex justify-content-between align-items-center">
+                        <a class="" data-toggle="modal" href="#">Cancel</a>
+                        <span class="badge badge-pill">For Pickup</span>
+                        <div class="color-container"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card equal-height status-on-rent">
+                      <h5 class="card-header">Extension Cord</h5>
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-borderless">
+                            <tbody>
+                              <tr>
+                                <th scope="row">Date</th>
+                                <td>17 Feb 2020</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Remarks</th>
+                                <td>Return the equipment within the day.</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="card-footer d-flex justify-content-end">
+                        <span class="badge badge-pill">On Rent</span>
+                        <div class="color-container"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- locker 1 -->
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card equal-height status-uncleared">
+                      <h5 class="card-header">Locker (Small)</h5>
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-borderless">
+                            <tbody>
+                              <tr>
+                                <th scope="row">Location</th>
+                                <td>Gokongwei 2/F</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Remarks</th>
+                                <td>Please pay a fine of P100 to the accounting office.</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="card-footer d-flex justify-content-end">
+                        <span class="badge badge-pill">Uncleared</span>
+                        <div class="color-container"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!--past requests-->
+              <div id="pastRequests" class="tab-pane fade">
+                <div class="row">
+
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card equal-height status-denied">
+                      <h5 class="card-header">Locker (Small)</h5>
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-borderless">
+                            <tbody>
+                              <tr>
+                                <th scope="row">Location</th>
+                                <td>Gokongwei 3/F</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Remarks</th>
+                                <td>Settle your uncleared penalties first.</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="card-footer d-flex justify-content-end">
+                        <span class="badge badge-pill">Denied</span>
+                        <div class="color-container"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card equal-height status-returned">
+                      <h5 class="card-header">Extension Cord</h5>
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-borderless">
+                            <tbody>
+                              <tr>
+                                <th scope="row">Date</th>
+                                <td>17 June 2019</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Remarks</th>
+                                <td>Returned on 18 June 2019.</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="card-footer d-flex justify-content-end">
+                        <span class="badge badge-pill">Returned</span>
+                        <div class="color-container"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card equal-height status-returned">
+                      <h5 class="card-header">Extension Cord</h5>
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-borderless">
+                            <tbody>
+                              <tr>
+                                <th scope="row">Date</th>
+                                <td>04 Oct 2018</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Remarks</th>
+                                <td>Returned on 05 Oct 2018.</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="card-footer d-flex justify-content-end">
+                        <span class="badge badge-pill">Returned</span>
+                        <div class="color-container"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card equal-height status-returned">
+                      <h5 class="card-header">Locker (Small)</h5>
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-borderless">
+                            <tbody>
+                              <tr>
+                                <th scope="row">Location</th>
+                                <td>Gokongwei 2/F</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Remarks</th>
+                                <td>Returned on 04 April 2018.</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="card-footer d-flex justify-content-end">
+                        <span class="badge badge-pill">Returned</span>
+                        <div class="color-container"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card equal-height status-returned">
+                      <h5 class="card-header">Locker (Big)</h5>
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-borderless">
+                            <tbody>
+                              <tr>
+                                <th scope="row">Location</th>
+                                <td>Gokongwei 3/F</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Remarks</th>
+                                <td>Returned on 19 April 2019.</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="card-footer d-flex justify-content-end">
+                        <span class="badge badge-pill">Returned</span>
+                        <div class="color-container"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <footer class="py-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">De La Salle University - Manila</p>
+            <p class="mb-1">Pahiram Services</p>
+          </footer>
+
+        </main>
+        <!-- do not remove -->
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/styles.js"></script>
+
+</body>
+
+</html>
