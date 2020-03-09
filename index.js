@@ -4,6 +4,7 @@ const port = 3000;
 
 const app = express();
 
+app.use(express.static('public'));
 app.set('view engine', 'hbs');
 
 // hbs.registerHelper();
