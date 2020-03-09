@@ -16,10 +16,6 @@ app.get('(/index.html)?', function(req, res) {
     res.render('index');
 });
 
-app.get('/profile(-page.html)?', function(req, res) {
-    res.render('profile');
-});
-
 app.get('/equipment(-form.html)?', function(req, res) {
     res.render('equipment-form');
 });
@@ -36,8 +32,16 @@ app.get('/terms(-page.html)?', function(req, res) {
     res.render('terms-page');
 });
 
-app.get('/about-us(-page.html)?', function(req, res) {
-    res.render('about-us-page');
+app.get('/manage-reservations(-page.html)?', function(req, res) {
+    res.render('manage-reservations-page');
+});
+
+app.get('/manage-lockers(-page.html)?', function(req, res) {
+    res.render('manage-lockers-page');
+});
+
+app.get('/manage-equipment(-page.html)?', function(req, res) {
+    res.render('manage-equipment-page');
 });
 
 app.listen(port, function () {
