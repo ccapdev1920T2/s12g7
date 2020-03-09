@@ -44,6 +44,14 @@ app.get('/manage-equipment(-page.html)?', function(req, res) {
     res.render('manage-equipment-page');
 });
 
+app.get('/login(-page.html)?', function(req, res) {
+    res.render('login-page');
+});
+
+app.get('/register(.html)?', function(req, res) {
+    res.render('register');
+});
+
 app.listen(port, function () {
     console.log('Listening at port ' + port);
 });
