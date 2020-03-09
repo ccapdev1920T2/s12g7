@@ -32,6 +32,10 @@ app.get('/terms(-page.html)?', function(req, res) {
     res.render('terms-page');
 });
 
+app.get('/about-us(-page.html)?', function(req, res) {
+    res.render('about-us-page');
+});
+
 app.get('/manage-reservations(-page.html)?', function(req, res) {
     res.render('manage-reservations-page');
 });
