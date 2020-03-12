@@ -10,42 +10,66 @@ app.set('view engine', 'hbs');
 
 // hbs.registerHelper();
 
-// hbs.registerPartials();
+hbs.registerPartials(__dirname + '/views/partials');
 
 app.get('(/index.html)?', function(req, res) {
-    res.render('index');
+    res.render('index', {
+        active: {active_index: true} // indicates which page is active in the nav partial
+    });
 });
 
 app.get('/equipment(-form.html)?', function(req, res) {
-    res.render('equipment-form');
+    res.render('equipment-form', {
+        active: {active_index: true}
+    });
 });
 
 app.get('/locker(-form.html)?', function(req, res) {
-    res.render('locker-form');
+    res.render('locker-form', {
+        active: {active_index: true}
+    });
+});
+
+app.get('/profile(-page.html)?', function(req, res) {
+    res.render('profile-page', {
+        active: {active_profile: true}
+    });
 });
 
 app.get('/my-reservations(-page.html)?', function(req, res) {
-    res.render('my-reservations-page');
+    res.render('my-reservations-page', {
+        active: {active_my_reservations: true}
+    });
 });
 
 app.get('/terms(-page.html)?', function(req, res) {
-    res.render('terms-page');
+    res.render('terms-page', {
+        active: {active_terms: true}
+    });
 });
 
 app.get('/about-us(-page.html)?', function(req, res) {
-    res.render('about-us-page');
+    res.render('about-us-page', {
+        active: {active_about_us: true}
+    });
 });
 
 app.get('/manage-reservations(-page.html)?', function(req, res) {
-    res.render('manage-reservations-page');
+    res.render('manage-reservations-page', {
+        active: {active_manage_reservations: true}
+    });
 });
 
 app.get('/manage-lockers(-page.html)?', function(req, res) {
-    res.render('manage-lockers-page');
+    res.render('manage-lockers-page', {
+        active: {active_manage_lockers: true}
+    });
 });
 
 app.get('/manage-equipment(-page.html)?', function(req, res) {
-    res.render('manage-equipment-page');
+    res.render('manage-equipment-page', {
+        active: {active_manage_equipment: true}
+    });
 });
 
 app.get('/login(-page.html)?', function(req, res) {
