@@ -8,7 +8,7 @@ app.use(express.static('public'));
 
 app.set('view engine', 'hbs');
 
-// hbs.registerHelper();
+// hbs.registerHelper(); 
 
 hbs.registerPartials(__dirname + '/views/partials');
 
