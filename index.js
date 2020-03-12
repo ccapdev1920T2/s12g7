@@ -8,13 +8,13 @@ app.use(express.static('public'));
 
 app.set('view engine', 'hbs');
 
-// hbs.registerHelper(); 
+// hbs.registerHelper();
 
 hbs.registerPartials(__dirname + '/views/partials');
 
 app.get('(/index.html)?', function(req, res) {
     res.render('index', {
-        active: {active_index: true} // indicates which page is active in the nav partial
+        active: {active_index: true} // indicates which page is active in the nav partial.
     });
 });
 
