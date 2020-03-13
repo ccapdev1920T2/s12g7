@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-/* mongoose.connect('mongodb+srv://root:p@ssword@cluster0-wovzq.gcp.mongodb.net/test?retryWrites=true&w=majority', {
+/* mongoose.connect('mongodb+srv://root:p%40ssword@cluster0-wovzq.gcp.mongodb.net/test?retryWrites=true&w=majority', {
     useMongoClient: true
 }) */
 
