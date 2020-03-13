@@ -18,6 +18,7 @@
   "homepage": "https://github.com/ccapdev1920T2/s12g7#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "hbs": "^4.1.0"
+    "hbs": "^4.1.0",
+    "mongoose": "^5.9.4"
   }
 }

@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-const Equipment = new mongoose.Schema({
+const equipmentSchema = new mongoose.Schema({
     name: {type: String, required: true},
-    quantity: {type: Number, required: true},
+    quantity: {type: Number, default: 0},
     image: {data: Buffer, contentType: String}
 });
 
-module.exports = mongoose.model('Equipment', Equipment);
+module.exports = mongoose.model('Equipment', equipmentSchema);

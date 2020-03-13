@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Panel = new mongoose.Schema({
+const panelSchema = new mongoose.Schema({
     type: {type: String, required: true},
     building: {type: String, required: true},
     floor: {type: String, required: true},
@@ -10,4 +10,4 @@ const Panel = new mongoose.Schema({
     }]
 });
 
-module.exports = mongoose.model('Panel', Panel);
+module.exports = mongoose.model('Panel', panelSchema);
