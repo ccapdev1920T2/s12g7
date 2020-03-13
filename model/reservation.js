@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const reservationSchema = new mongoose.Schema({
+    userID: {type: Number, required: true},
     reservationType: { type: String, enum: ['locker', 'equipment'] },
     date: { type: Date, default: Date.now },
     status: { 
