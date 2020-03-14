@@ -3,11 +3,22 @@ const hbs = require('hbs');
 const port = 3000;
 const mongoose = require('mongoose');
 
+// Google OAuth
+const passport = require('passport');
+const auth = require('./auth');
+
+// Cookies and session
+const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
+
 const Reservation = require('./model/reservation');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://root:p%40ssword@cluster0-wovzq.gcp.mongodb.net/test?retryWrites=true&w=majority',
+auth(passport);
+app.use(passport.initialize());
+
+mongoose.connect('mongodb://localhost:27017/',
     { useNewUrlParser: true, useUnifiedTopology: true }
 ).catch(err => {
     console.log('Error connecting to the db: ' + err);
@@ -15,15 +26,35 @@ mongoose.connect('mongodb+srv://root:p%40ssword@cluster0-wovzq.gcp.mongodb.net/t
 
 app.use(express.static('public'));
 
+app.use(cookieSession({
+    name: 'session',
+    keys: ['123']
+}));
+
+app.use(cookieParser());
+
 app.set('view engine', 'hbs');
 
 // hbs.registerHelper();
 
 hbs.registerPartials(__dirname + '/views/partials');
 
+app.get('/auth/google', passport.authenticate('google', {
+    scope: ['https://www.googleapis.com/auth/plus.login']
+}));
+
+app.get('/auth/google/callback',
+    passport.authenticate('google', {
+        failureRedirect: '/login'
+    }), function (req, res) {
+        req.session.token = req.user.token;
+        res.redirect('/');
+    }
+);
+
 app.get('(/index.html)?', async function (req, res) {
 
-    var reservation = new Reservation({
+    /* var reservation = new Reservation({
         userID: 11826401,
         reservationType: 'locker',
         status: 'Pending',
@@ -34,9 +65,27 @@ app.get('(/index.html)?', async function (req, res) {
         console.log('Error writing to db');
     }); // TODO: test using CREATE method instead */
 
-    res.render('index', {
-        active: { active_index: true } // indicates which page is active in the nav partial.
-    });
+    if (req.session.token) {
+        res.cookie('token', req.session.token);
+        // res.json({
+        //     status: 'session cookie set'
+        // });
+        res.render('index', {
+            active: { active_index: true }, // indicates which page is active in the nav partial.
+        });
+    } else {
+        res.cookie('token', '')
+        // res.json({
+        //     status: 'session cookie not set'
+        // });
+        res.redirect('/login');
+    }
+});
+
+app.get('/logout', (req, res) => {
+    req.logout();
+    req.session = null;
+    res.redirect('/');
 });
 
 app.get('/equipment(-form.html)?', function (req, res) {
