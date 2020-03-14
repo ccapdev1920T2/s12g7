@@ -67,17 +67,12 @@ app.get('(/index.html)?', async function (req, res) {
 
     if (req.session.token) {
         res.cookie('token', req.session.token);
-        // res.json({
-        //     status: 'session cookie set'
-        // });
+        console.log(req.session.passport.user.profile);
         res.render('index', {
             active: { active_index: true }, // indicates which page is active in the nav partial.
         });
     } else {
         res.cookie('token', '')
-        // res.json({
-        //     status: 'session cookie not set'
-        // });
         res.redirect('/login');
     }
 });
