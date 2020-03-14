@@ -8,7 +8,7 @@ const Reservation = require('./model/reservation');
 const app = express();
 
 mongoose.connect('mongodb+srv://root:p%40ssword@cluster0-wovzq.gcp.mongodb.net/test?retryWrites=true&w=majority', 
-    {useNewUrlParser: true, useUnifiedTopology: trueA}
+    {useNewUrlParser: true, useUnifiedTopology: true}
 );
 
 app.use(express.static('public'));
@@ -21,7 +21,7 @@ hbs.registerPartials(__dirname + '/views/partials');
 
 app.get('(/index.html)?', function (req, res) {
 
-    /* var reservation = new Reservation({
+    var reservation = new Reservation({
         userID: 11826401,
         reservationType: 'locker',
         status: 'Pending',
@@ -30,7 +30,7 @@ app.get('(/index.html)?', function (req, res) {
     });
     reservation.save(function(err) {
         if (err) console.log('Error writing to db');
-    }); */ // TODO: test using CREATE method instead
+    }); // TODO: test using CREATE method instead
 
     res.render('index', {
         active: { active_index: true } // indicates which page is active in the nav partial.
