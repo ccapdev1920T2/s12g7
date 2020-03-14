@@ -1,0 +1,29 @@
+body {
+    background-image: linear-gradient(154.33deg, #7CCC91 20.81%, #53B098 52.32%);
+    color: #545662;
+    font-size: 14px;
+    height: 100vh;
+}
+
+.header-brand {
+    color: #7CCC91; 
+    font-family: 'Quicksand';
+    font-weight: 600; /* semi-bold */
+    font-size: 3rem;
+}
+
+.container {
+    background-color: transparent;
+    height: 85%;
+    font-family: 'Muli', sans-serif;
+}
+
+.leftside {
+    background-color: #FAFAFA;
+    border-radius: 16px 0px 0px 16px;
+}
+
+.rightside {
+    background-color:#E1EFE5;;
+    border-radius: 0px 16px 16px 0px;
+}

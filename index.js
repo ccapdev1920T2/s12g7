@@ -12,6 +12,7 @@ const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 
 const Reservation = require('./model/reservation');
+const User = require('./model/user');
 
 const app = express();
 
@@ -52,7 +53,7 @@ app.get('/auth/google/callback',
     }
 );
 
-app.get('(/index.html)?', async function (req, res) {
+app.get('(/index.html)?', function (req, res) {
 
     /* var reservation = new Reservation({
         userID: 11826401,
@@ -142,7 +143,14 @@ app.get('/login(-page.html)?', function (req, res) {
 });
 
 app.get('/register(.html)?', function (req, res) {
-    res.render('register');
+
+    var colleges = User.schema.path('college').enumValues;
+    console.log(req.session.passport.user.profile.emails[0].value);
+
+    res.render('register', {
+        colleges: colleges,
+        email: req.session.passport.user.profile.emails[0].value
+    });
 });
 
 app.listen(port, function () {

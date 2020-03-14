@@ -2,114 +2,70 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 
-    <!-- Custom Styles -->
-    <link href="css/styles-register.css" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/styles-login.css" rel="stylesheet">
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lato|Muli&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet"> <!-- logo -->
-    <!-- FontAwesome -->
-    <script src="https://kit.fontawesome.com/9d250896cd.js" crossorigin="anonymous"></script>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet"> <!-- logo -->
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/9d250896cd.js" crossorigin="anonymous"></script>
 
-    <title>Register</title>
+  <title>Register</title>
   <link rel="icon" href="static/dummy-logo.png">
 </head>
 
 <body class="d-flex flex-column justify-content-center align-items-center">
-    <div class="container">
-        <div class="row m-0" id="loginForm">
-            <div class="leftside 
-                        d-flex 
-                        flex-column justify-content-center 
-                        align-items-center col-md-7">
-                <div class="space"></div>
-                <h1>pahiram</h1>
-                <div class="space"></div>
-
-                <!-- DIV FOR SPACE -->
-
-                <!-- DIV FOR SPACE? -->
-            </div>
-            <div class="rightside 
-                        d-flex 
-                        flex-column justify-content-center 
-                        align-items-center col-md-5">
-                <div class="space"></div>
-                <h1>Create your account</h1>
-
-                <form>
-                    <div class="form-group">
-                        <input type="text" id="idnum" class="form-control" required>
-                        <label class="form-control-placeholder" for="idnum">User ID</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" class="form-control" required>
-                        <label class="form-control-placeholder" for="email">E-mail address</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="fname" class="form-control" required>
-                        <label class="form-control-placeholder" for="fname">First Name</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="lname" class="form-control" required>
-                        <label class="form-control-placeholder" for="lname">Last Name</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" id="password" class="form-control" required>
-                        <label class="form-control-placeholder" for="password">Password</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" id="cpassword" class="form-control" required>
-                        <label class="form-control-placeholder" for="cpassword">Confirm Password</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                        I agree to the 
-                            <a id="register" data-toggle="modal" data-target="#myModal">Terms and Conditions.</a>
-                        
-                    </div>
-                    <a id="locker-btn" type="button" class="btn btn-primary btn-block" href="index.html">Sign up</a>
-                    <div class="space"></div>  
-                    
-                                                <!-- The Modal -->
-                        <!-- The Modal -->
-                    <div class="modal" id="myModal">
-                        <div class="modal-dialog">
-                        <div class="modal-content">
-                        
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                            <h4 class="modal-title">Modal Heading</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-                            
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                            Modal body..
-                            </div>
-                            
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            </div>
-                            
-                        </div>
-                        </div>
-                    </div><!--  -->
-                </form> 
-            </div>
+  <div class="container">
+    <div class="card h-100">
+      <div class="row m-0 h-100">
+        <div class="col-md-7">
+          <!-- INSERT ILLUS HERE -->
         </div>
+        <div class="col-md-5">
+          <h1 class="mb-5">Complete your registration</h1>
+          <form class="form-horizontal">
+            <div class="form-group form-inline input-group">
+              <label for="idnum" class="col-lg-4 justify-content-start p-0">ID Number</label>
+              <input type="number" class="form-control mb-2 col-lg-8" placeholder="Enter your ID number"
+                id="idnum">
+            </div>
+            <div class="form-group form-inline input-group">
+              <label for="college" class="col-lg-4 justify-content-start p-0">College</label>
+              <select class="form-control col-lg-8" id="college">
+                {{#each colleges}}
+                  <option value="{{this}}">{{this}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <div class="form-group form-inline input-group">
+              <label for="degProg" class="col-lg-4 justify-content-start p-0">Degree Program</label>
+              <input type="text" class="form-control mb-2 col-lg-8" placeholder="Enter your ID number"
+                id="degProg">
+            </div>
+            <div class="form-group form-inline input-group">
+              <label for="email" class="col-lg-4 justify-content-start p-0">Email Address</label>
+              <input type="email" class="form-control mb-2 col-lg-8" id="email" value="{{email}}" readonly>
+            </div>
+            <div class="form-group form-inline input-group">
+              <label for="phone" class="col-lg-4 justify-content-start p-0">Mobile Number</label>
+              <input type="tel" class="form-control mb-2 col-lg-8" placeholder="Enter your contact number"
+                id="phone">
+            </div>
+            <input type="submit" class="btn btn-primary" value="Register">
+          </form>
+        </div>
+      </div>
     </div>
-
-
-  
+  </div>
 </body>
 
 </html>

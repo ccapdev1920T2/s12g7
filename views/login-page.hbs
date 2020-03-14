@@ -2,67 +2,44 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 
-    <!-- Custom Styles -->
-    <link href="css/styles-homepage.css" rel="stylesheet">
-    <link href="css/styles-bootstrap-social.css" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/styles-login.css" rel="stylesheet">
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lato|Muli&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet"> <!-- logo -->
-    <!-- FontAwesome -->
-    <script src="https://kit.fontawesome.com/9d250896cd.js" crossorigin="anonymous"></script>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Lato|Muli&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet"> <!-- logo -->
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/9d250896cd.js" crossorigin="anonymous"></script>
 
-    <title>Log In</title>
+  <title>Log In</title>
   <link rel="icon" href="static/dummy-logo.png">
 </head>
 
 <body class="d-flex flex-column justify-content-center align-items-center">
-    <div class="container">
-        <div class="row m-0" id="loginForm">
-            <div class="leftside 
-                        d-flex 
-                        flex-column justify-content-center 
-                        align-items-center col-md-5">
-                <div class="space"></div>
-                <h1>pahiram</h1>
-                <!-- <div class="space"></div> -->
-
-                <!-- DIV FOR SPACE -->
-                
-                <form>
-                    <a class="btn btn-block btn-social">
-                        <i class="fab fa-google"></i> Log in with Google
-                    </a>
-                    <div class="form-group">
-                        <input type="text" id="idnum" class="form-control" required>
-                        <label class="form-control-placeholder" for="idnum">User ID</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" id="password" class="form-control" required>
-                        <label class="form-control-placeholder" for="password">Password</label>
-                    </div>
-                    <!-- <div class="space"></div> -->
-                    <a id="locker-btn" type="button" class="btn btn-primary btn-block" href="index.html">Log in</a>
-                    <div class="space"></div>
-                    
-                    <p>Don't have an account? <span><a id="register" type="link" href="register.html">Sign up here.</a></span></p>
-                   
-                </form>
-                <!-- DIV FOR SPACE? -->
-            </div>
-            <div class="rightside col-md-7">
-                <!-- INSERT ILLUS HERE -->    
-            </div>
+  <div class="container">
+    <div class="card h-100">
+      <div class="row m-0 h-100">
+        <div class="d-flex flex-column justify-content-center align-items-center col-md-5">
+          <h1 class="mb-5 header-brand">pahiram</h1>
+          <a class="btn btn-round btn-lg btn-primary btn-social">
+            <i class="fab fa-google mr-2"></i> Log in
+          </a>
+          <!-- DIV FOR SPACE? -->
         </div>
-
+        <div class="col-md-7">
+          <!-- INSERT ILLUS HERE -->
+        </div>
+      </div>
     </div>
+  </div>
 </body>
 
 </html>
