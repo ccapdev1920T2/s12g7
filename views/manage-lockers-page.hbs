@@ -329,7 +329,8 @@
             </div>
             <div class="form-group form-inline input-group">
               <label for="panelBldg" class="col-lg-4 justify-content-start">Building:</label>
-              <select class="form-control col-lg-8" id="panelBldg">
+              <input type="text" class="form-control col-lg-8" id="panelBldg" list="bldgList"/>
+              <datalist id="bldgList">
                 <option>Andrew Gonzalez Hall</option>
                 <option>Gokongwei Building</option>
                 <option>La Salle Hall</option>
@@ -337,16 +338,17 @@
                 <option>Enrique M. Razon Sports Center</option>
                 <option>Velasco Hall</option>
                 <option>Yuchengco Hall</option>
-              </select>
+              </datalist>
             </div>
             <div class="form-group form-inline input-group">
               <label for="panelFloor" class="col-lg-4 justify-content-start">Floor:</label>
-              <select class="form-control col-lg-8" id="panelFloor">
+              <input type="text" class="form-control col-lg-8" id="panelFloor" list="flrList"/>
+              <datalist id="flrList">
                 <option>1/F</option>
                 <option>2/F</option>
                 <option>3/F</option>
                 <option>15/F</option>
-              </select>
+              </datalist>
             </div>
             <div class="form-group form-inline input-group">
               <label for="low Range" class="col-lg-4 justify-content-start">Range:</label>
