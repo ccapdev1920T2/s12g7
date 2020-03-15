@@ -97,89 +97,29 @@
                       </div>
                     </div>
                   </div>
+
                   <div class="row mx-auto panel">
-                    <div class="col-12 panel-label d-flex align-items-center justify-content-between">
-                      <div>
-                        Small Panel 1 (220-231)
+
+                    {{#each panels}}
+                      <div class="col-12 panel-label d-flex align-items-center justify-content-between">
+                        <div>
+                          {{type}} panel
+                        </div>
+                        <a class="delete-panel btn btn-white" data-toggle="modal" href="#delPanelModal">
+                          <i class="fas fa-trash"></i>
+                        </a>
                       </div>
-                      <a class="delete-panel btn btn-white" data-toggle="modal" href="#delPanelModal">
-                        <i class="fas fa-trash"></i>
-                      </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
-                        #220
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-occupied d-flex align-items-center">
-                        #221
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-uncleared d-flex align-items-center">
-                        #222
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-broken d-flex align-items-center">
-                        #223
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
-                        #224
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
-                        #225
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
-                        #226
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-occupied d-flex align-items-center">
-                        #227
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-occupied d-flex align-items-center">
-                        #228
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
-                        #229
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
-                        #230
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-uncleared d-flex align-items-center">
-                        #231
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-  
-  
+
+                      {{#each lockers}}
+                        <div class="col-lg-4 col-md-6 locker-container mb-4">
+                          <div class="locker locker-status-manage-{{status}} d-flex align-items-center">
+                            #{{number}}
+                            <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                          </div>
+                        </div>
+                      {{/each}}
+                    {{/each}}
+
                     <div class="col-12 panel-label d-flex align-items-center justify-content-between">
                       <div>
                         Small Panel 2 (208-219)
@@ -188,6 +128,7 @@
                         <i class="fas fa-trash"></i>
                       </a>
                     </div>
+
                     <div class="col-lg-4 col-md-6 locker-container mb-4">
                       <div class="locker locker-status-manage-vacant d-flex align-items-center">
                         #208
@@ -254,7 +195,10 @@
                         <i class="locker-status-icon fas fa-circle ml-auto"></i>
                       </div>
                     </div>
+
                   </div>
+
+
                 </div>
               </div>
 
