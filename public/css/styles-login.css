@@ -3,13 +3,21 @@
     background-color: #fff;
 }
 
-
-.illustration {
+body {
+    min-height: 100vh;
     background-image: linear-gradient(154.33deg, #7CCC91 20.81%, #53B098 52.32%);
 }
 
+.card {
+    padding: 60px 80px;
+}
+
+.brand-logo {
+    height: 100px;
+}
+
 .header-brand {
-    color: #7CCC91; 
+    color: #1A4D55; 
     font-family: 'Quicksand';
     font-weight: 600; /* semi-bold */
     font-size: 3rem;
