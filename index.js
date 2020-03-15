@@ -1,7 +1,14 @@
 const express = require('express');
 const hbs = require('hbs');
-const port = 3000;
 const mongoose = require('mongoose');
+const port = 3000;
+const app = express();
+
+// Handlebars
+app.set('view engine', 'hbs');
+
+// Express static files
+app.use(express.static('public'));
 
 // Google OAuth
 const passport = require('passport');
@@ -11,77 +18,32 @@ const auth = require('./auth');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 
-const Reservation = require('./model/reservation');
-const User = require('./model/user');
-
-const app = express();
-
+// Passport for Google oauth
 auth(passport);
 app.use(passport.initialize());
 
+// Cookies and sessions
+app.use(cookieSession({
+    name: 'session',
+    keys: ['123']
+}));
+app.use(cookieParser());
+
+// Routes
+const user = require('./routes/user');
+const home = require('./routes/home');
+
+// Connecting to the db
 mongoose.connect('mongodb://localhost:27017/',
     { useNewUrlParser: true, useUnifiedTopology: true }
 ).catch(err => {
     console.log('Error connecting to the db: ' + err);
 });
 
-app.use(express.static('public'));
-
-app.use(cookieSession({
-    name: 'session',
-    keys: ['123']
-}));
-
-app.use(cookieParser());
-
-app.set('view engine', 'hbs');
-
-// hbs.registerHelper();
-
 hbs.registerPartials(__dirname + '/views/partials');
 
-app.get('/auth/google', passport.authenticate('google', {
-    scope: ['https://www.googleapis.com/auth/userinfo.profile', 
-        'https://www.googleapis.com/auth/userinfo.email']
-}));
-
-app.get('/auth/google/callback',
-    passport.authenticate('google', {
-        failureRedirect: '/login'
-    }), function (req, res) {
-        req.session.token = req.user.token;
-        res.redirect('/');
-    }
-);
-
-app.get('(/index.html)?', function (req, res) {
-
-    /* var reservation = new Reservation({
-        userID: 11826401,
-        reservationType: 'locker',
-        status: 'Pending',
-        Description: 'This is a description.',
-        Remarks: 'This is remarkable.'
-    });
-    await reservation.save().catch(err => {
-        console.log('Error writing to db');
-    }); // TODO: test using CREATE method instead */
-
-    if (req.session.token) {
-        res.cookie('token', req.session.token);
-        console.log(req.session.passport.user.profile);
-        res.render('index', {
-            active: { active_index: true }, // indicates which page is active in the nav partial.
-            sidebarData: { 
-                dp: req.session.passport.user.profile.photos[0].value,
-                name: req.session.passport.user.profile.displayName,
-            }
-        });
-    } else {
-        res.cookie('token', '')
-        res.redirect('/login');
-    }
-});
+app.use('/', user);
+app.use('/', home);
 
 app.get('/logout', (req, res) => {
     req.logout();
