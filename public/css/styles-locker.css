@@ -7,7 +7,7 @@
     font-size: 14px;
     font-weight: bold;
     height: 48px;
-    /* border: solid #E1EFE5 1px; */
+    /* border: solid #e7f1ed 1px; */
     border-radius: 10px;
     background-color: #f7f7f7;
     color: #232941;
@@ -17,7 +17,7 @@
 
 .locker {
     padding: 16px;
-    border: solid #E1EFE5 1px;
+    border: solid #e7f1ed 1px;
     border-radius: 10px;
     transition: ease 0.2s;
 }
@@ -55,12 +55,12 @@
 .locker.locker-status-manage-uncleared:focus {
     transform: translateY(0);
     box-shadow: none;
-    background-color: #E1EFE5;
+    background-color: #e7f1ed;
     transition: 0.1s ease;
 }
 
 .locker.locker-status-vacant.selected {
-    background-color: #53B098;
+    background-color: #38b98a;
     color: #fff;
 }
 
@@ -82,7 +82,7 @@
 i.locker-status-vacant,
 .locker.locker-status-manage-vacant i,
 i.locker-status-manage-vacant {
-    color: #53B098;
+    color: #38b98a;
 }
 
 .locker.locker-status-occupied i,

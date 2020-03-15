@@ -1,12 +1,12 @@
 body {
-    background-image: linear-gradient(154.33deg, #7CCC91 20.81%, #53B098 52.32%);
+    background-image: linear-gradient(154.33deg, #6aca6f 20.81%, #38b98a 52.32%);
     color: #545662;
     font-size: 14px;
     height: 100vh;
 }
 
 h1 {
-    color: #7CCC91; 
+    color: #6aca6f; 
     font-family: 'Muli';
     font-weight: 600; /* semi-bold */
 }
@@ -22,12 +22,12 @@ h1 {
 }
 
 .leftside {
-    background-color:/*  #FAFAFA; */#E1EFE5;
+    background-color:/*  #FAFAFA; */#e7f1ed;
     border-radius: 16px 0px 0px 16px;
 }
 
 .rightside {
-    background-color:/*  #E1EFE5; */#fafafa;
+    background-color:/*  #e7f1ed; */#fafafa;
     border-radius: 0px 16px 16px 0px;
 }
 
@@ -49,7 +49,7 @@ h1 {
 }
 
 .btn-primary {
-    background-image: linear-gradient(/* 270deg */to left, #1A4D55 , #2A6573, #458595);
+    background-image: linear-gradient(/* 270deg */to left, #1f6383 , #2A6573, #458595);
 }
 
 form {
@@ -69,7 +69,7 @@ form {
 .form-control:focus {
     background-color: transparent;
     border-width: 6px;
-    border-color: #7CCC91;
+    border-color: #6aca6f;
     box-shadow: none;
 }
 
@@ -104,7 +104,7 @@ p {
 }
 
 #register {
-    color: #7CCC91; 
+    color: #6aca6f; 
     cursor: pointer;
     font-weight: 900;
 }

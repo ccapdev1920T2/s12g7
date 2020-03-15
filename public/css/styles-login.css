@@ -5,7 +5,7 @@
 
 body {
     min-height: 100vh;
-    background-image: linear-gradient(154.33deg, #7CCC91 20.81%, #53B098 52.32%);
+    background-image: linear-gradient(154.33deg, #6aca6f 20.81%, #38b98a 52.32%);
 }
 
 .card {
@@ -17,7 +17,7 @@ body {
 }
 
 .header-brand {
-    color: #1A4D55; 
+    color: #1f6383; 
     font-family: 'Quicksand';
     font-weight: 600; /* semi-bold */
     font-size: 3rem;
@@ -35,6 +35,6 @@ body {
 }
 
 .rightside {
-    background-color:#E1EFE5;;
+    background-color:#e7f1ed;;
     border-radius: 0px 12px 12px 0px;
 }
