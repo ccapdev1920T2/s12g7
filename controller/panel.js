@@ -7,8 +7,7 @@ exports.panel_create = function (req, res) {
         locker_array.push({number: i, status: 'vacant'});
     }
 
-    let panel = new Panel(
-        {
+    let panel = new Panel({
             type: req.body.panelType,
             building: req.body.panelBldg,
             level: req.body.panelFloor,
@@ -23,14 +22,23 @@ exports.panel_create = function (req, res) {
 };
 
 exports.panel_details = function(req, res) {
-    Panel.find({building: bldg, level: flr}, function(err, panel) {
+    Panel.find({building: req.query.bldg, level: req.query.flr}, function(err, panel) {
         if (err) return next(err);
-        res.send(panel);
+        //res.send(panel);
+        res.render('manage-lockers-page', {
+            active: { active_manage_lockers: true },
+            //sidebarData: { 
+            //    dp: req.session.passport.user.profile.photos[0].value,
+            //    name: req.session.passport.user.profile.displayName,
+            //},
+            panels: panel
+        });
     })
 };
 
 exports.panel_update = function(req, res) {
-    const targetPanel = await Panel.findOne({
+    //await removed in line 41
+    const targetPanel = Panel.findOne({
         building: req.params.bldg, 
         level: req.params.flr, 
         panel: req.params.panelid
