@@ -17,12 +17,8 @@
                     <div class="profile-name text-center">{{sb.name}}</div>
                 </a>
             </div>
-            <div class="d-flex justify-content-center my-3">
-                <a type="button" href="index.html" class="{{#if act.active_index}}active{{/if}} btn btn-white btn-round btn-main d-flex align-items-center justify-content-center">
-                    Rent & Reserve
-                </a>
-            </div>
             <ul class="nav flex-column">
+                <li class="nav-item mb-4"><a class="{{#if act.active_index}}active{{/if}} nav-link nav-main" href="index.html">Rent & Reserve</a></li>
                 <li class="nav-item"><a class="{{#if act.active_my_reservations}}active{{/if}} nav-link" href="my-reservations-page.html"><i class="fas fa-sticky-note pr-3"></i> My Reservations </a></li>
                 <li class="nav-item"><a class="{{#if act.active_terms}}active{{/if}} nav-link" href="terms-page.html"><i class="fas fa-window-restore pr-3"></i> Terms </a></li>
                 <li class="nav-item"><a class="{{#if act.active_about_us}}active{{/if}} nav-link" href="about-us-page.html"><i class="fas fa-address-card pr-3"></i> About Us </a></li>

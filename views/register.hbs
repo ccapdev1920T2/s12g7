@@ -24,43 +24,40 @@
 </head>
 
 <body class="d-flex flex-column justify-content-center align-items-center">
-  <div class="container">
-    <div class="card h-100">
-      <div class="row m-0 h-100">
-        <div class="col-md-7">
-          <!-- INSERT ILLUS HERE -->
-        </div>
-        <div class="col-md-5">
-          <h1 class="mb-5">Complete your registration</h1>
-          <form class="form-horizontal">
-            <div class="form-group form-inline input-group">
-              <label for="idnum" class="col-lg-4 justify-content-start p-0">ID Number</label>
-              <input type="number" class="form-control mb-2 col-lg-8" placeholder="Enter your ID number"
-                id="idnum">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="illustration col-md-5">
+        <!-- INSERT ILLUS HERE -->
+      </div>
+      <div class="content col-md-7">
+        <div class="card-body row my-5">
+          <h1 class="mx-auto mb-5">Complete your registration.</h1>
+          <form class="col-8 mx-auto row">
+            <div class="form-group col-12">
+              <label for="idnum">ID Number</label>
+              <input type="number" class="form-control" placeholder="Enter your ID number" id="idnum">
             </div>
-            <div class="form-group form-inline input-group">
-              <label for="college" class="col-lg-4 justify-content-start p-0">College</label>
-              <select class="form-control col-lg-8" id="college">
+            <div class="form-group col-12">
+              <label for="college">College</label>
+              <select class="form-control" id="college">
                 {{#each colleges}}
-                  <option value="{{this}}">{{this}}</option>
+                <option value="{{this}}">{{this}}</option>
                 {{/each}}
               </select>
             </div>
-            <div class="form-group form-inline input-group">
-              <label for="degProg" class="col-lg-4 justify-content-start p-0">Degree Program</label>
-              <input type="text" class="form-control mb-2 col-lg-8" placeholder="Enter your ID number"
-                id="degProg">
+            <div class="form-group col-12">
+              <label for="degProg">Degree Program</label>
+              <input type="text" class="form-control" placeholder="Enter your ID number" id="degProg">
             </div>
-            <div class="form-group form-inline input-group">
-              <label for="email" class="col-lg-4 justify-content-start p-0">Email Address</label>
-              <input type="email" class="form-control mb-2 col-lg-8" id="email" value="{{email}}" readonly>
+            <div class="form-group col-12">
+              <label for="email">Email Address</label>
+              <input type="email" class="form-control" id="email" value="{{email}}" readonly>
             </div>
-            <div class="form-group form-inline input-group">
-              <label for="phone" class="col-lg-4 justify-content-start p-0">Mobile Number</label>
-              <input type="tel" class="form-control mb-2 col-lg-8" placeholder="Enter your contact number"
-                id="phone">
+            <div class="form-group col-12 mb-5">
+              <label for="phone">Mobile Number</label>
+              <input type="tel" class="form-control" placeholder="Enter your contact number" id="phone">
             </div>
-            <input type="submit" class="btn btn-primary" value="Register">
+            <input type="submit" class="btn btn-primary btn-round mx-auto" value="Sign up">
           </form>
         </div>
       </div>
