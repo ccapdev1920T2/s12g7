@@ -31,7 +31,7 @@
 <body>
   <div class="container-fluid">
     <div class="main-container row">
-      {{> sidenav active}}
+      {{> sidenav act=active sb=sidebarData}}
 
       <div class="main col-md-9 col-lg-10 ml-sm-auto p-0">
         {{> topnav}}
@@ -70,10 +70,7 @@
 
         </main>
 
-        <footer class="py-5 pt-5 text-muted text-center text-small">
-          <p class="mb-1">De La Salle University - Manila</p>
-          <p class="mb-1">Pahiram Services</p>
-        </footer>
+        {{> footer}}
 
       </div>
 
