@@ -28,7 +28,7 @@
 <body>
   <div class="container-fluid">
     <div class="main-container row">
-      {{> sidenav active}}
+      {{> sidenav act=active sb=sidebarData}}
 
       <div class="main col-md-9 col-lg-10 ml-sm-auto p-0">
         {{> topnav}}
@@ -42,13 +42,13 @@
               <div class="profile-card row mx-auto">
 
                 <div class="col-xl-5 profile-bg-container px-0">
-                  <div class="profile-header-bg"></div>
+                  <div class="profile-header-bg" style="background-image: url({{sidebarData.dp}});"></div>
                 </div>
 
                 <div class="col-xl-5 profile-header px-0">
-                  <div id="avatar" class="profile-picture mx-auto"></div>
+                  <div id="avatar" class="profile-picture mx-auto" style="background-image: url({{sidebarData.dp}});"></div>
                   <div class="profile-head d-flex flex-column align-items-center pt-3 pb-5">
-                    <h5 class="profile-name mb-0">Jane Doe</h5>
+                    <h5 class="profile-name mb-0">{{sidebarData.name}}</h5>
                     <h6 class="profile-type mb-4">Student</h6>
                     <a id="editProfile" data-toggle="modal" href="#editProfileModal"
                       class="btn btn-white btn-round">Edit Profile</a>

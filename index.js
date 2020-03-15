@@ -41,7 +41,8 @@ app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
 
 app.get('/auth/google', passport.authenticate('google', {
-    scope: ['https://www.googleapis.com/auth/plus.login']
+    scope: ['https://www.googleapis.com/auth/userinfo.profile', 
+        'https://www.googleapis.com/auth/userinfo.email']
 }));
 
 app.get('/auth/google/callback',
@@ -71,6 +72,10 @@ app.get('(/index.html)?', function (req, res) {
         console.log(req.session.passport.user.profile);
         res.render('index', {
             active: { active_index: true }, // indicates which page is active in the nav partial.
+            sidebarData: { 
+                dp: req.session.passport.user.profile.photos[0].value,
+                name: req.session.passport.user.profile.displayName,
+            }
         });
     } else {
         res.cookie('token', '')
@@ -86,55 +91,91 @@ app.get('/logout', (req, res) => {
 
 app.get('/equipment(-form.html)?', function (req, res) {
     res.render('equipment-form', {
-        active: { active_index: true }
+        active: { active_index: true },
+        sidebarData: { 
+            dp: req.session.passport.user.profile.photos[0].value,
+            name: req.session.passport.user.profile.displayName,
+        }
     });
 });
 
 app.get('/locker(-form.html)?', function (req, res) {
     res.render('locker-form', {
-        active: { active_index: true }
+        active: { active_index: true },
+        sidebarData: { 
+            dp: req.session.passport.user.profile.photos[0].value,
+            name: req.session.passport.user.profile.displayName,
+        }
     });
 });
 
 app.get('/profile(-page.html)?', function (req, res) {
     res.render('profile-page', {
-        active: { active_profile: true }
+        active: { active_profile: true },
+        sidebarData: { 
+            dp: req.session.passport.user.profile.photos[0].value,
+            name: req.session.passport.user.profile.displayName,
+        }
     });
 });
 
 app.get('/my-reservations(-page.html)?', function (req, res) {
     res.render('my-reservations-page', {
-        active: { active_my_reservations: true }
+        active: { active_my_reservations: true },
+        sidebarData: { 
+            dp: req.session.passport.user.profile.photos[0].value,
+            name: req.session.passport.user.profile.displayName,
+        }
     });
 });
 
 app.get('/terms(-page.html)?', function (req, res) {
     res.render('terms-page', {
-        active: { active_terms: true }
+        active: { active_terms: true },
+        sidebarData: { 
+            dp: req.session.passport.user.profile.photos[0].value,
+            name: req.session.passport.user.profile.displayName,
+        }
     });
 });
 
 app.get('/about-us(-page.html)?', function (req, res) {
     res.render('about-us-page', {
-        active: { active_about_us: true }
+        active: { active_about_us: true },
+        sidebarData: { 
+            dp: req.session.passport.user.profile.photos[0].value,
+            name: req.session.passport.user.profile.displayName,
+        }
     });
 });
 
 app.get('/manage-reservations(-page.html)?', function (req, res) {
     res.render('manage-reservations-page', {
-        active: { active_manage_reservations: true }
+        active: { active_manage_reservations: true },
+        sidebarData: { 
+            dp: req.session.passport.user.profile.photos[0].value,
+            name: req.session.passport.user.profile.displayName,
+        }
     });
 });
 
 app.get('/manage-lockers(-page.html)?', function (req, res) {
     res.render('manage-lockers-page', {
-        active: { active_manage_lockers: true }
+        active: { active_manage_lockers: true },
+        sidebarData: { 
+            dp: req.session.passport.user.profile.photos[0].value,
+            name: req.session.passport.user.profile.displayName,
+        }
     });
 });
 
 app.get('/manage-equipment(-page.html)?', function (req, res) {
     res.render('manage-equipment-page', {
-        active: { active_manage_equipment: true }
+        active: { active_manage_equipment: true },
+        sidebarData: { 
+            dp: req.session.passport.user.profile.photos[0].value,
+            name: req.session.passport.user.profile.displayName,
+        }
     });
 });
 
