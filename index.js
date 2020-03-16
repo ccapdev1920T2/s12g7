@@ -34,7 +34,7 @@ const index = require('./routes/index.routes');
 const profile = require('./routes/user.routes');
 const reserve = require('./routes/reserve.routes');
 const myReservations = require('./routes/myReservations.routes');
-const panel = require('./routes/panel');
+const panel = require('./routes/panel.routes');
 
 // Connecting to the db
 mongoose.connect('mongodb://localhost:27017/',
