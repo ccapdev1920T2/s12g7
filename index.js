@@ -31,6 +31,7 @@ app.use(cookieParser());
 
 // Routes
 const index = require('./routes/index.routes');
+const profile = require('./routes/user.routes');
 const reserve = require('./routes/reserve.routes');
 const myReservations = require('./routes/myReservations.routes');
 
@@ -44,6 +45,7 @@ mongoose.connect('mongodb://localhost:27017/',
 hbs.registerPartials(__dirname + '/views/partials');
 
 app.use('/', index);
+app.use('/profile', profile);
 app.use('/reserve', reserve);
 app.use('/my-reservations', myReservations);
 
@@ -75,10 +77,6 @@ app.get('/manage-equipment(-page.html)?', function (req, res) {
             name: req.session.passport.user.profile.displayName,
         }
     });
-});
-
-app.get('/login(-page.html)?', function (req, res) {
-    res.render('login-page');
 });
 
 app.listen(port, function () {
