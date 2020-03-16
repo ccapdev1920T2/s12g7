@@ -45,9 +45,9 @@ mongoose.connect('mongodb://localhost:27017/',
 hbs.registerPartials(__dirname + '/views/partials');
 
 app.use('/', index);
-app.use('/profile', profile);
-app.use('/reserve', reserve);
-app.use('/my-reservations', myReservations);
+app.use('/profile', userIsLoggedIn, profile);
+app.use('/reserve', userIsLoggedIn, reserve);
+app.use('/my-reservations', userIsLoggedIn, myReservations);
 
 app.get('/manage-reservations(-page.html)?', function (req, res) {
     res.render('manage-reservations-page', {
@@ -79,6 +79,19 @@ app.get('/manage-equipment(-page.html)?', function (req, res) {
     });
 });
 
+app.use(function (req, res, next) {
+    res.status(404).send("Sorry can't find that!");
+    // TODO: create 404 page
+})
+
 app.listen(port, function () {
     console.log('Listening at port ' + port);
 });
+
+// Middleware
+function userIsLoggedIn(req, res, next) {
+    if (req.session.token)
+        next();
+    else
+        res.redirect('/login');
+}
