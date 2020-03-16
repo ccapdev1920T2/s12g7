@@ -16,8 +16,8 @@ const reservationSchema = new mongoose.Schema({
             'Returned'
         ]
     },
-    Description: String,
-    Remarks: String
+    description: String,
+    remarks: String
 });
 
 module.exports = mongoose.model('Reservation', reservationSchema);
