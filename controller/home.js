@@ -15,7 +15,7 @@ exports.index = function (req, res) {
         res.cookie('token', req.session.token);
         res.render('index', {
             active: { active_index: true }, // indicates which page is active in the nav partial.
-            sidebarData: {
+            sidebarData: { 
                 dp: req.session.passport.user.profile.photos[0].value,
                 name: req.session.passport.user.profile.displayName,
             }

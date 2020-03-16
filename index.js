@@ -33,8 +33,6 @@ app.use(cookieParser());
 const user = require('./routes/user');
 const home = require('./routes/home');
 
-const User = require('./model/user');
-
 // Connecting to the db
 mongoose.connect('mongodb://localhost:27017/',
     { useNewUrlParser: true, useUnifiedTopology: true }
