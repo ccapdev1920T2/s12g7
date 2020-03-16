@@ -1,14 +1,14 @@
+const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
 const mongoose = require('mongoose');
 const port = 3000;
 const app = express();
-
 // Handlebars
 app.set('view engine', 'hbs');
 
 // Express static files
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Google OAuth
 const passport = require('passport');
@@ -46,26 +46,6 @@ hbs.registerPartials(__dirname + '/views/partials');
 app.use('/', index);
 app.use('/reserve', reserve);
 app.use('/my-reservations', myReservations);
-
-app.get('/terms(-page.html)?', function (req, res) {
-    res.render('terms-page', {
-        active: { active_terms: true },
-        sidebarData: {
-            dp: req.session.passport.user.profile.photos[0].value,
-            name: req.session.passport.user.profile.displayName,
-        }
-    });
-});
-
-app.get('/about-us(-page.html)?', function (req, res) {
-    res.render('about-us-page', {
-        active: { active_about_us: true },
-        sidebarData: {
-            dp: req.session.passport.user.profile.photos[0].value,
-            name: req.session.passport.user.profile.displayName,
-        }
-    });
-});
 
 app.get('/manage-reservations(-page.html)?', function (req, res) {
     res.render('manage-reservations-page', {

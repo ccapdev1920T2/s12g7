@@ -29,6 +29,26 @@ exports.home = function (req, res) {
     }
 };
 
+exports.terms = function (req, res) {
+    res.render('terms-page', {
+        active: { active_terms: true },
+        sidebarData: {
+            dp: req.session.passport.user.profile.photos[0].value,
+            name: req.session.passport.user.profile.displayName,
+        }
+    });
+};
+
+exports.about = function (req, res) {
+    res.render('about-us-page', {
+        active: { active_about_us: true },
+        sidebarData: {
+            dp: req.session.passport.user.profile.photos[0].value,
+            name: req.session.passport.user.profile.displayName,
+        }
+    });
+}
+
 exports.signin = passport.authenticate('google', {
     scope: ['https://www.googleapis.com/auth/userinfo.profile',
         'https://www.googleapis.com/auth/userinfo.email'],
