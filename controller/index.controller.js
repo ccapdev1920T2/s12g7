@@ -59,12 +59,35 @@ exports.callback_success = function (req, res) {
     res.redirect('/');
 };
 
-exports.register = function (req, res) {
+exports.register_get = function (req, res) {
     var colleges = User.schema.path('college').enumValues;
 
     res.render('register', {
         colleges: colleges,
         email: req.session.passport.user.profile.emails[0].value
+    });
+};
+
+exports.register_post = async function (req, res) {
+    var user = new User({
+        firstName: req.session.passport.user.profile.name.givenName,
+        lastName: req.session.passport.user.profile.name.familyName,
+        email: req.session.passport.user.profile.emails[0].value,
+        idNum: req.body.idNum,
+        college: User.schema.path('college').enumValues[req.body.college],
+        degreeProg: req.body.degProg,
+        contactNum: req.body.phone,
+        type: 'student',
+    });
+
+    await user.save(function(err, user) {
+        if (err) {
+            console.log('Error writing to db');
+        } else {
+            console.log('success');
+
+        }
+        res.redirect('/');
     });
 };
 
