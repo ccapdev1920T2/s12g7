@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 exports.lockerSchema = new mongoose.Schema({
-    number: { type: Object, required: true, unique: true },
+    number: { type: Number, required: true, unique: true },
     status: {
         type: String,
         required: true,
