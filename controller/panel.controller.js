@@ -1,4 +1,4 @@
-const Panel = require('../model/panel');
+const Panel = require('../model/panel.model');
 
 exports.panel_create = function (req, res) {
     var locker_array = [];
