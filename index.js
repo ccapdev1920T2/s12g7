@@ -80,8 +80,12 @@ app.get('/manage-equipment(-page.html)?', function (req, res) {
 });
 
 app.use(function (req, res, next) {
-    res.status(404).send("Sorry can't find that!");
-    // TODO: create 404 page
+    res.status(404).render('404-page', {
+        sidebarData: {
+            dp: req.session.passport.user.profile.photos[0].value,
+            name: req.session.passport.user.profile.displayName,
+        }
+    });
 })
 
 app.listen(port, function () {
