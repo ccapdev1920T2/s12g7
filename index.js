@@ -33,6 +33,8 @@ app.use(cookieParser());
 const user = require('./routes/user');
 const home = require('./routes/home');
 
+const User = require('./model/user');
+
 // Connecting to the db
 mongoose.connect('mongodb://localhost:27017/',
     { useNewUrlParser: true, useUnifiedTopology: true }
@@ -44,12 +46,6 @@ hbs.registerPartials(__dirname + '/views/partials');
 
 app.use('/', user);
 app.use('/', home);
-
-app.get('/logout', (req, res) => {
-    req.logout();
-    req.session = null;
-    res.redirect('/');
-});
 
 app.get('/equipment(-form.html)?', function (req, res) {
     res.render('equipment-form', {
@@ -143,17 +139,6 @@ app.get('/manage-equipment(-page.html)?', function (req, res) {
 
 app.get('/login(-page.html)?', function (req, res) {
     res.render('login-page');
-});
-
-app.get('/register(.html)?', function (req, res) {
-
-    var colleges = User.schema.path('college').enumValues;
-    console.log(req.session.passport.user.profile.emails[0].value);
-
-    res.render('register', {
-        colleges: colleges,
-        email: req.session.passport.user.profile.emails[0].value
-    });
 });
 
 app.listen(port, function () {
