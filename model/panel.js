@@ -4,8 +4,8 @@ const lockerSchema = require('./locker');
 
 const panelSchema = new mongoose.Schema({
     type: { type: String, required: true },
-    building: { type: String, required: true }, // TODO: enum for buildings
-    level: { type: Number, min: 0, required: true },
+    building: { type: String, required: true, trim: true },
+    level: { type: Number, min: 0, required: true, trim: true },
     lockers: [lockerSchema]
 });
 
