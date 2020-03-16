@@ -34,34 +34,36 @@ const index = require('./routes/index.routes');
 const profile = require('./routes/user.routes');
 const reserve = require('./routes/reserve.routes');
 const myReservations = require('./routes/myReservations.routes');
+const panel = require('./routes/panel');
 
 // Connecting to the db
 mongoose.connect('mongodb://localhost:27017/',
-    { useNewUrlParser: true, useUnifiedTopology: true }
+    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
 ).catch(err => {
     console.log('Error connecting to the db: ' + err);
 });
 
 hbs.registerPartials(__dirname + '/views/partials');
+hbs.registerHelper('lockernumber', function (obj) {
+    const JSONstr = JSON.stringify(obj);
+    const JSobj = JSON.parse(JSONstr);
+    return JSobj.number;
+});
+hbs.registerHelper('lockerstatus', function (obj) {
+    const JSONstr = JSON.stringify(obj);
+    const JSobj = JSON.parse(JSONstr);
+    return JSobj.status;
+});
 
 app.use('/', index);
 app.use('/profile', userIsLoggedIn, profile);
 app.use('/reserve', userIsLoggedIn, reserve);
 app.use('/my-reservations', userIsLoggedIn, myReservations);
+app.use('/manage-lockers(-page.html)?', panel);
 
 app.get('/manage-reservations(-page.html)?', function (req, res) {
     res.render('manage-reservations-page', {
         active: { active_manage_reservations: true },
-        sidebarData: {
-            dp: req.session.passport.user.profile.photos[0].value,
-            name: req.session.passport.user.profile.displayName,
-        }
-    });
-});
-
-app.get('/manage-lockers(-page.html)?', function (req, res) {
-    res.render('manage-lockers-page', {
-        active: { active_manage_lockers: true },
         sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
