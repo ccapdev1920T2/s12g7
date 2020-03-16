@@ -15,6 +15,8 @@ router.get('/auth/google/callback', index_controller.callback, index_controller.
 
 router.get('/register', index_controller.register);
 
+router.get('/login', index_controller.login);
+
 router.get('/logout', index_controller.logout);
 
 

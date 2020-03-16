@@ -71,7 +71,11 @@ exports.register = function (req, res) {
         colleges: colleges,
         email: req.session.passport.user.profile.emails[0].value
     });
-}
+};
+
+exports.login = function (req, res) {
+    res.render('login-page');
+};
 
 exports.logout = function (req, res) {
     req.logout();
