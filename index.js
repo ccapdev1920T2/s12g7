@@ -30,8 +30,9 @@ app.use(cookieSession({
 app.use(cookieParser());
 
 // Routes
-const user = require('./routes/user');
-const home = require('./routes/home');
+const index = require('./routes/index.routes');
+const reserve = require('./routes/reserve.routes');
+const myReservations = require('./routes/myReservations.routes');
 
 // Connecting to the db
 mongoose.connect('mongodb://localhost:27017/',
@@ -42,53 +43,14 @@ mongoose.connect('mongodb://localhost:27017/',
 
 hbs.registerPartials(__dirname + '/views/partials');
 
-app.use('/', user);
-app.use('/', home);
-
-app.get('/equipment(-form.html)?', function (req, res) {
-    res.render('equipment-form', {
-        active: { active_index: true },
-        sidebarData: { 
-            dp: req.session.passport.user.profile.photos[0].value,
-            name: req.session.passport.user.profile.displayName,
-        }
-    });
-});
-
-app.get('/locker(-form.html)?', function (req, res) {
-    res.render('locker-form', {
-        active: { active_index: true },
-        sidebarData: { 
-            dp: req.session.passport.user.profile.photos[0].value,
-            name: req.session.passport.user.profile.displayName,
-        }
-    });
-});
-
-app.get('/profile(-page.html)?', function (req, res) {
-    res.render('profile-page', {
-        active: { active_profile: true },
-        sidebarData: { 
-            dp: req.session.passport.user.profile.photos[0].value,
-            name: req.session.passport.user.profile.displayName,
-        }
-    });
-});
-
-app.get('/my-reservations(-page.html)?', function (req, res) {
-    res.render('my-reservations-page', {
-        active: { active_my_reservations: true },
-        sidebarData: { 
-            dp: req.session.passport.user.profile.photos[0].value,
-            name: req.session.passport.user.profile.displayName,
-        }
-    });
-});
+app.use('/', index);
+app.use('/reserve', reserve);
+app.use('/my-reservations', myReservations);
 
 app.get('/terms(-page.html)?', function (req, res) {
     res.render('terms-page', {
         active: { active_terms: true },
-        sidebarData: { 
+        sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
         }
@@ -98,7 +60,7 @@ app.get('/terms(-page.html)?', function (req, res) {
 app.get('/about-us(-page.html)?', function (req, res) {
     res.render('about-us-page', {
         active: { active_about_us: true },
-        sidebarData: { 
+        sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
         }
@@ -108,7 +70,7 @@ app.get('/about-us(-page.html)?', function (req, res) {
 app.get('/manage-reservations(-page.html)?', function (req, res) {
     res.render('manage-reservations-page', {
         active: { active_manage_reservations: true },
-        sidebarData: { 
+        sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
         }
@@ -118,7 +80,7 @@ app.get('/manage-reservations(-page.html)?', function (req, res) {
 app.get('/manage-lockers(-page.html)?', function (req, res) {
     res.render('manage-lockers-page', {
         active: { active_manage_lockers: true },
-        sidebarData: { 
+        sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
         }
@@ -128,7 +90,7 @@ app.get('/manage-lockers(-page.html)?', function (req, res) {
 app.get('/manage-equipment(-page.html)?', function (req, res) {
     res.render('manage-equipment-page', {
         active: { active_manage_equipment: true },
-        sidebarData: { 
+        sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
         }
