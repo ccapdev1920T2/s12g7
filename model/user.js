@@ -8,18 +8,17 @@ const userSchema = new mongoose.Schema({
     college: {
         type: String, required: true,
         enum: [
-            'Brother Andrew Gonzalez College of Education',
+            'College of Education',
             'College of Computer Studies',
             'College of Liberal Arts',
             'College of Science',
-            'Gokongwei College of Engineering',
-            'Ramon V. Del Rosario College of Business',
+            'College of Engineering',
+            'College of Business',
             'School of Economics']
     },
     degreeProg: { type: String, required: true },
     contactNum: { type: Number, required: true },
-    isAdmin: { type: Boolean, default: false },
-    profilePicURL: {type: String, default: 'default-pic.jpg'}
+    type: { type: String, default: 'student', enum: ['student', 'studentRep'] },
 });
 
 module.exports = mongoose.model('User', userSchema);
