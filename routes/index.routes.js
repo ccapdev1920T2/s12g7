@@ -5,6 +5,10 @@ const router = express.Router();
 
 router.get('/', index_controller.home);
 
+router.get('/terms', index_controller.terms);
+
+router.get('/about', index_controller.about);
+
 router.get('/auth/google', index_controller.signin);
 
 router.get('/auth/google/callback', index_controller.callback, index_controller.callback_success);
