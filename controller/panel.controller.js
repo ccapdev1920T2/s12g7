@@ -22,18 +22,63 @@ exports.panel_create = function (req, res) {
 };
 
 exports.panel_details = function(req, res) {
-    Panel.find({building: req.query.bldg, level: req.query.flr}, function(err, panel) {
-        if (err) return next(err);
-        //res.send(panel);
-        res.render('manage-lockers-page', {
-            active: { active_manage_lockers: true },
-            //sidebarData: { 
-            //    dp: req.session.passport.user.profile.photos[0].value,
-            //    name: req.session.passport.user.profile.displayName,
-            //},
-            panels: panel
+    // Show the panels
+    if (req.query.bldg != null && req.query.flr != null) {
+        Panel.find({building: req.query.bldg, level: req.query.flr}, function(err, panel) {
+            if (err) return next(err);
+            
+            Panel.find({building: req.query.bldg}).distinct('level', function(err, panel_floor) {
+                if (err) return next(err);
+    
+                Panel.find().distinct('building', function(err, panel_building) {
+                    if (err) return next(err);
+                    res.render('manage-lockers-page', {
+                        active: { active_manage_lockers: true },
+                        sidebarData: { 
+                            dp: req.session.passport.user.profile.photos[0].value,
+                            name: req.session.passport.user.profile.displayName
+                        },
+                        panel_buildings: panel_building,
+                        panel_floors: panel_floor,
+                        panels: panel
+                    });
+                });
+            });
         });
-    })
+    }
+    // Show list of floors in the building (and also list of buildings)
+    else if (req.query.bldg != null) {
+        Panel.find({building: req.query.bldg}).distinct('level', function(err, panel_floor) {
+            if (err) return next(err);
+
+            Panel.find().distinct('building', function(err, panel_building) {
+                if (err) return next(err);
+                res.render('manage-lockers-page', {
+                    active: { active_manage_lockers: true },
+                    sidebarData: { 
+                        dp: req.session.passport.user.profile.photos[0].value,
+                        name: req.session.passport.user.profile.displayName
+                    },
+                    panel_buildings: panel_building,
+                    panel_floors: panel_floor
+                });
+            });
+        });
+    }
+    // Show the list of buildings in the dropdown
+    else {
+        Panel.find().distinct('building', function(err, panel_building) {
+            if (err) return next(err);
+            res.render('manage-lockers-page', {
+                active: { active_manage_lockers: true },
+                sidebarData: { 
+                    dp: req.session.passport.user.profile.photos[0].value,
+                    name: req.session.passport.user.profile.displayName
+                },
+                panel_buildings: panel_building
+            });
+        });
+    }
 };
 
 exports.panel_update = function(req, res) {
@@ -58,5 +103,3 @@ exports.panel_delete = function(req, res) {
         res.send('Panel deleted successfully.')
     });
 };
-
-
