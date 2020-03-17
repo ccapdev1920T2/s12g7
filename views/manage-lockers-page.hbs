@@ -67,7 +67,7 @@
                   <label for="floor">Floor level</label>
                   <select class="form-control" id="floor" onchange="updateQueryStringParameter('flr', this.value)">
                     {{#each panel_floors}}
-                    <option value="{{this}}"> {{this}} </option>
+                    <option value="{{this}}"> {{this}}/F </option>
                     {{/each}}
                   </select>
                 </div>
@@ -98,7 +98,7 @@
                     {{#each panels}}
                       <div class="col-12 panel-label d-flex align-items-center justify-content-between">
                         <div>
-                          {{type}} panel
+                          {{capitalizeFirst type}} Panel {{number}} ({{lowerRange}}-{{upperRange}})
                         </div>
                         <a class="delete-panel btn btn-white" data-toggle="modal" href="#delPanelModal">
                           <i class="fas fa-trash"></i>
@@ -114,92 +114,10 @@
                         </div>
                       {{/each}}
                     {{/each}}
-
-                    <div class="col-12 panel-label d-flex align-items-center justify-content-between">
-                      <div>
-                        Small Panel 2 (208-219)
-                      </div>
-                      <a class="delete-panel btn btn-white" data-toggle="modal" href="#delPanelModal">
-                        <i class="fas fa-trash"></i>
-                      </a>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
-                        #208
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
-                        #209
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-uncleared d-flex align-items-center">
-                        #210
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
-                        #211
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-occupied d-flex align-items-center">
-                        #212
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-occupied d-flex align-items-center">
-                        #213
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
-                        #214
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-occupied d-flex align-items-center">
-                        #215
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-vacant d-flex align-items-center">
-                        #216
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-broken d-flex align-items-center">
-                        #217
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 locker-container mb-4">
-                      <div class="locker locker-status-manage-broken d-flex align-items-center">
-                        #218
-                        <i class="locker-status-icon fas fa-circle ml-auto"></i>
-                      </div>
-                    </div>
-
                   </div>
-
-
                 </div>
               </div>
-
             </div>
-
-
           </form>
 
 
@@ -251,7 +169,7 @@
           </button>
         </div>
         <div class="modal-body col-lg-10 mx-auto">
-          <form class="form-horizontal" id="addPanelForm" action="/manage-lockers/panel" method="POST">
+          <form class="form-horizontal" id="addPanelForm">
             <div class="form-group form-inline input-group">
               <label for="addPanelNumber" class="col-lg-4 justify-content-start">Panel #:</label>
               <input type="number" class="form-control col-lg-8" placeholder="Enter panel number" id="addPanelNumber">
@@ -259,44 +177,34 @@
             <div class="form-group form-inline input-group">
               <label for="panelType" class="col-lg-4 justify-content-start">Type:</label>
               <select class="form-control col-lg-8" id="panelType">
-                <option>Big panel</option>
-                <option>Small panel</option>
+                <option value="big">Big panel</option>
+                <option value="small">Small panel</option>
               </select>
             </div>
             <div class="form-group form-inline input-group">
               <label for="panelBldg" class="col-lg-4 justify-content-start">Building:</label>
               <input type="text" class="form-control col-lg-8" id="panelBldg" list="bldgList"/>
               <datalist id="bldgList">
-                <option>Andrew Gonzalez Hall</option>
-                <option>Gokongwei Building</option>
-                <option>La Salle Hall</option>
-                <option>Miguel Hall</option>
-                <option>Enrique M. Razon Sports Center</option>
-                <option>Velasco Hall</option>
-                <option>Yuchengco Hall</option>
+                {{#each panel_buildings}}
+                    <option value="{{this}}"> {{this}} </option>
+                {{/each}}
               </datalist>
             </div>
             <div class="form-group form-inline input-group">
               <label for="panelFloor" class="col-lg-4 justify-content-start">Floor:</label>
-              <input type="text" class="form-control col-lg-8" id="panelFloor" list="flrList"/>
-              <datalist id="flrList">
-                <option>1/F</option>
-                <option>2/F</option>
-                <option>3/F</option>
-                <option>15/F</option>
-              </datalist>
+              <input type="number" class="form-control col-lg-8" id="panelFloor" min="1" oninput="validity.valid||(value='');">
             </div>
             <div class="form-group form-inline input-group">
               <label for="low Range" class="col-lg-4 justify-content-start">Range:</label>
-              <input type="number" class="form-control col-lg-3" placeholder="From" id="lowRange">
+              <input type="number" class="form-control col-lg-3" placeholder="From" id="lowerRange">
               <div class="col-lg-2 m-auto text-center">to</div>
-              <input type="number" class="form-control col-lg-3" placeholder="To" id="highRange">
+              <input type="number" class="form-control col-lg-3" placeholder="To" id="upperRange">
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" id="panelsubmit" form="addPanelForm">Submit</button>
+          <button type="submit" class="btn btn-primary" form="addPanelForm">Submit</button>
         </div>
       </div>
     </div>
@@ -323,8 +231,8 @@
     </div>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  <script src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -350,6 +258,27 @@
         $(this).attr("data-target", "#setStatusModal");
         $(this).attr("data-lockernumber", $(this).text());
       });
+
+      $("#addPanelForm").on('submit', function(e){
+        e.preventDefault();
+        $.ajax({
+            url: "/manage-lockers/panel",
+            type: "POST",
+            data: {
+              'number': $('#addPanelNumber').val(),
+              'type': $('#panelType').val(),
+              'building': $('#panelBldg').val(),
+              'level': $('#panelFloor').val(),
+              'lowerRange': $('#lowerRange').val(),
+              'upperRange': $('#upperRange').val()
+            },
+            success: function(data){
+                console.log(data);
+                alert(data);
+            }
+        });
+      });
+
     });
 
     $('#setStatusModal').on('show.bs.modal', function (event) {
