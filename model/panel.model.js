@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const lockerSchema = require('./locker');
+const lockerSchema = require('./locker.model');
 
 const panelSchema = new mongoose.Schema({
     type: { type: String, required: true, enum: ['big', 'small'] },
