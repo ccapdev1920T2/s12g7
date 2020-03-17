@@ -53,16 +53,10 @@ mongoose.connect('mongodb://localhost:27017/',
 });
 
 hbs.registerPartials(__dirname + '/views/partials');
-hbs.registerHelper('lockernumber', function (obj) {
-    const JSONstr = JSON.stringify(obj);
-    const JSobj = JSON.parse(JSONstr);
-    return JSobj.number;
-});
-hbs.registerHelper('lockerstatus', function (obj) {
-    const JSONstr = JSON.stringify(obj);
-    const JSobj = JSON.parse(JSONstr);
-    return JSobj.status;
-});
+hbs.registerHelper('lockernumber', function (str) {return JSON.parse(JSON.stringify(str)).number;});
+hbs.registerHelper('lockerstatus', function (str) {return JSON.parse(JSON.stringify(str)).status;});
+// capitalizeFirst capitalizes the first character of the text/string parameter
+hbs.registerHelper('capitalizeFirst', function (text) {return text[0].toUpperCase() + text.slice(1);});
 
 app.use('/', index);
 app.use('/profile', UserAuth.userIsLoggedIn, UserAuth.userIsNew, profile);
