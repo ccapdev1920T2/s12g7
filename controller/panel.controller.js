@@ -1,24 +1,39 @@
 const Panel = require('../model/panel.model');
 
-exports.panel_create = function (req, res) {
-    var locker_array = [];
+exports.panel_create = async function (req, res) {
+   
+    var locker_array =[];
 
-    for (var i = req.body.lowRange; i <= req.body.highRange; i++) {
+    for (var i = parseInt(req.body.lowerRange); i <= parseInt(req.body.upperRange); i++) {
         locker_array.push({number: i, status: 'vacant'});
     }
+    
+    console.log(locker_array);
 
     let panel = new Panel({
-            type: req.body.panelType,
-            building: req.body.panelBldg,
-            level: req.body.panelFloor,
-            lockers: locker_array
+            number: req.body.number,
+            type: req.body.type,
+            building: req.body.building,
+            level: req.body.level,
+            lockers: locker_array,
+            lowerRange: req.body.lowerRange,
+            upperRange: req.body.upperRange
         }
     );
 
-    panel.save(function (err) {
-        if (err) return next(err);
-        res.send('Panel created successfully.')
-    })
+    await panel.save(function (err) {
+        if (err) {
+            console.log('Error writing to db');
+        } else {
+            console.log('success');
+        }
+    });
+
+    // panel.save(function (err) {
+    //     if (err) return next(err);
+    //     console.log(panel);
+    //     res.send('Panel created successfully.');
+    // });
 };
 
 exports.panel_details = function(req, res) {
@@ -39,7 +54,7 @@ exports.panel_details = function(req, res) {
                             name: req.session.passport.user.profile.displayName
                         },
                         panel_buildings: panel_building,
-                        panel_floors: panel_floor,
+                        panel_floors: panel_floor.sort(),
                         panels: panel
                     });
                 });
@@ -53,15 +68,8 @@ exports.panel_details = function(req, res) {
 
             Panel.find().distinct('building', function(err, panel_building) {
                 if (err) return next(err);
-                res.render('manage-lockers-page', {
-                    active: { active_manage_lockers: true },
-                    sidebarData: { 
-                        dp: req.session.passport.user.profile.photos[0].value,
-                        name: req.session.passport.user.profile.displayName
-                    },
-                    panel_buildings: panel_building,
-                    panel_floors: panel_floor
-                });
+                panel_floor = panel_floor.sort();
+                res.redirect("/manage-lockers/panel?bldg=" + req.query.bldg + "&flr=" + panel_floor[0]);
             });
         });
     }
