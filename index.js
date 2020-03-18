@@ -47,7 +47,7 @@ const panel = require('./routes/panel.routes');
 const equipment = require('./routes/equipment.routes');
 
 // Connecting to the db
-mongoose.connect('mongodb://localhost:27017/',
+mongoose.connect('mongodb://localhost:27017/ccapdev',
     { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false }
 ).catch(err => {
     console.log('Error connecting to the db: ' + err);
