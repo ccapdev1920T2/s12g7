@@ -28,12 +28,10 @@ exports.profile_details = async function (req, res) {
 
 exports.profile_update = async function(req, res) {
     try {
-        const filter = { email: req.session.passport.user.profile.emails[0].value };
+        const filter = { idNum: req.params.idNum };
         const update = { contactNum: req.body.phone };
         await User.findOneAndUpdate(filter, update);
-
-        res.redirect('/profile');
-
+        res.redirect('/profile/' + req.session.idNum);
     } catch(err) {
         console.log(err);
     }
