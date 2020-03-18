@@ -6,7 +6,7 @@ const equipmentController = require('../controller/equipment.controller');
 // create
 router.post('/equipment', equipmentController.createEquipment);
 
-router.get('/equipment', equipmentController.viewEquipments);
+router.get('/equipment', equipmentController.viewAllEquipment);
 
 // read TODO:retrieve single or all?
 /* router.get('/equipment', equipmentController.viewEquipment);
