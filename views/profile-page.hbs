@@ -49,8 +49,8 @@
                 <div class="col-xl-5 profile-header px-0">
                   <div id="avatar" class="profile-picture mx-auto" style="background-image: url({{sidebarData.dp}});"></div>
                   <div class="profile-head d-flex flex-column align-items-center pt-3 pb-5">
-                    <h5 class="profile-name mb-0">{{sidebarData.name}}</h5>
-                    <h6 class="profile-type mb-4">Student</h6>
+                    <h5 class="profile-name mb-0">{{user.firstName}} {{user.lastName}}</h5>
+                    <h6 class="profile-type mb-4">{{user.type}}</h6>
                     <a id="editProfile" data-toggle="modal" href="#editProfileModal"
                       class="btn btn-white btn-round">Edit Profile</a>
                   </div>
@@ -61,23 +61,23 @@
                       <tbody>
                         <tr>
                           <th scope="row">ID number</th>
-                          <td>11641193</td>
+                          <td>{{user.idNum}}</td>
                         </tr>
                         <tr>
                           <th scope="row">College</th>
-                          <td>CCS</td>
+                          <td>{{user.college}}</td>
                         </tr>
                         <tr>
                           <th scope="row">Degree program</th>
-                          <td>BS-CS</td>
+                          <td>{{user.degreeProg}}</td>
                         </tr>
                         <tr>
                           <th scope="row">Email address</th>
-                          <td>jane_doe@dlsu.edu.ph</td>
+                          <td>{{user.email}}</td>
                         </tr>
                         <tr>
-                          <th scope="row">Contact number</th>
-                          <td>+63 915 723 1189</td>
+                          <th scope="row">Mobile number</th>
+                          <td>{{user.contactNum}}</td>
                         </tr>
                       </tbody>
                     </table>

@@ -23,3 +23,4 @@ module.exports.userIsNew = function(req, res, next) {
         }
     );
 }
+
