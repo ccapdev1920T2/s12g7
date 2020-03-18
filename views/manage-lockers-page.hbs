@@ -107,7 +107,8 @@
 
                       {{#each lockers}}
                         <div class="col-lg-4 col-md-6 locker-container mb-4">
-                          <div class="locker locker-status-manage-{{lockerstatus this}} d-flex align-items-center">
+                          <div class="locker locker-status-manage-{{lockerstatus this}} d-flex align-items-center" 
+                            data-toggle="modal" data-target="#setStatusModal" data-lockernumber="{{lockernumber this}}" data-panelid="{{../_id}}">
                             #{{lockernumber this}}
                             <i class="locker-status-icon fas fa-circle ml-auto"></i>
                           </div>
@@ -140,19 +141,25 @@
           </button>
         </div>
         <div class="modal-body col-lg-10 mx-auto">
+          <form class="form-horizontal" id="setStatusForm" method="POST" action="/manage-lockers/panel/update">
           <div class="form-group">
             <label for="status">Select status:</label>
-            <select class="form-control" id="status">
-              <option value="locker-status-manage-vacant">Vacant</option>
-              <option value="locker-status-manage-occupied">Occupied</option>
-              <option value="locker-status-manage-broken">Broken</option>
-              <option value="locker-status-manage-uncleared">Uncleared</option>
+            <select class="form-control" id="statusSelector" name="status">
+              <option value="vacant">Vacant</option>
+              <option value="occupied">Occupied</option>
+              <option value="broken">Broken</option>
+              <option value="uncleared">Uncleared</option>
             </select>
           </div>
+          <input type="hidden" name="panelid" id="setStatusPanelId">
+          <input type="hidden" name="lockernumber" id="setStatusLockerNumber">
+          <input type="hidden" name="building" id="setStatusBuilding">
+          <input type="hidden" name="level" id="setStatusFloor">
+          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" id="statusSubmit">Submit</button>
+          <button type="submit" class="btn btn-primary" form="setStatusForm">Submit</button>
         </div>
       </div>
     </div>
@@ -169,21 +176,21 @@
           </button>
         </div>
         <div class="modal-body col-lg-10 mx-auto">
-          <form class="form-horizontal" id="addPanelForm">
+          <form class="form-horizontal" id="addPanelForm" action="/manage-lockers/panel" method="POST">
             <div class="form-group form-inline input-group">
               <label for="addPanelNumber" class="col-lg-4 justify-content-start">Panel #:</label>
-              <input type="number" class="form-control col-lg-8" placeholder="Enter panel number" id="addPanelNumber">
+              <input type="number" class="form-control col-lg-8" placeholder="Enter panel number" id="addPanelNumber" name="number">
             </div>
             <div class="form-group form-inline input-group">
               <label for="panelType" class="col-lg-4 justify-content-start">Type:</label>
-              <select class="form-control col-lg-8" id="panelType">
+              <select class="form-control col-lg-8" id="panelType" name="type">
                 <option value="big">Big panel</option>
                 <option value="small">Small panel</option>
               </select>
             </div>
             <div class="form-group form-inline input-group">
               <label for="panelBldg" class="col-lg-4 justify-content-start">Building:</label>
-              <input type="text" class="form-control col-lg-8" id="panelBldg" list="bldgList"/>
+              <input type="text" class="form-control col-lg-8" id="panelBldg" list="bldgList" name="building"/>
               <datalist id="bldgList">
                 {{#each panel_buildings}}
                     <option value="{{this}}"> {{this}} </option>
@@ -192,13 +199,13 @@
             </div>
             <div class="form-group form-inline input-group">
               <label for="panelFloor" class="col-lg-4 justify-content-start">Floor:</label>
-              <input type="number" class="form-control col-lg-8" id="panelFloor" min="1" oninput="validity.valid||(value='');">
+              <input type="number" class="form-control col-lg-8" id="panelFloor" min="1" oninput="validity.valid||(value='');" name="level">
             </div>
             <div class="form-group form-inline input-group">
               <label for="low Range" class="col-lg-4 justify-content-start">Range:</label>
-              <input type="number" class="form-control col-lg-3" placeholder="From" id="lowerRange">
+              <input type="number" class="form-control col-lg-3" placeholder="From" id="lowerRange" name="lowerRange" min="1" oninput="validity.valid||(value='');">
               <div class="col-lg-2 m-auto text-center">to</div>
-              <input type="number" class="form-control col-lg-3" placeholder="To" id="upperRange">
+              <input type="number" class="form-control col-lg-3" placeholder="To" id="upperRange" name="upperRange" min="1" oninput="validity.valid||(value='');">
             </div>
           </form>
         </div>
@@ -231,8 +238,8 @@
     </div>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.4.1.js"
-    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -250,68 +257,45 @@
       
       $("#bldg").val(bldg);
       $("#floor").val(flr);
+    });
 
-      var lockers = $(".locker");
+      $('#setStatusModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var lockernumber = button.data('lockernumber'); // Extract info from data-* attributes
+        var panelid = button.data('panelid');
+        var statusIcon = button.find('.locker-status-icon');
+        var classList = button.attr('class').split(' ');
+        $(statusIcon).addClass(classList[1]);
+        var modal = $(this);
 
-      $(".locker").each(function () {
-        $(this).attr("data-toggle", "modal");
-        $(this).attr("data-target", "#setStatusModal");
-        $(this).attr("data-lockernumber", $(this).text());
+        modal.find('.modal-title').text('Locker #' + lockernumber + ' ');
+        modal.find('.modal-title').append('<i class="locker-status-icon fas fa-circle ml-auto ' + classList[1] + '"></i>');
+        modal.find('#statusSelector').val(classList[1].slice(21));
+
+        $("#setStatusPanelId").val(panelid);
+        $("#setStatusLockerNumber").val(lockernumber);
+        $("#setStatusBuilding").val($("#bldg").val());
+        $("#setStatusFloor").val($("#floor").val());
       });
 
-      $("#addPanelForm").on('submit', function(e){
-        e.preventDefault();
-        $.ajax({
-            url: "/manage-lockers/panel",
-            type: "POST",
-            data: {
-              'number': $('#addPanelNumber').val(),
-              'type': $('#panelType').val(),
-              'building': $('#panelBldg').val(),
-              'level': $('#panelFloor').val(),
-              'lowerRange': $('#lowerRange').val(),
-              'upperRange': $('#upperRange').val()
-            },
-            success: function(data){
-                console.log(data);
-                alert(data);
+      // Removes a query parameter
+      function removeParam(key, sourceURL) {
+        var rtn = sourceURL.split("?")[0],
+            param,
+            params_arr = [],
+            queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
+        if (queryString !== "") {
+            params_arr = queryString.split("&");
+            for (var i = params_arr.length - 1; i >= 0; i -= 1) {
+                param = params_arr[i].split("=")[0];
+                if (param === key) {
+                    params_arr.splice(i, 1);
+                }
             }
-        });
-      });
-
-    });
-
-    $('#setStatusModal').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget); // Button that triggered the modal
-      var lockernumber = button.data('lockernumber'); // Extract info from data-* attributes
-      var statusIcon = button.find('.locker-status-icon');
-      var classList = button.attr('class').split(' ');
-      $(statusIcon).addClass(classList[1]);
-      var modal = $(this);
-
-      modal.find('.modal-title').text('Locker ' + lockernumber + '');
-      modal.find('.modal-title').append('<i class="locker-status-icon fas fa-circle ml-auto ' + classList[1] + '"></i>');
-      modal.find('#status').val(classList[1]);
-    });
-
-    // Removes a query parameter
-    function removeParam(key, sourceURL) {
-      var rtn = sourceURL.split("?")[0],
-          param,
-          params_arr = [],
-          queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
-      if (queryString !== "") {
-          params_arr = queryString.split("&");
-          for (var i = params_arr.length - 1; i >= 0; i -= 1) {
-              param = params_arr[i].split("=")[0];
-              if (param === key) {
-                  params_arr.splice(i, 1);
-              }
-          }
-          rtn = rtn + "?" + params_arr.join("&");
-      }
-      return rtn;
-    }
+            rtn = rtn + "?" + params_arr.join("&");
+        }
+        return rtn;
+      };
 
     // Adds or updates a query parameter
     function updateQueryStringParameter(key, value) {
@@ -327,7 +311,7 @@
       else {
         window.location.href = uri + separator + key + "=" + value;
       }
-    }
+    };
 
   </script>
 </body>

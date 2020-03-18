@@ -26,14 +26,9 @@ exports.panel_create = async function (req, res) {
             console.log('Error writing to db');
         } else {
             console.log('success');
+            res.redirect("/manage-lockers/panel?bldg=" + req.body.building + "&flr=" + req.body.level);
         }
     });
-
-    // panel.save(function (err) {
-    //     if (err) return next(err);
-    //     console.log(panel);
-    //     res.send('Panel created successfully.');
-    // });
 };
 
 exports.panel_details = function(req, res) {
@@ -61,47 +56,57 @@ exports.panel_details = function(req, res) {
             });
         });
     }
-    // Show list of floors in the building (and also list of buildings)
-    else if (req.query.bldg != null) {
-        Panel.find({building: req.query.bldg}).distinct('level', function(err, panel_floor) {
-            if (err) return next(err);
-
-            Panel.find().distinct('building', function(err, panel_building) {
-                if (err) return next(err);
-                panel_floor = panel_floor.sort();
-                res.redirect("/manage-lockers/panel?bldg=" + req.query.bldg + "&flr=" + panel_floor[0]);
-            });
-        });
-    }
-    // Show the list of buildings in the dropdown
+    // Show list of floors in the building (and also list of buildings), auto-select floor
     else {
         Panel.find().distinct('building', function(err, panel_building) {
             if (err) return next(err);
-            res.render('manage-lockers-page', {
-                active: { active_manage_lockers: true },
-                sidebarData: { 
-                    dp: req.session.passport.user.profile.photos[0].value,
-                    name: req.session.passport.user.profile.displayName
-                },
-                panel_buildings: panel_building
-            });
+
+            if (panel_building[0] != null) {
+                Panel.find({building: panel_building[0]}).distinct('level', function(err, panel_floor) {
+                    if (err) return next(err);
+                    Panel.find().distinct('building', function(err, panel_building) {
+                        if (err) return next(err);
+                        panel_floor = panel_floor.sort();
+                        res.redirect("/manage-lockers/panel?bldg=" + panel_building[0] + "&flr=" + panel_floor[0]);
+                    });
+                });
+            }
+            else {
+                res.render('manage-lockers-page', {
+                    active: { active_manage_lockers: true },
+                    sidebarData: { 
+                        dp: req.session.passport.user.profile.photos[0].value,
+                        name: req.session.passport.user.profile.displayName
+                    }
+                });
+            }
         });
     }
 };
 
-exports.panel_update = function(req, res) {
-    //await removed in line 41
-    const targetPanel = Panel.findOne({
-        building: req.params.bldg, 
-        level: req.params.flr, 
-        panel: req.params.panelid
-    });
-
-    (targetPanel.lockers.find(obj => {return obj.number == lockernumber})).status = req.params.status;
-
-    targetPanel.save(function(err) {
+exports.panel_update = async function(req, res) {
+    await Panel.findById(req.body.panelid, async function(err, panel) {
         if (err) return next(err);
-        res.send('Locker status updated successfully.');
+
+        for (var i = 0; i < panel.upperRange - panel.lowerRange + 1; i++) {
+            // console.log(targetPanel.lockers[i].number);
+            // console.log(req.body.lockernumber);
+            if (panel.lockers[i].number == parseInt(req.body.lockernumber)) {
+                console.log(panel.lockers[i]);
+                panel.lockers[i].status = req.body.status;
+                console.log(panel.lockers[i]);
+            }
+        };
+       
+        await panel.save(function (err) {
+            if (err) {
+                console.log('Error updating db');
+            } else {
+                console.log('success');
+                res.redirect("/manage-lockers/panel?bldg=" + req.body.building + "&flr=" + req.body.level);
+            }
+        });
+
     });
 };
 
