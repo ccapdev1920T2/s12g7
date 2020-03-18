@@ -17,6 +17,16 @@ exports.createEquipment = async function (req, res) {
     });
 };
 
+exports.viewEquipments = function (req, res) {
+    res.render('manage-equipment-page', {
+        active: { active_manage_equipment: true },
+        sidebarData: {
+            dp: req.session.passport.user.profile.photos[0].value,
+            name: req.session.passport.user.profile.displayName,
+        }
+    });
+};
+
 /* exports.equipment_details = ;
 
 exports.equipment_update = ;
