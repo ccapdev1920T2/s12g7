@@ -52,8 +52,8 @@ label {
     top:0;
     bottom: 0; */
     /* z-index: 0; */
-    filter: blur(25px) brightness(0.6);
-    -webkit-filter: blur(25px) brightness(0.6);
+    filter: blur(50px) brightness(0.5);
+    -webkit-filter: blur(50px) brightness(0.5);
 }
 
 .profile-bg-container {
@@ -93,8 +93,4 @@ label {
 
 .profile-card .profile-info {
     background-color: #fff;
-}
-
-.profile-card .profile-info th {
-    font-size: 1.2rem;
 }

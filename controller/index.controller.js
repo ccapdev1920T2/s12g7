@@ -59,13 +59,22 @@ exports.callback_success = function (req, res) {
     res.redirect('/');
 };
 
-exports.register_get = function (req, res) {
+exports.register_get = async function (req, res) {
     var colleges = User.schema.path('college').enumValues;
 
-    res.render('register', {
-        colleges: colleges,
-        email: req.session.passport.user.profile.emails[0].value
-    });
+    try {
+        var user = await User.findOne({ email: req.session.passport.user.profile.emails[0].value });
+        if (user == null) {
+            res.render('register', {
+                colleges: colleges,
+                email: req.session.passport.user.profile.emails[0].value
+            });
+        } else {
+            res.redirect('/');
+        }
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 exports.register_post = async function (req, res) {
@@ -80,19 +89,19 @@ exports.register_post = async function (req, res) {
         type: 'student',
     });
 
-    await user.save(function(err, user) {
-        if (err) {
-            console.log('Error writing to db');
-        } else {
-            console.log('success');
-
-        }
-        res.redirect('/');
-    });
+    try {
+        await user.save();
+    } catch (err) {
+        console.log('Error writing to db: ' + err);
+    }
+    res.redirect('/');
 };
 
 exports.login = function (req, res) {
-    res.render('login-page');
+    if (req.session.token)
+        res.redirect('/');
+    else
+        res.render('login-page');
 };
 
 exports.logout = function (req, res) {
