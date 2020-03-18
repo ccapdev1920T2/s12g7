@@ -44,6 +44,7 @@ const profile = require('./routes/user.routes');
 const reserve = require('./routes/reserve.routes');
 const myReservations = require('./routes/myReservations.routes');
 const panel = require('./routes/panel.routes');
+const equipment = require('./routes/equipment.routes');
 
 // Connecting to the db
 mongoose.connect('mongodb://localhost:27017/',
@@ -63,20 +64,11 @@ app.use('/profile', UserAuth.userIsLoggedIn, UserAuth.userIsNew, profile);
 app.use('/reserve', UserAuth.userIsLoggedIn, UserAuth.userIsNew, reserve);
 app.use('/my-reservations', UserAuth.userIsLoggedIn, UserAuth.userIsNew, myReservations);
 app.use('/manage-lockers', UserAuth.userIsLoggedIn, UserAuth.userIsNew, panel);
+app.use('/manage-equipment', UserAuth.userIsLoggedIn, UserAuth.userIsNew, equipment);
 
 app.get('/manage-reservations(-page.html)?', function (req, res) {
     res.render('manage-reservations-page', {
         active: { active_manage_reservations: true },
-        sidebarData: {
-            dp: req.session.passport.user.profile.photos[0].value,
-            name: req.session.passport.user.profile.displayName,
-        }
-    });
-});
-
-app.get('/manage-equipment(-page.html)?', function (req, res) {
-    res.render('manage-equipment-page', {
-        active: { active_manage_equipment: true },
         sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
