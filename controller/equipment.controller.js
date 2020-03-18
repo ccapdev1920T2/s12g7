@@ -21,7 +21,7 @@ exports.createEquipment = async function (req, res) {
     res.redirect("/manage-equipment/equipment");
 };
 
-exports.viewEquipments = function (req, res) {
+exports.viewAllEquipment = function (req, res) {
     Equipment.find({}, function(err, equipments) {
         res.render('manage-equipment-page', {
             active: { active_manage_equipment: true },
