@@ -2,9 +2,9 @@ const Equipment = require('../model/equipment.model');
 
 exports.createEquipment = async function (req, res) {
     let equipment = new Equipment({
-        name: req.body.name,
-        quantity: req.body.quantity,
-        available: req.body.available
+        name: req.body.equipment-name,
+        quantity: req.body.equipment-ct,
+        available: req.body.equipment-ct
         // ,imageURL: req.body.imageURL TODO:
     });
 
