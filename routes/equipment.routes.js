@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
 
-const equipment_controller = require('../controller/equipment.controller');
+const equipmentController = require('../controller/equipment.controller');
 
 // create
-router.post('/equipment', equipment_controller.equipment_create);
+router.post('/equipment', equipmentController.createEquipment);
 
-// read
-router.get('/equipment', equipment_controller.equipment_details);
+// read TODO:retrieve single or all?
+/* router.get('/equipment', equipmentController.viewEquipment);
 
 //update or replace TODO:
-router.put('', equipment_controller.equipment_update);
+router.put('/equipment/:id', equipmentController.updateEquipment);
 
 // delete TODO:
-router.delete('', equipment_controller.equipment_delete);
+router.delete('/equipment/:equipmentid', equipmentController .deleteEquipment);
 
 module.exports = router;
-
+ */
