@@ -8,7 +8,7 @@ exports.createEquipment = async function (req, res) {
         // ,imageURL: req.body.imageURL TODO:
     });
 
-    await panel.save(function (err) {
+    await equipment.save(function (err) {
         if (err) {
             console.log('Error writing to db');
         } else {
