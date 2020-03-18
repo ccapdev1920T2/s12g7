@@ -44,18 +44,19 @@
             </div>
 
             <div class="col-lg-10 row align-items-end mx-auto">
+              {{#each equipmentList}}
               <div class="col-lg-4 col-6">
                 <div class="card equipment-card">
                   <div class="equipment-img mx-auto" style="background-image: url(static/equipment-types/vga-cable.png)">
                   </div>
                   <div class="card-body">
-                    <h5 class="card-title">VGA Cable</h5>
+                    <h5 class="card-title">{{name}}</h5>
                     <div class="card-text mb-3">
                       <div>
-                        <span class="card-text-label">Stock: </span><span>50</span>
+                        <span class="card-text-label">Stock: </span><span>{{quantity}}</span>
                       </div>
                       <div>
-                        <span class="card-text-label">Available: </span><span>21</span>
+                        <span class="card-text-label">Available: </span><span>{{available}}</span>
                       </div>
                       <div>
                         <span class="card-text-label">On rent: </span><span>29</span>
@@ -71,7 +72,8 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4 col-6">
+              {{/each}}
+             {{!--  <div class="col-lg-4 col-6">
                 <div class="card equipment-card">
                   <div class="equipment-img mx-auto"
                     style="background-image: url(static/equipment-types/extension-cord.png)"></div>
@@ -124,7 +126,7 @@
                     </a>
                   </div>
                 </div>
-              </div>
+              </div> --}}
             </div>
 
           </div>
@@ -148,26 +150,26 @@
           </button>
         </div>
         <div class="modal-body">
-          <form class="form-horizontal col-lg-10 mx-auto">
+          <form class="form-horizontal col-lg-10 mx-auto" method="POST" action="/manage-equipment/equipment" id="addEquipForm">
             <div class="form-group form-inline input-group">
               <label for="equipment-name" class="col-lg-4 justify-content-start p-0">Name</label>
               <input type="text" class="form-control mb-2 col-lg-8" placeholder="Enter equipment name"
-                id="equipment-name">
+                name="name">
             </div>
             <div class="form-group form-inline input-group">
               <label for="equipment-ct" class="col-lg-4 justify-content-start p-0">Amount on stock</label>
               <input type="number" class="form-control mb-2 col-lg-8" placeholder="Enter number of stocks"
-                id="equipment-ct">
+                name="count">
             </div>
             <div class="form-group form-inline input-group">
               <label for="equipment-pic" class="col-lg-4 justify-content-start p-0">Image</label>
-              <input type="file" class="form-control-file mb-2 col-lg-8" id="equipment-pic">
+              <input type="file" class="form-control-file mb-2 col-lg-8" name="pic">
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" id="panelsubmit">Add</button>
+          <button type="submit" class="btn btn-primary" form="addEquipForm">Add</button>
         </div>
       </div>
     </div>
