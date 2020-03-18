@@ -12,14 +12,13 @@ module.exports.userIsNew = function(req, res, next) {
     User.findOne({'email': req.session.passport.user.profile.emails[0].value}, 
         function (err, user) {
             if (err) {
-                console.log('error');
+                console.log(err);
                 next();
-            }
-            else if (user) {
-                console.log('user is not new: ' + user);
+            } else if (user) {
                 next();
-            } else
+            } else {
                 res.redirect('/register');
+            }
         }
     );
 }

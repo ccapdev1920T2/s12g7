@@ -1,7 +1,6 @@
 const User = require('../model/user.model');
 
-exports.viewProfile = async function (req, res) {
-
+exports.profile_details = async function (req, res) {
     try {
         var user = await User.findOne({ email: req.session.passport.user.profile.emails[0].value });
         if (user) {
@@ -20,7 +19,19 @@ exports.viewProfile = async function (req, res) {
     } catch (err) {
         console.log(err);
         redirect('/');
-    }
-
-    
+    }    
 };
+
+exports.profile_update = async function(req, res) {
+    
+    try {
+        const filter = { email: req.session.passport.user.profile.emails[0].value };
+        const update = { contactNum: req.body.phone };
+        await User.findOneAndUpdate(filter, update);
+
+        res.redirect('/profile');
+
+    } catch(err) {
+        console.log(err);
+    }
+}
