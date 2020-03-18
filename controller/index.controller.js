@@ -20,6 +20,7 @@ exports.home = function (req, res) {
         sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
+            idNum: req.session.idNum
         }
     });
 };
@@ -30,6 +31,7 @@ exports.terms = function (req, res) {
         sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
+            idNum: req.session.idNum
         }
     });
 };
@@ -40,6 +42,7 @@ exports.about = function (req, res) {
         sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
+            idNum: req.session.idNum
         }
     });
 }
@@ -54,8 +57,20 @@ exports.callback = passport.authenticate('google', {
     failureRedirect: '/login'
 });
 
-exports.callback_success = function (req, res) {
+exports.callback_success = async function (req, res) {
     req.session.token = req.user.token;
+
+    try {
+        var user = await User.findOne({ email: req.session.passport.user.profile.emails[0].value });
+        if (user) {
+            req.session.idNum = user.idNum;
+        } else {
+            console.log('user cannot be accessed');
+        }
+    } catch (err) {
+        console.log(err);
+    }
+
     res.redirect('/');
 };
 

@@ -543,7 +543,7 @@ tr {
 .form-group .form-control,
 .form-group .form-control-file {
     background-color: #eef5f3;
-    border-radius: 8px;
+    border-radius: 8px !important;
     padding: 8px 16px;
     min-height: 3rem;
     border: solid #f7f7f7 1px;
