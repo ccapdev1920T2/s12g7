@@ -24,11 +24,15 @@ body {
 }
 
 main {
-    background-color: #fefefe;
+    background-color: #f6fdfa;
     /* height: calc(100vh - 64px); */
     min-height: calc(100vh - 64px);
     border-radius: 0 0 0 12px;
     /* overflow-y: auto; */
+}
+
+footer {
+    background-color: #f6fdfa;
 }
 
 .main {
@@ -124,12 +128,12 @@ h1, h2, h3, h4, h5 {
     border: none;
     border-radius: 4px;
     transition: ease .25s;
-    padding: 6px 16px;
+    padding: 8px 16px;
 }
 
 .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0px 2px 4px rgba(110, 163, 124, 0.3);
+    box-shadow: 0px 10px 25px rgba(110, 163, 124, 0.1);
 }
 
 .btn:active, .btn:focus {
@@ -156,7 +160,7 @@ h1, h2, h3, h4, h5 {
 
 .btn-round {
     border-radius: 50px;
-    padding: 6px 16px;
+    padding: 8px 24px;
 }
 
 .btn-toggle {
@@ -175,7 +179,8 @@ h1, h2, h3, h4, h5 {
 }
 
 .btn-lg {
-    padding: 6px 24px;
+    font-size: 1.2rem;
+    padding: 8px 32px;
 }
 
 .btn-primary {
@@ -231,7 +236,7 @@ h1, h2, h3, h4, h5 {
 .btn-white:hover {
     /* background-color: #f7f7f7; */
     color: #232941;
-    box-shadow: 0px 2px 4px rgba(110, 163, 124, 0.2);
+    box-shadow: 0px 10px 25px rgba(110, 163, 124, 0.1);
 }
 
 /* 
@@ -255,10 +260,14 @@ h1, h2, h3, h4, h5 {
 
 .card {
     background-color: #fff;
-    border: solid #e7f1ed 1px;
+    border: solid #fff 8px;
     border-radius: 12px;
-    box-shadow: 0px 2px 4px rgba(110, 163, 124, 0.2);
+    box-shadow: 0px 10px 25px rgba(110, 163, 124, 0.1);
     padding: 0;
+}
+
+.card:hover {
+    box-shadow: 0px 20px 50px rgba(110, 163, 124, 0.2);
 }
 
 .card.card-translucent {
@@ -285,8 +294,7 @@ h1, h2, h3, h4, h5 {
     position: relative;
     background-color: #fff;
     /* background-image: linear-gradient(154deg, #3f7886, #265c69, #1f6383); */
-    border-radius: 0 0 12px 12px;
-    padding: 16px 24px;
+    padding: 12px 24px;
     border: none;
     overflow: hidden;
 }
@@ -304,6 +312,7 @@ h1, h2, h3, h4, h5 {
     background-color: #e2b740;
     z-index: 0;
     transition: 0.25s ease;
+    border-radius: 8px;
 }
 
 .card:hover .card-footer .color-container {
@@ -460,12 +469,12 @@ tr {
     color: #5f5f5f;
     background-color: #e7f1ed;
     border: solid #e7f1ed 1px;
-    padding: 8px 16px;
+    padding: 12px 24px;
     border-radius: 0;
 }
 
 .nav.nav-tabs .nav-link:hover {
-    background-color: #f7f7f7;
+    background-color: #d2e4dd;
 }
 
 .nav.nav-tabs .nav-item:first-of-type .nav-link {
@@ -520,7 +529,7 @@ tr {
     top: 0;
     right: 0;
     left: 16.666667%; */
-    background-color: #fefefe;
+    background-color: #f6fdfa;
 }
 
 /* Fix the navbar when screen size gets too small */
@@ -578,11 +587,11 @@ tr {
     position: relative;
     padding-bottom: 64px;
     background-color: #fff;
-    border: solid #e7f1ed 1px;
     border-radius: 12px;
-    box-shadow: 0px 2px 4px rgba(110, 163, 124, 0.2);
+    box-shadow: 0px 10px 25px rgba(110, 163, 124, 0.1);
+    border: solid #fff 8px;
     /* min-height: 100px; */
-    margin-bottom: 30px;
+    margin-bottom: 30px
 }
 
 .form-group.form-card label {
@@ -615,7 +624,7 @@ tr {
     color: #1f6383;
     position: absolute;
     bottom: 0;
-    border-radius: 0 0 12px 12px !important;
+    border-radius: 8px !important;
     font-size: 12px;
     padding: 16px 24px;
     height: 48px;
@@ -803,7 +812,7 @@ tr {
 .sidebar .nav-link.nav-main:hover {
     background-color: #fff;
     transform: translateY(-2px);
-    box-shadow: 0px 2px 4px rgba(110, 163, 124, 0.2);
+    box-shadow: 0px 10px 25px rgba(110, 163, 124, 0.1);
 }
 
 .sidebar .nav-link.active {
@@ -877,7 +886,7 @@ tr {
     height: 80px;
     width: 80px;
     border-radius: 100%;
-    border: solid #fff 3px;
+    border: solid #fff 2px;
     /* box-shadow: 0px 4px 10px rgba(124, 204, 145, 0.2); */
     transition: ease 0.25s;
 }
@@ -888,12 +897,12 @@ tr {
 
 .profile-container .profile-img:hover {
     transform: translateY(-2px);
-    box-shadow: 0px 2px 4px rgba(110, 163, 124, 0.3);
+    box-shadow: 0px 10px 25px rgba(110, 163, 124, 0.1);
 }
 
 .profile-container .profile-name {
     color: #232941;
-    /* font-family: 'Muli', sans-serif; */
+    font-weight: 700;   
 }
 
 .profile-container a {
