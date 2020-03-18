@@ -2,9 +2,9 @@ const Equipment = require('../model/equipment.model');
 
 exports.createEquipment = async function (req, res) {
     let equipment = new Equipment({
-        name: req.body.equipment-name,
-        quantity: req.body.equipment-ct,
-        available: req.body.equipment-ct
+        name: req.body.name,
+        quantity: req.body.ct,
+        available: req.body.ct
         // ,imageURL: req.body.imageURL TODO:
     });
 
@@ -15,6 +15,8 @@ exports.createEquipment = async function (req, res) {
             console.log('success');
         }
     });
+
+    res.redirect("/manage-equipment/equipment");
 };
 
 exports.viewEquipments = function (req, res) {
