@@ -100,7 +100,7 @@
                         <div>
                           {{capitalizeFirst type}} Panel {{number}} ({{lowerRange}}-{{upperRange}})
                         </div>
-                        <a class="delete-panel btn btn-white" data-toggle="modal" href="#delPanelModal">
+                        <a class="delete-panel btn btn-white" data-toggle="modal" href="#delPanelModal" data-panelid="{{_id}}">
                           <i class="fas fa-trash"></i>
                         </a>
                       </div>
@@ -228,11 +228,16 @@
           </button>
         </div>
         <div class="modal-body col-lg-10 mx-auto">
+          <form id="deletePanelForm" action="/manage-lockers/panel/delete" method="POST">
+            <input type="hidden" name="panelid" id="deletePanelId">
+            <input type="hidden" name="building" id="deletePanelBuilding">
+            <input type="hidden" name="level" id="deletePanelFloor">
+          </form>
           <h5>Do you really want to delete this panel?</h1>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" id="panelsubmit">Delete</button>
+          <button type="submit" class="btn btn-primary" form="deletePanelForm">Delete</button>
         </div>
       </div>
     </div>
@@ -276,6 +281,15 @@
         $("#setStatusLockerNumber").val(lockernumber);
         $("#setStatusBuilding").val($("#bldg").val());
         $("#setStatusFloor").val($("#floor").val());
+      });
+
+      $('#delPanelModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var panelid = button.data('panelid');
+
+        $("#deletePanelId").val(panelid);
+        $("#deletePanelBuilding").val($("#bldg").val());
+        $("#deletePanelFloor").val($("#floor").val());
       });
 
       // Removes a query parameter
