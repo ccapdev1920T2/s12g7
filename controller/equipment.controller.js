@@ -34,8 +34,28 @@ exports.viewAllEquipment = function (req, res) {
 
 };
 
-exports.updateEquipment = function (req, res) {
-    
+exports.updateEquipment = async function (req, res) {
+    await Equipment.findById(req.body.equipmentid, async function(err, equipment) {
+        if (err) return next(err);
+
+        if (req.body.name != null) {
+		equipment.name = req.body.name;
+	    }
+
+        if (req.body.count != null) {
+            equipment.quantity = req.body.count;
+        }
+       
+        await equipment.save(function (err) {
+            if (err) {
+                console.log('Error updating db');
+            } else {
+                console.log('success');
+                res.redirect("/manage-equipment/equipment");
+            }
+        });
+
+    });
 };
 exports.deleteEquipment = function (req, res) {
     Equipment.findByIdAndDelete(req.body.equipmentid, function(err) {
