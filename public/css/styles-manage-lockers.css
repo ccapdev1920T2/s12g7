@@ -10,7 +10,7 @@
     /* border: solid #E0E5EC 1px; */
     border-radius: 10px;
     background-color: #f7f7f7;
-    color: #232941;
+    color: #3f3f3f;
     margin-bottom: 16px;
 }
 
@@ -65,6 +65,6 @@ i.status-manage-broken {
 }
 
 .label-legend {
-    color: #232941;
+    color: #3f3f3f;
     margin: 16px 24px 0 24px;
 }
