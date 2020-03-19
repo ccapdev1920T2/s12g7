@@ -34,7 +34,9 @@ exports.viewAllEquipment = function (req, res) {
 
 };
 
-export.updateEquipment 
+exports.updateEquipment = function (req, res) {
+    
+};
 exports.deleteEquipment = function (req, res) {
     Equipment.findByIdAndDelete(req.body.equipmentid, function(err) {
         if (err) return next(err);

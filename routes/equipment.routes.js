@@ -6,8 +6,11 @@ const equipmentController = require('../controller/equipment.controller');
 // create
 router.post('/equipment', equipmentController.createEquipment);
 
-//view all equipment
+// view all equipment
 router.get('/equipment', equipmentController.viewAllEquipment);
+
+// update equipment
+router.post('/equipment/update', equipmentController.updateEquipment);
 
 // delete equipment
 router.post('/equipment/delete', equipmentController.deleteEquipment);
