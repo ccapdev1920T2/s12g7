@@ -1,3 +1,14 @@
+.option {
+    color: #1f6383;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.option:hover {
+    color: #38b98a;
+    text-decoration: none;
+}
+
 .equipment-element {
     /* max-width: 200px;
     max-height: 200px; */
