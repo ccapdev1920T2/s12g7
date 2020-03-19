@@ -8,4 +8,6 @@ router.get('/', index_controller.home);
 router.get('/locker', reserve_controller.locker);
 router.get('/equipment', reserve_controller.equipment);
 
+router.post('/locker', reserve_controller.locker_reserve);
+
 module.exports = router;
