@@ -35,6 +35,17 @@ exports.viewAllEquipment = function (req, res) {
 
 };
 
+exports.updateEquipment = async function (req, res) {
+    Equipment.findOneAndUpdate({name: req.body.name}, /* update, options, callback */)
+};
+
+exports.deleteEquipment = function (req, res) {
+    Equipment.findOneAndDelete(req.params.name, function(err) {
+        if (err) return next(err);
+        console.log('Equipment deleted successfully.')
+    });
+};
+
 /* exports.equipment_details = ;
 
 exports.equipment_update = ;

@@ -8,6 +8,7 @@ router.post('/equipment', equipmentController.createEquipment);
 
 router.get('/equipment', equipmentController.viewAllEquipment);
 
+router.delete('/equipment/:name', equipmentController.deleteEquipment);
 // read TODO:retrieve single or all?
 /* router.get('/equipment', equipmentController.viewEquipment);
 
