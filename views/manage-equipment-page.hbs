@@ -64,10 +64,10 @@
                     </div>
                   </div>
                   <div class="card-footer d-flex flex-row justify-content-between">
-                    <a data-toggle="modal" href="#editEquipmentModal" data-equipmentid="{{_id}}">Edit equipment</a>
+                    <a class="option" data-toggle="modal" href="#editEquipmentModal" data-equipmentid="{{_id}}">Edit equipment</a>
                     <span>|</span> <!--TODO: -->
                     <a data-toggle="modal" href="#delEquipmentModal" data-equipmentid="{{_id}}">
-                      <i class="fas fa-trash"></i>
+                      <i class="option fas fa-trash"></i>
                     </a>
                   </div>
                 </div>
@@ -129,7 +129,7 @@
         </div>
         <div class="modal-body">
           <form class="form-horizontal col-lg-10 mx-auto" method="POST" action="/manage-equipment/equipment/update" id="editEquipForm"> <!--FIXME: -->
-            <input type="hidden" name="editequipmentid" id="editHiddenEquipID">
+            <input type="hidden" name="equipmentid" id="editHiddenEquipID">
             
             <div class="form-group form-inline input-group">
               <label for="equipment-name" class="col-lg-4 justify-content-start p-0">Name</label>
@@ -167,7 +167,7 @@
         </div>
         <div class="modal-body col-lg-10 mx-auto">
           <form method="POST" action="/manage-equipment/equipment/delete" id="delEquipForm">
-            <input type="hidden" name="equipmentid" id="hiddenEquipID">
+            <input type="hidden" name="equipmentid" id="delHiddenEquipID">
           </form>
           <h5>Do you really want to delete this equipment?</h5> 
         </div>
@@ -191,7 +191,7 @@
     $('#delEquipmentModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget);
       var equipmentID = button.data('equipmentid'); /*TODO:*/
-      $('#hiddenEquipID').val(equipmentID);
+      $('#delHiddenEquipID').val(equipmentID);
     });
 
      $('#editEquipmentModal').on('show.bs.modal', function (event) {
