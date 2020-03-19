@@ -1,40 +1,74 @@
 <nav class="col-md-3 col-lg-2 sidebar">
-    <div class="sidebar-sticky d-flex flex-column justify-content-between">
-        <div class="">
-            <div class="d-flex">
-                <div class="sidebar-brand">
-                    <a class="brand d-flex align-items-center" href="/">
-                        <img class="brand-logo" src="/static/logo.png"> pahiram 
-                    </a>
-                </div>
-                <button class="btn nav-btn ml-auto">
-                    <i class="fas fa-bars"></i> 
-                </button>
-            </div>
-            <div class="{{#if act.active_profile}}active{{/if}} profile-container mb-4">
-                <a class="d-flex flex-column justify-content-center" href="/profile/{{sb.idNum}}">
-                    <div class="profile-img mb-2 mx-auto" style="background-image: url({{sb.dp}});"></div>
-                    <div class="profile-name text-center">{{sb.name}}</div>
-                </a>
-            </div>
-            <ul class="nav flex-column mb-4">
-                <li class="nav-item mb-4"><a class="{{#if act.active_index}}active{{/if}} nav-link nav-main" href="/reserve">Rent & Reserve</a></li>
-                <li class="nav-item"><a class="{{#if act.active_my_reservations}}active{{/if}} nav-link" href="/my-reservations"><i class="fas fa-sticky-note pr-3"></i> My Reservations </a></li>
-                <li class="nav-item"><a class="{{#if act.active_terms}}active{{/if}} nav-link" href="/terms"><i class="fas fa-window-restore pr-3"></i> Terms </a></li>
-                <li class="nav-item"><a class="{{#if act.active_about_us}}active{{/if}} nav-link" href="/about"><i class="fas fa-address-card pr-3"></i> About Us </a></li>
-            </ul>
-            <div class="nav-section-header">
-                Manage
-            </div>
-            <ul class="nav flex-column">
-                <li class="nav-item"><a class="{{#if act.active_manage_reservations}}active{{/if}} nav-link" href="/manage-reservations"><i class="fas fa-pen pr-3"></i> Reservations </a></li>
-                <li class="nav-item"><a class="{{#if act.active_manage_lockers}}active{{/if}} nav-link" href="/manage-lockers/panel"><i class="fas fa-columns pr-3"></i> Lockers </a></li>
-                <li class="nav-item"><a class="{{#if act.active_manage_equipment}}active{{/if}} nav-link" href="/manage-equipment/equipment"><i class="fas fa-plug pr-3"></i> Equipment </a></li>
-            </ul>
+  <div class="sidebar-sticky d-flex flex-column justify-content-between">
+    <div class="">
+      <div class="d-flex">
+        <div class="sidebar-brand">
+          <a class="brand d-flex align-items-center" href="/">
+            <img class="brand-logo" src="/static/logo.png"> pahiram
+          </a>
         </div>
-
-        <div class="sign-out">
-            <a href="/logout"><i class="fas fa-sign-out-alt pr-2"></i>Sign Out</a>
-        </div>
+        <button class="btn nav-btn ml-auto">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      <div class="{{#if act.active_profile}}active{{/if}} profile-container mb-4">
+        <a class="d-flex flex-column justify-content-center" href="/profile/{{sb.idNum}}">
+          <div class="profile-img mb-2 mx-auto" style="background-image: url({{sb.dp}});"></div>
+          <div class="profile-name text-center">{{sb.name}}</div>
+        </a>
+      </div>
+      <ul class="nav flex-column mb-4">
+        <li class="nav-item mb-4"><a class="{{#if act.active_index}}active{{/if}} nav-link nav-main"
+            href="/reserve">Rent & Reserve</a></li>
+        <li class="nav-item">
+          <a class="{{#if act.active_my_reservations}}active{{/if}} nav-link" href="/my-reservations">
+            <img class="icon mr-2" id="ic-my-reservations" src="/static/icons/{{#if act.active_my_reservations}}active-my-reservations.png{{else}}my-reservations.png{{/if}}">
+            My Reservations
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="{{#if act.active_terms}}active{{/if}} nav-link" href="/terms">
+            <img class="icon mr-2" id="ic-my-reservations" src="/static/icons/{{#if act.active_terms}}active-terms.png{{else}}terms.png{{/if}}">
+            Terms 
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="{{#if act.active_about_us}}active{{/if}} nav-link" href="/about">
+            <img class="icon mr-2" id="ic-my-reservations" src="/static/icons/{{#if act.active_about_us}}active-about.png{{else}}about.png{{/if}}">
+            About Us 
+          </a>
+        </li>
+      </ul>
+      <div class="nav-section-header">
+        Manage
+      </div>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="{{#if act.active_manage_reservations}}active{{/if}} nav-link" href="/manage-reservations">
+            <img class="icon mr-2" id="ic-my-reservations" src="/static/icons/{{#if act.active_manage_reservations}}active-manage-reservations.png{{else}}manage-reservations.png{{/if}}">
+            Reservations 
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="{{#if act.active_manage_lockers}}active{{/if}} nav-link" href="/manage-lockers/panel">
+            <img class="icon mr-2" id="ic-my-reservations" src="/static/icons/{{#if act.active_manage_lockers}}active-manage-lockers.png{{else}}manage-lockers.png{{/if}}">
+            Lockers 
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="{{#if act.active_manage_equipment}}active{{/if}} nav-link" href="/manage-equipment/equipment">  
+            <img class="icon mr-2" id="ic-my-reservations" src="/static/icons/{{#if act.active_manage_equipment}}active-manage-equipment.png{{else}}manage-equipment.png{{/if}}">
+            Equipment 
+          </a>
+        </li>
+      </ul>
     </div>
+
+    <div class="sign-out">
+      <a class="d-flex align-content-center" href="/logout">
+        <img class="icon mr-2" src="/static/icons/signout.png">
+        Sign Out
+      </a>
+    </div>
+  </div>
 </nav>

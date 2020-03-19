@@ -15,16 +15,17 @@ html {
 }
 
 * {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Muli', sans-serif;
 }
 
 body {
     background-color: #e7f1ed;
+    font-weight: 500;
     /* background-color: #6aca6f; */
 }
 
 main {
-    background-color: #f6fdfa;
+    background-color: #fefefe;
     /* height: calc(100vh - 64px); */
     min-height: calc(100vh - 64px);
     border-radius: 0 0 0 12px;
@@ -32,7 +33,11 @@ main {
 }
 
 footer {
-    background-color: #f6fdfa;
+    background-color: #fefefe;
+}
+
+p {
+    color: #838383;
 }
 
 .main {
@@ -63,7 +68,7 @@ a:hover {
 
 hr {
     margin: 0 16px;
-    background-color: #a5ccb3;
+    background-color: #e2f0ea;
 }
 
 /* 
@@ -81,8 +86,8 @@ hr {
 }
 
 .status-pending {
-    background-color: #e2b740;
-    border-color: #e2b740;
+    background-color: #f3c239;
+    border-color: #f3c239;
     color: #fff;
 }
 
@@ -115,7 +120,7 @@ hr {
 */
 
 h1, h2, h3, h4, h5 {
-    font-family: 'Muli', 'Inter', sans-serif;
+    font-family: 'Muli', 'Muli', sans-serif;
     color: #3f3f3f;
     font-weight: 700;
 }
@@ -126,7 +131,7 @@ h1, h2, h3, h4, h5 {
 
 .btn {
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     transition: ease .25s;
     padding: 8px 16px;
 }
@@ -235,7 +240,7 @@ h1, h2, h3, h4, h5 {
 
 .btn-white:hover {
     /* background-color: #f7f7f7; */
-    color: #232941;
+    color: #3f3f3f;
     box-shadow: 0px 10px 25px rgba(110, 163, 124, 0.1);
 }
 
@@ -280,13 +285,13 @@ h1, h2, h3, h4, h5 {
 }
 
 .card .card-body {
-    padding: 8px 24px;
+    padding: 12px;
 }
 
 .card .card-header {
     background-color: transparent;
     border-radius: 0 0 12px 12px;
-    padding: 16px 24px;
+    padding: 12px;
     border: none;
 }
 
@@ -294,7 +299,7 @@ h1, h2, h3, h4, h5 {
     position: relative;
     background-color: #fff;
     /* background-image: linear-gradient(154deg, #3f7886, #265c69, #1f6383); */
-    padding: 12px 24px;
+    padding: 12px;
     border: none;
     overflow: hidden;
 }
@@ -309,7 +314,7 @@ h1, h2, h3, h4, h5 {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #e2b740;
+    background-color: #f3c239;
     z-index: 0;
     transition: 0.25s ease;
     border-radius: 8px;
@@ -344,8 +349,8 @@ h1, h2, h3, h4, h5 {
 .card.status-pending .color-container,
 .card.status-pending .badge {
     color: #fff;
-    background: #e2b740;
-    border-color: #e2b740;
+    background: #f3c239;
+    border-color: #f3c239;
 }
 
 .card.status-denied .color-container,
@@ -378,12 +383,23 @@ h1, h2, h3, h4, h5 {
 
 .card:hover .badge {
     background-color: #fff;
-    color: #232941;
+    color: #3f3f3f;
 }
 
 /* .card .card-img-top {
     padding: 16px;
 } */
+
+
+
+/* 
+* List Group
+*/
+
+.list-group-item {
+    border: none;
+    background-color: transparent;
+}
 
 /* 
 * Modals
@@ -419,6 +435,7 @@ table.table {
 }
 
 .table:not(.table-borderless) th {
+    color: #3f3f3f;
     border: none !important;
     padding: 16px 8px !important;
 }
@@ -428,6 +445,10 @@ table.table {
     border-bottom: solid #e7f1ed 1px !important;
     padding: 16px 8px !important;
     vertical-align: middle;
+}
+
+.table td {
+    color: #838383;
 }
 
 tr {
@@ -529,7 +550,7 @@ tr {
     top: 0;
     right: 0;
     left: 16.666667%; */
-    background-color: #f6fdfa;
+    background-color: #fefefe;
 }
 
 /* Fix the navbar when screen size gets too small */
@@ -598,24 +619,24 @@ tr {
     font-family: 'Muli', sans-serif;
     font-weight: 700;
     font-size: 14px;
-    color: #232941;
+    color: #3f3f3f;
     padding: 16px 24px 0 24px;
     margin-bottom: 0;
 }
 
 .form-group.form-card label.label-desc {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Muli', sans-serif;
     font-weight: normal;
     font-size: 12px;
     padding: 0 24px 0 24px;
     font-style: italic;
-    color: #717774;
+    color: #838383;
 }
 
 .form-group.form-card .label-desc {
     padding: 0 24px 16px 24px;
     font-style: italic;
-    color: #717774;
+    color: #838383;
 }
 
 .form-group.form-card .form-control {
@@ -710,7 +731,7 @@ tr {
 */
 
 .header-text {
-    font-family: 'Muli', 'Inter', sans-serif;
+    font-family: 'Muli', 'Muli', sans-serif;
     font-size: 2rem;
     font-weight: 900;
     color: #1f6383;
@@ -780,14 +801,15 @@ tr {
 }
 
 .sidebar .nav-link {
-    /* font-family: 'Muli', 'Inter', sans-serif; */
+    /* font-family: 'Muli', 'Muli', sans-serif; */
     display: flex;
     align-items: center;
-    color: #717774;
-    min-height: 36px;
+    color: #63a392;
+    min-height: 40px;
     margin: 2px 16px;
     padding: 4px 12px;
     transition: ease 0.2s;
+    /* font-weight: 600; */
 }
 
 .sidebar .nav-link i {
@@ -796,6 +818,7 @@ tr {
 }
 
 .sidebar .nav-link.nav-main {
+    color: #63a392;
     justify-content: center;
     background-color: #fff;
     border-radius: 8px;
@@ -805,7 +828,6 @@ tr {
 
 .sidebar .nav-link:hover {
     background-color: #d2e4dd;
-    color: #232941;
     border-radius: 8px;
 }
 
@@ -820,7 +842,7 @@ tr {
     background-image: linear-gradient(135deg, #6aca6f, #38b98a 75%);
     border-radius: 8px;
     color: #fff;
-    /* font-weight: bold; */
+    font-weight: 500;
 }
 
 .sidebar .nav-link.active i {
@@ -852,14 +874,19 @@ tr {
     font-family: 'Muli', sans-serif;
     font-weight: 700;
     font-size: 0.9rem;
-    color: #38b98a;
+    color: #7cc4b1;
     text-transform: uppercase;
     margin: 0px 28px 8px 28px;
 }
 
+.sidebar .icon {
+    height: 20px;
+    width: 20px;
+}
+
 .nav-btn {
     background-color: transparent;
-    color: #232941 !important;
+    color: #3f3f3f !important;
     font-size: 1rem !important;
 }
 
@@ -885,8 +912,8 @@ tr {
     background-size: cover;
     height: 80px;
     width: 80px;
-    border-radius: 100%;
-    border: solid #fff 2px;
+    border-radius: 80px;
+    border: solid #fff 4px;
     /* box-shadow: 0px 4px 10px rgba(124, 204, 145, 0.2); */
     transition: ease 0.25s;
 }
@@ -901,8 +928,8 @@ tr {
 }
 
 .profile-container .profile-name {
-    color: #232941;
-    font-weight: 700;   
+    color: #1f6383;
+    /* font-weight: 500;    */
 }
 
 .profile-container a {
@@ -912,6 +939,14 @@ tr {
 .sign-out {
     margin: 2px 16px;
     padding: 4px 12px;
+}
+
+.sign-out a {
+    color: #63a392;
+}
+
+.sign-out a:hover {
+    color: #1f6383;
 }
 
 /*
