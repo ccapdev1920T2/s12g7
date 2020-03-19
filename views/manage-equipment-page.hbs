@@ -65,7 +65,7 @@
                   </div>
                   <div class="card-footer d-flex flex-row justify-content-between">
                     <a data-toggle="modal" href="#editEquipmentModal">Edit equipment</a>
-                    <span>|</span>
+                    <span>|</span> <!--TODO: -->
                     <a data-toggle="modal" href="#delEquipmentModal">
                       <i class="fas fa-trash"></i>
                     </a>
@@ -73,68 +73,10 @@
                 </div>
               </div>
               {{/each}}
-             {{!--  <div class="col-lg-4 col-6">
-                <div class="card equipment-card">
-                  <div class="equipment-img mx-auto"
-                    style="background-image: url(static/equipment-types/extension-cord.png)"></div>
-                  <div class="card-body">
-                    <h5 class="card-title">Extension Cord</h5>
-                    <div class="card-text mb-3">
-                      <div>
-                        <span class="card-text-label">Stock: </span><span>50</span>
-                      </div>
-                      <div>
-                        <span class="card-text-label">Available: </span><span>21</span>
-                      </div>
-                      <div>
-                        <span class="card-text-label">On rent: </span><span>29</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer d-flex flex-row justify-content-between">
-                    <a data-toggle="modal" href="#editEquipmentModal">Edit equipment</a>
-                    <span>|</span>
-                    <a data-toggle="modal" href="#delEquipmentModal">
-                      <i class="fas fa-trash"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-6">
-                <div class="card equipment-card">
-                  <div class="equipment-img mx-auto" style="background-image: url(static/equipment-types/lan-cable.png)">
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">LAN Cable</h5>
-                    <div class="card-text mb-3">
-                      <div>
-                        <span class="card-text-label">Stock: </span><span>50</span>
-                      </div>
-                      <div>
-                        <span class="card-text-label">Available: </span><span>21</span>
-                      </div>
-                      <div>
-                        <span class="card-text-label">On rent: </span><span>29</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer d-flex flex-row justify-content-between">
-                    <a data-toggle="modal" href="#editEquipmentModal">Edit equipment</a>
-                    <span>|</span>
-                    <a data-toggle="modal" href="#delEquipmentModal">
-                      <i class="fas fa-trash"></i>
-                    </a>
-                  </div>
-                </div>
-              </div> --}}
             </div>
-
           </div>
-
         </main>
-
         {{> footer}}
-
       </div>
     </div>
   </div>
@@ -180,32 +122,32 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="equipmentModalLabel">Edit Equipment</h5>
+          <h5 class="modal-title" id="equipmentModalLabel">Edit Equipment</h5> 
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form class="form-horizontal col-lg-10 mx-auto">
+          <form class="form-horizontal col-lg-10 mx-auto" method="PUT" action="/manage-equipment/equipment:name" id="editEquipForm"> <!--FIXME: -->
             <div class="form-group form-inline input-group">
               <label for="equipment-name" class="col-lg-4 justify-content-start p-0">Name</label>
               <input type="text" class="form-control mb-2 col-lg-8" placeholder="Enter equipment name"
-                id="equipment-name">
+                name="name">
             </div>
             <div class="form-group form-inline input-group">
               <label for="equipment-ct" class="col-lg-4 justify-content-start p-0">Amount on stock</label>
               <input type="number" class="form-control mb-2 col-lg-8" placeholder="Enter number of stocks"
-                id="equipment-ct">
+                name="count">
             </div>
             <div class="form-group form-inline input-group">
               <label for="equipment-pic" class="col-lg-4 justify-content-start p-0">Image</label>
-              <input type="file" class="form-control-file mb-2 col-lg-8" id="equipment-pic">
+              <input type="file" class="form-control-file mb-2 col-lg-8" name="pic"> {{!-- TODO: --}}
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" id="panelsubmit">Save</button>
+          <button type="submit" class="btn btn-primary" form="editEquipForm">Save</button>
         </div>
       </div>
     </div>
@@ -216,17 +158,17 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="equipmentModalLabel">Delete Equipment</h5>
+          <h5 class="modal-title" id="equipmentModalLabel">Delete Equipment</h5> 
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body col-lg-10 mx-auto">
-          <h5>Do you really want to delete this equipment?</h1>
+          <h5>Do you really want to delete this equipment?</h5> 
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer"> 
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" id="panelsubmit">Delete</button>
+          <button type="submit" class="btn btn-primary" data-dismiss="modal" id="delEquip">Delete</button> <!--TODO: -->
         </div>
       </div>
     </div>
