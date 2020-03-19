@@ -34,6 +34,7 @@ exports.panel_create = async function (req, res) {
 exports.panel_details = function(req, res) {
     // Show the panels
     if (req.query.bldg != null && req.query.flr != null) {
+
         Panel.find({building: req.query.bldg, level: req.query.flr}, function(err, panel) {
             if (err) return next(err);
             
@@ -56,7 +57,20 @@ exports.panel_details = function(req, res) {
             });
         });
     }
-    // Show list of floors in the building (and also list of buildings), auto-select floor
+    else if (req.query.bldg != null) {
+        Panel.find({building: req.query.bldg}).distinct('level', function(err, panel_floor) {
+            if (err) return next(err);
+
+            if (panel_floor[0] != null) {
+                panel_floor = panel_floor.sort();
+                res.redirect("/manage-lockers/panel?bldg=" + req.query.bldg + "&flr=" + panel_floor[0]);
+            }
+            else {
+                res.redirect("/manage-lockers/panel");
+            }
+        });
+    }
+    // if no query
     else {
         Panel.find().distinct('building', function(err, panel_building) {
             if (err) return next(err);
@@ -64,11 +78,8 @@ exports.panel_details = function(req, res) {
             if (panel_building[0] != null) {
                 Panel.find({building: panel_building[0]}).distinct('level', function(err, panel_floor) {
                     if (err) return next(err);
-                    Panel.find().distinct('building', function(err, panel_building) {
-                        if (err) return next(err);
-                        panel_floor = panel_floor.sort();
-                        res.redirect("/manage-lockers/panel?bldg=" + panel_building[0] + "&flr=" + panel_floor[0]);
-                    });
+                    panel_floor = panel_floor.sort();
+                    res.redirect("/manage-lockers/panel?bldg=" + panel_building[0] + "&flr=" + panel_floor[0]);
                 });
             }
             else {
@@ -111,8 +122,8 @@ exports.panel_update = async function(req, res) {
 };
 
 exports.panel_delete = function(req, res) {
-    Panel.findByIdAndRemove(req.params.panelid, function(err) {
+    Panel.findByIdAndDelete(req.body.panelid, function(err) {
         if (err) return next(err);
-        res.send('Panel deleted successfully.')
+        res.redirect("/manage-lockers/panel?bldg=" + req.body.building + "&flr=" + req.body.level);
     });
 };
