@@ -10,6 +10,6 @@ router.post('/equipment', equipmentController.createEquipment);
 router.get('/equipment', equipmentController.viewAllEquipment);
 
 // delete equipment
-router.delete('/equipment/delete', equipmentController.deleteEquipment);
+router.post('/equipment/delete', equipmentController.deleteEquipment);
 
 module.exports = router;

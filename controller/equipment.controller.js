@@ -15,10 +15,9 @@ exports.createEquipment = async function (req, res) {
             console.log('Error writing to db');
         } else {
             console.log('success');
+            res.redirect("/manage-equipment/equipment");
         }
     });
-
-    res.redirect("/manage-equipment/equipment");
 };
 
 exports.viewAllEquipment = function (req, res) {
