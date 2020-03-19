@@ -66,7 +66,7 @@
                   <div class="card-footer d-flex flex-row justify-content-between">
                     <a data-toggle="modal" href="#editEquipmentModal">Edit equipment</a>
                     <span>|</span> <!--TODO: -->
-                    <a data-toggle="modal" href="#delEquipmentModal">
+                    <a data-toggle="modal" href="#delEquipmentModal" data-equipmentID="{{_id}}">
                       <i class="fas fa-trash"></i>
                     </a>
                   </div>
@@ -128,7 +128,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form class="form-horizontal col-lg-10 mx-auto" method="PUT" action="/manage-equipment/equipment:name" id="editEquipForm"> <!--FIXME: -->
+          <form class="form-horizontal col-lg-10 mx-auto" {{!-- method="PUT" action="/manage-equipment/equipment:name" id="editEquipForm" --}}> <!--FIXME: -->
             <div class="form-group form-inline input-group">
               <label for="equipment-name" class="col-lg-4 justify-content-start p-0">Name</label>
               <input type="text" class="form-control mb-2 col-lg-8" placeholder="Enter equipment name"
@@ -164,11 +164,14 @@
           </button>
         </div>
         <div class="modal-body col-lg-10 mx-auto">
+          <form method="POST" action="/manage-equipment/equipment/delete" id="delEquipForm">
+            <input type="hidden" name="equipmentID" id="hiddenEquipID">
+          </form>
           <h5>Do you really want to delete this equipment?</h5> 
         </div>
         <div class="modal-footer"> 
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" data-dismiss="modal" id="delEquip">Delete</button> <!--TODO: -->
+          <button type="submit" class="btn btn-primary" id="delEquipForm">Delete</button>
         </div>
       </div>
     </div>
@@ -182,6 +185,12 @@
     crossorigin="anonymous"></script>
   <script type="text/javascript" src="/js/bootstrap.js"></script>
   <script type="text/javascript" src="/js/styles.js"></script>
+  <script>
+    $('#delEquipmentModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      var equipmentID = button.data('equipmentID'); 
+      $('#hiddenEquipID').val(equipmentID);
+    });
+  </script>
 </body>
-
 </html>

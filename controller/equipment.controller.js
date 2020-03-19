@@ -22,27 +22,24 @@ exports.createEquipment = async function (req, res) {
 };
 
 exports.viewAllEquipment = function (req, res) {
-    Equipment.find({}, function(err, equipments) {
+    Equipment.find({}, function(err, equipment) {
         res.render('manage-equipment-page', {
             active: { active_manage_equipment: true },
             sidebarData: { 
                 dp: req.session.passport.user.profile.photos[0].value,
                 name: req.session.passport.user.profile.displayName
                 },
-            equipmentList: equipments
+            equipmentList: equipment
         });
     });
 
 };
 
-exports.updateEquipment = async function (req, res) {
-    Equipment.findOneAndUpdate({name: req.body.name}, /* update, options, callback */)
-};
-
 exports.deleteEquipment = function (req, res) {
-    Equipment.findOneAndDelete(req.params.name, function(err) {
+    Equipment.findByIdAndDelete(req.body.equipmentID, function(err) {
         if (err) return next(err);
-        console.log('Equipment deleted successfully.')
+        console.log('Equipment deleted successfully.');
+        res.redirect("/manage-equipment/equipment");
     });
 };
 

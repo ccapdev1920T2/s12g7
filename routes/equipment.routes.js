@@ -6,19 +6,10 @@ const equipmentController = require('../controller/equipment.controller');
 // create
 router.post('/equipment', equipmentController.createEquipment);
 
+//view all equipment
 router.get('/equipment', equipmentController.viewAllEquipment);
 
-router.delete('/equipment/:name', equipmentController.deleteEquipment);
-// read TODO:retrieve single or all?
-/* router.get('/equipment', equipmentController.viewEquipment);
-
-//update or replace TODO:
-router.put('/equipment/:id', equipmentController.updateEquipment);
-
-// delete TODO:
-router.delete('/equipment/:equipmentid', equipmentController .deleteEquipment);
-
-module.exports = router;
- */
+// delete equipment
+router.delete('/equipment/delete', equipmentController.deleteEquipment);
 
 module.exports = router;
