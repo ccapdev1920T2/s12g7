@@ -34,8 +34,9 @@ exports.viewAllEquipment = function (req, res) {
 
 };
 
+export.updateEquipment 
 exports.deleteEquipment = function (req, res) {
-    Equipment.findByIdAndDelete(req.body.equipmentID, function(err) {
+    Equipment.findByIdAndDelete(req.body.equipmentid, function(err) {
         if (err) return next(err);
         console.log('Equipment deleted successfully.');
         res.redirect("/manage-equipment/equipment");
