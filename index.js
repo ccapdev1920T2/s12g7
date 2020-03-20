@@ -79,11 +79,11 @@ app.get('/manage-reservations(-page.html)?', function (req, res) {
     });
 });
 
-app.use(multer({ dest: './uploads/',
-    rename: function (fieldname, filename) {
-      return filename;
-    },
-}));
+// app.use(multer({ dest: './uploads/',
+//     rename: function (fieldname, filename) {
+//       return filename;
+//     },
+// }));
 
 app.use(function (req, res, next) {
     res.status(404).render('404-page', {
