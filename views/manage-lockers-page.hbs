@@ -78,18 +78,18 @@
                   <label class="form-control-placeholder col-12">Manage lockers</label>
                   <div class="label-legend">
                     <div class="row">
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center">
-                        <i class="locker-status-manage-vacant fas fa-circle ml-auto"></i> - vacant
+                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <i class="locker-status-vacant fas fa-circle ml-auto mr-2"></i> vacant
                       </div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center">
-                        <i class="locker-status-manage-occupied fas fa-circle ml-auto"></i>- occupied
-                      </div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center">
-                        <i class="locker-status-manage-broken fas fa-circle ml-auto"></i> - broken
-                      </div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center">
-                        <i class="locker-status-manage-uncleared fas fa-circle ml-auto"></i> - uncleared
-                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <i class="locker-status-occupied fas fa-circle ml-auto mr-2"></i> occupied
+                    </div>
+                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <i class="locker-status-broken fas fa-circle ml-auto mr-2"></i> broken
+                    </div>
+                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <i class="locker-status-uncleared fas fa-circle ml-auto mr-2"></i> uncleared
+                    </div>
                     </div>
                   </div>
 
@@ -106,7 +106,7 @@
                       </div>
 
                       {{#each lockers}}
-                        <div class="col-lg-4 col-md-6 locker-container mb-4">
+                        <div class="col-lg-4 col-md-6 col-12 locker-container mb-4">
                           <div class="locker locker-status-manage-{{lockerstatus this}} d-flex align-items-center" 
                             data-toggle="modal" data-target="#setStatusModal" data-lockernumber="{{lockernumber this}}" data-panelid="{{../_id}}">
                             #{{lockernumber this}}
