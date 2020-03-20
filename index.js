@@ -2,6 +2,8 @@ const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
 const mongoose = require('mongoose');
+const fs = require('fs');
+const multer = require('multer');
 const port = 3000;
 const app = express();
 
@@ -76,6 +78,12 @@ app.get('/manage-reservations(-page.html)?', function (req, res) {
         }
     });
 });
+
+app.use(multer({ dest: './uploads/',
+    rename: function (fieldname, filename) {
+      return filename;
+    },
+}));
 
 app.use(function (req, res, next) {
     res.status(404).render('404-page', {
