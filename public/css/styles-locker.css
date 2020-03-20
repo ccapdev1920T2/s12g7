@@ -41,7 +41,7 @@
 .locker.locker-status-manage-uncleared:hover {
     cursor: pointer;
     transform: translateY(-2px);
-    box-shadow: 0px 10px 25px rgba(110, 163, 124, 0.1);
+    box-shadow: 0px 10px 40px rgba(110, 163, 124, 0.2);
 }
 
 .locker.locker-status-vacant:active,
