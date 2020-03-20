@@ -44,7 +44,8 @@ exports.viewAllEquipment = function (req, res) {
             active: { active_manage_equipment: true },
             sidebarData: {
                 dp: req.session.passport.user.profile.photos[0].value,
-                name: req.session.passport.user.profile.displayName
+                name: req.session.passport.user.profile.displayName,
+                idNum: req.session.idNum
             },
             equipmentList: equipment
         });

@@ -55,7 +55,8 @@ exports.panel_details = async function(req, res) {
                 active: { active_manage_lockers: true },
                 sidebarData: { 
                     dp: req.session.passport.user.profile.photos[0].value,
-                    name: req.session.passport.user.profile.displayName
+                    name: req.session.passport.user.profile.displayName,
+                    idNum: req.session.idNum
                 },
                 panel_buildings: panel_building,
                 panel_floors: panel_floor.sort(),
