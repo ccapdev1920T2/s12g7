@@ -8,8 +8,6 @@ exports.panel_create = async function (req, res) {
         locker_array.push({number: i, status: 'vacant'});
     }
     
-    console.log(locker_array);
-
     let panel = new Panel({
             number: req.body.number,
             type: req.body.type,
@@ -21,66 +19,65 @@ exports.panel_create = async function (req, res) {
         }
     );
 
-    await panel.save(function (err) {
-        if (err) {
-            console.log('Error writing to db');
-        } else {
-            console.log('success');
-            res.redirect("/manage-lockers/panel?bldg=" + req.body.building + "&flr=" + req.body.level);
-        }
-    });
+    try {
+        await panel.save();
+    }
+    catch (err) {
+        console.log('Error writing to db: ' + err);
+    }
+    res.redirect("/manage-lockers/?bldg=" + req.body.building + "&flr=" + req.body.level);
 };
 
-exports.panel_details = function(req, res) {
+exports.panel_details = async function(req, res) {
     // Show the panels
     if (req.query.bldg != null && req.query.flr != null) {
+        try {
+            var panel = await Panel.find({building: req.query.bldg, level: req.query.flr});
+            var panel_floor = await Panel.find({building: req.query.bldg}).distinct('level');
+            var panel_building = await Panel.find().distinct('building');
 
-        Panel.find({building: req.query.bldg, level: req.query.flr}, function(err, panel) {
-            if (err) return next(err);
-            
-            Panel.find({building: req.query.bldg}).distinct('level', function(err, panel_floor) {
-                if (err) return next(err);
-    
-                Panel.find().distinct('building', function(err, panel_building) {
-                    if (err) return next(err);
-                    res.render('manage-lockers-page', {
-                        active: { active_manage_lockers: true },
-                        sidebarData: { 
-                            dp: req.session.passport.user.profile.photos[0].value,
-                            name: req.session.passport.user.profile.displayName
-                        },
-                        panel_buildings: panel_building,
-                        panel_floors: panel_floor.sort(),
-                        panels: panel
-                    });
-                });
+            res.render('manage-lockers-page', {
+                active: { active_manage_lockers: true },
+                sidebarData: { 
+                    dp: req.session.passport.user.profile.photos[0].value,
+                    name: req.session.passport.user.profile.displayName
+                },
+                panel_buildings: panel_building,
+                panel_floors: panel_floor.sort(),
+                panels: panel
             });
-        });
+        } 
+        catch (err) {
+            console.log(err);
+        }
     }
     else if (req.query.bldg != null) {
-        Panel.find({building: req.query.bldg}).distinct('level', function(err, panel_floor) {
-            if (err) return next(err);
-
+        try {
+            var panel_floor = await Panel.find({building: req.query.bldg}).distinct('level');
             if (panel_floor[0] != null) {
                 panel_floor = panel_floor.sort();
-                res.redirect("/manage-lockers/panel?bldg=" + req.query.bldg + "&flr=" + panel_floor[0]);
+                res.redirect("/manage-lockers/?bldg=" + req.query.bldg + "&flr=" + panel_floor[0]);
             }
             else {
-                res.redirect("/manage-lockers/panel");
+                res.redirect("/manage-lockers/");
             }
-        });
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
-    // if no query
     else {
-        Panel.find().distinct('building', function(err, panel_building) {
-            if (err) return next(err);
-
+        try {
+            var panel_building = await Panel.find().distinct('building');
             if (panel_building[0] != null) {
-                Panel.find({building: panel_building[0]}).distinct('level', function(err, panel_floor) {
-                    if (err) return next(err);
+                try {
+                    var panel_floor = await Panel.find({building: panel_building[0]}).distinct('level');
                     panel_floor = panel_floor.sort();
-                    res.redirect("/manage-lockers/panel?bldg=" + panel_building[0] + "&flr=" + panel_floor[0]);
-                });
+                    res.redirect("/manage-lockers/?bldg=" + panel_building[0] + "&flr=" + panel_floor[0]);
+                }
+                catch (err) {
+                    console.log(err);
+                }
             }
             else {
                 res.render('manage-lockers-page', {
@@ -91,39 +88,44 @@ exports.panel_details = function(req, res) {
                     }
                 });
             }
-        });
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 };
 
 exports.panel_update = async function(req, res) {
-    await Panel.findById(req.body.panelid, async function(err, panel) {
-        if (err) return next(err);
-
-        for (var i = 0; i < panel.upperRange - panel.lowerRange + 1; i++) {
-            // console.log(targetPanel.lockers[i].number);
-            // console.log(req.body.lockernumber);
-            if (panel.lockers[i].number == parseInt(req.body.lockernumber)) {
-                console.log(panel.lockers[i]);
-                panel.lockers[i].status = req.body.status;
-                console.log(panel.lockers[i]);
+    try {
+        var panel = await Panel.findById(req.body.panelid);
+        if (panel) {
+            for (var i = 0; i < panel.upperRange - panel.lowerRange + 1; i++) {
+                if (panel.lockers[i].number == parseInt(req.body.lockernumber)) {
+                    panel.lockers[i].status = req.body.status;
+                }
+            };
+            try {
+                await panel.save();
+            } 
+            catch (err) {
+                console.log('Error updating db: ' + err);
             }
-        };
-       
-        await panel.save(function (err) {
-            if (err) {
-                console.log('Error updating db');
-            } else {
-                console.log('success');
-                res.redirect("/manage-lockers/panel?bldg=" + req.body.building + "&flr=" + req.body.level);
-            }
-        });
-
-    });
+        } 
+        else {
+            console.log('Panel cannot be accessed');
+        }
+    } catch (err) {
+        console.log(err);
+    }
+    res.redirect("/manage-lockers/?bldg=" + req.body.building + "&flr=" + req.body.level);
 };
 
-exports.panel_delete = function(req, res) {
-    Panel.findByIdAndDelete(req.body.panelid, function(err) {
-        if (err) return next(err);
-        res.redirect("/manage-lockers/panel?bldg=" + req.body.building + "&flr=" + req.body.level);
-    });
+exports.panel_delete = async function(req, res) {
+    try {
+        await Panel.findByIdAndDelete(req.body.panelid);
+    }
+    catch (err) {
+        console.log(err);
+    }
+    res.redirect("/manage-lockers/?bldg=" + req.body.building + "&flr=" + req.body.level);
 };
