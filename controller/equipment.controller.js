@@ -4,9 +4,14 @@ exports.createEquipment = async function (req, res) {
     let equipment = new Equipment({
         name: req.body.name,
         quantity: parseInt(req.body.count),
-        available: parseInt(req.body.count)
-        // ,imageURL: req.body.imageURL TODO:
+        available: parseInt(req.body.count),
+        image: {
+            data: fs.readFileSync(req.files.userPhoto.path),
+            contentType: 'image/png'
+        }
     });
+
+    
     
     console.log(equipment);
 
