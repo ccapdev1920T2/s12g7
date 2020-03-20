@@ -3,9 +3,9 @@ const router = express.Router();
 
 const panel_controller = require('../controller/panel.controller');
 
-router.post('/panel', panel_controller.panel_create);
-router.get('/panel', panel_controller.panel_details);
-router.post('/panel/update', panel_controller.panel_update);
-router.post('/panel/delete', panel_controller.panel_delete);
+router.post('/', panel_controller.panel_create);
+router.get('/', panel_controller.panel_details);
+router.post('/update', panel_controller.panel_update);
+router.post('/delete', panel_controller.panel_delete);
 
 module.exports = router
