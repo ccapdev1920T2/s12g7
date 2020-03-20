@@ -141,7 +141,7 @@
           </button>
         </div>
         <div class="modal-body col-lg-10 mx-auto">
-          <form class="form-horizontal" id="setStatusForm" method="POST" action="/manage-lockers/panel/update">
+          <form class="form-horizontal" id="setStatusForm" method="POST" action="/manage-lockers/update">
           <div class="form-group">
             <label for="status">Select status:</label>
             <select class="form-control" id="statusSelector" name="status">
@@ -176,11 +176,7 @@
           </button>
         </div>
         <div class="modal-body col-lg-10 mx-auto">
-          <form class="form-horizontal" id="addPanelForm" action="/manage-lockers/panel" method="POST">
-            <div class="form-group form-inline input-group">
-              <label for="addPanelNumber" class="col-lg-4 justify-content-start">Panel #:</label>
-              <input type="number" class="form-control col-lg-8" placeholder="Enter panel number" id="addPanelNumber" name="number">
-            </div>
+          <form class="form-horizontal" id="addPanelForm" action="/manage-lockers/" method="POST">
             <div class="form-group form-inline input-group">
               <label for="panelType" class="col-lg-4 justify-content-start">Type:</label>
               <select class="form-control col-lg-8" id="panelType" name="type">
@@ -228,7 +224,7 @@
           </button>
         </div>
         <div class="modal-body col-lg-10 mx-auto">
-          <form id="deletePanelForm" action="/manage-lockers/panel/delete" method="POST">
+          <form id="deletePanelForm" action="/manage-lockers/delete" method="POST">
             <input type="hidden" name="panelid" id="deletePanelId">
             <input type="hidden" name="building" id="deletePanelBuilding">
             <input type="hidden" name="level" id="deletePanelFloor">
