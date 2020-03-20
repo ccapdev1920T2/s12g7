@@ -295,6 +295,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .card .card-body {
+    color: #838383;
     padding: 12px;
 }
 
@@ -303,6 +304,15 @@ h1, h2, h3, h4, h5 {
     border-radius: 0 0 12px 12px;
     padding: 12px;
     border: none;
+}
+
+.card .card-subtitle {
+    color: #838383;
+}
+
+.card .card-icon {
+    height: 1.5rem;
+    width: 1.5rem;
 }
 
 .card .card-footer {
@@ -350,49 +360,49 @@ h1, h2, h3, h4, h5 {
     color: #e7f1ed;
 }
 
-.card.status-on-rent .color-container,
-.card.status-on-rent .badge {
+.card .card-footer.status-on-rent .color-container,
+.card .card-footer.status-on-rent .badge {
     color: #fff;
     background: #38b98a;
     border-color: #38b98a;
 }
 
-.card.status-pending .color-container,
-.card.status-pending .badge {
+.card .card-footer.status-pending .color-container,
+.card .card-footer.status-pending .badge {
     color: #fff;
     background: #f3c239;
     border-color: #f3c239;
 }
 
-.card.status-denied .color-container,
-.card.status-denied .badge {
+.card .card-footer.status-denied .color-container,
+.card .card-footer.status-denied .badge {
     color: #fff;
     background: #8b8a92;
     border-color: #8b8a92;
 }
 
-.card.status-uncleared .color-container,
-.card.status-uncleared .badge {
+.card .card-footer.status-uncleared .color-container,
+.card .card-footer.status-uncleared .badge {
     color: #fff;
     background: #e65946;
     border-color: #e65946;
 }
 
-.card.status-pickup-pay .color-container,
-.card.status-pickup-pay .badge {
+.card .card-footer.status-pickup-pay .color-container,
+.card .card-footer.status-pickup-pay .badge {
     color: #fff;
     background: #7e4dda;
     border-color: #7e4dda;
 }
 
-.card.status-returned .color-container,
-.card.status-returned .badge {
+.card .card-footer.status-returned .color-container,
+.card .card-footer.status-returned .badge {
     color: #fff;
     background: #557fcc;
     border-color: #557fcc;
 }
 
-.card:hover .badge {
+.card:hover .card-footer .badge {
     background-color: #fff;
     color: #3f3f3f;
 }
