@@ -2,14 +2,29 @@ const Panel = require('../model/panel.model');
 
 exports.panel_create = async function (req, res) {
    
-    var locker_array =[];
+    try {
+        var panel_number = await Panel.find({building: req.body.building, level: req.body.level, type: req.body.type}).distinct('number');
+        panel_number = panel_number.sort();
+    }
+    catch (err) {
+        console.log('Error reading from db: ' + err);
+    }
 
+    var missingPanelNumber = 1;
+    for (var i = 0; i < panel_number.length; i++) {
+        if (missingPanelNumber != panel_number[i]) {
+            break;
+        }
+        missingPanelNumber++;
+    }
+    
+    var locker_array =[];
     for (var i = parseInt(req.body.lowerRange); i <= parseInt(req.body.upperRange); i++) {
         locker_array.push({number: i, status: 'vacant'});
     }
     
-    let panel = new Panel({
-            number: req.body.number,
+    var panel = new Panel({
+            number: missingPanelNumber,
             type: req.body.type,
             building: req.body.building,
             level: req.body.level,
@@ -102,6 +117,7 @@ exports.panel_update = async function(req, res) {
             for (var i = 0; i < panel.upperRange - panel.lowerRange + 1; i++) {
                 if (panel.lockers[i].number == parseInt(req.body.lockernumber)) {
                     panel.lockers[i].status = req.body.status;
+                    break;
                 }
             };
             try {
