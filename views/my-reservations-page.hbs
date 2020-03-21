@@ -49,143 +49,60 @@
                 </li>
               </ul>
             </div>
+
+            {{!-- Active --}}
             <div class="tab-content col-12">
               <div id="activeRequests" class="tab-pane active">
                 <div class="row">
-                  <!-- equipment 1 -->
-                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card equal-height status-pending">
-                      <h5 class="card-header">Extension Cord</h5>
-                      <div class="card-body">
-                        <div class="table-responsive">
-                          <table class="table table-borderless">
-                            <tbody>
-                              <tr>
-                                <th scope="row">Date</th>
-                                <td>07 Mar 2020</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Remarks</th>
-                                <td>N/A</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                      <div class="card-footer d-flex justify-content-between align-items-center">
-                        <a class="" data-toggle="modal" href="#">Cancel</a>
-                        <span class="badge badge-pill">Pending</span>
-                        <div class="color-container"></div>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card equal-height status-pending">
-                      <h5 class="card-header">VGA Cable</h5>
-                      <div class="card-body">
-                        <div class="table-responsive">
-                          <table class="table table-borderless">
-                            <tbody>
-                              <tr>
-                                <th scope="row">Date</th>
-                                <td>03 Mar 2020</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Remarks</th>
-                                <td>N/A</td>
-                              </tr>
-                            </tbody>
-                          </table>
+                  {{#each activeRes}}
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                      <div class="card equal-height">
+                        <h5 class="card-header">{{title}}</h5>
+                        <div class="card-body">
+                          <div class="d-flex align-items-center mb-2">
+                            <img class="card-icon mr-2" src="/static/icons/date.png" alt="date">
+                            {{dateCreatedStr}}
+                          </div> 
+                          <div class="d-flex align-items-center my-2">
+                            <img class="card-icon mr-2" src="/static/icons/desc.png" alt="description">
+                            {{description}}
+                          </div>
+                          <div class="d-flex align-items-center my-2">
+                            <img class="card-icon mr-2" src="/static/icons/remarks.png" alt="remarks">
+                            {{remarks}}
+                          </div>
+                          {{#if (hasPenalty penalty)}}
+                          <div class="d-flex align-items-center my-2">
+                            <img class="card-icon mr-2" src="/static/icons/penalty.png" alt="penalty">
+                            Penalty: Php {{penalty}}
+                          </div>
+                          {{/if}}
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center 
+                          {{#if (status-pending status)}}
+                          status-pending
+                          {{else if (status-pickup-pay status)}}
+                          status-pickup-pay
+                          {{else if (status-pickup-pay status)}}
+                          status-pickup-pay
+                          {{else if (status-on-rent status)}}
+                          status-on-rent
+                          {{else if (status-denied status)}}
+                          status-denied
+                          {{else if (status-uncleared status)}}
+                          status-uncleared
+                          {{else}}
+                          status-returned
+                          {{/if}}
+                          ">
+                          <a class="" data-toggle="modal" href="#">Cancel</a>
+                          <span class="badge badge-pill">{{status}}</span>
+                          <div class="color-container"></div>
                         </div>
                       </div>
-                      <div class="card-footer d-flex justify-content-between align-items-center">
-                        <a class="" data-toggle="modal" href="#">Cancel</a>
-                        <span class="badge badge-pill">Pending</span>
-                        <div class="color-container"></div>
-                      </div>
                     </div>
-                  </div>
-
-                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card equal-height status-pickup-pay">
-                      <h5 class="card-header">LAN Cable</h5>
-                      <div class="card-body">
-                        <div class="table-responsive">
-                          <table class="table table-borderless">
-                            <tbody>
-                              <tr>
-                                <th scope="row">Date</th>
-                                <td>01 Mar 2020</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Remarks</th>
-                                <td>Proceed to G504 for pickup.</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                      <div class="card-footer d-flex justify-content-between align-items-center">
-                        <a class="" data-toggle="modal" href="#">Cancel</a>
-                        <span class="badge badge-pill">For Pickup</span>
-                        <div class="color-container"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card equal-height status-on-rent">
-                      <h5 class="card-header">Extension Cord</h5>
-                      <div class="card-body">
-                        <div class="table-responsive">
-                          <table class="table table-borderless">
-                            <tbody>
-                              <tr>
-                                <th scope="row">Date</th>
-                                <td>17 Feb 2020</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Remarks</th>
-                                <td>Return the equipment within the day.</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                      <div class="card-footer d-flex justify-content-end">
-                        <span class="badge badge-pill">On Rent</span>
-                        <div class="color-container"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- locker 1 -->
-                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card equal-height status-uncleared">
-                      <h5 class="card-header">Locker (Small)</h5>
-                      <div class="card-body">
-                        <div class="table-responsive">
-                          <table class="table table-borderless">
-                            <tbody>
-                              <tr>
-                                <th scope="row">Location</th>
-                                <td>Gokongwei 2/F</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Remarks</th>
-                                <td>Please pay a fine of P100 to the accounting office.</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                      <div class="card-footer d-flex justify-content-end">
-                        <span class="badge badge-pill">Uncleared</span>
-                        <div class="color-container"></div>
-                      </div>
-                    </div>
-                  </div>
+                  {{/each}}
 
                 </div>
               </div>
@@ -194,135 +111,54 @@
               <div id="pastRequests" class="tab-pane fade">
                 <div class="row">
 
-                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card equal-height status-denied">
-                      <h5 class="card-header">Locker (Small)</h5>
-                      <div class="card-body">
-                        <div class="table-responsive">
-                          <table class="table table-borderless">
-                            <tbody>
-                              <tr>
-                                <th scope="row">Location</th>
-                                <td>Gokongwei 3/F</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Remarks</th>
-                                <td>Settle your uncleared penalties first.</td>
-                              </tr>
-                            </tbody>
-                          </table>
+                  {{#each pastRes}}
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                      <div class="card equal-height">
+                        <h5 class="card-header">{{title}}</h5>
+                        <div class="card-body">
+                          <div class="d-flex align-items-center mb-2">
+                            <img class="card-icon mr-2" src="/static/icons/date.png" alt="date">
+                            {{dateCreatedStr}}
+                          </div> 
+                          <div class="d-flex align-items-center my-2">
+                            <img class="card-icon mr-2" src="/static/icons/desc.png" alt="description">
+                            {{description}}
+                          </div>
+                          <div class="d-flex align-items-center my-2">
+                            <img class="card-icon mr-2" src="/static/icons/remarks.png" alt="remarks">
+                            {{remarks}}
+                          </div>
+                          {{#if (hasPenalty penalty)}}
+                          <div class="d-flex align-items-center my-2">
+                            <img class="card-icon mr-2" src="/static/icons/penalty.png" alt="penalty">
+                            Penalty: Php {{penalty}}
+                          </div>
+                          {{/if}}
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center 
+                          {{#if (status-pending status)}}
+                          status-pending
+                          {{else if (status-pickup-pay status)}}
+                          status-pickup-pay
+                          {{else if (status-pickup-pay status)}}
+                          status-pickup-pay
+                          {{else if (status-on-rent status)}}
+                          status-on-rent
+                          {{else if (status-denied status)}}
+                          status-denied
+                          {{else if (status-uncleared status)}}
+                          status-uncleared
+                          {{else}}
+                          status-returned
+                          {{/if}}
+                          ">
+                          <a class="" data-toggle="modal" href="#">Cancel</a>
+                          <span class="badge badge-pill">{{status}}</span>
+                          <div class="color-container"></div>
                         </div>
                       </div>
-                      <div class="card-footer d-flex justify-content-end">
-                        <span class="badge badge-pill">Denied</span>
-                        <div class="color-container"></div>
-                      </div>
                     </div>
-                  </div>
-
-                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card equal-height status-returned">
-                      <h5 class="card-header">Extension Cord</h5>
-                      <div class="card-body">
-                        <div class="table-responsive">
-                          <table class="table table-borderless">
-                            <tbody>
-                              <tr>
-                                <th scope="row">Date</th>
-                                <td>17 June 2019</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Remarks</th>
-                                <td>Returned on 18 June 2019.</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                      <div class="card-footer d-flex justify-content-end">
-                        <span class="badge badge-pill">Returned</span>
-                        <div class="color-container"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card equal-height status-returned">
-                      <h5 class="card-header">Extension Cord</h5>
-                      <div class="card-body">
-                        <div class="table-responsive">
-                          <table class="table table-borderless">
-                            <tbody>
-                              <tr>
-                                <th scope="row">Date</th>
-                                <td>04 Oct 2018</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Remarks</th>
-                                <td>Returned on 05 Oct 2018.</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                      <div class="card-footer d-flex justify-content-end">
-                        <span class="badge badge-pill">Returned</span>
-                        <div class="color-container"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card equal-height status-returned">
-                      <h5 class="card-header">Locker (Small)</h5>
-                      <div class="card-body">
-                        <div class="table-responsive">
-                          <table class="table table-borderless">
-                            <tbody>
-                              <tr>
-                                <th scope="row">Location</th>
-                                <td>Gokongwei 2/F</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Remarks</th>
-                                <td>Returned on 04 April 2018.</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                      <div class="card-footer d-flex justify-content-end">
-                        <span class="badge badge-pill">Returned</span>
-                        <div class="color-container"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card equal-height status-returned">
-                      <h5 class="card-header">Locker (Big)</h5>
-                      <div class="card-body">
-                        <div class="table-responsive">
-                          <table class="table table-borderless">
-                            <tbody>
-                              <tr>
-                                <th scope="row">Location</th>
-                                <td>Gokongwei 3/F</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">Remarks</th>
-                                <td>Returned on 19 April 2019.</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                      <div class="card-footer d-flex justify-content-end">
-                        <span class="badge badge-pill">Returned</span>
-                        <div class="color-container"></div>
-                      </div>
-                    </div>
-                  </div>
+                  {{/each}}
 
                 </div>
               </div>

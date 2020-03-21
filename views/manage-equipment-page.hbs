@@ -39,36 +39,31 @@
 
             <div class="col-12 d-flex justify-content-between mb-5">
               <h1>Manage equipment</h1>
-              <a id="addEquipment" data-toggle="modal" href="#addEquipmentModal"
-                class="btn btn-secondary my-auto"><i class="fas fa-plus"></i> Add</a>
+              <a id="addEquipment" data-toggle="modal" href="#addEquipmentModal" class="btn btn-secondary my-auto"><i
+                  class="fas fa-plus"></i> Add</a>
             </div>
 
-            <div class="col-lg-10 row align-items-end mx-auto px-0">
+            <div class="col-lg-12 row align-items-end mx-auto px-0">
               {{#each equipmentList}}
-              <div class="col-lg-4 col-6">
+              <div class="col-lg-4 col-md-6 col-12">
                 <div class="card equipment-card">
-                  <div class="equipment-img mx-auto" style="background-image: url(static/equipment-types/vga-cable.png)">
+                  <div class="equipment-img mx-auto" style="background-image: url({{imageURL}})">
                   </div>
                   <div class="card-body">
                     <h5 class="card-title">{{name}}</h5>
                     <div class="card-text mb-3">
                       <div>
-                        <span class="card-text-label">Stock: </span><span>{{quantity}}</span>
-                      </div>
-                      <div>
-                        <span class="card-text-label">Available: </span><span>{{available}}</span>
-                      </div>
-                      <div>
-                        <span class="card-text-label">On rent: </span><span>29</span>
+                        <span class="card-text-label">On Rent: </span><span>0</span>
                       </div>
                     </div>
                   </div>
                   <div class="card-footer d-flex flex-row justify-content-between">
-                    <a class="option" data-toggle="modal" href="#editEquipmentModal" data-equipmentid="{{_id}}">Edit equipment</a>
-                    <span>|</span> <!--TODO: -->
-                    <a data-toggle="modal" href="#delEquipmentModal" data-equipmentid="{{_id}}">
-                      <i class="option fas fa-trash"></i>
+                    <span class="badge badge-pill">{{available}}/{{quantity}} available</span>
+                    <!--TODO: -->
+                    <a data-toggle="modal" href="#editEquipmentModal" data-equipmentid="{{_id}}">
+                      <img src="/static/icons/active-manage-reservations.png" alt="Edit" style="height: 2rem; width: 2rem;">
                     </a>
+                    <div class="color-container"></div>
                   </div>
                 </div>
               </div>
@@ -92,20 +87,19 @@
           </button>
         </div>
         <div class="modal-body">
-          <form class="form-horizontal col-lg-10 mx-auto" method="POST" action="/manage-equipment/equipment" id="addEquipForm">
+          <form class="form-horizontal col-lg-10 mx-auto" method="POST" action="/manage-equipment/equipment"
+            id="addEquipForm" enctype="multipart/form-data">
             <div class="form-group form-inline input-group">
               <label for="equipment-name" class="col-lg-4 justify-content-start p-0">Name</label>
-              <input type="text" class="form-control mb-2 col-lg-8" placeholder="Enter equipment name"
-                name="name">
+              <input type="text" class="form-control mb-2 col-lg-8" placeholder="Enter equipment name" name="name">
             </div>
             <div class="form-group form-inline input-group">
               <label for="equipment-ct" class="col-lg-4 justify-content-start p-0">Amount on stock</label>
-              <input type="number" class="form-control mb-2 col-lg-8" placeholder="Enter number of stocks"
-                name="count">
+              <input type="number" class="form-control mb-2 col-lg-8" placeholder="Enter number of stocks" name="count">
             </div>
             <div class="form-group form-inline input-group">
               <label for="equipment-pic" class="col-lg-4 justify-content-start p-0">Image</label>
-              <input type="file" class="form-control-file mb-2 col-lg-8" name="pic" accept="image/*">
+              <input type="file" class="form-control-file mb-2 col-lg-8" name="equipmentImage" accept="image/*">
             </div>
           </form>
         </div>
@@ -122,32 +116,33 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="equipmentModalLabel">Edit Equipment</h5> 
+          <h5 class="modal-title" id="equipmentModalLabel">Edit Equipment</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form class="form-horizontal col-lg-10 mx-auto" method="POST" action="/manage-equipment/equipment/update" id="editEquipForm"> <!--FIXME: -->
+          <form class="form-horizontal col-lg-10 mx-auto" method="POST" action="/manage-equipment/equipment/update"
+            id="editEquipForm" enctype="multipart/form-data">
+            <!--FIXME: -->
             <input type="hidden" name="equipmentid" id="editHiddenEquipID">
-            
+
             <div class="form-group form-inline input-group">
               <label for="equipment-name" class="col-lg-4 justify-content-start p-0">Name</label>
-              <input type="text" class="form-control mb-2 col-lg-8" placeholder="Enter equipment name"
-                name="name">
+              <input type="text" class="form-control mb-2 col-lg-8" placeholder="Enter equipment name" name="name">
             </div>
             <div class="form-group form-inline input-group">
               <label for="equipment-ct" class="col-lg-4 justify-content-start p-0">Amount on stock</label>
-              <input type="number" class="form-control mb-2 col-lg-8" placeholder="Enter number of stocks"
-                name="count">
+              <input type="number" class="form-control mb-2 col-lg-8" placeholder="Enter number of stocks" name="count">
             </div>
             <div class="form-group form-inline input-group">
               <label for="equipment-pic" class="col-lg-4 justify-content-start p-0">Image</label>
-              <input type="file" class="form-control-file mb-2 col-lg-8" name="pic"> {{!-- TODO: --}}
+              <input type="file" class="form-control-file mb-2 col-lg-8" name="equipmentImage"> {{!-- TODO: --}}
             </div>
           </form>
         </div>
         <div class="modal-footer">
+          <a class="btn btn-warning mr-auto" data-dismiss="modal" data-toggle="modal" href="#delEquipmentModal" data-equipmentid="{{_id}}">Delete</a>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary" form="editEquipForm">Save</button>
         </div>
@@ -160,7 +155,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="equipmentModalLabel">Delete Equipment</h5> 
+          <h5 class="modal-title" id="equipmentModalLabel">Delete Equipment</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -169,9 +164,9 @@
           <form method="POST" action="/manage-equipment/equipment/delete" id="delEquipForm">
             <input type="hidden" name="equipmentid" id="delHiddenEquipID">
           </form>
-          <h5>Do you really want to delete this equipment?</h5> 
+          <h5>Do you really want to delete this equipment?</h5>
         </div>
-        <div class="modal-footer"> 
+        <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary" form="delEquipForm">Delete</button>
         </div>
@@ -194,11 +189,12 @@
       $('#delHiddenEquipID').val(equipmentID);
     });
 
-     $('#editEquipmentModal').on('show.bs.modal', function (event) {
+    $('#editEquipmentModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget);
-      var equipmentID = button.data('equipmentid'); 
+      var equipmentID = button.data('equipmentid');
       $('#editHiddenEquipID').val(equipmentID);
     });
   </script>
 </body>
+
 </html>
