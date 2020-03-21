@@ -10,7 +10,7 @@ exports.createEquipment = function (req, res) {
     const tempPath = req.file.path;
     const filename = shortid.generate() + '.png';
     const filePath = path.join(__dirname, '/../public/uploads/equipment-images', filename);
-    const staticFilePath = '/uploads/equipment-images/' + filename;
+    const relativeFilePath = '/uploads/equipment-images/' + filename;
 
     console.log('target: ' + filePath);
 
@@ -23,7 +23,7 @@ exports.createEquipment = function (req, res) {
                 name: req.body.name,
                 quantity: parseInt(req.body.count),
                 available: parseInt(req.body.count),
-                imageURL: staticFilePath
+                imageURL: relativeFilePath
             });
 
             try {
