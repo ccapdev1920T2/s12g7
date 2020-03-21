@@ -11,15 +11,15 @@ const upload = multer({
 });
 
 // create
-router.post('/equipment', upload.single('equipmentImage'), equipmentController.createEquipment);
+router.post('/', upload.single('equipmentImage'), equipmentController.createEquipment);
 
 // view all equipment
-router.get('/equipment', equipmentController.viewAllEquipment);
+router.get('/', equipmentController.viewAllEquipment);
 
 // update equipment
-router.post('/equipment/update', equipmentController.updateEquipment);
+router.post('/update', upload.single('equipmentImage'), equipmentController.updateEquipment);
 
 // delete equipment
-router.post('/equipment/delete', equipmentController.deleteEquipment);
+router.post('/delete', equipmentController.deleteEquipment);
 
 module.exports = router;
