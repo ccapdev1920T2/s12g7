@@ -138,7 +138,7 @@ h1, h2, h3, h4, h5 {
 
 .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0px 10px 25px rgba(110, 163, 124, 0.1);
+    box-shadow: 0px 10px 40px rgba(110, 163, 124, 0.2);
 }
 
 .btn:active, .btn:focus {
@@ -241,7 +241,17 @@ h1, h2, h3, h4, h5 {
 .btn-white:hover {
     /* background-color: #f7f7f7; */
     color: #3f3f3f;
-    box-shadow: 0px 10px 25px rgba(110, 163, 124, 0.1);
+    box-shadow: 0px 10px 40px rgba(110, 163, 124, 0.2);
+}
+
+.btn-warning {
+    color: #fff;
+    background-color: #e65946;
+}
+
+.btn-warning:hover {
+    color: #fff;
+    background-color: #f36957;
 }
 
 /* 
@@ -267,12 +277,12 @@ h1, h2, h3, h4, h5 {
     background-color: #fff;
     border: solid #fff 8px;
     border-radius: 12px;
-    box-shadow: 0px 10px 25px rgba(110, 163, 124, 0.1);
+    box-shadow: 0px 10px 40px rgba(110, 163, 124, 0.2);
     padding: 0;
 }
 
 .card:hover {
-    box-shadow: 0px 20px 50px rgba(110, 163, 124, 0.2);
+    box-shadow: 0px 30px 50px rgba(110, 163, 124, 0.3);
 }
 
 .card.card-translucent {
@@ -285,6 +295,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .card .card-body {
+    color: #838383;
     padding: 12px;
 }
 
@@ -293,6 +304,15 @@ h1, h2, h3, h4, h5 {
     border-radius: 0 0 12px 12px;
     padding: 12px;
     border: none;
+}
+
+.card .card-subtitle {
+    color: #838383;
+}
+
+.card .card-icon {
+    height: 1.5rem;
+    width: 1.5rem;
 }
 
 .card .card-footer {
@@ -314,7 +334,7 @@ h1, h2, h3, h4, h5 {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #f3c239;
+    background-color: #6aca6f;
     z-index: 0;
     transition: 0.25s ease;
     border-radius: 8px;
@@ -332,6 +352,7 @@ h1, h2, h3, h4, h5 {
 
 .card-footer .badge {
     font-size: 1rem;
+    background-color: #6aca6f;
 }
 
 .card-footer a:hover,
@@ -339,49 +360,49 @@ h1, h2, h3, h4, h5 {
     color: #e7f1ed;
 }
 
-.card.status-on-rent .color-container,
-.card.status-on-rent .badge {
+.card .card-footer.status-on-rent .color-container,
+.card .card-footer.status-on-rent .badge {
     color: #fff;
     background: #38b98a;
     border-color: #38b98a;
 }
 
-.card.status-pending .color-container,
-.card.status-pending .badge {
+.card .card-footer.status-pending .color-container,
+.card .card-footer.status-pending .badge {
     color: #fff;
     background: #f3c239;
     border-color: #f3c239;
 }
 
-.card.status-denied .color-container,
-.card.status-denied .badge {
+.card .card-footer.status-denied .color-container,
+.card .card-footer.status-denied .badge {
     color: #fff;
     background: #8b8a92;
     border-color: #8b8a92;
 }
 
-.card.status-uncleared .color-container,
-.card.status-uncleared .badge {
+.card .card-footer.status-uncleared .color-container,
+.card .card-footer.status-uncleared .badge {
     color: #fff;
     background: #e65946;
     border-color: #e65946;
 }
 
-.card.status-pickup-pay .color-container,
-.card.status-pickup-pay .badge {
+.card .card-footer.status-pickup-pay .color-container,
+.card .card-footer.status-pickup-pay .badge {
     color: #fff;
     background: #7e4dda;
     border-color: #7e4dda;
 }
 
-.card.status-returned .color-container,
-.card.status-returned .badge {
+.card .card-footer.status-returned .color-container,
+.card .card-footer.status-returned .badge {
     color: #fff;
     background: #557fcc;
     border-color: #557fcc;
 }
 
-.card:hover .badge {
+.card:hover .card-footer .badge {
     background-color: #fff;
     color: #3f3f3f;
 }
@@ -609,7 +630,7 @@ tr {
     padding-bottom: 64px;
     background-color: #fff;
     border-radius: 12px;
-    box-shadow: 0px 10px 25px rgba(110, 163, 124, 0.1);
+    box-shadow: 0px 10px 40px rgba(110, 163, 124, 0.2);
     border: solid #fff 8px;
     /* min-height: 100px; */
     margin-bottom: 30px
@@ -803,18 +824,15 @@ tr {
 .sidebar .nav-link {
     /* font-family: 'Muli', 'Muli', sans-serif; */
     display: flex;
+    flex-direction: row;
     align-items: center;
+    align-self: center;
     color: #63a392;
     min-height: 40px;
     margin: 2px 16px;
     padding: 4px 12px;
     transition: ease 0.2s;
     /* font-weight: 600; */
-}
-
-.sidebar .nav-link i {
-    font-size: 0.75rem;
-    color: #1f6383;
 }
 
 .sidebar .nav-link.nav-main {
@@ -834,7 +852,7 @@ tr {
 .sidebar .nav-link.nav-main:hover {
     background-color: #fff;
     transform: translateY(-2px);
-    box-shadow: 0px 10px 25px rgba(110, 163, 124, 0.1);
+    box-shadow: 0px 10px 40px rgba(110, 163, 124, 0.2);
 }
 
 .sidebar .nav-link.active {
@@ -880,8 +898,8 @@ tr {
 }
 
 .sidebar .icon {
-    height: 20px;
-    width: 20px;
+    height: 1.2rem;
+    width: 1.2rem;
 }
 
 .nav-btn {
@@ -924,7 +942,7 @@ tr {
 
 .profile-container .profile-img:hover {
     transform: translateY(-2px);
-    box-shadow: 0px 10px 25px rgba(110, 163, 124, 0.1);
+    box-shadow: 0px 10px 40px rgba(110, 163, 124, 0.2);
 }
 
 .profile-container .profile-name {
