@@ -74,3 +74,14 @@ exports.myReservations = async function (req, res) {
         console.log(err);
     }
 };
+
+exports.manageReservations = function(req, res) {
+    res.render('manage-reservations-page', {
+        active: { active_manage_reservations: true },
+        sidebarData: {
+            dp: req.session.passport.user.profile.photos[0].value,
+            name: req.session.passport.user.profile.displayName,
+            idNum: req.session.idNum
+        }
+    });
+}
