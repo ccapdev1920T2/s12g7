@@ -14,6 +14,7 @@ exports.myReservations = async function (req, res) {
 
     /* try {
         var reservation = new Reservation({
+            title: 'Locker'
             userID: 11826401,
             reservationType: 'locker',
             itemID: null,
