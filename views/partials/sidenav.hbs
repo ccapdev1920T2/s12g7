@@ -21,7 +21,7 @@
         <li class="nav-item mb-4"><a class="{{#if act.active_index}}active{{/if}} nav-link nav-main"
             href="/reserve">Rent & Reserve</a></li>
         <li class="nav-item">
-          <a class="{{#if act.active_my_reservations}}active{{/if}} nav-link" href="/my-reservations">
+          <a class="{{#if act.active_my_reservations}}active{{/if}} nav-link" href="/reservations">
             <img class="icon mr-2" id="ic-my-reservations" src="/static/icons/{{#if act.active_my_reservations}}active-my-reservations.png{{else}}my-reservations.png{{/if}}">
             My Reservations
           </a>
@@ -44,7 +44,7 @@
       </div>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="{{#if act.active_manage_reservations}}active{{/if}} nav-link" href="/manage-reservations">
+          <a class="{{#if act.active_manage_reservations}}active{{/if}} nav-link" href="/reservations/manage">
             <img class="icon mr-2" id="ic-my-reservations" src="/static/icons/{{#if act.active_manage_reservations}}active-manage-reservations.png{{else}}manage-reservations.png{{/if}}">
             Reservations 
           </a>
