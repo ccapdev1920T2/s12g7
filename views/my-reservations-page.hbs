@@ -64,15 +64,18 @@
                             <img class="card-icon mr-2" src="/static/icons/date.png" alt="date">
                             {{dateCreatedStr}}
                           </div> 
+                          <hr>
                           <div class="d-flex align-items-center my-2">
                             <img class="card-icon mr-2" src="/static/icons/desc.png" alt="description">
                             {{description}}
                           </div>
+                          <hr>
                           <div class="d-flex align-items-center my-2">
                             <img class="card-icon mr-2" src="/static/icons/remarks.png" alt="remarks">
                             {{remarks}}
                           </div>
                           {{#if (hasPenalty penalty)}}
+                          <hr>
                           <div class="d-flex align-items-center my-2">
                             <img class="card-icon mr-2" src="/static/icons/penalty.png" alt="penalty">
                             Penalty: Php {{penalty}}
@@ -96,8 +99,10 @@
                           status-returned
                           {{/if}}
                           ">
+                          {{#if (cancellable status)}}
                           <a class="" data-toggle="modal" href="#">Cancel</a>
-                          <span class="badge badge-pill">{{status}}</span>
+                          {{/if}}
+                          <span class="badge badge-pill ml-auto">{{status}}</span>
                           <div class="color-container"></div>
                         </div>
                       </div>
@@ -120,15 +125,18 @@
                             <img class="card-icon mr-2" src="/static/icons/date.png" alt="date">
                             {{dateCreatedStr}}
                           </div> 
+                          <hr>
                           <div class="d-flex align-items-center my-2">
                             <img class="card-icon mr-2" src="/static/icons/desc.png" alt="description">
                             {{description}}
                           </div>
+                          <hr>
                           <div class="d-flex align-items-center my-2">
                             <img class="card-icon mr-2" src="/static/icons/remarks.png" alt="remarks">
                             {{remarks}}
                           </div>
                           {{#if (hasPenalty penalty)}}
+                          <hr>
                           <div class="d-flex align-items-center my-2">
                             <img class="card-icon mr-2" src="/static/icons/penalty.png" alt="penalty">
                             Penalty: Php {{penalty}}
@@ -152,8 +160,10 @@
                           status-returned
                           {{/if}}
                           ">
+                          {{#if (cancellable status)}}
                           <a class="" data-toggle="modal" href="#">Cancel</a>
-                          <span class="badge badge-pill">{{status}}</span>
+                          {{/if}}
+                          <span class="badge badge-pill ml-auto">{{status}}</span>
                           <div class="color-container"></div>
                         </div>
                       </div>
@@ -165,13 +175,10 @@
             </div>
           </div>
 
-          <footer class="py-5 pt-5 text-muted text-center text-small">
-            <p class="mb-1">De La Salle University - Manila</p>
-            <p class="mb-1">Pahiram Services</p>
-          </footer>
-
         </main>
-        <!-- do not remove -->
+
+          {{> footer}}
+
       </div>
     </div>
   </div>

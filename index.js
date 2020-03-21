@@ -54,6 +54,7 @@ mongoose.connect('mongodb://localhost:27017/ccapdev',
 });
 
 hbs.registerPartials(__dirname + '/views/partials');
+
 hbs.registerHelper('lockernumber', function (str) {return JSON.parse(JSON.stringify(str)).number;});
 hbs.registerHelper('lockerstatus', function (str) {return JSON.parse(JSON.stringify(str)).status;});
 // capitalizeFirst capitalizes the first character of the text/string parameter

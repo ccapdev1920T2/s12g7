@@ -1,14 +1,24 @@
 const hbs = require('hbs');
 const Reservation = require('../model/reservation.model');
+const cron = require('node-cron');
+
+// TODO: update reservations based on time
+cron.schedule('* * * * *', () => {
+    console.log('running a task every minute');
+});
 
 hbs.registerHelper('hasPenalty', (penalty) => { return penalty > 0; });
 
 hbs.registerHelper('status-pending', (status) => { return status == 'Pending'; });
-hbs.registerHelper('status-pickup-pay', (status) => { return status == 'For Pickup' || status =='To Pay'; });
+hbs.registerHelper('status-pickup-pay', (status) => { return status == 'For Pickup' || status == 'To Pay'; });
 hbs.registerHelper('status-on-rent', (status) => { return status == 'On Rent'; });
 hbs.registerHelper('status-denied', (status) => { return status == 'Denied'; });
 hbs.registerHelper('status-uncleared', (status) => { return status == 'Uncleared'; });
 hbs.registerHelper('status-returned', (status) => { return status == 'Returned'; });
+
+hbs.registerHelper('cancellable', (status) => {
+    return status == 'Pending' || status == 'For Pickup' || status == 'To Pay';
+})
 
 exports.myReservations = async function (req, res) {
 
@@ -34,9 +44,6 @@ exports.myReservations = async function (req, res) {
         var activeReservations = [];
         var pastReservations = [];
 
-        console.log('res:' + reservations);
-
-
         reservations.forEach(function (reservation) {
             reservation.dateCreatedStr = reservation.dateCreated.toDateString();
             if (reservation.status == 'Denied') {
@@ -51,9 +58,6 @@ exports.myReservations = async function (req, res) {
                 activeReservations.push(reservation);
             }
         });
-
-        console.log('active:' + activeReservations);
-        console.log('past:' + pastReservations);
 
         res.render('my-reservations-page', {
             active: { active_my_reservations: true },
