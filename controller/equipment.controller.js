@@ -17,7 +17,7 @@ exports.createEquipment = function (req, res) {
     fs.rename(tempPath, filePath, async function(err) {
         if (err) {
             console.log(err);
-            res.redirect('/manage-equipment/equipment');
+            res.redirect('/manage-equipment/');
         } else {
             let equipment = new Equipment({
                 name: req.body.name,
@@ -31,7 +31,7 @@ exports.createEquipment = function (req, res) {
             } catch(err) {
                 console.log(err);
             }
-            res.redirect("/manage-equipment/equipment");
+            res.redirect("/manage-equipment/");
         }
     });
 
@@ -53,33 +53,43 @@ exports.viewAllEquipment = function (req, res) {
 };
 
 exports.updateEquipment = async function (req, res) {
-    await Equipment.findById(req.body.equipmentid, async function (err, equipment) {
-        if (err) return next(err);
+    try {
+        var equipment = await Equipment.findById(req.body.equipmentid);
+        console.log(equipment);
+        if (req.body.name.trim().length != 0) { equipment.name = req.body.name; }
+        if (!isNaN(parseInt(req.body.count))) { equipment.quantity = req.body.count; }
+        if (req.file != null) {
+            const tempPath = req.file.path;
+            const filename = shortid.generate() + '.png';
+            const filePath = path.join(__dirname, '/../public/uploads/equipment-images', filename);
+            const relativeFilePath = '/uploads/equipment-images/' + filename;
 
-        if (req.body.name != null) {
-            equipment.name = req.body.name;
+            fs.rename(tempPath, filePath, async function(err) {
+                if (err) console.log(err);
+                else equipment.imageURL = relativeFilePath;
+                try {
+                    await equipment.save();
+                }
+                catch (err) {
+                    console.log('Error updating db: ' + err);
+                }
+            });
         }
-
-        if (req.body.count != null) {
-            equipment.quantity = req.body.count;
+        else {
+            await equipment.save();
         }
-
-        await equipment.save(function (err) {
-            if (err) {
-                console.log('Error updating db');
-            } else {
-                console.log('success');
-                res.redirect("/manage-equipment/equipment");
-            }
-        });
-
-    });
+    }
+    catch (err) {
+        console.log('Error updating db: ' + err);
+    }              
+    res.redirect("/manage-equipment/");
 };
+
 exports.deleteEquipment = function (req, res) {
     Equipment.findByIdAndDelete(req.body.equipmentid, function (err) {
         if (err) return next(err);
         console.log('Equipment deleted successfully.');
-        res.redirect("/manage-equipment/equipment");
+        res.redirect("/manage-equipment/");
     });
 };
 
