@@ -55,11 +55,6 @@ mongoose.connect('mongodb://localhost:27017/ccapdev',
 
 hbs.registerPartials(__dirname + '/views/partials');
 
-hbs.registerHelper('lockernumber', function (str) {return JSON.parse(JSON.stringify(str)).number;});
-hbs.registerHelper('lockerstatus', function (str) {return JSON.parse(JSON.stringify(str)).status;});
-// capitalizeFirst capitalizes the first character of the text/string parameter
-hbs.registerHelper('capitalizeFirst', function (text) {return text[0].toUpperCase() + text.slice(1);});
-
 app.use('/', index);
 app.use('/profile', UserAuth.userIsLoggedIn, UserAuth.userIsNew, profile);
 app.use('/reserve', UserAuth.userIsLoggedIn, UserAuth.userIsNew, reserve);
