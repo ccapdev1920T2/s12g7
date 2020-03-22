@@ -1,4 +1,9 @@
 const Panel = require('../model/panel.model');
+const hbs = require('hbs');
+
+hbs.registerHelper('lockernumber', function (str) {return JSON.parse(JSON.stringify(str)).number;});
+hbs.registerHelper('lockerstatus', function (str) {return JSON.parse(JSON.stringify(str)).status;});
+hbs.registerHelper('capitalizeFirst', function (text) {return text[0].toUpperCase() + text.slice(1);});
 
 exports.panel_create = async function (req, res) {
    
