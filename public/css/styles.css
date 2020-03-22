@@ -99,6 +99,46 @@ hr {
     background-size: contain;
 }
 
+.icon#date {
+    background: url(../static/icons/date.png) center no-repeat;
+    background-size: contain;
+}
+
+.icon#desc {
+    background: url(../static/icons/desc.png) center no-repeat;
+    background-size: contain;
+}
+
+.icon#remarks {
+    background: url(../static/icons/remarks.png) center no-repeat;
+    background-size: contain;
+}
+
+.icon#penalty {
+    background: url(../static/icons/penalty.png) center no-repeat;
+    background-size: contain;
+}
+
+.icon#locker {
+    background: url(../static/icons/locker.png) center no-repeat;
+    background-size: contain;
+}
+
+.icon#equipment {
+    background: url(../static/icons/equipment.png) center no-repeat;
+    background-size: contain;
+}
+
+.icon#accept {
+    background: url(../static/icons/accept.png) center no-repeat;
+    background-size: contain;
+}
+
+.icon#deny {
+    background: url(../static/icons/deny.png) center no-repeat;
+    background-size: contain;
+}
+
 /* 
 * Colors
 */
@@ -319,6 +359,14 @@ h1, h2, h3, h4, h5 {
 
 .card .card-subtitle {
     color: #838383;
+}
+
+.card .card-item {
+    border: solid #e7f1ed 1px;
+    border-radius: 8px;
+    padding: 8px;
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
 
 .card .card-icon {
@@ -822,7 +870,7 @@ tr {
 
 .sidebar-sticky::-webkit-scrollbar {
     display: none;
-  }
+}
 
 .sidebar-sticky {
     position: -webkit-sticky;
