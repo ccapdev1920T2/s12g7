@@ -36,17 +36,11 @@
         <main role="main" class="pt-3 px-4">
           <form class="form row px-0 col-lg-10 align-items-end mx-auto" action="POST">
 
-            <div class="col-12 d-flex justify-content-between mb-5">
-
-              <h1>Manage lockers</h1>
-              <div>
-                <a id="addPanel" data-toggle="modal" href="#addPanelModal" class="btn btn-secondary my-auto"><i
-                    class="fas fa-plus"></i> Add panel</a>
+            <div class="col-12 d-flex flex-wrap justify-content-between mb-5">
+              <h1 class="mb-4">Manage lockers</h1>
+                <a id="addPanel" data-toggle="modal" href="#addPanelModal" class="btn btn-primary mb-auto d-flex align-items-center">
+                  <div class="icon mr-2" id="add"></div> Add panel
                 </a>
-                <!-- <a id="delPanel" data-toggle="modal" href="#delPanelModal" class="btn btn-dark btn-lg px-3">
-                  <p class="m-1"><i class="fas fa-trash-alt"></i> Remove panel</p>
-                </a> -->
-              </div>
             </div>
 
             <div class="col-lg-10 row align-items-end mx-auto px-0">
@@ -100,8 +94,8 @@
                         <div>
                           {{capitalizeFirst type}} Panel {{number}} ({{lowerRange}}-{{upperRange}})
                         </div>
-                        <a class="delete-panel btn btn-white" data-toggle="modal" href="#delPanelModal" data-panelid="{{_id}}">
-                          <i class="fas fa-trash"></i>
+                        <a class="delete-panel d-flex align-items-center" data-toggle="modal" href="#delPanelModal" data-panelid="{{_id}}">
+                          <div class="icon" id="delete"></div>
                         </a>
                       </div>
 

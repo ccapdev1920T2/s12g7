@@ -1,12 +1,12 @@
 body {
-    background-image: linear-gradient(154.33deg, #6aca6f 20.81%, #38b98a 52.32%);
+    background-image: linear-gradient(154.33deg, #d9f2c9 20.81%, #1f6383 52.32%);
     color: #545662;
     font-size: 14px;
     height: 100vh;
 }
 
 h1 {
-    color: #6aca6f; 
+    color: #d9f2c9; 
     font-family: 'Muli';
     font-weight: 600; /* semi-bold */
 }
@@ -48,10 +48,6 @@ h1 {
     /* TODO: hover color + active outline not working */
 }
 
-.btn-primary {
-    background-image: linear-gradient(/* 270deg */to left, #1f6383 , #2A6573, #458595);
-}
-
 form {
     padding: 20px;
 }
@@ -69,7 +65,7 @@ form {
 .form-control:focus {
     background-color: transparent;
     border-width: 6px;
-    border-color: #6aca6f;
+    border-color: #d9f2c9;
     box-shadow: none;
 }
 
@@ -104,7 +100,7 @@ p {
 }
 
 #register {
-    color: #6aca6f; 
+    color: #d9f2c9; 
     cursor: pointer;
     font-weight: 900;
 }

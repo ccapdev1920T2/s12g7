@@ -111,3 +111,8 @@ i.locker-status-manage-broken {
     color: #838383;
     margin: 16px 24px 0 24px;
 }
+
+a.delete-panel .icon {
+    height: 2rem;
+    width: 2rem;
+}
