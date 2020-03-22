@@ -44,10 +44,10 @@
                 <h5 class="card-header">Pending</h5>
                 <div class="card-body">
                   <div class="card-subtitle">March 27, 2020</div>
-                  <div class="card-item px-4">
-                    <div class="row">
+                  <div class="card-item">
+                    <div class="d-flex flex-row flex-nowrap">
                       <div class="col-1 icon my-auto" id="locker"></div>
-                      <div class="col-8 col-lg-9 d-flex flex-column">
+                      <div class="d-flex flex-column mx-4">
                         <div class="font-weight-bold">
                           11826401
                         </div>
@@ -59,55 +59,10 @@
                       <a class="col-1 icon my-auto response" id="deny" href="#" title="Deny"></a>
                     </div>
                   </div>
-                  <div class="card-item px-4">
-                    <div class="row">
+                  <div class="card-item">
+                    <div class="d-flex flex-row flex-nowrap">
                       <div class="col-1 icon my-auto" id="equipment"></div>
-                      <div class="col-8 col-lg-9 d-flex flex-column">
-                        <div class="font-weight-bold">
-                          11826401
-                        </div>
-                        <div>
-                          VGA Cable, needed on March 27, 2020 at 11:00am
-                        </div>
-                      </div>
-                      <a class="col-1 icon my-auto response" id="accept" href="#" title="Accept"></a>
-                      <a class="col-1 icon my-auto response" id="deny" href="#" title="Deny"></a>
-                    </div>
-                  </div>
-                  <div class="card-item px-4">
-                    <div class="row">
-                      <div class="col-1 icon my-auto" id="equipment"></div>
-                      <div class="col-8 col-lg-9 d-flex flex-column">
-                        <div class="font-weight-bold">
-                          11826401
-                        </div>
-                        <div>
-                          VGA Cable, needed on March 27, 2020 at 11:00am
-                        </div>
-                      </div>
-                      <a class="col-1 icon my-auto response" id="accept" href="#" title="Accept"></a>
-                      <a class="col-1 icon my-auto response" id="deny" href="#" title="Deny"></a>
-                    </div>
-                  </div>
-                  <div class="card-item px-4">
-                    <div class="row">
-                      <div class="col-1 icon my-auto" id="equipment"></div>
-                      <div class="col-8 col-lg-9 d-flex flex-column">
-                        <div class="font-weight-bold">
-                          11826401
-                        </div>
-                        <div>
-                          VGA Cable, needed on March 27, 2020 at 11:00am
-                        </div>
-                      </div>
-                      <a class="col-1 icon my-auto response" id="accept" href="#" title="Accept"></a>
-                      <a class="col-1 icon my-auto response" id="deny" href="#" title="Deny"></a>
-                    </div>
-                  </div>
-                  <div class="card-item px-4">
-                    <div class="row">
-                      <div class="col-1 icon my-auto" id="equipment"></div>
-                      <div class="col-8 col-lg-9 d-flex flex-column">
+                      <div class="d-flex flex-column mx-4">
                         <div class="font-weight-bold">
                           11826401
                         </div>
@@ -128,27 +83,28 @@
                 <h5 class="card-header">For pickup & to pay</h5>
                 <div class="card-body">
                   <div class="card-subtitle">Today</div>
-                  <div class="card-item px-4">
-                    <div class="row">
+                  <div class="card-item">
+                    <div class="d-flex flex-row flex-nowrap">
                       <div class="col-1 icon my-auto" id="locker"></div>
-                      <div class="col-8 col-lg-9 d-flex flex-column">
+                      <div class="d-flex flex-column mx-4">
                         <div class="font-weight-bold">
                           11826401
                         </div>
                         <div>
                           Locker #331, Big Panel #2, Gokongwei, 3/F
                         </div>
+                        <div class="font-weight-bold">
+                          Php 75.00
+                        </div>
                       </div>
                       <a class="col-1 icon my-auto response" id="accept" href="#" title="Accept"></a>
                       <a class="col-1 icon my-auto response" id="deny" href="#" title="Deny"></a>
                     </div>
                   </div>
-                  <br>
-                  <div class="card-subtitle">March 27, 2020</div>
-                  <div class="card-item px-4">
-                    <div class="row">
+                  <div class="card-item">
+                    <div class="d-flex flex-row flex-nowrap">
                       <div class="col-1 icon my-auto" id="equipment"></div>
-                      <div class="col-8 col-lg-9 d-flex flex-column">
+                      <div class="d-flex flex-column mx-4">
                         <div class="font-weight-bold">
                           11826401
                         </div>
@@ -164,439 +120,265 @@
               </div>
             </div>
 
-            <div class="col-12 mb-5 d-flex">
-              <ul class="nav nav-tabs">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button"
-                    aria-haspopup="true" aria-expanded="false">Active Rentals</a>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item active" data-toggle="tab" href="#activeLockers">Lockers</a>
-                    <a class="dropdown-item" data-toggle="tab" href="#activeEquipment">Equipment</a>
+            <div class="col-12 mb-5">
+              <div class="card">
+                <div class="card-body">
+                  <div class="col-12 mb-5 d-flex px-0">
+                    <ul class="nav nav-tabs">
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button"
+                          aria-haspopup="true" aria-expanded="false">Active</a>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item active" data-toggle="tab" href="#activeLockers">Lockers</a>
+                          <a class="dropdown-item" data-toggle="tab" href="#activeEquipment">Equipment</a>
+                        </div>
+                      </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                          aria-haspopup="true" aria-expanded="false">Past</a>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" data-toggle="tab" href="#pastLockers">Lockers</a>
+                          <a class="dropdown-item" data-toggle="tab" href="#pastEquipment">Equipment</a>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                    aria-expanded="false">Past Rentals</a>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" data-toggle="tab" href="#pastLockers">Lockers</a>
-                    <a class="dropdown-item" data-toggle="tab" href="#pastEquipment">Equipment</a>
-                  </div>
-                </li>
-              </ul>
-            </div>
 
-            <div class="col-12">
-              <div class="tab-content">
-                <div id="activeLockers" class="tab-pane active">
-                  <div class="container">
-                    <h5 class="">Locker rentals</h5>
-                    <div class="d-flex justify-content-between align-items-center pb-3">
-                      <div>
-                        <div class="input-group right-inner-addon px-0">
-                          <div class="form-group form-inline">
-                            <input type="search" id="ALsearchBox" class="form-control" placeholder="Filter">
+                  <div class="col-12 px-0">
+                    <div class="tab-content">
+                      <div id="activeLockers" class="tab-pane active">
+
+                          <h5 class="mb-4">Locker rentals</h5>
+
+                          <div class="row">
+                            <div class="col-md-6 input-group mb-2">
+                              <div class="form-group form-inline my-auto">
+                                <input type="search" id="ALsearchBox" class="form-control" placeholder="Filter">
+                              </div>
+                            </div>
+                            <div class="col-md-6 d-flex">
+                              <nav class="ml-md-auto" aria-label="Page navigation example">
+                                <ul class="pagination">
+                                  <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                              </nav>
+                            </div>
+                          </div>
+
+                          <div class="col-12 table-responsive px-0">
+                            <table class="table table-hover">
+                              <thead class="">
+                                <tr class="active head">
+                                  <th>ID number</th>
+                                  <th>Date requested</th>
+                                  <th>Locker number</th>
+                                  <th>Panel type</th>
+                                  <th>Location</th>
+                                  <th>Balance</th>
+                                  <th>Status</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody id="ALtable">
+                                <tr>
+                                  <td>11642343</td>
+                                  <td>02/24/2020</td>
+                                  <td>612</td>
+                                  <td>Big</td>
+                                  <td>1st, St. Anne</td>
+                                  <td>Php 0.00</td>
+                                  <td>
+                                    <div class="badge badge-pill status-on-rent">on rent</div>
+                                  </td>
+                                  <td>
+                                    <a class="table-link" data-toggle="modal" href="#editReservationStatusModal">
+                                      <div class="icon" id="edit"></div>
+                                    </a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                      </div>
+
+                      <div id="activeEquipment" class="tab-pane fade">
+                        <div class="container">
+
+                          <h5 class="mb-4">Equipment rentals</h5>
+
+                          <div class="row">
+                            <div class="col-md-6 input-group mb-2">
+                              <div class="form-group form-inline my-auto">
+                                <input type="search" id="AEsearchBox" class="form-control" placeholder="Filter">
+                              </div>
+                            </div>
+                            <div class="col-md-6 d-flex">
+                              <nav class="ml-md-auto" aria-label="Page navigation example">
+                                <ul class="pagination">
+                                  <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                              </nav>
+                            </div>
+                          </div>
+
+                          <div class="table-responsive">
+                            <table class="table table-hover">
+                              <thead class="">
+                                <tr class="active">
+                                  <th>ID number</th>
+                                  <th>Date requested</th>
+                                  <th>Equipment</th>
+                                  <th>Time needed</th>
+                                  <th>Balance</th>
+                                  <th>Status</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody id="AEtable">
+                                <tr>
+                                  <td>11242343</td>
+                                  <td>02/24/2020</td>
+                                  <td>LAN cable</td>
+                                  <td>9:15am</td>
+                                  <td>Php 0.00</td>
+                                  <td>
+                                    <div class="badge badge-pill status-pending">pending</div>
+                                  </td>
+                                  <td>
+                                    <a class="table-link" data-toggle="modal" href="#editReservationStatusModal">
+                                      <div class="icon" id="edit"></div>
+                                    </a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <div id="pastLockers" class="tab-pane fade">
+                        <div class="container">
+
+                          <h5 class="mb-4">Locker rentals</h5>
+
+                          <div class="row">
+                            <div class="col-md-6 input-group mb-2">
+                              <div class="form-group form-inline my-auto">
+                                <input type="search" id="PLsearchBox" class="form-control" placeholder="Filter">
+                              </div>
+                            </div>
+                            <div class="col-md-6 d-flex">
+                              <nav class="ml-md-auto" aria-label="Page navigation example">
+                                <ul class="pagination">
+                                  <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                              </nav>
+                            </div>
+                          </div>
+
+                          <div class="table-responsive">
+                            <table class="table table-hover">
+                              <thead class="">
+                                <tr class="active">
+                                  <th>ID number</th>
+                                  <th>Date requested</th>
+                                  <th>Locker number</th>
+                                  <th>Location</th>
+                                  <th>Status</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody id="PLtable">
+                                <tr>
+                                  <td>11342343</td>
+                                  <td>02/29/2020</td>
+                                  <td>403</td>
+                                  <td>4th, St. Andrews</td>
+                                  <td>
+                                    <div class="badge badge-pill status-returned">returned</div>
+                                  </td>
+                                  <td>
+                                    <a class="table-link" data-toggle="modal" href="#editReservationStatusModal">
+                                      <div class="icon" id="edit"></div>
+                                    </a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <div id="pastEquipment" class="tab-pane fade">
+                        <div class="container">
+
+                          <h5 class="mb-4">Equipment rentals</h5>
+
+                          <div class="row">
+                            <div class="col-md-6 input-group mb-2">
+                              <div class="form-group form-inline my-auto">
+                                <input type="search" id="PEsearchBox" class="form-control" placeholder="Filter">
+                              </div>
+                            </div>
+                            <div class="col-md-6 d-flex">
+                              <nav class="ml-md-auto" aria-label="Page navigation example">
+                                <ul class="pagination">
+                                  <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                              </nav>
+                            </div>
+                          </div>
+
+                          <div class="table-responsive">
+                            <table class="table table-hover">
+                              <thead class="">
+                                <tr class="active">
+                                  <th>ID number</th>
+                                  <th>Date reserved</th>
+                                  <th>Equipment</th>
+                                  <th>Time needed</th>
+                                  <th>Status</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody id="PEtable">
+                                <tr>
+                                  <td>11342343</td>
+                                  <td>02/24/2020</td>
+                                  <td>LAN cable</td>
+                                  <td>9:15am</td>
+                                  <td>
+                                    <div class="badge badge-pill status-returned">returned</div>
+                                  </td>
+                                  <td>
+                                    <a class="table-link" data-toggle="modal" href="#editReservationStatusModal">
+                                      <div class="icon" id="edit"></div>
+                                    </a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
                           </div>
                         </div>
                       </div>
-                      <div>
-                        <a href="#" class="btn btn-primary"><i class="fas fa-chevron-left"></i></a>
-                        <span class="mx-3"> 0 - 5 of 5 </span>
-                        <a href="#" class="btn btn-primary"><i class="fas fa-chevron-right"></i></a>
-                      </div>
-                    </div>
-
-                    <div class="table-responsive">
-                      <table class="table table-hover">
-                        <thead class="">
-                          <tr class="active head">
-                            <th>ID number</th>
-                            <th>Date requested</th>
-                            <th>Locker number</th>
-                            <th>Panel type</th>
-                            <th>Location</th>
-                            <th>Balance</th>
-                            <th>Status</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody id="ALtable">
-                          <tr>
-                            <td>11642343</td>
-                            <td>02/24/2020</td>
-                            <td>612</td>
-                            <td>Big</td>
-                            <td>1st, St. Anne</td>
-                            <td>Php 0.00</td>
-                            <td>
-                              <div class="badge badge-pill status-on-rent">on rent</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-                          </tr>
-                          <tr>
-                            <td>11856410</td>
-                            <td>02/26/2020</td>
-                            <td>415</td>
-                            <td>Small</td>
-                            <td>3rd, St. Joseph</td>
-                            <td>Php 70.00</td>
-                            <td>
-                              <div class="badge badge-pill status-pickup-pay">to pay</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-
-                          </tr>
-                          <tr>
-                            <td>11143624</td>
-                            <td>02/28/2020</td>
-                            <td>216</td>
-                            <td>Big</td>
-                            <td>4th, Velasco</td>
-                            <td>Php 0.00</td>
-                            <td>
-                              <div class="badge badge-pill status-on-rent">on rent</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-
-                          </tr>
-                          <tr>
-                            <td>11221122</td>
-                            <td>02/29/2020</td>
-                            <td>976</td>
-                            <td>Big</td>
-                            <td>6th, Faculty Center</td>
-                            <td>Php 0.00</td>
-                            <td>
-                              <div class="badge badge-pill status-on-rent">on rent</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-
-                          </tr>
-                          <tr>
-                            <td>11557876</td>
-                            <td>03/02/2020</td>
-                            <td>784</td>
-                            <td>Small</td>
-                            <td>2nd, William Hall</td>
-                            <td>Php 200.00</td>
-                            <td>
-                              <div class="badge badge-pill status-uncleared">uncleared</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-
-                <div id="activeEquipment" class="tab-pane fade">
-                  <div class="container">
-                    <h5>Equipment rentals</h5>
-
-                    <div class="d-flex justify-content-between align-items-center pb-3">
-                      <div>
-                        <div class="input-group right-inner-addon px-0">
-                          <div class="form-group form-line">
-                            <input type="search" id="AEsearchBox" class="form-control" required>
-                            <label class="form-control-placeholder" for="AEsearchBox"><i class="fas fa-search"></i>
-                              Search
-                              filter</label>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <a href="#" class="btn btn-primary"><i class="fas fa-chevron-left"></i></a>
-                        <span class="mx-3"> 0 - 5 of 5 </span>
-                        <a href="#" class="btn btn-primary"><i class="fas fa-chevron-right"></i></a>
-                      </div>
-                    </div>
-
-                    <div class="table-responsive">
-                      <table class="table table-hover">
-                        <thead class="">
-                          <tr class="active">
-                            <th>ID number</th>
-                            <th>Date requested</th>
-                            <th>Equipment</th>
-                            <th>Time needed</th>
-                            <th>Reason for borrowing</th>
-                            <th>Balance</th>
-                            <th>Status</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody id="AEtable">
-                          <tr>
-                            <td>11242343</td>
-                            <td>02/24/2020</td>
-                            <td>LAN cable</td>
-                            <td>9:15am</td>
-                            <td>Laptop wifi is broken, need internet to do my homework.</td>
-                            <td>Php 0.00</td>
-                            <td>
-                              <div class="badge badge-pill status-pending">pending</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-                          </tr>
-                          <tr>
-                            <td>1165641</td>
-                            <td>02/26/2020</td>
-                            <td>Extension cord</td>
-                            <td>11:00am</td>
-                            <td>Will use it for Ivy's surprise birthday party !!!</td>
-                            <td>Php 0.00</td>
-                            <td>
-                              <div class="badge badge-pill status-on-rent">on rent</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-                          </tr>
-                          <tr>
-                            <td>11743624</td>
-                            <td>02/28/2020</td>
-                            <td>VGA cable</td>
-                            <td>7:30am</td>
-                            <td>Classroom movie viewing.</td>
-                            <td>Php 120.00</td>
-                            <td>
-                              <div class="badge badge-pill status-uncleared">uncleared</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-                          </tr>
-                          <tr>
-                            <td>11521122</td>
-                            <td>02/29/2020</td>
-                            <td>Flash drive</td>
-                            <td>4:15pm</td>
-                            <td>Have to download something from computer lab.</td>
-                            <td>Php 0.00</td>
-                            <td>
-                              <div class="badge badge-pill status-on-rent">on rent</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-                          </tr>
-                          <tr>
-                            <td>11929876</td>
-                            <td>03/02/2020</td>
-                            <td>HDMI cable</td>
-                            <td>12:45pm</td>
-                            <td>For gaming with my friends.</td>
-                            <td>Php 0.00</td>
-                            <td>
-                              <div class="badge badge-pill status-on-rent">on rent</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-
-                  </div>
-                </div>
-
-                <div id="pastLockers" class="tab-pane fade">
-                  <div class="container">
-                    <h5>Locker rentals</h5>
-
-                    <div class="d-flex justify-content-between align-items-center pb-3">
-                      <div>
-                        <div class="input-group right-inner-addon px-0">
-                          <div class="form-group form-line">
-                            <input type="search" id="PLsearchBox" class="form-control" required>
-                            <label class="form-control-placeholder" for="PLsearchBox"><i class="fas fa-search"></i>
-                              Search
-                              filter</label>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <a href="#" class="btn btn-primary"><i class="fas fa-chevron-left"></i></a>
-                        <span class="mx-3"> 0 - 5 of 5 </span>
-                        <a href="#" class="btn btn-primary"><i class="fas fa-chevron-right"></i></a>
-                      </div>
-                    </div>
-
-                    <div class="table-responsive">
-                      <table class="table table-hover">
-                        <thead class="">
-                          <tr class="active">
-                            <th>ID number</th>
-                            <th>Date requested</th>
-                            <th>Locker number</th>
-                            <th>Location</th>
-                            <th>Status</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody id="PLtable">
-                          <tr>
-                            <td>11342343</td>
-                            <td>02/29/2020</td>
-                            <td>403</td>
-                            <td>4th, St. Andrews</td>
-                            <td>
-                              <div class="badge badge-pill status-returned">returned</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-                          </tr>
-                          <tr>
-                            <td>11756413</td>
-                            <td>02/29/2020</td>
-                            <td>232</td>
-                            <td>3th, Gokongwei</td>
-                            <td>
-                              <div class="badge badge-pill status-returned">returned</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-                          </tr>
-                          <tr>
-                            <td>11643624</td>
-                            <td>02/29/2020</td>
-                            <td>511</td>
-                            <td>1st, St. La Salle</td>
-                            <td>
-                              <div class="badge badge-pill status-returned">returned</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-                          </tr>
-                          <tr>
-                            <td>11821122</td>
-                            <td>02/29/2020</td>
-                            <td>607</td>
-                            <td>4th, St. Joseph</td>
-                            <td>
-                              <div class="badge badge-pill status-returned">returned</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-                          </tr>
-                          <tr>
-                            <td>11229876</td>
-                            <td>02/29/2020</td>
-                            <td>113</td>
-                            <td>2nd, Razon Sports Complex</td>
-                            <td>
-                              <div class="badge badge-pill status-returned">returned</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-
-                  </div>
-                </div>
-
-                <div id="pastEquipment" class="tab-pane fade">
-                  <div class="container">
-                    <h5>Equipment rentals</h5>
-                    <div class="d-flex justify-content-between align-items-center pb-3">
-                      <div>
-                        <div class="input-group right-inner-addon px-0">
-                          <div class="form-group form-line">
-                            <input type="search" id="PEsearchBox" class="form-control" required>
-                            <label class="form-control-placeholder" for="PEsearchBox"><i class="fas fa-search"></i>
-                              Search
-                              filter</label>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <a href="#" class="btn btn-primary"><i class="fas fa-chevron-left"></i></a>
-                        <span class="mx-3"> 0 - 5 of 5 </span>
-                        <a href="#" class="btn btn-primary"><i class="fas fa-chevron-right"></i></a>
-                      </div>
-                    </div>
-
-                    <div class="table-responsive">
-                      <table class="table table-hover">
-                        <thead class="">
-                          <tr class="active">
-                            <th>ID number</th>
-                            <th>Date reserved</th>
-                            <th>Equipment</th>
-                            <th>Time needed</th>
-                            <th>Reason for borrowing</th>
-                            <th>Status</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody id="PEtable">
-                          <tr>
-                            <td>11342343</td>
-                            <td>02/24/2020</td>
-                            <td>LAN cable</td>
-                            <td>9:15am</td>
-                            <td>Laptop wifi is broken, need internet to do my homework.</td>
-                            <td>
-                              <div class="badge badge-pill status-returned">returned</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-                          </tr>
-                          <tr>
-                            <td>11756416</td>
-                            <td>02/26/2020</td>
-                            <td>Extension cord</td>
-                            <td>4:15pm</td>
-                            <td>Will use it for Ivy's surprise birthday party !!!</td>
-                            <td>
-                              <div class="badge badge-pill status-returned">returned</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-                          </tr>
-                          <tr>
-                            <td>11643624</td>
-                            <td>02/28/2020</td>
-                            <td>VGA cable</td>
-                            <td>2:30pm</td>
-                            <td>Classroom movie viewing.</td>
-                            <td>
-                              <div class="badge badge-pill status-returned">returned</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-                          </tr>
-                          <tr>
-                            <td>11821122</td>
-                            <td>02/29/2020</td>
-                            <td>Flash drive</td>
-                            <td>11:00am</td>
-                            <td>Have to download something from computer lab.</td>
-                            <td>
-                              <div class="badge badge-pill status-returned">returned</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-                          </tr>
-                          <tr>
-                            <td>11229876</td>
-                            <td>03/02/2020</td>
-                            <td>HDMI cable</td>
-                            <td>9:15am</td>
-                            <td>For gaming with my friends.</td>
-                            <td>
-                              <div class="badge badge-pill status-returned">returned</div>
-                            </td>
-                            <td><a class="table-link" data-toggle="modal" href="#editReservationStatusModal"><i
-                                  class="fas fa-edit"></i> edit</a></td>
-                          </tr>
-                        </tbody>
-                      </table>
                     </div>
                   </div>
                 </div>
