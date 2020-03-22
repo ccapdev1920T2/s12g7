@@ -99,6 +99,11 @@ hr {
     background-size: contain;
 }
 
+.icon#edit-white {
+    background: url(../static/icons/edit-white.png) center no-repeat;
+    background-size: contain;
+}
+
 .icon#date {
     background: url(../static/icons/date.png) center no-repeat;
     background-size: contain;
@@ -306,6 +311,41 @@ h1, h2, h3, h4, h5 {
 }
 
 /* 
+* Pagination
+*/
+
+.pagination {
+    background-color: #fff;
+    border: solid #e7f1ed 1px;
+    border-radius: 12px;
+    padding: 4px;
+    margin: 0;
+}
+
+.pagination .page-item .page-link {
+    color: #3f3f3f;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin: 4px;
+}
+
+.pagination .page-item:hover .page-link {
+    background-color: #e7f1ed;
+}
+
+.pagination .page-item .page-link:active,
+.pagination .page-item .page-link:focus {
+    box-shadow: none;
+    background-color: #d9f2c9;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #38b98a;
+    color: #fff;
+}
+
+/* 
 * Badges
 */
 
@@ -319,6 +359,7 @@ h1, h2, h3, h4, h5 {
     background-color: #fff;
     color: #38b98a !important;
 }
+
 
 /* 
 * Cards
@@ -547,13 +588,13 @@ tr {
     padding: 4px 0 4px 4px;
 } 
 
-.table.table-hover tr .table-link {
+.table.table-hover tr .table-link .icon {
     opacity: 0;
     transition: 0.2s ease;
     font-size: 1.1rem;
 
 }
-.table.table-hover tr:not(.head):hover .table-link {
+.table.table-hover tr:not(.head):hover .table-link .icon {
     opacity: 1;
 }
 
@@ -566,6 +607,17 @@ tr {
     box-shadow: 0px 10px 40px rgba(110, 163, 124, 0.2);
 }
 
+
+.card .nav.nav-tabs .nav-link {
+    border: solid #e7f1ed 1px;
+    border-radius: 8px;
+}
+
+.card .nav {
+    box-shadow: none;
+}
+
+
 .nav.nav-tabs .nav-link {
     color: #5f5f5f;
     background-color: #fff;
@@ -575,8 +627,8 @@ tr {
 }
 
 .nav.nav-tabs .nav-link:hover {
-    background-color: #f7f7f7;
-    border-color: #f7f7f7;
+    background-color: #e7f1ed;
+    border-color: #e7f1ed;
 }
 
 .nav.nav-tabs .nav-item:first-of-type .nav-link {
@@ -617,7 +669,7 @@ tr {
 }
 
 .nav-item.dropdown .dropdown-menu .dropdown-item.active {
-    background-color: #d9f2c9;
+    background-color: #38b98a;
     color: #fff;
 }
 
