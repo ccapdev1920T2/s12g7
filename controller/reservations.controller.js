@@ -3,10 +3,10 @@ const Reservation = require('../model/reservation.model');
 const cron = require('node-cron');
 
 // TODO: update reservations based on time
-cron.schedule('* * * * *', () => {
+/* cron.schedule('* * * * *', () => {
     console.log('running a task every minute');
 });
-
+ */
 hbs.registerHelper('hasPenalty', (penalty) => { return penalty > 0; });
 
 hbs.registerHelper('status-pending', (status) => { return status == 'Pending'; });
