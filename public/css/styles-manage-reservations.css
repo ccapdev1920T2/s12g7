@@ -35,5 +35,9 @@
 }
 
 .pinned-card .card-body::-webkit-scrollbar-thumb {
-    background: #38b98a;
-  }
+    background-color: #fff;
+}
+
+.pinned-card:hover .card-body::-webkit-scrollbar-thumb {
+    background-color: #38b98a;
+}

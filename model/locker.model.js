@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-module.exports.lockerSchema = new mongoose.Schema({
+const lockerSchema = new mongoose.Schema({
     number: { type: Number, required: true },
     status: {
         type: String,
@@ -8,3 +8,5 @@ module.exports.lockerSchema = new mongoose.Schema({
         enum: ['vacant', 'occupied', 'broken', 'uncleared']
     }
 });
+
+module.exports = mongoose.model('Locker', lockerSchema);
