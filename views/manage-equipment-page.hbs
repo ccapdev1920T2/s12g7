@@ -60,7 +60,7 @@
                   <div class="card-footer d-flex flex-row justify-content-between align-items-center">
                     <span class="badge badge-pill">{{available}}/{{quantity}} available</span>
                     <!--TODO: -->
-                    <a data-toggle="modal" href="#editEquipmentModal" data-equipmentid="{{_id}}">
+                    <a data-toggle="modal" href="#editEquipmentModal" data-equipmentid="{{_id}}" data-equipmentname="{{name}}" data-equipmentquantity="{{quantity}}">
                       <div class="icon" id="edit-white"></div>
                     </a>
                     <div class="color-container"></div>
@@ -129,15 +129,15 @@
 
             <div class="form-group form-inline input-group">
               <label for="equipment-name" class="col-lg-4 justify-content-start p-0">Name</label>
-              <input type="text" class="form-control mb-2 col-lg-8" placeholder="Enter equipment name" name="name">
+              <input type="text" class="form-control mb-2 col-lg-8" id="equipment-name" placeholder="Enter equipment name" name="name">
             </div>
             <div class="form-group form-inline input-group">
               <label for="equipment-ct" class="col-lg-4 justify-content-start p-0">Amount on stock</label>
-              <input type="number" class="form-control mb-2 col-lg-8" placeholder="Enter number of stocks" name="count" min="1" oninput="validity.valid||(value='');">
+              <input type="number" class="form-control mb-2 col-lg-8" id="equipment-ct" placeholder="Enter number of stocks" name="count" min="1" oninput="validity.valid||(value='');">
             </div>
             <div class="form-group form-inline input-group">
               <label for="equipment-pic" class="col-lg-4 justify-content-start p-0">Image</label>
-              <input type="file" class="form-control-file mb-2 col-lg-8" name="equipmentImage" accept="image/*">
+              <input type="file" class="form-control-file mb-2 col-lg-8" id="equipment-pic" name="equipmentImage" accept="image/*">
             </div>
           </form>
         </div>
@@ -193,6 +193,14 @@
       var button = $(event.relatedTarget);
       var equipmentID = button.data('equipmentid');
       $('#editHiddenEquipID').val(equipmentID);
+
+      // extract
+      var equipmentName = button.data('equipment-name');
+      var equipmentCt = button.data('equipment-ct');
+
+      // show
+      $('#equipment-name').val(equipmentName);
+      $('#equipment-ct').val(equipmentCt);
     });
   </script>
 </body>
