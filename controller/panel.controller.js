@@ -26,12 +26,10 @@ exports.panel_create = async function (req, res) {
             missingPanelNumber++;
         }
 
-        console.log('Missing panel: ' + missingPanelNumber);
-
         var locker_array = [];
         for (var i = parseInt(req.body.lowerRange); i <= parseInt(req.body.upperRange); i++) {
             var locker = new Locker({ number: i, status: 'vacant' })
-            await locker.save();
+            // await locker.save();
             locker_array.push(locker._id);
         }
 
