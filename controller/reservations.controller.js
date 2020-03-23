@@ -1,6 +1,11 @@
 const hbs = require('hbs');
-const Reservation = require('../model/reservation.model');
 const cron = require('node-cron');
+const mongoose = require('mongoose');
+
+const Reservation = require('../model/reservation.model');
+const Locker = require('../model/locker.model');
+const Equipment = require('../model/equipment.model');
+
 
 // TODO: update reservations based on time
 /* cron.schedule('* * * * *', () => {
@@ -24,15 +29,16 @@ exports.myReservations = async function (req, res) {
 
     /* try {
         var reservation = new Reservation({
-            title: 'Locker'
-            userID: 11826401,
-            reservationType: 'locker',
-            itemID: null,
+            title: 'LAN Cable',
+            userID: 11641223,
+            reservationType: 'equipment',
+            itemID: mongoose.Types.ObjectId('5e74a0492beec33a04f262c8'),
             dateCreated: Date.now(),
             status: 'To Pay',
-            description: 'Locker #331, Big Panel #2, Gokongwei, 3/F',
-            remarks: 'Please proceed to the Student Services office for your payment of P70.00',
-            penalty: 0
+            description: 'needed on March 30, 2020, 11:00am',
+            remarks: 'N/A',
+            penalty: 0,
+            onItemType: 'Equipment'
         });
         await reservation.save();
     } catch (err) {
@@ -75,13 +81,38 @@ exports.myReservations = async function (req, res) {
     }
 };
 
-exports.manageReservations = function(req, res) {
+
+
+exports.manageReservations = async function (req, res) {
+
+    var now = new Date();
+    var dateToday = now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate();
+    var tomorrow = new Date(now);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    var dateTomorrow = tomorrow.getFullYear()+'-'+(tomorrow.getMonth()+1)+'-'+tomorrow.getDate();
+
+    try {
+        var pendingToday = await Reservation
+            .find({status: 'Pending'})
+            .where('dateCreated').gte(dateToday).lt(dateTomorrow);
+        var pendingEarlier = await Reservation
+            .find()
+            .where('dateCreated').lt(dateToday)
+            .populate('itemID');
+
+        console.log(pendingEarlier);
+    } catch (err) {
+        console.log('ERROR' + err);
+    }
+
     res.render('manage-reservations-page', {
         active: { active_manage_reservations: true },
         sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
             idNum: req.session.idNum
-        }
+        },
+        pendingToday: pendingToday,
+        pendingEarlier: pendingEarlier
     });
 }

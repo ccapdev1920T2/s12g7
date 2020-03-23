@@ -6,7 +6,7 @@ const panelSchema = new mongoose.Schema({
     type: { type: String, required: true, enum: ['big', 'small'] },
     building: { type: String, required: true, trim: true },
     level: { type: Number, min: 0, required: true, trim: true },
-    lockers: [locker.lockerSchema],
+    lockers: [{type: mongoose.Schema.Types.ObjectId, ref: 'Locker'}],
     lowerRange: { type: Number, required: true},
     upperRange: { type: Number, required: true}
 });

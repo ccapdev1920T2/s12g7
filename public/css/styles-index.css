@@ -1,8 +1,8 @@
 .illus-container {
     position: relative;
     overflow: hidden;
-    min-height: 300px;
-    height: 55vh;
+    min-height: 350px;
+    /* height: 55vh; */
 }
 
 .illus-element {

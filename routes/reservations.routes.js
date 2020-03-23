@@ -8,5 +8,4 @@ router.get('/', reservations_controller.myReservations);
 router.get('/manage', reservations_controller.manageReservations);
 
 
-
 module.exports = router;
