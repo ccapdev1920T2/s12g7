@@ -68,11 +68,11 @@ exports.locker = function (req, res) {
 exports.reserve_locker = async function (req, res) {
     var currentDate = new Date();
     var reservation = new Reservation({
-        userID: req.body.userID, //TO DO: place correct parameter (maybe from session?)
+        userID: req.body.userID, //TODO: place correct parameter (maybe from session?)
         reservationType: 'locker', 
         date: currentDate,
         status: 'Pending',
-        description: 'yes i do the cooking', //TO DO: not sure kung anong laman neto?
+        description: 'yes i do the cooking', //TODO: not sure kung anong laman neto?
         remarks: 'yes i do the cleaning'
     });
 
@@ -105,24 +105,23 @@ exports.equipment = async function (req, res) {
 };
 
 exports.reserve_equipment = async function (req, res) {
-    res.send(req.body);
-    // var currentDate = new Date();
-    // var reservation = new Reservation({
-    //     userID: req.body.userID, //TO DO: place correct parameter (maybe from session?)
-    //     reservationType: 'equipment', 
-    //     date: currentDate,
-    //     status: 'Pending',
-    //     description: 'yes i do the cooking', //TO DO: not sure kung anong laman neto?
-    //     remarks: 'yes i do the cleaning'
-    // });
+    var currentDate = new Date();
+    var reservation = new Reservation({
+        userID: req.body.userID, //TODO: place correct parameter (maybe from session?)
+        reservationType: 'equipment', 
+        date: currentDate,
+        status: 'Pending',
+        description: 'yes i do the cooking', //TODO: not sure kung anong laman neto?
+        remarks: 'yes i do the cleaning'
+    });
     
-    // await reservation.save(function (err) {
-    //     if (err) {
-    //         console.log('Error writing reservation to db');
-    //         res.send(reservation);
-    //     } else {
-    //         console.log('successful reservation write to db');
-    //         res.send(reservation);
-    //     }
-    // });
+    await reservation.save(function (err) {
+        if (err) {
+            console.log('Error writing reservation to db');
+            res.send(reservation);
+        } else {
+            console.log('successful reservation write to db');
+            res.send(reservation);
+        }
+    });
 };

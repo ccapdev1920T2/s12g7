@@ -73,9 +73,7 @@ exports.updateEquipment = async function (req, res) {
         if (req.body.name.trim().length != 0) { equipment.name = req.body.name; }
         if (!isNaN(parseInt(req.body.count))) { equipment.quantity = req.body.count; }
         if (req.file != null) {
-            fs.unlinkSync(path.join(__dirname, '/../public', equipment.imageURL), function (err) {
-                if (err) return console.log(err);
-            });
+            fs.unlinkSync(path.join(__dirname, '/../public', equipment.imageURL));
 
             const tempPath = req.file.path;
             const filename = shortid.generate() + '.png';
@@ -105,15 +103,10 @@ exports.updateEquipment = async function (req, res) {
 exports.deleteEquipment = async function (req, res) { 
     try {
         var equipment = await Equipment.findById(req.body.equipmentid);
-        fs.unlinkSync(path.join(__dirname, '/../public', equipment.imageURL), function (err) {
-            if (err) return console.log(err);
-        });
+        fs.unlinkSync(path.join(__dirname, '/../public', equipment.imageURL));
         await Equipment.findByIdAndDelete(req.body.equipmentid);
     } catch (err) {
         console.log(err);
     } 
-
     res.redirect("/manage-equipment/");
-    
-    // fs.unlink(req.file.path);
 };
