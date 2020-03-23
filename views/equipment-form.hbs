@@ -35,7 +35,7 @@
         {{> topnav}}
 
         <main role="main" class="pt-3 px-4">
-          <form class="form row col-lg-10 mx-auto px-0" action="POST">
+          <form class="form row col-lg-10 mx-auto px-0" method="POST" action="/reserve/equipment" id="equipmentForm">
 
             <h1 class="mb-5 col-12">Rent equipment</h1>
 
@@ -46,24 +46,16 @@
                   <label class="form-control-placeholder col-12">Choose an equipment to borrow</label>
                   <label class="label-desc col-12">Only one equipment can be borrowed per request.</label>
                   <div class="row px-4 mx-auto">
+
+                    {{#each equipmentList}}
                     <div class="col-lg-4 col-md-6 col-6 d-flex flex-column align-items-center" >
-                      <div class="equipment-element" id="lan-cable"></div>
-                      <button class="btn btn-toggle" id="lan-btn" data-toggle="button" aria-pressed="false" type="button">
-                        LAN cable
+                      <div class="equipment-element" style="background: url({{imageURL}}) center no-repeat; background-size: contain;"></div>
+                      <button class="btn btn-toggle" data-toggle="button" data-equipmentid="{{_id}}" aria-pressed="false" type="button">
+                        {{name}}
                       </button>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-6 d-flex flex-column align-items-center" >
-                      <div class="equipment-element" id="extension-cord"></div>
-                      <button class="btn btn-toggle" id="extension-btn" data-toggle="button" aria-pressed="false" type="button">
-                        Extension cord
-                      </button>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-6 d-flex flex-column align-items-center" >
-                      <div class="equipment-element" id="vga-cable"></div>
-                      <button class="btn btn-toggle" id="vga-btn" data-toggle="button" aria-pressed="false" type="button">
-                        VGA cable
-                      </button>
-                    </div>
+                    {{/each}}
+
                   </div>
                 </div>
               </div>
@@ -72,7 +64,7 @@
                 <div class="form-group form-card">
                   <label class="form-control-placeholder d-block" for="reason">Reason for borrowing the equipment</label>
                   <label class="label-desc d-block">(e.g. I need this for my presentation in CCAPDEV)</label>
-                  <input type="text" id="reason" class="form-control" required>
+                  <input type="text" id="reason" class="form-control" name="reason">
                 </div>
               </div>
   
@@ -80,14 +72,13 @@
                 <div class="form-group form-card select-form">
                   <label class="d-block" for="borrow-time">Time needed</label>
                   <label class="label-desc d-block">next school day</label>
-                  <select class="form-control" id="borrow-time">
+                  <select class="form-control" id="borrow-time" name="borrowtime">
                     <option>7:30am</option>
                     <option>9:15am</option>
                     <option>11:00am</option>
                     <option>12:45pm</option>
                     <option>2:30pm</option>
                     <option>4:15pm</option>
-                    <option>6:00pm</option>
                   </select>
                 </div>
               </div>
@@ -101,13 +92,11 @@
                 </div>
                 <div>
                   <a href="/reserve" class="btn btn-outline mr-4">Go back</a>
-                  <input class="btn btn-primary" type="submit">
+                  <button class="btn btn-primary" type="button" id="submitEquipmentForm">Submit</button>
                 </div>
               </div>
-
             </div>
-
-
+            <input type="hidden" name="equipmentid" id="equipmentid">
           </form>
 
         </main>
@@ -155,7 +144,6 @@
       </div>
     </div>
   </div>
-
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
@@ -165,6 +153,34 @@
   <script type="text/javascript" src="/js/bootstrap.js"></script>
   <script type="text/javascript" src="/js/styles.js"></script>
   <script type="text/javascript" src="/js/styles-equipment.js"></script>
+  <script>
+  $(document).ready(function () {
+      $("#submitEquipmentForm").click(function() {
+        var equipment = $('button.active');
+        var equipmentid = equipment.data('equipmentid');
+        var reason = $('#reason').val();
+
+        if ($("#checkTerms").prop('checked')) {
+          if (equipment.length != 0) {
+            $('#equipmentid').val(equipmentid);
+
+            if (reason.trim().length != 0) {
+              $('#equipmentForm').submit();
+            }
+            else {
+              alert("Please write the reason for borrowing.");
+            }
+          }
+          else {
+            alert("Please select an equipment you want to rent.");
+          }
+        }
+        else {
+          alert("Please check the box if you agree to the terms and conditions.");
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

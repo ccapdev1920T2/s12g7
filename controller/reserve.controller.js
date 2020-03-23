@@ -65,14 +65,14 @@ exports.locker = function (req, res) {
     }
 };
 
-exports.locker_reserve = async function (req, res) {
+exports.reserve_locker = async function (req, res) {
     var currentDate = new Date();
-    let reservation = new Reservation({
-        userID: req.body.userID, //TO DO: place correct parameter (maybe from session?)
+    var reservation = new Reservation({
+        userID: req.body.userID, //TODO: place correct parameter (maybe from session?)
         reservationType: 'locker', 
         date: currentDate,
         status: 'Pending',
-        description: 'yes i do the cooking', //TO DO: not sure kung anong laman neto?
+        description: 'yes i do the cooking', //TODO: not sure kung anong laman neto?
         remarks: 'yes i do the cleaning'
     });
 
@@ -87,13 +87,41 @@ exports.locker_reserve = async function (req, res) {
     });
 };
 
-exports.equipment = function (req, res) {
-    res.render('equipment-form', {
-        active: { active_index: true },
-        sidebarData: {
-            dp: req.session.passport.user.profile.photos[0].value,
-            name: req.session.passport.user.profile.displayName,
-            idNum: req.session.idNum
+exports.equipment = async function (req, res) {
+    try {
+        equipment = await Equipment.find({});
+        res.render('equipment-form', {
+            active: { active_index: true },
+            sidebarData: {
+                dp: req.session.passport.user.profile.photos[0].value,
+                name: req.session.passport.user.profile.displayName,
+                idNum: req.session.idNum
+            },
+            equipmentList: equipment
+        });
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+exports.reserve_equipment = async function (req, res) {
+    var currentDate = new Date();
+    var reservation = new Reservation({
+        userID: req.body.userID, //TODO: place correct parameter (maybe from session?)
+        reservationType: 'equipment', 
+        date: currentDate,
+        status: 'Pending',
+        description: 'yes i do the cooking', //TODO: not sure kung anong laman neto?
+        remarks: 'yes i do the cleaning'
+    });
+    
+    await reservation.save(function (err) {
+        if (err) {
+            console.log('Error writing reservation to db');
+            res.send(reservation);
+        } else {
+            console.log('successful reservation write to db');
+            res.send(reservation);
         }
     });
 };
