@@ -38,8 +38,9 @@ exports.createEquipment = function (req, res) {
     // console.log(equipment);
 };
 
-exports.viewAllEquipment = function (req, res) {
-    Equipment.find({}, function (err, equipment) {
+exports.viewAllEquipment = async function (req, res) {
+    try {
+        equipment = await Equipment.find({});
         res.render('manage-equipment-page', {
             active: { active_manage_equipment: true },
             sidebarData: {
@@ -49,7 +50,20 @@ exports.viewAllEquipment = function (req, res) {
             },
             equipmentList: equipment
         });
-    });
+    } catch (err) {
+        console.log(err);
+    }
+    /* Equipment.find({}, function (err, equipment) {
+        res.render('manage-equipment-page', {
+            active: { active_manage_equipment: true },
+            sidebarData: {
+                dp: req.session.passport.user.profile.photos[0].value,
+                name: req.session.passport.user.profile.displayName,
+                idNum: req.session.idNum
+            },
+            equipmentList: equipment
+        });
+    }); */
 };
 
 exports.updateEquipment = async function (req, res) {
@@ -59,6 +73,7 @@ exports.updateEquipment = async function (req, res) {
         if (req.body.name.trim().length != 0) { equipment.name = req.body.name; }
         if (!isNaN(parseInt(req.body.count))) { equipment.quantity = req.body.count; }
         if (req.file != null) {
+            // fs.unlink()
             const tempPath = req.file.path;
             const filename = shortid.generate() + '.png';
             const filePath = path.join(__dirname, '/../public/uploads/equipment-images', filename);
@@ -78,23 +93,20 @@ exports.updateEquipment = async function (req, res) {
         else {
             await equipment.save();
         }
-    }
-    catch (err) {
+    } catch (err) {
         console.log('Error updating db: ' + err);
     }              
     res.redirect("/manage-equipment/");
 };
 
-exports.deleteEquipment = function (req, res) {
-    Equipment.findByIdAndDelete(req.body.equipmentid, function (err) {
-        if (err) return next(err);
-        console.log('Equipment deleted successfully.');
-        res.redirect("/manage-equipment/");
-    });
+exports.deleteEquipment = async function (req, res) { 
+    try {
+        await Equipment.findByIdAndDelete(req.body.equipmentid);
+    } catch (err) {
+        console.log(err);
+    } 
+
+    res.redirect("/manage-equipment/");
+    
+    // fs.unlink(req.file.path);
 };
-
-/* exports.equipment_details = ;
-
-exports.equipment_update = ;
-
-exports.equipment_delete = ; */
