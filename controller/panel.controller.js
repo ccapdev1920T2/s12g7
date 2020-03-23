@@ -14,10 +14,6 @@ exports.panel_create = async function (req, res) {
             .distinct('number')
             .sort();
 
-        console.log('panel: ' + panel_number);
-
-        // panel_number = panel_number.sort();
-
         var missingPanelNumber = 1;
         for (var i = 0; i < panel_number.length; i++) {
             if (missingPanelNumber != panel_number[i]) {
@@ -29,7 +25,7 @@ exports.panel_create = async function (req, res) {
         var locker_array = [];
         for (var i = parseInt(req.body.lowerRange); i <= parseInt(req.body.upperRange); i++) {
             var locker = new Locker({ number: i, status: 'vacant' })
-            // await locker.save();
+            await locker.save();
             locker_array.push(locker._id);
         }
 
@@ -53,43 +49,6 @@ exports.panel_create = async function (req, res) {
 };
 
 exports.panel_details = async function (req, res) {
-
-    /* try {
-
-        for (var i = 1; i < 3; i++) {
-
-            var locker_array = [];
-
-            for (var j = i*5; j < i*5 + 5; j++) {
-                var locker = new Locker({number: j, status: 'vacant'});
-                await locker.save();
-                locker_array.push(locker._id);
-            }
-
-            var panel = new Panel({
-                number: i,
-                type: 'big',
-                building: 'Gokongwei',
-                level: '2',
-                lockers: locker_array,
-                lowerRange: i*5,
-                upperRange: i*5+4
-            });
-    
-            await panel.save();
-        }
-
-        
-    } catch(err) {
-        console.log(err);
-    } */
-
-    /* try {
-        for (var i = 0; i < 500; i++)
-            await Locker.findOneAndDelete({number: i});
-    } catch (err) {
-        console.log(err)
-    } */
 
     // Show the panels
     if (req.query.bldg != null && req.query.flr != null) {
