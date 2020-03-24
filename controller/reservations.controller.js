@@ -12,6 +12,15 @@ const Equipment = require('../model/equipment.model');
     console.log('running a task every minute');
 });
  */
+
+hbs.registerHelper('dateStr', (date) => {return date.toDateString();});
+
+hbs.registerHelper('dateTimeToday', () => {
+    const date = new Date();
+    return date.toDateString() + ', ' + date.toLocaleTimeString()
+
+});
+
 hbs.registerHelper('hasPenalty', (penalty) => { return penalty > 0; });
 
 hbs.registerHelper('status-pending', (status) => { return status == 'Pending'; });
@@ -23,6 +32,10 @@ hbs.registerHelper('status-returned', (status) => { return status == 'Returned';
 
 hbs.registerHelper('cancellable', (status) => {
     return status == 'Pending' || status == 'For Pickup' || status == 'To Pay';
+});
+
+hbs.registerHelper('isLocker', (type) => {
+    return type == 'locker';
 })
 
 exports.myReservations = async function (req, res) {
@@ -32,15 +45,30 @@ exports.myReservations = async function (req, res) {
             title: 'LAN Cable',
             userID: 11641223,
             reservationType: 'equipment',
-            itemID: mongoose.Types.ObjectId('5e74a0492beec33a04f262c8'),
+            item: mongoose.Types.ObjectId('5e799396737917283c38bc68'),
             dateCreated: Date.now(),
-            status: 'To Pay',
-            description: 'needed on March 30, 2020, 11:00am',
+            status: 'Pending',
+            description: 'needed on March 25, 2020, 11:00am',
             remarks: 'N/A',
             penalty: 0,
             onItemType: 'Equipment'
         });
         await reservation.save();
+        
+        var reservation = new Reservation({
+            title: 'Locker #30',
+            userID: 11826401,
+            reservationType: 'locker',
+            item: mongoose.Types.ObjectId('5e78b2bc9a0bc0057841790f'),
+            dateCreated: Date.now(),
+            status: 'To Pay',
+            description: 'Locker #101, Big Panel 1, Gokongwei 2/F',
+            remarks: 'Pay Php 70.00 at the office.',
+            penalty: 0,
+            onItemType: 'Locker'
+        });
+        await reservation.save();
+
     } catch (err) {
         console.log(err);
     } */
@@ -94,16 +122,20 @@ exports.manageReservations = async function (req, res) {
     try {
         var pendingToday = await Reservation
             .find({status: 'Pending'})
-            .where('dateCreated').gte(dateToday).lt(dateTomorrow);
+            .where('dateCreated').gte(dateToday).lt(dateTomorrow)
+            .populate('item');
         var pendingEarlier = await Reservation
-            .find()
+            .find({status: 'Pending'})
             .where('dateCreated').lt(dateToday)
-            .populate('itemID');
+            .populate('item');
 
-        console.log(pendingEarlier);
+        var pickupPayToday = await Reservation
+            .find({status: ['For Pickup', 'To Pay']});
     } catch (err) {
         console.log('ERROR' + err);
     }
+
+    console.log(pickupPayToday);
 
     res.render('manage-reservations-page', {
         active: { active_manage_reservations: true },
@@ -113,6 +145,7 @@ exports.manageReservations = async function (req, res) {
             idNum: req.session.idNum
         },
         pendingToday: pendingToday,
-        pendingEarlier: pendingEarlier
+        pendingEarlier: pendingEarlier,
+        pickupPayToday: pickupPayToday
     });
 }
