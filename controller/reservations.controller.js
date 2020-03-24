@@ -131,11 +131,20 @@ exports.manageReservations = async function (req, res) {
 
         var pickupPayToday = await Reservation
             .find({status: ['For Pickup', 'To Pay']});
+
+        var activeLockers = await Reservation
+            .find({status: ['On Rent', 'Uncleared'], reservationType: 'locker'});
+        var pastLockers = await Reservation
+            .find({status: ['Denied', 'Returned'], reservationType: 'locker'});
+        
+        var activeEquipment = await Reservation
+            .find({status: ['On Rent', 'Uncleared'], reservationType: 'equipment'});
+        var pastEquipment = await Reservation
+            .find({status: ['Denied', 'Returned'], reservationType: 'equipment'});
+
     } catch (err) {
         console.log('ERROR' + err);
     }
-
-    console.log(pickupPayToday);
 
     res.render('manage-reservations-page', {
         active: { active_manage_reservations: true },
@@ -146,6 +155,10 @@ exports.manageReservations = async function (req, res) {
         },
         pendingToday: pendingToday,
         pendingEarlier: pendingEarlier,
-        pickupPayToday: pickupPayToday
+        pickupPayToday: pickupPayToday,
+        activeLockers: activeLockers,
+        pastLockers: pastLockers,
+        activeEquipment: activeEquipment,
+        pastEquipment: pastEquipment
     });
 }
