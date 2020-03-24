@@ -43,6 +43,9 @@
               <div class="card pinned-card h-100">
                 <h5 class="card-header">Pending</h5>
                 <div class="card-body">
+                  {{#unless pendingEarlier}}{{#unless pendingToday}}
+                  <div class="font-italic my-4 text-center">All caught up</div>
+                  {{/unless}}{{/unless}}
                   {{#if pendingEarlier}}
                   <div class="card-subtitle">Earlier</div>
                   {{#each pendingEarlier}}
@@ -50,18 +53,15 @@
                     <div class="d-flex flex-row flex-nowrap">
                       <div class="col-1 icon my-auto"
                         id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
-                      <div class="d-flex flex-column mx-4">
-                        <div class="font-weight-bold">
-                          {{userID}}
-                        </div>
+                      <div class="d-flex flex-fill flex-column mx-4">
                         <div>
                           {{dateStr dateCreated}}
                         </div>
-                        <div class="font-weight-bold">
+                        <div>
                           {{#if (isLocker reservationType)}}
-                          {{description}}
+                          <span class="font-weight-bold">{{description}}</span>
                           {{else}}
-                          {{title}}, {{description}}
+                          <span class="font-weight-bold">{{title}}</span>, {{description}}
                           {{/if}}
                         </div>
                       </div>
@@ -74,19 +74,13 @@
                   {{/if}}
 
                   {{#if pendingToday}}
-                  {{#each pendingToday}}
                   <div class="card-subtitle">Today</div>
+                  {{#each pendingToday}}
                   <div class="card-item">
                     <div class="d-flex flex-row flex-nowrap">
                       <div class="col-1 icon my-auto"
                         id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
-                      <div class="d-flex flex-column mx-4">
-                        <div>
-                          {{dateStr dateCreated}}
-                        </div>
-                        <div class="font-weight-bold">
-                          {{userID}}
-                        </div>
+                      <div class="d-flex flex-fill flex-column mx-4">
                         <div>
                           {{#if (isLocker reservationType)}}
                           <span class="font-weight-bold">{{description}}</span>
@@ -109,15 +103,19 @@
               <div class="card pinned-card h-100">
                 <h5 class="card-header">Today's pickups and payments</h5>
                 <div class="card-body">
+                  {{#if pickupPayToday}}
                   <div class="card-subtitle"> as of {{dateTimeToday}}</div>
+                  {{else}}
+                  <div class="font-italic my-4 text-center">All caught up</div>
+                  {{/if}}
                   {{#each pickupPayToday}}
                   <div class="card-item">
                     <div class="d-flex flex-row flex-nowrap">
                       <div class="col-1 icon my-auto" id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
                       <div class="d-flex flex-column mx-4">
-                        <div class="font-weight-bold">
+                        {{!-- <div class="font-weight-bold">
                           {{userID}}
-                        </div>
+                        </div> --}}
                         <div>
                           {{#if (isLocker reservationType)}}
                             {{description}}
@@ -188,29 +186,35 @@
                         </div>
 
                         <div class="col-12 table-responsive px-0">
+                          {{#if activeLockers}}
                           <table class="table table-hover">
                             <thead class="">
                               <tr class="active head">
                                 <th>ID number</th>
                                 <th>Date requested</th>
-                                <th>Locker number</th>
-                                <th>Panel type</th>
-                                <th>Location</th>
-                                <th>Balance</th>
+                                <th>Description</th>
+                                <th>Penalty</th>
                                 <th>Status</th>
                                 <th></th>
                               </tr>
                             </thead>
                             <tbody id="ALtable">
+                              {{#each activeLockers}}
                               <tr>
-                                <td>11642343</td>
-                                <td>02/24/2020</td>
-                                <td>612</td>
-                                <td>Big</td>
-                                <td>1st, St. Anne</td>
-                                <td>Php 0.00</td>
+                                <td>{{userID}}</td>
+                                <td>{{dateStr dateCreated}}</td>
+                                <td>{{description}}</td>
+                                <td>Php {{penalty}}</td>
                                 <td>
-                                  <div class="badge badge-pill status-on-rent">on rent</div>
+                                  <div class="badge badge-pill
+                                  {{#if (status-on-rent status)}}
+                                  status-on-rent
+                                  {{else}}
+                                  status-uncleared
+                                  {{/if}}
+                                  ">
+                                    {{status}}
+                                  </div>
                                 </td>
                                 <td>
                                   <a class="table-link" data-toggle="modal" href="#editReservationStatusModal">
@@ -218,8 +222,12 @@
                                   </a>
                                 </td>
                               </tr>
+                              {{/each}}
                             </tbody>
                           </table>
+                          {{else}}
+                          <div class="font-italic my-4 text-center">No active reservations</div>
+                          {{/if}}
                         </div>
                       </div>
 
@@ -247,27 +255,37 @@
                         </div>
 
                         <div class="table-responsive px-0">
+                          {{#if activeEquipment}}
                           <table class="table table-hover">
                             <thead class="">
                               <tr class="active">
                                 <th>ID number</th>
                                 <th>Date requested</th>
                                 <th>Equipment</th>
-                                <th>Time needed</th>
-                                <th>Balance</th>
+                                <th>Description</th>
+                                <th>Penalty</th>
                                 <th>Status</th>
                                 <th></th>
                               </tr>
                             </thead>
                             <tbody id="AEtable">
+                              {{#each activeEquipment}}
                               <tr>
-                                <td>11242343</td>
-                                <td>02/24/2020</td>
-                                <td>LAN cable</td>
-                                <td>9:15am</td>
-                                <td>Php 0.00</td>
+                                <td>{{userID}}</td>
+                                <td>{{dateStr dateCreated}}</td>
+                                <td>{{title}}</td>
+                                <td>{{description}}</td>
+                                <td>Php {{penalty}}</td>
                                 <td>
-                                  <div class="badge badge-pill status-pending">pending</div>
+                                  <div class="badge badge-pill
+                                  {{#if (status-on-rent status)}}
+                                  status-on-rent
+                                  {{else}}
+                                  status-uncleared
+                                  {{/if}}
+                                  ">
+                                    {{status}}
+                                  </div>
                                 </td>
                                 <td>
                                   <a class="table-link" data-toggle="modal" href="#editReservationStatusModal">
@@ -275,8 +293,12 @@
                                   </a>
                                 </td>
                               </tr>
+                              {{/each}}
                             </tbody>
                           </table>
+                          {{else}}
+                          <div class="font-italic my-4 text-center">No active reservations</div>
+                          {{/if}}
                         </div>
 
                       </div>
@@ -305,25 +327,33 @@
                         </div>
 
                         <div class="table-responsive px-0">
+                          {{#if pastLockers}}
                           <table class="table table-hover">
                             <thead class="">
                               <tr class="active">
                                 <th>ID number</th>
                                 <th>Date requested</th>
-                                <th>Locker number</th>
-                                <th>Location</th>
+                                <th>Description</th>
                                 <th>Status</th>
                                 <th></th>
                               </tr>
                             </thead>
                             <tbody id="PLtable">
+                              {{#each pastLockers}}
                               <tr>
-                                <td>11342343</td>
-                                <td>02/29/2020</td>
-                                <td>403</td>
-                                <td>4th, St. Andrews</td>
+                                <td>{{userID}}</td>
+                                <td>{{dateStr dateCreated}}</td>
+                                <td>{{description}}</td>
                                 <td>
-                                  <div class="badge badge-pill status-returned">returned</div>
+                                  <div class="badge badge-pill
+                                  {{#if (status-denied status)}}
+                                  status-denied
+                                  {{else}}
+                                  status-returned
+                                  {{/if}}
+                                  ">
+                                    {{status}}
+                                  </div>
                                 </td>
                                 <td>
                                   <a class="table-link" data-toggle="modal" href="#editReservationStatusModal">
@@ -331,8 +361,12 @@
                                   </a>
                                 </td>
                               </tr>
+                              {{/each}}
                             </tbody>
                           </table>
+                          {{else}}
+                          <div class="font-italic my-4 text-center">No past reservations</div>
+                          {{/if}}
                         </div>
 
                       </div>
@@ -361,25 +395,35 @@
                         </div>
 
                         <div class="table-responsive px-0">
+                          {{#if pastEquipment}}
                           <table class="table table-hover">
                             <thead class="">
                               <tr class="active">
                                 <th>ID number</th>
                                 <th>Date reserved</th>
                                 <th>Equipment</th>
-                                <th>Time needed</th>
+                                <th>Description</th>
                                 <th>Status</th>
                                 <th></th>
                               </tr>
                             </thead>
                             <tbody id="PEtable">
+                              {{#each pastEquipment}}
                               <tr>
-                                <td>11342343</td>
-                                <td>02/24/2020</td>
-                                <td>LAN cable</td>
-                                <td>9:15am</td>
+                                <td>{{userID}}</td>
+                                <td>{{dateStr dateCreated}}</td>
+                                <td>{{title}}</td>
+                                <td>{{description}}</td>
                                 <td>
-                                  <div class="badge badge-pill status-returned">returned</div>
+                                  <div class="badge badge-pill
+                                  {{#if (status-denied status)}}
+                                  status-denied
+                                  {{else}}
+                                  status-returned
+                                  {{/if}}
+                                  ">
+                                    {{status}}
+                                  </div>
                                 </td>
                                 <td>
                                   <a class="table-link" data-toggle="modal" href="#editReservationStatusModal">
@@ -387,8 +431,12 @@
                                   </a>
                                 </td>
                               </tr>
+                              {{/each}}
                             </tbody>
                           </table>
+                          {{else}}
+                          <div class="font-italic my-4 text-center">No past reservations</div>
+                          {{/if}}
                         </div>
                       </div>
                     </div>

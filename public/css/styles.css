@@ -149,8 +149,8 @@ hr {
 */
 
 .status-on-rent {
-    background-color: #1f6383;
-    border-color: #1f6383;
+    background-color: #38b98a;
+    border-color: #38b98a;
     color: #fff;
 }
 
@@ -462,8 +462,8 @@ h1, h2, h3, h4, h5 {
 .card .card-footer.status-on-rent .color-container,
 .card .card-footer.status-on-rent .badge {
     color: #fff;
-    background: #1f6383;
-    border-color: #1f6383;
+    background: #38b98a;
+    border-color: #38b98a;
 }
 
 .card .card-footer.status-pending .color-container,
