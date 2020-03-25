@@ -17,3 +17,7 @@
     background-color: #efefef;
     border-top: solid 1px #efefef;
 }
+
+.cancel-anchor {
+    cursor: pointer;
+}

@@ -56,57 +56,51 @@
                 <div class="row">
 
                   {{#each activeRes}}
-                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                      <div class="card equal-height">
-                        <h5 class="card-header">{{title}}</h5>
-                        <div class="card-body">
-                          <div class="d-flex align-items-center mb-2">
-                            <div class="col-1 icon mr-2" id="date"></div>
-                            {{dateCreatedStr}}
-                          </div> 
-                          <hr>
-                          <div class="d-flex align-items-center my-2">
-                            <div class="col-1 icon mr-2" id="desc"></div>
-                            {{description}}
-                          </div>
-                          <hr>
-                          <div class="d-flex align-items-center my-2">
-                            <div class="col-1 icon mr-2" id="remarks"></div>
-                            {{remarks}}
-                          </div>
-                          {{#if (hasPenalty penalty)}}
-                          <hr>
-                          <div class="d-flex align-items-center my-2">
-                            <div class="col-1 icon mr-2" id="penalty"></div>
-                            Penalty: Php {{penalty}}
-                          </div>
-                          {{/if}}
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card equal-height">
+                      <h5 class="card-header">{{title}}</h5>
+                      <div class="card-body">
+                        <div class="d-flex align-items-center mb-2">
+                          <div class="col-1 icon mr-2" id="date"></div>
+                          {{dateStr dateCreated}}
                         </div>
-                        <div class="card-footer d-flex justify-content-between align-items-center 
+                        <hr>
+                        <div class="d-flex align-items-center my-2">
+                          <div class="col-1 icon mr-2" id="desc"></div>
+                          {{description}}
+                        </div>
+                        <hr>
+                        <div class="d-flex align-items-center my-2">
+                          <div class="col-1 icon mr-2" id="remarks"></div>
+                          {{remarks}}
+                        </div>
+                        {{#if (hasPenalty penalty)}}
+                        <hr>
+                        <div class="d-flex align-items-center my-2">
+                          <div class="col-1 icon mr-2" id="penalty"></div>
+                          Penalty: Php {{penalty}}
+                        </div>
+                        {{/if}}
+                      </div>
+                      <div class="card-footer d-flex justify-content-between align-items-center 
                           {{#if (status-pending status)}}
                           status-pending
                           {{else if (status-pickup-pay status)}}
                           status-pickup-pay
-                          {{else if (status-pickup-pay status)}}
-                          status-pickup-pay
                           {{else if (status-on-rent status)}}
                           status-on-rent
-                          {{else if (status-denied status)}}
-                          status-denied
-                          {{else if (status-uncleared status)}}
-                          status-uncleared
                           {{else}}
-                          status-returned
+                          status-uncleared
                           {{/if}}
                           ">
-                          {{#if (cancellable status)}}
-                          <a class="" data-toggle="modal" href="#">Cancel</a>
-                          {{/if}}
-                          <span class="badge badge-pill ml-auto">{{status}}</span>
-                          <div class="color-container"></div>
-                        </div>
+                        {{#if (cancellable status)}}
+                        <a class="cancel-anchor" data-reservationid="{{_id}}" data-toggle="modal" data-target="#cancelReservationModal">Cancel</a>
+                        {{/if}}
+                        <span class="badge badge-pill ml-auto">{{status}}</span>
+                        <div class="color-container"></div>
                       </div>
                     </div>
+                  </div>
                   {{/each}}
 
                 </div>
@@ -117,59 +111,45 @@
                 <div class="row">
 
                   {{#each pastRes}}
-                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                      <div class="card equal-height">
-                        <h5 class="card-header">{{title}}</h5>
-                        <div class="card-body">
-                          <div class="d-flex align-items-center mb-2">
-                            <div class="col-1 icon mr-2" id="date"></div>
-                            {{dateCreatedStr}}
-                          </div> 
-                          <hr>
-                          <div class="d-flex align-items-center my-2">
-                            <div class="col-1 icon mr-2" id="desc"></div>
-                            {{description}}
-                          </div>
-                          <hr>
-                          <div class="d-flex align-items-center my-2">
-                            <div class="col-1 icon mr-2" id="remarks"></div>
-                            {{remarks}}
-                          </div>
-                          {{#if (hasPenalty penalty)}}
-                          <hr>
-                          <div class="d-flex align-items-center my-2">
-                            <div class="col-1 icon mr-2" id="penalty"></div>
-                            Penalty: Php {{penalty}}
-                          </div>
-                          {{/if}}
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card equal-height">
+                      <h5 class="card-header">{{title}}</h5>
+                      <div class="card-body">
+                        <div class="d-flex align-items-center mb-2">
+                          <div class="col-1 icon mr-2" id="date"></div>
+                          {{dateCreatedStr}}
                         </div>
-                        <div class="card-footer d-flex justify-content-between align-items-center 
-                          {{#if (status-pending status)}}
-                          status-pending
-                          {{else if (status-pickup-pay status)}}
-                          status-pickup-pay
-                          {{else if (status-pickup-pay status)}}
-                          status-pickup-pay
-                          {{else if (status-on-rent status)}}
-                          status-on-rent
-                          {{else if (status-denied status)}}
+                        <hr>
+                        <div class="d-flex align-items-center my-2">
+                          <div class="col-1 icon mr-2" id="desc"></div>
+                          {{description}}
+                        </div>
+                        <hr>
+                        <div class="d-flex align-items-center my-2">
+                          <div class="col-1 icon mr-2" id="remarks"></div>
+                          {{remarks}}
+                        </div>
+                        {{#if (hasPenalty penalty)}}
+                        <hr>
+                        <div class="d-flex align-items-center my-2">
+                          <div class="col-1 icon mr-2" id="penalty"></div>
+                          Penalty: Php {{penalty}}
+                        </div>
+                        {{/if}}
+                      </div>
+                      <div class="card-footer d-flex justify-content-between align-items-center 
+                          {{#if (status-denied status)}}
                           status-denied
-                          {{else if (status-uncleared status)}}
-                          status-uncleared
                           {{else}}
                           status-returned
                           {{/if}}
                           ">
-                          {{#if (cancellable status)}}
-                          <a class="" data-toggle="modal" href="#">Cancel</a>
-                          {{/if}}
-                          <span class="badge badge-pill ml-auto">{{status}}</span>
-                          <div class="color-container"></div>
-                        </div>
+                        <span class="badge badge-pill ml-auto">{{status}}</span>
+                        <div class="color-container"></div>
                       </div>
                     </div>
+                  </div>
                   {{/each}}
-
                 </div>
               </div>
             </div>
@@ -177,8 +157,32 @@
 
         </main>
 
-          {{> footer}}
+        {{> footer}}
 
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="cancelReservationModal" tabindex="-1" role="dialog" aria-labelledby="cancelReservationLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cancelReservationLabel">Cancel Reservation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="cancelReservationForm" action="/reservations/manage/delete" method="POST">
+          <div class="modal-body col-lg-10 mx-auto">
+            <input type="hidden" id="reservationID" name="reservationID">
+            <h5>Do you really want to cancel your reservation?</h1>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline" data-dismiss="modal">No</button>
+            <button type="submit" class="btn btn-warning">Yes, cancel it.</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -191,6 +195,13 @@
     crossorigin="anonymous"></script>
   <script type="text/javascript" src="/js/bootstrap.js"></script>
   <script type="text/javascript" src="/js/styles.js"></script>
+
+  <script>
+    $('#cancelReservationModal').on('show.bs.modal', (event) => {
+      var cancelBtn = $(event.relatedTarget);
+      $('#reservationID').val(cancelBtn.data('reservationid'));
+    });
+  </script>
 
 </body>
 
