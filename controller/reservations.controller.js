@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const Reservation = require('../model/reservation.model');
 const Locker = require('../model/locker.model');
 const Equipment = require('../model/equipment.model');
-
+const User = require('../model/reservation.model');
 
 // TODO: update reservations based on time
 /* cron.schedule('* * * * *', () => {
@@ -74,24 +74,17 @@ exports.myReservations = async function (req, res) {
     } */
 
     try {
-        var reservations = await Reservation.find({ userID: req.session.idNum }).sort('dateCreated');
-        var activeReservations = [];
-        var pastReservations = [];
-
-        reservations.forEach(function (reservation) {
-            reservation.dateCreatedStr = reservation.dateCreated.toDateString();
-            if (reservation.status == 'Denied') {
-                var elapsedTime = Date.now() - reservation.dateCreated;
-                if (elapsedTime / 86400000 > 1)
-                    pastReservations.push(reservation);
-                else
-                    activeReservations.push(reservation);
-            } else if (reservation.status == 'Returned') {
-                pastReservations.push(reservation);
-            } else {
-                activeReservations.push(reservation);
-            }
-        });
+        var activeReservations = await Reservation
+            .find({ 
+                userID: req.session.idNum, 
+                status: ['Pending', 'For Pickup', 'To Pay', 'Uncleared', 'On Rent'] 
+            }).sort({dateCreated: -1});
+                
+        var pastReservations = await Reservation
+            .find({ 
+                userID: req.session.idNum, 
+                status: ['Denied', 'Returned'] 
+            }).sort({dateCreated: -1});
 
         res.render('my-reservations-page', {
             active: { active_my_reservations: true },
@@ -109,9 +102,7 @@ exports.myReservations = async function (req, res) {
     }
 };
 
-
-
-exports.manageReservations = async function (req, res) {
+exports.reservation_details = async function (req, res) {
 
     var now = new Date();
     var dateToday = now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate();
@@ -161,4 +152,25 @@ exports.manageReservations = async function (req, res) {
         activeEquipment: activeEquipment,
         pastEquipment: pastEquipment
     });
+}
+
+exports.reservation_delete = async function(req, res) {
+    try {
+        var reservation = await Reservation.findById(req.body.reservationID);
+        var user = await User.find({idNum: req.session.idNum});
+
+        if ((reservation.userID == req.session.idNum && isCancellable(reservation)) || userIsAdmin(user))
+            await Reservation.findByIdAndDelete(reservation._id);
+    } catch(err) {console.log(err);};
+    res.redirect('/reservations');    
+};
+
+function isCancellable(reservation) {
+    return reservation.status == 'Pending' 
+        || reservation.status == 'For Pickup'
+        || reservation.status == 'To Pay';
+}
+
+function userIsAdmin(user) {
+    return user.type == 'studentRep';
 }
