@@ -49,7 +49,10 @@
                   {{#if pendingEarlier}}
                   <div class="card-subtitle">Earlier</div>
                   {{#each pendingEarlier}}
-                  <div class="card-item">
+                  <div class="card-item" data-toggle="modal" data-target="#editReservationModal" data-title="{{title}}"
+                    data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
+                    data-description="{{description}}" data-remarks="{{remarks}}" data-penalty="{{penalty}}"
+                    data-type="{{type}}">
                     <div class="d-flex flex-row flex-nowrap">
                       <div class="col-1 icon my-auto"
                         id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
@@ -76,7 +79,10 @@
                   {{#if pendingToday}}
                   <div class="card-subtitle">Today</div>
                   {{#each pendingToday}}
-                  <div class="card-item">
+                  <div class="card-item" data-toggle="modal" data-target="#editReservationModal" data-title="{{title}}"
+                    data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
+                    data-description="{{description}}" data-remarks="{{remarks}}" data-penalty="{{penalty}}"
+                    data-type="{{type}}">
                     <div class="d-flex flex-row flex-nowrap">
                       <div class="col-1 icon my-auto"
                         id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
@@ -109,18 +115,22 @@
                   <div class="font-italic my-4 text-center">All caught up</div>
                   {{/if}}
                   {{#each pickupPayToday}}
-                  <div class="card-item">
+                  <div class="card-item" data-toggle="modal" data-target="#editReservationModal" data-title="{{title}}"
+                    data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
+                    data-description="{{description}}" data-remarks="{{remarks}}" data-penalty="{{penalty}}"
+                    data-type="{{type}}">
                     <div class="d-flex flex-row flex-nowrap">
-                      <div class="col-1 icon my-auto" id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
+                      <div class="col-1 icon my-auto"
+                        id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
                       <div class="d-flex flex-column mx-4">
                         {{!-- <div class="font-weight-bold">
                           {{userID}}
                         </div> --}}
                         <div>
                           {{#if (isLocker reservationType)}}
-                            {{description}}
+                          {{description}}
                           {{else}}
-                            {{title}}, {{description}}
+                          {{title}}, {{description}}
                           {{/if}}
                         </div>
                         <div>
@@ -217,7 +227,11 @@
                                   </div>
                                 </td>
                                 <td>
-                                  <a class="table-link" data-toggle="modal" href="#editReservationStatusModal">
+                                  <a class="table-link" data-toggle="modal" href="#editReservationModal"
+                                    data-title="{{title}}" data-userid="{{userID}}"
+                                    data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
+                                    data-description="{{description}}" data-remarks="{{remarks}}"
+                                    data-penalty="{{penalty}}" data-type="{{type}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
                                 </td>
@@ -288,7 +302,11 @@
                                   </div>
                                 </td>
                                 <td>
-                                  <a class="table-link" data-toggle="modal" href="#editReservationStatusModal">
+                                  <a class="table-link" data-toggle="modal" href="#editReservationModal"
+                                    data-title="{{title}}" data-userid="{{userID}}"
+                                    data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
+                                    data-description="{{description}}" data-remarks="{{remarks}}"
+                                    data-penalty="{{penalty}}" data-type="{{type}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
                                 </td>
@@ -356,7 +374,11 @@
                                   </div>
                                 </td>
                                 <td>
-                                  <a class="table-link" data-toggle="modal" href="#editReservationStatusModal">
+                                  <a class="table-link" data-toggle="modal" href="#editReservationModal"
+                                    data-title="{{title}}" data-userid="{{userID}}"
+                                    data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
+                                    data-description="{{description}}" data-remarks="{{remarks}}"
+                                    data-penalty="{{penalty}}" data-type="{{type}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
                                 </td>
@@ -426,7 +448,11 @@
                                   </div>
                                 </td>
                                 <td>
-                                  <a class="table-link" data-toggle="modal" href="#editReservationStatusModal">
+                                  <a class="table-link" data-toggle="modal" href="#editReservationModal"
+                                    data-title="{{title}}" data-userid="{{userID}}"
+                                    data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
+                                    data-description="{{description}}" data-remarks="{{remarks}}"
+                                    data-penalty="{{penalty}}" data-type="{{type}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
                                 </td>
@@ -456,34 +482,65 @@
     </div>
   </div>
 
-  <div class="modal fade" id="editReservationStatusModal" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel"
+  <div class="modal fade" id="editReservationModal" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
+          {{!-- <span class="badge badge-pill status-on-rent mr-4">hello</span> --}}
           <h5 class="modal-title" id="statusModalLabel">Update Reservation Status</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body col-lg-10 mx-auto">
-          <form class="form-horizontal">
-            <div class="form-group form-inline input-group">
-              <label for="status" class="col-lg-4 justify-content-start">Type:</label>
-              <select class="form-control col-lg-8" id="status">
-                <option value="status-manage-occupied">Pending</option>
-                <option value="status-manage-broken">To Pay</option>
-                <option value="status-manage-vacant">On Rent</option>
-                <option value="status-manage-uncleared">Returned</option>
-                <option value="status-manage-uncleared">Uncleared</option>
-                <option value="status-manage-uncleared">Denied</option>
-              </select>
+          <div class="d-flex flex-column">
+            <div class="font-weight-bold pl-2 mb-2" id="idNum"></div>
+            <div class="d-flex flex-row align-items-center">
+              <div class="icon col-1 mr-2" id="date"></div>
+              <div class="" id="dateCreated"></div>
             </div>
-            <div class="form-group form-inline input-group">
-              <label for="remarks" class="col-lg-4 justify-content-start">Remarks</label>
-              <input type="text" class="form-control col-lg-8" placeholder="Enter Remarks" id="remarks">
+            <div class="d-flex flex-row align-items-center mb-4">
+              <div class="icon col-1 mr-2" id="desc"></div>
+              <div class="" id="description"></div>
             </div>
-          </form>
+            <form class="form-horizontal">
+              <div class="form-group form-inline input-group">
+                <label for="status" class="col-lg-4 justify-content-start pl-2">Status:</label>
+                <div class="col-lg-8 px-0">
+                  <select class="form-control custom-select" id="status">
+                    <option value="status-manage-pending">Pending</option>
+                    <option value="status-manage-pickup-pay">To Pay</option>
+                    <option value="status-manage-on-rent">On Rent</option>
+                    <option value="status-manage-returned">Returned</option>
+                    <option value="status-manage-uncleared">Uncleared</option>
+                    <option value="status-manage-denied">Denied</option>
+                  </select>
+                </div>
+              </div>
+              {{!-- <div class="form-group form-inline input-group">
+                <label for="secret" class="col-lg-4 justify-content-start">Secret:</label>
+                <div class="col-lg-8 px-0">
+                  <select class="form-control custom-select" id="secret">
+                    <option value="status-manage-occupied">sdsdd</option>
+                    <option value="status-manage-broken">evev</option>
+                    <option value="status-manage-vacant">zzsd</option>
+                  </select>
+                </div>
+              </div> --}}
+              <div class="form-group form-inline input-group" id="remarksForm">
+                <label for="remarks" class="col-lg-4 justify-content-start pl-2">Remarks</label>
+                <input type="text" class="form-control col-lg-8" placeholder="Enter Remarks" id="remarks">
+              </div>
+              <div class="form-group form-inline input-group" id="penaltyForm">
+                <label for="penalty" class="col-lg-4 justify-content-start pl-2">Penalty</label>
+                <div class="input-group-prepend">
+                  <div class="input-group-text">@</div>
+                </div>
+                <input type="number" class="form-control col-lg-8" placeholder="Penalty" id="penalty">
+              </div>
+            </form>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -500,7 +557,6 @@
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
   <script type="text/javascript" src="/js/bootstrap.js"></script>
-  <script type="text/javascript" src="/js/styles.js"></script>
 
   <script>
     $(document).ready(function () {
@@ -529,7 +585,58 @@
         });
       });
     });
+
+    $('#editReservationModal').on('show.bs.modal', (event) => {
+      var btn = $(event.relatedTarget);
+      var reservation = {
+        title: btn.data('title'),
+        userID: btn.data('userid'),
+        dateCreated: btn.data('datecreated'),
+        status: btn.data('status'),
+        description: btn.data('description'),
+        remarks: btn.data('remarks'),
+        penalty: btn.data('penalty'),
+        type: btn.data('type')
+      }
+
+      $('#statusModalLabel').text(reservation.title);
+      $('#idNum').text(reservation.userID);
+      $('#dateCreated').text(reservation.dateCreated);
+      $('#description').text(reservation.description);
+      $('#remarks').val(reservation.remarks);
+      $('#penalty').val(reservation.penalty);
+
+      var pickupPayText;
+      if (reservation.type == 'locker')
+        $('[value="status-manage-pickup-pay"]').text('To Pay')
+      else
+        $('[value="status-manage-pickup-pay"]').text('For Pickup')
+
+      // $('#status').change(function() {
+        
+      // })
+
+      $('#remarksForm').css('display', 'none');
+      $('#penaltyForm').css('display', 'none');
+
+      if (reservation.status == 'Pending') {
+      }
+
+      /*
+      status-manage-pending">Pen
+      status-manage-pickup-pay">
+      status-manage-on-rent">On 
+      status-manage-returned">Re
+      status-manage-uncleared">U
+      status-manage-denied">Deni
+      */
+
+      console.log(reservation);
+
+    })
   </script>
+
+  <script type="text/javascript" src="/js/styles.js"></script>
 </body>
 
 </html>

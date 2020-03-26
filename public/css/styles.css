@@ -60,6 +60,7 @@ a:hover {
 }
 
 /* Small Screens */
+
 @media (max-width: 767.98px) {
     main {
         border-radius: 0;
@@ -334,8 +335,7 @@ h1, h2, h3, h4, h5 {
     background-color: #e7f1ed;
 }
 
-.pagination .page-item .page-link:active,
-.pagination .page-item .page-link:focus {
+.pagination .page-item .page-link:active, .pagination .page-item .page-link:focus {
     box-shadow: none;
     background-color: #d9f2c9;
 }
@@ -359,7 +359,6 @@ h1, h2, h3, h4, h5 {
     background-color: #fff;
     color: #38b98a !important;
 }
-
 
 /* 
 * Cards
@@ -454,48 +453,41 @@ h1, h2, h3, h4, h5 {
     background-color: #38b98a;
 }
 
-.card-footer a:hover,
-.card-footer i:hover {
+.card-footer a:hover, .card-footer i:hover {
     color: #e7f1ed;
 }
 
-.card .card-footer.status-on-rent .color-container,
-.card .card-footer.status-on-rent .badge {
+.card .card-footer.status-on-rent .color-container, .card .card-footer.status-on-rent .badge {
     color: #fff;
     background: #38b98a;
     border-color: #38b98a;
 }
 
-.card .card-footer.status-pending .color-container,
-.card .card-footer.status-pending .badge {
+.card .card-footer.status-pending .color-container, .card .card-footer.status-pending .badge {
     color: #fff;
     background: #f3c239;
     border-color: #f3c239;
 }
 
-.card .card-footer.status-denied .color-container,
-.card .card-footer.status-denied .badge {
+.card .card-footer.status-denied .color-container, .card .card-footer.status-denied .badge {
     color: #fff;
     background: #8b8a92;
     border-color: #8b8a92;
 }
 
-.card .card-footer.status-uncleared .color-container,
-.card .card-footer.status-uncleared .badge {
+.card .card-footer.status-uncleared .color-container, .card .card-footer.status-uncleared .badge {
     color: #fff;
     background: #e65946;
     border-color: #e65946;
 }
 
-.card .card-footer.status-pickup-pay .color-container,
-.card .card-footer.status-pickup-pay .badge {
+.card .card-footer.status-pickup-pay .color-container, .card .card-footer.status-pickup-pay .badge {
     color: #fff;
     background: #7e4dda;
     border-color: #7e4dda;
 }
 
-.card .card-footer.status-returned .color-container,
-.card .card-footer.status-returned .badge {
+.card .card-footer.status-returned .color-container, .card .card-footer.status-returned .badge {
     color: #fff;
     background: #557fcc;
     border-color: #557fcc;
@@ -509,8 +501,6 @@ h1, h2, h3, h4, h5 {
 /* .card .card-img-top {
     padding: 16px;
 } */
-
-
 
 /* 
 * List Group
@@ -526,6 +516,7 @@ h1, h2, h3, h4, h5 {
 */
 
 .modal .modal-content {
+    color: #838383;
     border-radius: 12px;
     border: solid #e7f1ed 1px;
     /* padding: 0; */
@@ -573,7 +564,6 @@ table.table {
 
 tr {
     transition: 0.2s ease;
-
 }
 
 .table.table-hover tr:not(.head):hover {
@@ -586,14 +576,14 @@ tr {
 
 .table.table-borderless td {
     padding: 4px 0 4px 4px;
-} 
+}
 
 .table.table-hover tr .table-link .icon {
     opacity: 0;
     transition: 0.2s ease;
     font-size: 1.1rem;
-
 }
+
 .table.table-hover tr:not(.head):hover .table-link .icon {
     opacity: 1;
 }
@@ -607,7 +597,6 @@ tr {
     box-shadow: 0px 10px 40px rgba(110, 163, 124, 0.2);
 }
 
-
 .card .nav.nav-tabs .nav-link {
     border: solid #e7f1ed 1px;
     border-radius: 8px;
@@ -616,7 +605,6 @@ tr {
 .card .nav {
     box-shadow: none;
 }
-
 
 .nav.nav-tabs .nav-link {
     color: #5f5f5f;
@@ -673,7 +661,6 @@ tr {
     color: #fff;
 }
 
-
 .nav-item.dropdown .dropdown-menu .dropdown-item:active {
     background-color: #e7f1ed;
 }
@@ -691,6 +678,7 @@ tr {
 }
 
 /* Fix the navbar when screen size gets too small */
+
 @media (max-width: 767.98px) {
     .navbar {
         position: fixed;
@@ -707,8 +695,7 @@ tr {
 * Forms
 */
 
-.form-group .form-control,
-.form-group .form-control-file {
+.form-group .form-control, .form-group .form-control-file {
     background-color: #eef5f3;
     border-radius: 8px !important;
     padding: 8px 16px;
@@ -718,14 +705,12 @@ tr {
     transition: 0.2s ease;
 }
 
-.form-group .form-control:hover,
-.form-group .form-control-file:hover {
+.form-group .form-control:hover, .form-group .form-control-file:hover {
     border-color: #38b98a;
     /* background-color: #fff; */
 }
 
-.form-group .form-control:active,
-.form-group .form-control:focus {
+.form-group .form-control:active, .form-group .form-control:focus {
     background-color: #fff;
     border-color: #38b98a;
     box-shadow: none;
@@ -833,7 +818,7 @@ tr {
     cursor: text;
     padding: 0;
 }
-  
+
 .form-group.form-line .form-control:focus {
     background-color: transparent;
     border-width: 3px;
@@ -854,12 +839,96 @@ tr {
 .form-group.form-line .form-control:hover {
     cursor: text;
 }
-.form-group.form-line .form-control:focus + .form-control-placeholder,
-.form-group.form-line .form-control:valid + .form-control-placeholder {
+
+.form-group.form-line .form-control:focus+.form-control-placeholder, .form-group.form-line .form-control:valid+.form-control-placeholder {
     font-size: 95%;
     transform: translateY(-150%);
     opacity: 1;
     color: #d9f2c9;
+}
+
+/* 
+* Custom Select
+*/
+
+select.custom-select.form-control {
+    display: none;
+}
+
+.select-selected {
+    width: 100%;
+    cursor: pointer;
+    background-color: #eef5f3;
+    border-radius: 8px;
+    padding: 8px 16px;
+    min-height: 3rem;
+    border: none;
+    margin: 0;
+    transition: 0.2s ease;
+    color: #3f3f3f;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #3f3f3f transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+}
+
+/*style items (options):*/
+.select-items {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 8px;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 99;
+    box-shadow: 0px 10px 40px rgba(110, 163, 124, 0.2);
+    overflow: hidden;
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div {
+    padding: 8px 16px;
+    min-height: 3rem;
+    margin: 0;
+    transition: 0.2s ease;
+    color: #3f3f3f;
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+.select-items div:not(.selected):hover {
+    background-color: #e7f1ed;
+}
+
+.select-items div.selected {
+    background-color: #38b98a;
+    color: #fff;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+    display: none;
 }
 
 /* 
@@ -1024,6 +1093,7 @@ tr {
 }
 
 /* Large screens: hide navigation button */
+
 @media (min-width: 768px) {
     .sidebar .nav-btn {
         display: none;
