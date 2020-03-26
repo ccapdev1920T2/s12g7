@@ -52,7 +52,7 @@
                   <div class="card-item" data-toggle="modal" data-target="#editReservationModal" data-title="{{title}}"
                     data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                     data-description="{{description}}" data-remarks="{{remarks}}" data-penalty="{{penalty}}"
-                    data-type="{{type}}">
+                    data-type="{{reservationType}}">
                     <div class="d-flex flex-row flex-nowrap">
                       <div class="col-1 icon my-auto"
                         id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
@@ -82,7 +82,7 @@
                   <div class="card-item" data-toggle="modal" data-target="#editReservationModal" data-title="{{title}}"
                     data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                     data-description="{{description}}" data-remarks="{{remarks}}" data-penalty="{{penalty}}"
-                    data-type="{{type}}">
+                    data-type="{{reservationType}}">
                     <div class="d-flex flex-row flex-nowrap">
                       <div class="col-1 icon my-auto"
                         id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
@@ -118,7 +118,7 @@
                   <div class="card-item" data-toggle="modal" data-target="#editReservationModal" data-title="{{title}}"
                     data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                     data-description="{{description}}" data-remarks="{{remarks}}" data-penalty="{{penalty}}"
-                    data-type="{{type}}">
+                    data-type="{{reservationType}}">
                     <div class="d-flex flex-row flex-nowrap">
                       <div class="col-1 icon my-auto"
                         id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
@@ -231,7 +231,7 @@
                                     data-title="{{title}}" data-userid="{{userID}}"
                                     data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                                     data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{type}}">
+                                    data-penalty="{{penalty}}" data-type="{{reservationType}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
                                 </td>
@@ -306,7 +306,7 @@
                                     data-title="{{title}}" data-userid="{{userID}}"
                                     data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                                     data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{type}}">
+                                    data-penalty="{{penalty}}" data-type="{{reservationType}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
                                 </td>
@@ -378,7 +378,7 @@
                                     data-title="{{title}}" data-userid="{{userID}}"
                                     data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                                     data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{type}}">
+                                    data-penalty="{{penalty}}" data-type="{{reservationType}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
                                 </td>
@@ -452,7 +452,7 @@
                                     data-title="{{title}}" data-userid="{{userID}}"
                                     data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                                     data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{type}}">
+                                    data-penalty="{{penalty}}" data-type="{{reservationType}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
                                 </td>
@@ -518,16 +518,6 @@
                   </select>
                 </div>
               </div>
-              {{!-- <div class="form-group form-inline input-group">
-                <label for="secret" class="col-lg-4 justify-content-start">Secret:</label>
-                <div class="col-lg-8 px-0">
-                  <select class="form-control custom-select" id="secret">
-                    <option value="status-manage-occupied">sdsdd</option>
-                    <option value="status-manage-broken">evev</option>
-                    <option value="status-manage-vacant">zzsd</option>
-                  </select>
-                </div>
-              </div> --}}
               <div class="form-group form-inline input-group" id="remarksForm">
                 <label for="remarks" class="col-lg-4 justify-content-start pl-2">Remarks</label>
                 <input type="text" class="form-control col-lg-8" placeholder="Enter Remarks" id="remarks">
@@ -535,7 +525,7 @@
               <div class="form-group form-inline input-group" id="penaltyForm">
                 <label for="penalty" class="col-lg-4 justify-content-start pl-2">Penalty</label>
                 <div class="input-group-prepend">
-                  <div class="input-group-text">@</div>
+                  <div class="input-group-text">Php</div>
                 </div>
                 <input type="number" class="form-control col-lg-8" placeholder="Penalty" id="penalty">
               </div>
@@ -543,7 +533,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" data-dismiss="modal" id="statusSubmit">Submit</button>
         </div>
       </div>
@@ -612,27 +602,52 @@
       else
         $('[value="status-manage-pickup-pay"]').text('For Pickup')
 
-      // $('#status').change(function() {
-        
-      // })
-
       $('#remarksForm').css('display', 'none');
       $('#penaltyForm').css('display', 'none');
 
-      if (reservation.status == 'Pending') {
+      switch (reservation.status) {
+        case 'Pending':
+          console.log('pending');
+          $('#status').val('status-manage-pending');
+          break;
+        case 'To pay':
+        case 'For Pickup':
+          $('#status').val('status-manage-pickup-pay');
+          break;
+        case 'On Rent':
+          console.log('on rent');
+          $('#status').val('status-manage-on-rent');
+          break;
+        case 'Returned':
+          $('#status').val('status-manage-returned');
+          break;
+        case 'Uncleared':
+          $('#status').val('status-manage-uncleared');
+          break;
+        case 'Denied':
+          $('#status').val('status-manage-denied');
+          break;
       }
 
-      /*
-      status-manage-pending">Pen
-      status-manage-pickup-pay">
-      status-manage-on-rent">On 
-      status-manage-returned">Re
-      status-manage-uncleared">U
-      status-manage-denied">Deni
-      */
+      $('#status').change();
 
-      console.log(reservation);
+      $('#status').change(function () {
+        var status = $(this).val();
 
+        if (status == 'status-manage-pickup-pay'
+            || status == 'status-manage-on-rent'
+            || status == 'status-manage-returned'
+            || status == 'status-manage-uncleared'
+            || status == 'status-manage-denied')
+          $('#remarksForm').css('display','flex');
+        else
+          $('#remarksForm').css('display','none');
+
+        if (status == 'status-manage-uncleared')
+          $('#penaltyForm').css('display','flex');
+        else
+          $('#penaltyForm').css('display','none');
+      })
     })
   </script>
 

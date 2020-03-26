@@ -515,6 +515,10 @@ h1, h2, h3, h4, h5 {
 * Modals
 */
 
+.modal {
+    transition: 0.2s ease;
+}
+
 .modal .modal-content {
     color: #838383;
     border-radius: 12px;
@@ -705,6 +709,20 @@ tr {
     transition: 0.2s ease;
 }
 
+.form-group .input-group-prepend .input-group-text {
+    background-color: #eef5f3;
+    border-radius: 8px 0 0 8px !important;
+    padding: 8px 4px 8px 16px;
+    min-height: 3rem;
+    border: solid #f7f7f7 1px;
+    margin: 0 !important;
+}
+
+.form-group .input-group-prepend + .form-control {
+    border-radius: 0 8px 8px 0 !important;
+    padding: 8px 16px 8px 4px;
+}
+
 .form-group .form-control:hover, .form-group .form-control-file:hover {
     border-color: #38b98a;
     /* background-color: #fff; */
@@ -859,10 +877,10 @@ select.custom-select.form-control {
     width: 100%;
     cursor: pointer;
     background-color: #eef5f3;
+    border: solid #eef5f3 1px;
     border-radius: 8px;
     padding: 8px 16px;
     min-height: 3rem;
-    border: none;
     margin: 0;
     transition: 0.2s ease;
     color: #3f3f3f;
@@ -870,6 +888,11 @@ select.custom-select.form-control {
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
+    transition: 0.2s ease;
+}
+
+.select-selected:hover {
+    border-color: #38b98a;
 }
 
 /*style the arrow inside the select element:*/
