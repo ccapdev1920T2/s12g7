@@ -71,25 +71,28 @@ exports.locker = async function (req, res) {
 };
 
 exports.reserve_locker = async function (req, res) {
-    var currentDate = new Date();
-    var reservation = new Reservation({
-        userID: req.body.userID, //TODO: place correct parameter (maybe from session?)
-        reservationType: 'locker', 
-        date: currentDate,
-        status: 'Pending',
-        description: 'yes i do the cooking', //TODO: not sure kung anong laman neto?
-        remarks: 'yes i do the cleaning'
-    });
-
-    await reservation.save(function (err) {
-        if (err) {
-            console.log('Error writing reservation to db');
-            res.send(reservation);
-        } else {
-            console.log('successful reservation write to db');
-            res.send(reservation);
-        }
-    });
+    try {
+        var panel = await Panel.findById(req.body.panelid);
+        var paneltype = panel.type[0].toUpperCase() + panel.type.slice(1);
+        var lockerIndex = req.body.lockernumber - panel.lowerRange;
+        var lockerid = panel.lockers[lockerIndex]._id;
+        
+        var descString = "Locker #" + req.body.lockernumber +", " + paneltype + " Panel #" + panel.number +
+                         ", " + panel.building + ", " + panel.level + "/F"; 
+       
+        var reservation = new Reservation({
+            userID: req.session.idNum, //TODO: place correct parameter (maybe from session?)
+            reservationType: 'locker',
+            item: lockerid,
+            status: 'Pending',
+            description: descString,
+            onItemType: 'Locker'
+        });
+        res.send(reservation);
+        //await reservation.save();
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 exports.equipment = async function (req, res) {
