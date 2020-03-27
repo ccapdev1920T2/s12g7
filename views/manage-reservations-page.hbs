@@ -49,27 +49,31 @@
                   {{#if pendingEarlier}}
                   <div class="card-subtitle">Earlier</div>
                   {{#each pendingEarlier}}
-                  <div class="card-item" data-toggle="modal" data-target="#editReservationModal" data-title="{{title}}"
-                    data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
-                    data-description="{{description}}" data-remarks="{{remarks}}" data-penalty="{{penalty}}"
-                    data-type="{{reservationType}}">
+                  <div class="card-item">
                     <div class="d-flex flex-row flex-nowrap">
-                      <div class="col-1 icon my-auto"
-                        id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
-                      <div class="d-flex flex-fill flex-column mx-4">
-                        <div>
-                          {{dateStr dateCreated}}
-                        </div>
-                        <div>
-                          {{#if (isLocker reservationType)}}
-                          <span class="font-weight-bold">{{description}}</span>
-                          {{else}}
-                          <span class="font-weight-bold">{{title}}</span>, {{description}}
-                          {{/if}}
+                      <div class="d-flex flex-row flex-nowrap" data-toggle="modal" data-target="#editReservationModal"
+                        data-title="{{title}}" data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}"
+                        data-status="{{status}}" data-description="{{description}}" data-remarks="{{remarks}}"
+                        data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}">
+                        <div class="col-1 icon my-auto"
+                          id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
+                        <div class="d-flex flex-fill flex-column mx-4">
+                          <div>
+                            {{dateStr dateCreated}}
+                          </div>
+                          <div>
+                            {{#if (isLocker reservationType)}}
+                            <span class="font-weight-bold">{{description}}</span>
+                            {{else}}
+                            <span class="font-weight-bold">{{title}}</span>, {{description}}
+                            {{/if}}
+                          </div>
                         </div>
                       </div>
-                      <a class="col-1 icon my-auto response" id="accept" href="#" title="Accept"></a>
-                      <a class="col-1 icon my-auto response" id="deny" href="#" title="Deny"></a>
+                      <a class="col-1 icon my-auto response" data-toggle="modal" data-target="#approveReservationModal"
+                        id="accept"></a>
+                      <a class="col-1 icon my-auto response" data-toggle="modal" data-target="#denyReservationModal"
+                        id="deny" href="#" title="Deny"></a>
                     </div>
                   </div>
                   {{/each}}
@@ -79,24 +83,28 @@
                   {{#if pendingToday}}
                   <div class="card-subtitle">Today</div>
                   {{#each pendingToday}}
-                  <div class="card-item" data-toggle="modal" data-target="#editReservationModal" data-title="{{title}}"
-                    data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
-                    data-description="{{description}}" data-remarks="{{remarks}}" data-penalty="{{penalty}}"
-                    data-type="{{reservationType}}">
+                  <div class="card-item">
                     <div class="d-flex flex-row flex-nowrap">
-                      <div class="col-1 icon my-auto"
-                        id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
-                      <div class="d-flex flex-fill flex-column mx-4">
-                        <div>
-                          {{#if (isLocker reservationType)}}
-                          <span class="font-weight-bold">{{description}}</span>
-                          {{else}}
-                          <span class="font-weight-bold">{{title}}</span>, {{description}}
-                          {{/if}}
+                      <div class="d-flex flex-row flex-nowrap" data-toggle="modal" data-target="#editReservationModal"
+                        data-title="{{title}}" data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}"
+                        data-status="{{status}}" data-description="{{description}}" data-remarks="{{remarks}}"
+                        data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}">
+                        <div class="col-1 icon my-auto"
+                          id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
+                        <div class="d-flex flex-fill flex-column mx-4">
+                          <div>
+                            {{#if (isLocker reservationType)}}
+                            <span class="font-weight-bold">{{description}}</span>
+                            {{else}}
+                            <span class="font-weight-bold">{{title}}</span>, {{description}}
+                            {{/if}}
+                          </div>
                         </div>
                       </div>
-                      <a class="col-1 icon my-auto response" id="accept" href="#" title="Accept"></a>
-                      <a class="col-1 icon my-auto response" id="deny" href="#" title="Deny"></a>
+                      <a class="col-1 icon my-auto response" data-toggle="modal" data-target="#approveReservationModal"
+                        id="accept"></a>
+                      <a class="col-1 icon my-auto response" data-toggle="modal" data-target="#denyReservationModal"
+                        id="deny" href="#" title="Deny"></a>
                     </div>
                   </div>
                   {{/each}}
@@ -118,14 +126,11 @@
                   <div class="card-item" data-toggle="modal" data-target="#editReservationModal" data-title="{{title}}"
                     data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                     data-description="{{description}}" data-remarks="{{remarks}}" data-penalty="{{penalty}}"
-                    data-type="{{reservationType}}">
+                    data-type="{{reservationType}}" data-id="{{_id}}">
                     <div class="d-flex flex-row flex-nowrap">
                       <div class="col-1 icon my-auto"
                         id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
                       <div class="d-flex flex-column mx-4">
-                        {{!-- <div class="font-weight-bold">
-                          {{userID}}
-                        </div> --}}
                         <div>
                           {{#if (isLocker reservationType)}}
                           {{description}}
@@ -137,8 +142,6 @@
                           Remarks: {{remarks}}
                         </div>
                       </div>
-                      <a class="col-1 icon my-auto response" id="accept" href="#" title="Accept"></a>
-                      <a class="col-1 icon my-auto response" id="deny" href="#" title="Deny"></a>
                     </div>
                   </div>
                   {{/each}}
@@ -231,7 +234,7 @@
                                     data-title="{{title}}" data-userid="{{userID}}"
                                     data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                                     data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{reservationType}}">
+                                    data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
                                 </td>
@@ -306,7 +309,7 @@
                                     data-title="{{title}}" data-userid="{{userID}}"
                                     data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                                     data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{reservationType}}">
+                                    data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
                                 </td>
@@ -378,7 +381,7 @@
                                     data-title="{{title}}" data-userid="{{userID}}"
                                     data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                                     data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{reservationType}}">
+                                    data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
                                 </td>
@@ -452,7 +455,7 @@
                                     data-title="{{title}}" data-userid="{{userID}}"
                                     data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                                     data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{reservationType}}">
+                                    data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
                                 </td>
@@ -493,22 +496,24 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body col-lg-10 mx-auto">
-          <div class="d-flex flex-column">
-            <div class="font-weight-bold pl-2 mb-2" id="idNum"></div>
-            <div class="d-flex flex-row align-items-center">
-              <div class="icon col-1 mr-2" id="date"></div>
-              <div class="" id="dateCreated"></div>
-            </div>
-            <div class="d-flex flex-row align-items-center mb-4">
-              <div class="icon col-1 mr-2" id="desc"></div>
-              <div class="" id="description"></div>
-            </div>
-            <form class="form-horizontal">
+        <form class="form-horizontal" method="post" action="/reservations/manage/update">
+          <input type="hidden" id="reservationID" name="reservationID">
+          <input type="hidden" id="reservationType" name="reservationType">
+          <div class="modal-body col-lg-10 mx-auto">
+            <div class="d-flex flex-column">
+              <div class="font-weight-bold pl-2 mb-2" id="idNum"></div>
+              <div class="d-flex flex-row align-items-center">
+                <div class="icon col-1 mr-2" id="date"></div>
+                <div class="" id="dateCreated"></div>
+              </div>
+              <div class="d-flex flex-row align-items-center mb-4">
+                <div class="icon col-1 mr-2" id="desc"></div>
+                <div class="" id="description"></div>
+              </div>
               <div class="form-group form-inline input-group">
                 <label for="status" class="col-lg-4 justify-content-start pl-2">Status:</label>
                 <div class="col-lg-8 px-0">
-                  <select class="form-control custom-select" id="status">
+                  <select class="form-control custom-select" name="status" id="status">
                     <option value="status-manage-pending">Pending</option>
                     <option value="status-manage-pickup-pay">To Pay</option>
                     <option value="status-manage-on-rent">On Rent</option>
@@ -520,22 +525,121 @@
               </div>
               <div class="form-group form-inline input-group" id="remarksForm">
                 <label for="remarks" class="col-lg-4 justify-content-start pl-2">Remarks</label>
-                <input type="text" class="form-control col-lg-8" placeholder="Enter Remarks" id="remarks">
+                <input type="text" class="form-control col-lg-8" name="remarks" placeholder="Enter Remarks"
+                  id="remarks">
               </div>
               <div class="form-group form-inline input-group" id="penaltyForm">
                 <label for="penalty" class="col-lg-4 justify-content-start pl-2">Penalty</label>
                 <div class="input-group-prepend">
                   <div class="input-group-text">Php</div>
                 </div>
-                <input type="number" class="form-control col-lg-8" placeholder="Penalty" id="penalty">
+                <input type="number" class="form-control col-lg-8" name="penalty" placeholder="Penalty" id="penalty">
               </div>
-            </form>
+            </div>
           </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-primary" id="statusSubmit" value="Update">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="approveReservationModal" tabindex="-1" role="dialog"
+    aria-labelledby="approveStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title mr-2" id="approveStatusModalLabel">Approve Reservation: </h5>
+          <h5 class="modal-title" id="approveReservationTitle"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" id="statusSubmit">Submit</button>
+        <form class="form-horizontal" method="post" action="/reservations/manage/update">
+          <input type="hidden" id="approveReservationID" name="reservationID">
+          <input type="hidden" id="approveReservationType" name="reservationType">
+          <div class="modal-body col-lg-10 mx-auto">
+            <div class="d-flex flex-column">
+              <div class="font-weight-bold pl-2 mb-2" id="idNum"></div>
+              <div class="d-flex flex-row align-items-center">
+                <div class="icon col-1 mr-2" id="date"></div>
+                <div class="" id="approveDateCreated"></div>
+              </div>
+              <div class="d-flex flex-row align-items-center mb-4">
+                <div class="icon col-1 mr-2" id="desc"></div>
+                <div class="" id="approveDescription"></div>
+              </div>
+              <div class="form-group form-inline input-group" id="approveRemarksForm">
+                <label for="remarks" class="col-lg-4 justify-content-start pl-2">Remarks</label>
+                <input type="text" class="form-control col-lg-8" name="remarks" placeholder="Enter Remarks"
+                  id="approveRemarks">
+              </div>
+              <div class="form-group form-inline input-group" id="approvePenaltyForm">
+                <label for="penalty" class="col-lg-4 justify-content-start pl-2">Penalty</label>
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Php</div>
+                </div>
+                <input type="number" class="form-control col-lg-8" name="penalty" placeholder="Penalty"
+                  id="approvePenalty">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-primary" id="approveStatusSubmit" value="Approve Reservation">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="denyReservationModal" tabindex="-1" role="dialog"
+    aria-labelledby="denyStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title mr-2" id="denyStatusModalLabel">Deny Reservation: </h5>
+          <h5 class="modal-title" id="denyReservationTitle"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <form class="form-horizontal" method="post" action="/reservations/manage/update">
+          <input type="hidden" id="denyReservationID" name="reservationID">
+          <input type="hidden" id="denyReservationType" name="reservationType">
+          <div class="modal-body col-lg-10 mx-auto">
+            <div class="d-flex flex-column">
+              <div class="font-weight-bold pl-2 mb-2" id="idNum"></div>
+              <div class="d-flex flex-row align-items-center">
+                <div class="icon col-1 mr-2" id="date"></div>
+                <div class="" id="denyDateCreated"></div>
+              </div>
+              <div class="d-flex flex-row align-items-center mb-4">
+                <div class="icon col-1 mr-2" id="desc"></div>
+                <div class="" id="denyDescription"></div>
+              </div>
+              <div class="form-group form-inline input-group" id="denyRemarksForm">
+                <label for="remarks" class="col-lg-4 justify-content-start pl-2">Remarks</label>
+                <input type="text" class="form-control col-lg-8" name="remarks" placeholder="Enter Remarks"
+                  id="denyRemarks">
+              </div>
+              <div class="form-group form-inline input-group" id="denyPenaltyForm">
+                <label for="penalty" class="col-lg-4 justify-content-start pl-2">Penalty</label>
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Php</div>
+                </div>
+                <input type="number" class="form-control col-lg-8" name="penalty" placeholder="Penalty"
+                  id="denyPenalty">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-primary" id="denyStatusSubmit" value="Deny Reservation">
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -576,9 +680,58 @@
       });
     });
 
+    $('#approveReservationModal').on('show.bs.modal', (event) => {
+      var btn = $(event.relatedTarget).prev();
+      var reservation = {
+        id: btn.data('id'),
+        title: btn.data('title'),
+        userID: btn.data('userid'),
+        dateCreated: btn.data('datecreated'),
+        status: btn.data('status'),
+        description: btn.data('description'),
+        remarks: btn.data('remarks'),
+        penalty: btn.data('penalty'),
+        type: btn.data('type')
+      }
+
+      $('#approveReservationTitle').text(reservation.title);
+      $('#approveReservationID').text(reservation.id);
+      $('#approveReservationType').text(reservation.type);
+      $('#approveDateCreated').text(reservation.dateCreated);
+      $('#approveDescription').text(reservation.description);
+      $('#approveRemarks').val(reservation.remarks);
+
+      $('#approvePenaltyForm').css('display', 'none');
+    });
+
+    $('#denyReservationModal').on('show.bs.modal', (event) => {
+      var btn = $(event.relatedTarget).prev().prev();
+      var reservation = {
+        id: btn.data('id'),
+        title: btn.data('title'),
+        userID: btn.data('userid'),
+        dateCreated: btn.data('datecreated'),
+        status: btn.data('status'),
+        description: btn.data('description'),
+        remarks: btn.data('remarks'),
+        penalty: btn.data('penalty'),
+        type: btn.data('type')
+      }
+
+      $('#denyReservationTitle').text(reservation.title);
+      $('#denyReservationID').text(reservation.id);
+      $('#denyReservationType').text(reservation.type);
+      $('#denyDateCreated').text(reservation.dateCreated);
+      $('#denyDescription').text(reservation.description);
+      $('#denyRemarks').val(reservation.remarks);
+
+      $('#denyPenaltyForm').css('display', 'none');
+    });
+
     $('#editReservationModal').on('show.bs.modal', (event) => {
       var btn = $(event.relatedTarget);
       var reservation = {
+        id: btn.data('id'),
         title: btn.data('title'),
         userID: btn.data('userid'),
         dateCreated: btn.data('datecreated'),
@@ -595,6 +748,8 @@
       $('#description').text(reservation.description);
       $('#remarks').val(reservation.remarks);
       $('#penalty').val(reservation.penalty);
+      $('#reservationID').val(reservation.id);
+      $('#reservationType').val(reservation.type);
 
       var pickupPayText;
       if (reservation.type == 'locker')
@@ -635,14 +790,14 @@
         var status = $(this).val();
 
         if (status != 'status-manage-pending')
-          $('#remarksForm').css('display','flex');
+          $('#remarksForm').css('display', 'flex');
         else
-          $('#remarksForm').css('display','none');
+          $('#remarksForm').css('display', 'none');
 
         if (status == 'status-manage-uncleared')
-          $('#penaltyForm').css('display','flex');
+          $('#penaltyForm').css('display', 'flex');
         else
-          $('#penaltyForm').css('display','none');
+          $('#penaltyForm').css('display', 'none');
       })
     })
   </script>
