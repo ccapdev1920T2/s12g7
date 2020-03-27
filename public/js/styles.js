@@ -78,7 +78,7 @@ $(document).ready(function () {
     $('select').each(function (index, selectItem) {
         var options = $(selectItem).children();
         $(options).each(function (index, optionItem) {
-            if (index == 0) {
+            if ($(selectItem).val() == $(optionItem).val()) {
                 $(selectItem).next().next().append(
                     '<div class="selected" value="'
                     + $(optionItem).attr('value') + '">' + optionItem.text
