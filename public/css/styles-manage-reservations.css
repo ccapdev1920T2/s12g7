@@ -27,7 +27,7 @@
 }
 
 .pinned-card .card-body {
-    max-height: 250px;
+    max-height: 40vh;
     overflow-y: scroll;
 }
 
