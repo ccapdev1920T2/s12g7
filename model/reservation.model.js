@@ -4,7 +4,7 @@ const reservationSchema = new mongoose.Schema({
     title: String,
     userID: { type: Number, required: true },
     reservationType: { type: String, enum: ['locker', 'equipment'] },
-    item: {type: mongoose.Schema.Types.ObjectId, refPath: 'onItemType'},
+    item: { type: mongoose.Schema.Types.ObjectId, refPath: 'onItemType' },
     dateCreated: { type: Date, default: Date.now() },
     status: {
         type: String,
@@ -19,13 +19,15 @@ const reservationSchema = new mongoose.Schema({
         ]
     },
     description: String,
-    remarks: {type: String, default: 'N/A'},
-    penalty: {type: Number, default: 0},
+    remarks: { type: String, default: '' },
+    penalty: { type: Number, default: 0 },
     onItemType: {
         type: String,
         required: true,
         enum: ['Equipment', 'Locker']
-    }
+    },
+    lastUpdated: { type: Date, default: Date.now() },
+    pickupPayDate: { type: Date, default: null }
 });
 
 module.exports = mongoose.model('Reservation', reservationSchema);

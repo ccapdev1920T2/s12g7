@@ -1,0 +1,18 @@
+Reservation Specs
+
+title: 	            <locker number> / <equipment name>
+	                (e.g. Locker #100; VGA Cable)
+userID: 		    id number
+reservationType:	'locker' / 'equipment' (note the capitalzation)
+item:               _id of locker/equipment
+dateCreated:        when the reservation was made (auto na to, default is Date.now())
+status:             status of reservation
+description:        <locker num> <panel num> <bldg> <flr> / <equipment type> <reason for borrowing>
+                    (e.g. Locker #302, Big Panel #1, Gokongwei, 3/F; 
+                    VGA Cable, needed for my presentation in CCAPDEV)
+remarks:            notes from the admin
+penalty:            for uncleared reservations (admin input)
+onItemType:         'Locker' / 'Equipment (note the capitalzation, tinamad na ako iedit to hahaha)
+lastUpdated:        date when reservation status gets updated (auto na to, default is Date.now())
+pickupPayDate:      when the payment deadline for the locker is / when the equipment is needed
+

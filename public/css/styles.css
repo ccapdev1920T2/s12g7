@@ -68,8 +68,9 @@ a:hover {
 }
 
 hr {
-    margin: 0 16px;
-    background-color: #e2f0ea;
+    margin: 0;
+    background-color: #efefef;
+    border-top: solid 1px #efefef;
 }
 
 /* 
