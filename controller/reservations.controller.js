@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const Reservation = require('../model/reservation.model');
 const Locker = require('../model/locker.model');
 const Equipment = require('../model/equipment.model');
-const User = require('../model/reservation.model');
+const User = require('../model/user.model');
 
 // TODO: update reservations based on time
 /* cron.schedule('* * * * *', () => {
@@ -13,7 +13,7 @@ const User = require('../model/reservation.model');
 });
  */
 
-hbs.registerHelper('dateStr', (date) => {return date.toDateString();});
+hbs.registerHelper('dateStr', (date) => { return date.toDateString(); });
 
 hbs.registerHelper('dateTimeToday', () => {
     const date = new Date();
@@ -75,16 +75,16 @@ exports.myReservations = async function (req, res) {
 
     try {
         var activeReservations = await Reservation
-            .find({ 
-                userID: req.session.idNum, 
-                status: ['Pending', 'For Pickup', 'To Pay', 'Uncleared', 'On Rent'] 
-            }).sort({dateCreated: -1});
-                
+            .find({
+                userID: req.session.idNum,
+                status: ['Pending', 'For Pickup', 'To Pay', 'Uncleared', 'On Rent']
+            }).sort({ dateCreated: -1 });
+
         var pastReservations = await Reservation
-            .find({ 
-                userID: req.session.idNum, 
-                status: ['Denied', 'Returned'] 
-            }).sort({dateCreated: -1});
+            .find({
+                userID: req.session.idNum,
+                status: ['Denied', 'Returned']
+            }).sort({ dateCreated: -1 });
 
         res.render('my-reservations-page', {
             active: { active_my_reservations: true },
@@ -105,33 +105,33 @@ exports.myReservations = async function (req, res) {
 exports.reservation_details = async function (req, res) {
 
     var now = new Date();
-    var dateToday = now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate();
+    var dateToday = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
     var tomorrow = new Date(now);
     tomorrow.setDate(tomorrow.getDate() + 1);
-    var dateTomorrow = tomorrow.getFullYear()+'-'+(tomorrow.getMonth()+1)+'-'+tomorrow.getDate();
+    var dateTomorrow = tomorrow.getFullYear() + '-' + (tomorrow.getMonth() + 1) + '-' + tomorrow.getDate();
 
     try {
         var pendingToday = await Reservation
-            .find({status: 'Pending'})
+            .find({ status: 'Pending' })
             .where('dateCreated').gte(dateToday).lt(dateTomorrow)
             .populate('item');
         var pendingEarlier = await Reservation
-            .find({status: 'Pending'})
+            .find({ status: 'Pending' })
             .where('dateCreated').lt(dateToday)
             .populate('item');
 
         var pickupPayToday = await Reservation
-            .find({status: ['For Pickup', 'To Pay']});
+            .find({ status: ['For Pickup', 'To Pay'] });
 
         var activeLockers = await Reservation
-            .find({status: ['On Rent', 'Uncleared'], reservationType: 'locker'});
+            .find({ status: ['On Rent', 'Uncleared'], reservationType: 'locker' });
         var pastLockers = await Reservation
-            .find({status: ['Denied', 'Returned'], reservationType: 'locker'});
-        
+            .find({ status: ['Denied', 'Returned'], reservationType: 'locker' });
+
         var activeEquipment = await Reservation
-            .find({status: ['On Rent', 'Uncleared'], reservationType: 'equipment'});
+            .find({ status: ['On Rent', 'Uncleared'], reservationType: 'equipment' });
         var pastEquipment = await Reservation
-            .find({status: ['Denied', 'Returned'], reservationType: 'equipment'});
+            .find({ status: ['Denied', 'Returned'], reservationType: 'equipment' });
 
     } catch (err) {
         console.log('ERROR' + err);
@@ -154,19 +154,59 @@ exports.reservation_details = async function (req, res) {
     });
 }
 
-exports.reservation_delete = async function(req, res) {
+exports.reservation_update = async function (req, res) {
+    try {
+        var user = await User.findOne({ idNum: parseInt(req.session.idNum) });
+
+        if (user) {
+            var status;
+            switch (req.body.status) {
+                case 'status-manage-pending':
+                    status = 'Pending'
+                    break;
+                case 'status-manage-pickup-pay':
+                    status = (req.body.reservationType == 'locker') ? 'To Pay' : 'For Pickup';
+                    break;
+                case 'status-manage-on-rent':
+                    status = 'On Rent';
+                    break;
+                case 'status-manage-returned':
+                    status = 'Returned';
+                    break;
+                case 'status-manage-uncleared':
+                    status = 'Uncleared';
+                    break;
+                case 'status-manage-denied':
+                    status = 'Denied';
+                    break;
+            }
+    
+            if (userIsAdmin(user))
+                await Reservation.findByIdAndUpdate(req.body.reservationID, {
+                    status: status,
+                    remarks: req.body.remarks,
+                    penalty: req.body.penalty
+                });
+        }
+
+    } catch(err) { console.log(err); };
+
+    res.redirect('/reservations/manage');
+}
+
+exports.reservation_delete = async function (req, res) {
     try {
         var reservation = await Reservation.findById(req.body.reservationID);
-        var user = await User.find({idNum: req.session.idNum});
+        var user = await User.findOne({ idNum: req.session.idNum });
 
         if ((reservation.userID == req.session.idNum && isCancellable(reservation)) || userIsAdmin(user))
             await Reservation.findByIdAndDelete(reservation._id);
-    } catch(err) {console.log(err);};
-    res.redirect('/reservations');    
+    } catch (err) { console.log(err); };
+    res.redirect('/reservations');
 };
 
 function isCancellable(reservation) {
-    return reservation.status == 'Pending' 
+    return reservation.status == 'Pending'
         || reservation.status == 'For Pickup'
         || reservation.status == 'To Pay';
 }
