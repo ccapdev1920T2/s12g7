@@ -571,6 +571,19 @@
                 <div class="icon col-1 mr-2" id="desc"></div>
                 <div class="" id="approveDescription"></div>
               </div>
+              <div class="form-group form-inline input-group" id="approveSelectForm">
+                <label for="status" class="col-lg-4 justify-content-start pl-2">Status:</label>
+                <div class="col-lg-8 px-0">
+                  <select class="form-control custom-select" name="status" id="approveStatus">
+                    <option value="status-manage-pending">Pending</option>
+                    <option value="status-manage-pickup-pay">To Pay</option>
+                    <option value="status-manage-on-rent">On Rent</option>
+                    <option value="status-manage-returned">Returned</option>
+                    <option value="status-manage-uncleared">Uncleared</option>
+                    <option value="status-manage-denied">Denied</option>
+                  </select>
+                </div>
+              </div>
               <div class="form-group form-inline input-group" id="approveRemarksForm">
                 <label for="remarks" class="col-lg-4 justify-content-start pl-2">Remarks</label>
                 <input type="text" class="form-control col-lg-8" name="remarks" placeholder="Enter Remarks"
@@ -619,6 +632,19 @@
               <div class="d-flex flex-row align-items-center mb-4">
                 <div class="icon col-1 mr-2" id="desc"></div>
                 <div class="" id="denyDescription"></div>
+              </div>
+              <div class="form-group form-inline input-group" id="denySelectForm">
+                <label for="status" class="col-lg-4 justify-content-start pl-2">Status:</label>
+                <div class="col-lg-8 px-0">
+                  <select class="form-control custom-select" name="status" id="denyStatus">
+                    <option value="status-manage-pending">Pending</option>
+                    <option value="status-manage-pickup-pay">To Pay</option>
+                    <option value="status-manage-on-rent">On Rent</option>
+                    <option value="status-manage-returned">Returned</option>
+                    <option value="status-manage-uncleared">Uncleared</option>
+                    <option value="status-manage-denied">Denied</option>
+                  </select>
+                </div>
               </div>
               <div class="form-group form-inline input-group" id="denyRemarksForm">
                 <label for="remarks" class="col-lg-4 justify-content-start pl-2">Remarks</label>
@@ -695,13 +721,15 @@
       }
 
       $('#approveReservationTitle').text(reservation.title);
-      $('#approveReservationID').text(reservation.id);
-      $('#approveReservationType').text(reservation.type);
+      $('#approveReservationID').val(reservation.id);
+      $('#approveReservationType').val(reservation.type);
       $('#approveDateCreated').text(reservation.dateCreated);
       $('#approveDescription').text(reservation.description);
       $('#approveRemarks').val(reservation.remarks);
+      $('#approveStatus').val('status-manage-pickup-pay');
 
       $('#approvePenaltyForm').css('display', 'none');
+      $('#approveSelectForm').css('display', 'none');
     });
 
     $('#denyReservationModal').on('show.bs.modal', (event) => {
@@ -719,13 +747,15 @@
       }
 
       $('#denyReservationTitle').text(reservation.title);
-      $('#denyReservationID').text(reservation.id);
-      $('#denyReservationType').text(reservation.type);
+      $('#denyReservationID').val(reservation.id);
+      $('#denyReservationType').val(reservation.type);
       $('#denyDateCreated').text(reservation.dateCreated);
       $('#denyDescription').text(reservation.description);
       $('#denyRemarks').val(reservation.remarks);
+      $('#denyStatus').val('status-manage-denied');
 
       $('#denyPenaltyForm').css('display', 'none');
+      $('#denySelectForm').css('display', 'none');
     });
 
     $('#editReservationModal').on('show.bs.modal', (event) => {
