@@ -710,17 +710,18 @@ tr {
 }
 
 .form-group .input-group-prepend .input-group-text {
-    background-color: #eef5f3;
+    background-color: #38b98a;
     border-radius: 8px 0 0 8px !important;
-    padding: 8px 4px 8px 16px;
+    padding: 8px 16px;
     min-height: 3rem;
-    border: solid #f7f7f7 1px;
+    border: solid #38b98a 1px;
+    color: #fff;
     margin: 0 !important;
 }
 
 .form-group .input-group-prepend + .form-control {
     border-radius: 0 8px 8px 0 !important;
-    padding: 8px 16px 8px 4px;
+    padding: 8px 16px;
 }
 
 .form-group .form-control:hover, .form-group .form-control-file:hover {
@@ -896,21 +897,27 @@ select.custom-select.form-control {
 }
 
 /*style the arrow inside the select element:*/
-.select-selected:after {
+/* .select-selected:after {
     position: absolute;
-    content: "";
+    content: url(../static/icons/add.png);
     top: 14px;
     right: 10px;
     width: 0;
     height: 0;
     border: 6px solid transparent;
     border-color: #3f3f3f transparent transparent transparent;
-}
+} */
 
-/*point the arrow upwards when the select box is open (active):*/
-.select-selected.select-arrow-active:after {
-    border-color: transparent transparent #fff transparent;
-    top: 7px;
+.select-selected:after {
+    content: "";
+    display: block;
+    background: url(../static/icons/arrow-down.png) center no-repeat;
+    background-size: contain;
+    position: absolute;
+    right: 16px;
+    top: 8px;
+    height: 1.5rem;
+    width: 1.5rem;
 }
 
 /*style items (options):*/

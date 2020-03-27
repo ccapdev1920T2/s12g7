@@ -634,11 +634,7 @@
       $('#status').change(function () {
         var status = $(this).val();
 
-        if (status == 'status-manage-pickup-pay'
-            || status == 'status-manage-on-rent'
-            || status == 'status-manage-returned'
-            || status == 'status-manage-uncleared'
-            || status == 'status-manage-denied')
+        if (status != 'status-manage-pending')
           $('#remarksForm').css('display','flex');
         else
           $('#remarksForm').css('display','none');
