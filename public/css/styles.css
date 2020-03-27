@@ -709,6 +709,10 @@ tr {
     transition: 0.2s ease;
 }
 
+.form-control.form-lg {
+    min-height: calc(3rem + 15px);
+}
+
 .form-group .input-group-prepend .input-group-text {
     background-color: #38b98a;
     border-radius: 8px 0 0 8px !important;
@@ -747,7 +751,6 @@ tr {
 
 .form-group.form-card {
     position: relative;
-    padding-bottom: 64px;
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0px 10px 40px rgba(110, 163, 124, 0.2);
@@ -761,7 +764,7 @@ tr {
     font-weight: 700;
     font-size: 14px;
     color: #3f3f3f;
-    padding: 16px 24px 0 24px;
+    padding: 16px 24px;
     margin-bottom: 0;
 }
 
@@ -780,7 +783,7 @@ tr {
     color: #838383;
 }
 
-.form-group.form-card .form-control {
+/* .form-group.form-card .form-control {
     background-color: #eef5f3;
     border: solid #eef5f3 1px;
     color: #3f3f3f;
@@ -815,7 +818,7 @@ tr {
     background-color: #fff;
     border-color: #38b98a;
     box-shadow: none;
-}
+} */
 
 /* 
 * Form Control Line
@@ -896,6 +899,10 @@ select.custom-select.form-control {
     border-color: #38b98a;
 }
 
+.custom-select.select-lg ~ .select-selected {
+    padding: 16px;
+}
+
 /*style the arrow inside the select element:*/
 /* .select-selected:after {
     position: absolute;
@@ -915,9 +922,13 @@ select.custom-select.form-control {
     background-size: contain;
     position: absolute;
     right: 16px;
-    top: 8px;
+    bottom: 10px;
     height: 1.5rem;
     width: 1.5rem;
+}
+
+.custom-select.select-lg ~ .select-selected:after {
+    bottom: 18px;
 }
 
 /*style items (options):*/
