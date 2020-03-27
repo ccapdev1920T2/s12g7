@@ -109,10 +109,11 @@
           <div class="modal-body col-lg-10 mx-auto">
             <div class="form-group form-inline input-group">
               <label for="phone" class="col-lg-4 justify-content-start">Mobile Number:</label>
+              <input type="tel" class="form-control col-lg-8" name="phone" id="phone" value="{{user.contactNum}}" required>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-outline" data-dismiss="modal">Cancel</button>
             <input type="submit" class="btn btn-primary" value="Submit">
           </div>
         </form>

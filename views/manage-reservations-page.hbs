@@ -54,13 +54,15 @@
                       <div class="d-flex flex-row flex-nowrap" data-toggle="modal" data-target="#editReservationModal"
                         data-title="{{title}}" data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}"
                         data-status="{{status}}" data-description="{{description}}" data-remarks="{{remarks}}"
-                        data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}">
+                        data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}"
+                        data-paymentdate="{{pickupPayDate}}">
                         <div class="col-1 icon my-auto"
                           id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
                         <div class="d-flex flex-fill flex-column mx-4">
                           <div>
                             {{dateStr dateCreated}}
                           </div>
+                          <div class="font-weight-bold">{{userID}}</div>
                           <div>
                             {{#if (isLocker reservationType)}}
                             <span class="font-weight-bold">{{description}}</span>
@@ -88,11 +90,13 @@
                       <div class="d-flex flex-row flex-nowrap" data-toggle="modal" data-target="#editReservationModal"
                         data-title="{{title}}" data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}"
                         data-status="{{status}}" data-description="{{description}}" data-remarks="{{remarks}}"
-                        data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}">
-                        <div class="col-1 icon my-auto"
+                        data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}"
+                        data-paymentdate="{{pickupPayDate}}">
+                        <div class="col-1 icon mb-auto mt-1"
                           id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
                         <div class="d-flex flex-fill flex-column mx-4">
                           <div>
+                            <div class="font-weight-bold">{{userID}}</div>
                             {{#if (isLocker reservationType)}}
                             <span class="font-weight-bold">{{description}}</span>
                             {{else}}
@@ -115,7 +119,7 @@
 
             <div class="col-lg-6 mb-5">
               <div class="card pinned-card h-100">
-                <h5 class="card-header">Today's pickups and payments</h5>
+                <h5 class="card-header">Pickups and payments</h5>
                 <div class="card-body">
                   {{#if pickupPayToday}}
                   <div class="card-subtitle"> as of {{dateTimeToday}}</div>
@@ -126,11 +130,12 @@
                   <div class="card-item" data-toggle="modal" data-target="#editReservationModal" data-title="{{title}}"
                     data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                     data-description="{{description}}" data-remarks="{{remarks}}" data-penalty="{{penalty}}"
-                    data-type="{{reservationType}}" data-id="{{_id}}">
+                    data-type="{{reservationType}}" data-id="{{_id}}" data-paymentdate="{{pickupPayDate}}">
                     <div class="d-flex flex-row flex-nowrap">
-                      <div class="col-1 icon my-auto"
+                      <div class="col-1 icon mb-auto mt-1"
                         id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
                       <div class="d-flex flex-column mx-4">
+                        <div class="font-weight-bold">{{userID}}</div>
                         <div>
                           {{#if (isLocker reservationType)}}
                           {{description}}
@@ -138,9 +143,17 @@
                           {{title}}, {{description}}
                           {{/if}}
                         </div>
+                        {{#if remarks}}
                         <div>
                           Remarks: {{remarks}}
                         </div>
+                        {{/if}}
+                        {{#if (isLocker reservationType)}}{{#if pickupPayDate}}
+                        <hr class="my-1">
+                        <div>
+                          Due: {{dateStr pickupPayDate}}
+                        </div>
+                        {{/if}}{{/if}}
                       </div>
                     </div>
                   </div>
@@ -234,7 +247,8 @@
                                     data-title="{{title}}" data-userid="{{userID}}"
                                     data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                                     data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}">
+                                    data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}"
+                                    data-paymentdate="{{pickupPayDate}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
                                 </td>
@@ -309,7 +323,8 @@
                                     data-title="{{title}}" data-userid="{{userID}}"
                                     data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                                     data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}">
+                                    data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}"
+                                    data-paymentdate="{{pickupPayDate}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
                                 </td>
@@ -381,7 +396,8 @@
                                     data-title="{{title}}" data-userid="{{userID}}"
                                     data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                                     data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}">
+                                    data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}"
+                                    data-paymentdate="{{pickupPayDate}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
                                 </td>
@@ -455,7 +471,8 @@
                                     data-title="{{title}}" data-userid="{{userID}}"
                                     data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                                     data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}">
+                                    data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}"
+                                    data-paymentdate="{{pickupPayDate}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
                                 </td>
@@ -523,6 +540,10 @@
                   </select>
                 </div>
               </div>
+              <div class="form-group form-inline input-group" id="paymentForm">
+                <label for="paymentForm" class="col-lg-4 justify-content-start pl-2">Deadline of Payment</label>
+                <input type="date" class="form-control col-lg-8" name="paymentDate" id="paymentDate">
+              </div>
               <div class="form-group form-inline input-group" id="remarksForm">
                 <label for="remarks" class="col-lg-4 justify-content-start pl-2">Remarks</label>
                 <input type="text" class="form-control col-lg-8" name="remarks" placeholder="Enter Remarks"
@@ -584,6 +605,10 @@
                   </select>
                 </div>
               </div>
+              <div class="form-group form-inline input-group" id="approvePaymentForm">
+                <label for="approvePaymentForm" class="col-lg-4 justify-content-start pl-2">Deadline of Payment</label>
+                <input type="date" class="form-control col-lg-8" name="paymentDate" id="approvePaymentDate">
+              </div>
               <div class="form-group form-inline input-group" id="approveRemarksForm">
                 <label for="remarks" class="col-lg-4 justify-content-start pl-2">Remarks</label>
                 <input type="text" class="form-control col-lg-8" name="remarks" placeholder="Enter Remarks"
@@ -608,8 +633,8 @@
     </div>
   </div>
 
-  <div class="modal fade" id="denyReservationModal" tabindex="-1" role="dialog"
-    aria-labelledby="denyStatusModalLabel" aria-hidden="true">
+  <div class="modal fade" id="denyReservationModal" tabindex="-1" role="dialog" aria-labelledby="denyStatusModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -717,8 +742,15 @@
         description: btn.data('description'),
         remarks: btn.data('remarks'),
         penalty: btn.data('penalty'),
-        type: btn.data('type')
+        type: btn.data('type'),
+        paymentDate: btn.data('paymentdate')
       }
+
+      var payDate = new Date();
+      var payDateString =
+        payDate.getFullYear() + '-'
+        + ((payDate.getMonth() <= 8) ? '0' : '') + (payDate.getMonth() + 1) + '-'
+        + ((payDate.getDate() <= 9) ? '0' : '') + payDate.getDate();
 
       $('#approveReservationTitle').text(reservation.title);
       $('#approveReservationID').val(reservation.id);
@@ -727,9 +759,15 @@
       $('#approveDescription').text(reservation.description);
       $('#approveRemarks').val(reservation.remarks);
       $('#approveStatus').val('status-manage-pickup-pay');
+      $('#approvePaymentDate').val(payDateString);
 
       $('#approvePenaltyForm').css('display', 'none');
       $('#approveSelectForm').css('display', 'none');
+
+      if (reservation.type == 'locker')
+        $('#approvePaymentForm').css('display', 'flex');
+      else
+        $('#approvePaymentForm').css('display', 'none');
     });
 
     $('#denyReservationModal').on('show.bs.modal', (event) => {
@@ -769,8 +807,17 @@
         description: btn.data('description'),
         remarks: btn.data('remarks'),
         penalty: btn.data('penalty'),
-        type: btn.data('type')
+        type: btn.data('type'),
+        paymentDate: btn.data('paymentdate')
       }
+
+      var payDate = reservation.paymentDate == '' ? new Date() : new Date(reservation.paymentDate);
+      var payDateString =
+        payDate.getFullYear() + '-'
+        + ((payDate.getMonth() <= 8) ? '0' : '') + (payDate.getMonth() + 1) + '-'
+        + ((payDate.getDate() <= 9) ? '0' : '') + payDate.getDate();
+
+      console.log(payDateString);
 
       $('#statusModalLabel').text(reservation.title);
       $('#idNum').text(reservation.userID);
@@ -780,6 +827,7 @@
       $('#penalty').val(reservation.penalty);
       $('#reservationID').val(reservation.id);
       $('#reservationType').val(reservation.type);
+      $('#paymentDate').val(payDateString);
 
       var pickupPayText;
       if (reservation.type == 'locker')
@@ -790,20 +838,15 @@
       $('#remarksForm').css('display', 'none');
       $('#penaltyForm').css('display', 'none');
 
-      console.log('true stat: ' + reservation.status)
-
       switch (reservation.status) {
         case 'Pending':
-          console.log('pending');
           $('#status').val('status-manage-pending');
           break;
         case 'To Pay':
         case 'For Pickup':
-          console.log('pickupay');
           $('#status').val('status-manage-pickup-pay');
           break;
         case 'On Rent':
-          console.log('on rent');
           $('#status').val('status-manage-on-rent');
           break;
         case 'Returned':
@@ -829,6 +872,11 @@
           $('#penaltyForm').css('display', 'flex');
         else
           $('#penaltyForm').css('display', 'none');
+
+        if (status == 'status-manage-pickup-pay' && reservation.type == 'locker')
+          $('#paymentForm').css('display', 'flex');
+        else
+          $('#paymentForm').css('display', 'none');
       })
 
       $('#status').change();

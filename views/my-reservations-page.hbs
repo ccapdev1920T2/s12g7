@@ -69,11 +69,19 @@
                           <div class="col-1 icon mr-2" id="desc"></div>
                           {{description}}
                         </div>
+                        {{#if (hasRemarks remarks)}}
                         <hr>
                         <div class="d-flex align-items-center my-2">
                           <div class="col-1 icon mr-2" id="remarks"></div>
                           {{remarks}}
                         </div>
+                        {{#if (status-pickup-pay status)}}{{#if (isLocker reservationType)}}{{#if pickupPayDate}}
+                        <div class="d-flex align-items-center my-2">
+                          <div class="col-1 icon mr-2" id="date"></div>
+                          Payment Due: {{dateStr pickupPayDate}}
+                        </div>
+                        {{/if}}{{/if}}{{/if}}
+                        {{/if}}
                         {{#if (hasPenalty penalty)}}
                         <hr>
                         <div class="d-flex align-items-center my-2">
@@ -177,6 +185,7 @@
           <div class="modal-body col-lg-10 mx-auto">
             <input type="hidden" id="reservationID" name="reservationID">
             <h5>Do you really want to cancel your reservation?</h1>
+            <p>Cancelled requests will be permanently deleted.</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline" data-dismiss="modal">No</button>

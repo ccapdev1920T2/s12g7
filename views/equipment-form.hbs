@@ -41,27 +41,6 @@
 
             <div class="col-lg-10 row align-items-end mx-auto px-0">
 
-              <div class="form-group-container col-lg-8">
-                <div class="form-group form-card">
-                  <label class="form-control-placeholder d-block" for="reason">Reason for borrowing the equipment</label>
-                  <input type="text" id="reason" class="form-control form-lg" name="reason" placeholder="e.g. I need this for my presentation in CCAPDEV">
-                </div>
-              </div>
-  
-              <div class="form-group-container col-lg-4">
-                <div class="form-group form-card select-form">
-                  <label class="d-block" for="borrow-time">Time needed</label>
-                  <select class="form-control custom-select select-lg" id="borrow-time" name="borrowtime">
-                    <option value="period1">7:30am</option>
-                    <option value="period2">9:15am</option>
-                    <option value="period3">11:00am</option>
-                    <option value="period4">12:45pm</option>
-                    <option value="period5">2:30pm</option>
-                    <option value="period6">4:15pm</option>
-                  </select>
-                </div>
-              </div>
-
               <div class="form-group-container col-lg-12">
                 <div class="form-group form-card equipment-types pb-4">
                   <label class="form-control-placeholder col-12">Choose an equipment to borrow</label>
@@ -81,6 +60,38 @@
                 </div>
               </div>
   
+              <div class="form-group-container col-lg-6">
+                <div class="form-group form-card select-form">
+                  <label class="d-block" for="borrow-date">Date needed</label>
+                  {{!-- TODO: Present only the next 5 schooldays from the server --}}
+                  <select class="form-control custom-select select-lg" id="borrow-date" name="borrpwDate">
+                    <option value="period1">March 30, 2020</option>
+                    <option value="period2">March 31, 2020</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group-container col-lg-6">
+                <div class="form-group form-card select-form">
+                  <label class="d-block" for="borrow-time">Time needed</label>
+                  <select class="form-control custom-select select-lg" id="borrow-time" name="borrowtime">
+                    <option value="period1">7:30am</option>
+                    <option value="period2">9:15am</option>
+                    <option value="period3">11:00am</option>
+                    <option value="period4">12:45pm</option>
+                    <option value="period5">2:30pm</option>
+                    <option value="period6">4:15pm</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group-container col-lg-12">
+                <div class="form-group form-card">
+                  <label class="form-control-placeholder d-block" for="reason">Reason for borrowing the equipment</label>
+                  <input type="text" id="reason" class="form-control form-lg" name="reason" placeholder="e.g. I need this for my presentation in CCAPDEV">
+                </div>
+              </div>
+
               <div class="form-group-container d-flex flex-wrap col-12 mx-auto justify-content-end align-items-center">
                 <div class="form-check mr-4 d-flex align-items-center my-4">
                   <input type="checkbox" class="form-check-input my-auto" id="checkTerms" required>

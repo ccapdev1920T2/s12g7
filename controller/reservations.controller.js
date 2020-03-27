@@ -22,6 +22,7 @@ hbs.registerHelper('dateTimeToday', () => {
 });
 
 hbs.registerHelper('hasPenalty', (penalty) => { return penalty > 0; });
+hbs.registerHelper('hasRemarks', (remarks) => { return remarks != ''; });
 
 hbs.registerHelper('status-pending', (status) => { return status == 'Pending'; });
 hbs.registerHelper('status-pickup-pay', (status) => { return status == 'For Pickup' || status == 'To Pay'; });
@@ -121,7 +122,7 @@ exports.reservation_details = async function (req, res) {
             .populate('item');
 
         var pickupPayToday = await Reservation
-            .find({ status: ['For Pickup', 'To Pay'] });
+            .find({ status: ['For Pickup', 'To Pay'] }).sort({'pickupPayDate': -1});
 
         var activeLockers = await Reservation
             .find({ status: ['On Rent', 'Uncleared'], reservationType: 'locker' });
@@ -185,7 +186,9 @@ exports.reservation_update = async function (req, res) {
                 await Reservation.findByIdAndUpdate(req.body.reservationID, {
                     status: status,
                     remarks: req.body.remarks,
-                    penalty: req.body.penalty
+                    penalty: req.body.penalty,
+                    lastUpdated: Date.now(),
+                    pickupPayDate: req.body.paymentDate
                 });
         }
 
