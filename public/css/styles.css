@@ -935,6 +935,7 @@ select.custom-select.form-control {
 .select-items {
     position: absolute;
     background-color: #fff;
+    border: solid #e7f1ed 1px;
     border-radius: 8px;
     top: calc(100% + 4px);
     left: 0;

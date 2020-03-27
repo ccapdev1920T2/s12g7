@@ -49,7 +49,7 @@
               <div class="form-group-container col-lg-8">
                 <div class="form-group form-card select-form">
                   <label for="bldg">Building</label>
-                  <select class="form-control" id="bldg" onchange="updateQueryStringParameter('bldg', this.value)">
+                  <select class="form-control custom-select select-lg" id="bldg" onchange="updateQueryStringParameter('bldg', this.value)">
                     {{#each panel_buildings}}
                     <option value="{{this}}"> {{this}} </option>
                     {{/each}}
@@ -60,7 +60,7 @@
               <div class="form-group-container col-lg-4">
                 <div class="form-group form-card select-form">
                   <label for="floor">Floor level</label>
-                  <select class="form-control" id="floor" onchange="updateQueryStringParameter('flr', this.value)">
+                  <select class="form-control custom-select select-lg" id="floor" onchange="updateQueryStringParameter('flr', this.value)">
                     {{#each panel_floors}}
                     <option value="{{this}}"> {{this}}/F </option>
                     {{/each}}
@@ -246,7 +246,6 @@
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
   <script type="text/javascript" src="../js/bootstrap.js"></script>
-  <script type="text/javascript" src="../js/styles.js"></script>
   <script type="text/javascript" src="../js/styles-locker.js"></script>
 
   <script>
@@ -324,6 +323,8 @@
     };
 
   </script>
+
+  <script type="text/javascript" src="../js/styles.js"></script>
 </body>
 
 </html>
