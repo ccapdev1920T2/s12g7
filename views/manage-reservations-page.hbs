@@ -790,13 +790,16 @@
       $('#remarksForm').css('display', 'none');
       $('#penaltyForm').css('display', 'none');
 
+      console.log('true stat: ' + reservation.status)
+
       switch (reservation.status) {
         case 'Pending':
           console.log('pending');
           $('#status').val('status-manage-pending');
           break;
-        case 'To pay':
+        case 'To Pay':
         case 'For Pickup':
+          console.log('pickupay');
           $('#status').val('status-manage-pickup-pay');
           break;
         case 'On Rent':
@@ -814,8 +817,6 @@
           break;
       }
 
-      $('#status').change();
-
       $('#status').change(function () {
         var status = $(this).val();
 
@@ -829,6 +830,9 @@
         else
           $('#penaltyForm').css('display', 'none');
       })
+
+      $('#status').change();
+
     })
   </script>
 
