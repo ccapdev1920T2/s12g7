@@ -1,7 +1,30 @@
 const User = require('../model/user.model');
 
 exports.people_details = async function (req, res) {
-    res.render('manage-people-page');
+
+    try {
+        var users = await User.find();
+        var colleges = User.schema.path('college').enumValues;
+
+        if (users) {
+            res.render('manage-people-page', {
+                active: {active_manage_people: true},
+                sidebarData: {
+                    dp: req.session.passport.user.profile.photos[0].value,
+                    name: req.session.passport.user.profile.displayName,
+                    idNum: req.session.idNum
+                },
+                users: users,
+                colleges: colleges
+            });
+
+        }
+        
+
+    } catch(err) {
+        console.log(err);
+    }
+
 }
 
 exports.profile_details = async function (req, res) {
