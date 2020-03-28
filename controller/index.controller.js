@@ -63,7 +63,7 @@ exports.callback_success = async function (req, res) {
     try {
         var user = await User.findOneAndUpdate(
             { email: req.session.passport.user.profile.emails[0].value },
-            { dpUrl: req.session.passport.user.profile.photos[0].value });
+            { dpURL: req.session.passport.user.profile.photos[0].value });
         if (user)
             req.session.idNum = user.idNum;
         else
@@ -96,6 +96,9 @@ exports.register_get = async function (req, res) {
 };
 
 exports.register_post = async function (req, res) {
+
+    console.log('register: ' + req.session.passport.user.profile.photos[0].value);
+
     var user = new User({
         firstName: req.session.passport.user.profile.name.givenName,
         lastName: req.session.passport.user.profile.name.familyName,
@@ -105,6 +108,7 @@ exports.register_post = async function (req, res) {
         degreeProg: req.body.degProg,
         contactNum: req.body.phone,
         type: 'student',
+        dpURL: req.session.passport.user.profile.photos[0].value
     });
 
     try {

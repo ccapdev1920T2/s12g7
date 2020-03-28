@@ -61,10 +61,16 @@
             Equipment 
           </a>
         </li>
+        <li class="nav-item">
+          <a class="{{#if act.active_manage_people}}active{{/if}} nav-link" href="/profile/manage">  
+            <img class="icon mr-2" id="ic-my-reservations" src="/static/icons/{{#if act.active_manage_people}}active-profile.png{{else}}profile.png{{/if}}">
+            People 
+          </a>
+        </li>
       </ul>
     </div>
 
-    <div class="sign-out">
+    <div class="sign-out mt-5">
       <a class="d-flex align-items-center" href="/logout">
         <img class="icon mr-2" src="/static/icons/signout.png">
         Sign Out

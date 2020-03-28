@@ -11,6 +11,7 @@
 
   <!-- Custom Styles -->
   <link href="..//css/styles.css" rel="stylesheet">
+  <link href="..//css/styles-manage-people.css" rel="stylesheet">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
@@ -22,6 +23,7 @@
 
   <title>People</title>
   <link rel="icon" href="..//static/logo.png">
+
 </head>
 
 <body>
@@ -31,15 +33,109 @@
 
       <div class="main col-md-9 col-lg-10 ml-sm-auto p-0">
         {{> topnav}}
-
         <main role="main" class="pt-3 px-4">
-          
 
+          <div class="row px-0 col-lg-10 mx-auto">
+            <h1 class="col-12 mb-5">Manage People</h1>
+
+            <div class="card no-hover col-12 p-4">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead class="">
+                    <tr class="active head">
+                      <th></th>
+                      <th>ID number</th>
+                      <th>Last Name</th>
+                      <th>First Name</th>
+                      <th>Mobile Number</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each users}}
+                    <tr>
+                      <td><div class="profile-icon" style="background-image: url({{dpURL}});"></div></td>
+                      <td>{{idNum}}</td>
+                      <td>{{lastName}}</td>
+                      <td>{{firstName}}</td>
+                      <td>{{contactNum}}</td>
+                      <td>
+                        <a class="table-link" data-toggle="modal" href="#editProfileModal">
+                          <div class="icon" id="edit"></div>
+                        </a>
+                      </td>
+                    </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
 
         </main>
         {{> footer}}
       </div>
 
+      <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog"
+        aria-labelledby="editProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editProfileModalLabel"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form class="form-horizontal" method="post" action="/reservations/manage/update">
+              <div class="modal-body col-lg-10 mx-auto">
+                <div class="d-flex flex-column">
+                  <div class="form-group form-inline input-group">
+                    <label for="firstName" class="col-lg-4 justify-content-start pl-2">First Name</label>
+                    <input type="text" class="form-control col-lg-8" name="firstName"
+                      id="firstName">
+                  </div>
+                  <div class="form-group form-inline input-group">
+                    <label for="lastName" class="col-lg-4 justify-content-start pl-2">Last Name</label>
+                    <input type="text" class="form-control col-lg-8" name="lastName"
+                      id="lastName">
+                  </div>
+                  <div class="form-group form-inline input-group">
+                    <label for="idNum" class="col-lg-4 justify-content-start pl-2">ID Number</label>
+                    <input type="number" class="form-control col-lg-8" name="idNum"
+                      id="idNum">
+                  </div>
+                  <div class="form-group form-inline input-group">
+                    <label for="college" class="col-lg-4 justify-content-start pl-2">College</label>
+                    <div class="col-lg-8 px-0">
+                      <select class="form-control custom-select" name="college" id="college">
+                        {{#each colleges}}
+                        <option value="{{@index}}">{{this}}</option>
+                        {{/each}}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group form-inline input-group">
+                    <label for="degProg" class="col-lg-4 justify-content-start pl-2">Degree Program</label>
+                    <input type="text" class="form-control col-lg-8" name="degProg"
+                      id="degProg">
+                  </div>
+                  <div class="form-group form-inline input-group">
+                    <label for="mobile" class="col-lg-4 justify-content-start pl-2">Mobile number</label>
+                    <input type="tel" class="form-control col-lg-8" name="mobile"
+                      id="mobile">
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary" id="approveStatusSubmit" value="Update">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -51,6 +147,10 @@
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
   <script type="text/javascript" src="../js/bootstrap.js"></script>
+
+  <style>
+
+  </style>
 
   <script type="text/javascript" src="../js/styles.js"></script>
 </body>

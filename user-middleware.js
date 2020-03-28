@@ -6,20 +6,18 @@ module.exports.userIsLoggedIn = function(req, res, next) {
         res.redirect('/login');
 }
 
-module.exports.userIsNew = function(req, res, next) {
+module.exports.userIsNew = async function(req, res, next) {
     const User = require('./model/user.model');
 
-    User.findOne({'email': req.session.passport.user.profile.emails[0].value}, 
-        function (err, user) {
-            if (err) {
-                console.log(err);
-                next();
-            } else if (user) {
-                next();
-            } else {
-                res.redirect('/register');
-            }
-        }
-    );
+    try {
+        var user = await User.findOne({'email': req.session.passport.user.profile.emails[0].value});
+        if (user)
+            next();
+        else
+            res.redirect('/register');
+    } catch(err) {
+        console.log(err);
+        next();
+    }
 }
 
