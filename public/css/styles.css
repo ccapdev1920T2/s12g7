@@ -742,8 +742,8 @@ tr {
 
 .form-group .form-control:disabled {
     color: #838383;
-    background-color: #fff;
-    border-color: #e7f1ed;
+    background-color: #eef5f3;
+    border-color: #eef5f3;
 }
 
 /* 
