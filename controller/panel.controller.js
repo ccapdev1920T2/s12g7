@@ -6,6 +6,11 @@ hbs.registerHelper('lockernumber', function (str) { return JSON.parse(JSON.strin
 hbs.registerHelper('lockerstatus', function (str) { return JSON.parse(JSON.stringify(str)).status; });
 hbs.registerHelper('capitalizeFirst', function (text) { return text[0].toUpperCase() + text.slice(1); });
 
+hbs.registerHelper('lockerIsBig', (type) => { return type == 'big'; });
+hbs.registerHelper('notFirst', (index) => { return index != 0; });
+
+
+
 exports.panel_create = async function (req, res) {
 
     try {

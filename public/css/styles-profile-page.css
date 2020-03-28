@@ -11,7 +11,7 @@
 
 .profile-head h5 {
     color: #545662;
-    font-size: 26px;
+    font-size: 20px;
 }
 
 .profile-head {
@@ -37,34 +37,14 @@ label {
     /* overflow: hidden; */
 }
 
-.profile-header-bg {
-    background: url(../static/profile-img.jpg) 50% 50% no-repeat;
-    height: 150%;
-    width: 150%;
-    margin: -25%;
-    /* position: absolute;
-    top:0;
-    bottom: 0; */
-    /* z-index: 0; */
-    filter: blur(50px) brightness(0.5);
-    -webkit-filter: blur(50px) brightness(0.5);
-}
-
-.profile-bg-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    overflow: hidden;
-}
-
 @media (min-width: 1200px) {
-    .profile-card .profile-header, .profile-bg-container {
+    .profile-card .profile-header {
         border-radius: 12px 0 0 12px;
     }
 }
 
 @media (max-width: 1199.98px) {
-    .profile-card .profile-header, .profile-bg-container {
+    .profile-card .profile-header {
         border-radius: 12px 12px 0 0;
     }
 }
@@ -76,7 +56,7 @@ label {
 
 .profile-card .profile-name, .profile-card .profile-type {
     font-family: 'Muli', sans-serif;
-    color: #f7f7f7;
+    color: #3f3f3f;
 }
 
 .profile-card .profile-info {

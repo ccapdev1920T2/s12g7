@@ -79,13 +79,13 @@ exports.myReservations = async function (req, res) {
             .find({
                 userID: req.session.idNum,
                 status: ['Pending', 'For Pickup', 'To Pay', 'Uncleared', 'On Rent']
-            }).sort({ dateCreated: -1 });
+            }).sort({ lastUpdated: -1 });
 
         var pastReservations = await Reservation
             .find({
                 userID: req.session.idNum,
                 status: ['Denied', 'Returned']
-            }).sort({ dateCreated: -1 });
+            }).sort({ lastUpdated: -1 });
 
         res.render('my-reservations-page', {
             active: { active_my_reservations: true },
@@ -122,7 +122,7 @@ exports.reservation_details = async function (req, res) {
             .populate('item');
 
         var pickupPayToday = await Reservation
-            .find({ status: ['For Pickup', 'To Pay'] }).sort({'pickupPayDate': -1});
+            .find({ status: ['For Pickup', 'To Pay'] }).sort({pickupPayDate: -1});
 
         var activeLockers = await Reservation
             .find({ status: ['On Rent', 'Uncleared'], reservationType: 'locker' });

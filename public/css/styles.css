@@ -146,6 +146,21 @@ hr {
     background-size: contain;
 }
 
+.icon#cancel {
+    background: url(../static/icons/cancel.png) center no-repeat;
+    background-size: contain;
+}
+
+.icon#big {
+    background: url(../static/icons/big.png) center no-repeat;
+    background-size: contain;
+}
+
+.icon#small {
+    background: url(../static/icons/small.png) center no-repeat;
+    background-size: contain;
+}
+
 /* 
 * Colors
 */
