@@ -583,7 +583,7 @@
           <input type="hidden" id="approveReservationType" name="reservationType">
           <div class="modal-body col-lg-10 mx-auto">
             <div class="d-flex flex-column">
-              <div class="font-weight-bold pl-2 mb-2" id="idNum"></div>
+              <div class="font-weight-bold pl-2 mb-2" id="approveIDNum"></div>
               <div class="d-flex flex-row align-items-center">
                 <div class="icon col-1 mr-2" id="date"></div>
                 <div class="" id="approveDateCreated"></div>
@@ -649,7 +649,7 @@
           <input type="hidden" id="denyReservationType" name="reservationType">
           <div class="modal-body col-lg-10 mx-auto">
             <div class="d-flex flex-column">
-              <div class="font-weight-bold pl-2 mb-2" id="idNum"></div>
+              <div class="font-weight-bold pl-2 mb-2" id="denyIDNum"></div>
               <div class="d-flex flex-row align-items-center">
                 <div class="icon col-1 mr-2" id="date"></div>
                 <div class="" id="denyDateCreated"></div>
@@ -760,6 +760,8 @@
       $('#approveRemarks').val(reservation.remarks);
       $('#approveStatus').val('status-manage-pickup-pay');
       $('#approvePaymentDate').val(payDateString);
+      $('#approveIDNum').text(reservation.userID);
+
 
       $('#approvePenaltyForm').css('display', 'none');
       $('#approveSelectForm').css('display', 'none');
@@ -791,6 +793,8 @@
       $('#denyDescription').text(reservation.description);
       $('#denyRemarks').val(reservation.remarks);
       $('#denyStatus').val('status-manage-denied');
+      $('#denyIDNum').text(reservation.userID);
+
 
       $('#denyPenaltyForm').css('display', 'none');
       $('#denySelectForm').css('display', 'none');

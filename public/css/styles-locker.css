@@ -8,14 +8,19 @@
     font-weight: bold;
     height: 48px;
     /* border: solid #e7f1ed 1px; */
-    border-radius: 10px;
     background-color: #eef5f3;
+    border: solid #eef5f3 1px;
+    border-radius: 10px;
     color: #3f3f3f;
     margin-bottom: 16px;
 }
 
+.panel .panel-label:hover {
+    border-color: #38b98a;
+}
 
 .locker {
+    min-height: calc(32px + 1rem) !important;
     padding: 16px;
     border: solid #e7f1ed 1px;
     border-radius: 10px;

@@ -102,7 +102,9 @@
                           {{/if}}
                           ">
                         {{#if (cancellable status)}}
-                        <a class="cancel-anchor" data-reservationid="{{_id}}" data-toggle="modal" data-target="#cancelReservationModal">Cancel</a>
+                        <a class="cancel-anchor" title="Cancel Reservation" data-reservationid="{{_id}}" data-toggle="modal" data-target="#cancelReservationModal">
+                          <div class="icon" id="cancel" style="height: 2rem; width: 2rem"></div>
+                        </a>
                         {{/if}}
                         <span class="badge badge-pill ml-auto">{{status}}</span>
                         <div class="color-container"></div>

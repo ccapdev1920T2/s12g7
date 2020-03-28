@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema({
     degreeProg: { type: String, required: true },
     contactNum: { type: Number, required: true },
     type: { type: String, default: 'student', enum: ['student', 'studentRep'] },
+    dpURL: { type: String, default: '../static/profile-img.jpg'}
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -1,5 +1,9 @@
 const User = require('../model/user.model');
 
+exports.people_details = async function (req, res) {
+    res.render('manage-people-page');
+}
+
 exports.profile_details = async function (req, res) {
     try {
         var user = await User.findOne({ idNum: req.params.idNum });
@@ -23,16 +27,16 @@ exports.profile_details = async function (req, res) {
     } catch (err) {
         console.log(err);
         res.redirect('/');
-    }    
+    }
 };
 
-exports.profile_update = async function(req, res) {
+exports.profile_update = async function (req, res) {
     try {
         const filter = { idNum: req.params.idNum };
         const update = { contactNum: req.body.phone };
         await User.findOneAndUpdate(filter, update);
         res.redirect('/profile/' + req.session.idNum);
-    } catch(err) {
+    } catch (err) {
         console.log(err);
     }
 }
