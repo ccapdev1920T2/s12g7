@@ -135,10 +135,12 @@
                           {{description}}
                         </div>
                         <hr>
+                        {{#if remarks}}
                         <div class="d-flex align-items-center my-2">
                           <div class="col-1 icon mr-2" id="remarks"></div>
                           {{remarks}}
                         </div>
+                        {{/if}}
                         {{#if (hasPenalty penalty)}}
                         <hr>
                         <div class="d-flex align-items-center my-2">
