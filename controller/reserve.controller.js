@@ -113,23 +113,26 @@ exports.equipment = async function (req, res) {
 };
 
 exports.reserve_equipment = async function (req, res) {
-    var currentDate = new Date();
-    var reservation = new Reservation({
-        userID: req.body.userID, //TODO: place correct parameter (maybe from session?)
-        onItemType: 'Equipment', 
-        date: currentDate,
-        status: 'Pending',
-        description: 'yes i do the cooking', //TODO: not sure kung anong laman neto?
-        remarks: 'yes i do the cleaning'
-    });
-    
-    await reservation.save(function (err) {
-        if (err) {
-            console.log('Error writing reservation to db');
-            res.send(reservation);
-        } else {
-            console.log('successful reservation write to db');
-            res.send(reservation);
-        }
-    });
+    try {
+        var equipment = await Equipment.findById(req.body.equipmentid);
+        var equipmentid = req.body.equipmentid;
+        var reason = req.body.reason;
+
+        var descString = equipment.name + ", " + reason;
+
+        var reservation = new Reservation({
+            title: equipment.name,
+            userID: req.session.idNum, 
+            reservationType: 'equipment',
+            item: equipmentid, 
+            status: 'Pending',
+            description: descString,
+            onItemType: 'Equipment'
+        });
+        res.send(reservation);
+        await reservation.save();
+        res.redirect("/reservations");
+    } catch (err) {
+        console.log(err);
+    }
 };
