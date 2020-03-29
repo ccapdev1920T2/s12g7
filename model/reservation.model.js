@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const reservationSchema = new mongoose.Schema({
     title: String,
     userID: { type: Number, required: true },
-    reservationType: { type: String, enum: ['locker', 'equipment'] },
     item: { type: mongoose.Schema.Types.ObjectId, refPath: 'onItemType' },
     dateCreated: { type: Date, default: Date.now() },
     status: {

@@ -82,7 +82,7 @@ exports.reserve_locker = async function (req, res) {
        
         var reservation = new Reservation({
             userID: req.session.idNum, //TODO: place correct parameter (maybe from session?)
-            reservationType: 'locker',
+            onItemType: 'Locker',
             item: lockerid,
             status: 'Pending',
             description: descString,
@@ -116,7 +116,7 @@ exports.reserve_equipment = async function (req, res) {
     var currentDate = new Date();
     var reservation = new Reservation({
         userID: req.body.userID, //TODO: place correct parameter (maybe from session?)
-        reservationType: 'equipment', 
+        onItemType: 'Equipment', 
         date: currentDate,
         status: 'Pending',
         description: 'yes i do the cooking', //TODO: not sure kung anong laman neto?

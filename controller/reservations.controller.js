@@ -36,43 +36,10 @@ hbs.registerHelper('cancellable', (status) => {
 });
 
 hbs.registerHelper('isLocker', (type) => {
-    return type == 'locker';
+    return type == 'Locker';
 })
 
 exports.myReservations = async function (req, res) {
-
-    /* try {
-        var reservation = new Reservation({
-            title: 'LAN Cable',
-            userID: 11641223,
-            reservationType: 'equipment',
-            item: mongoose.Types.ObjectId('5e799396737917283c38bc68'),
-            dateCreated: Date.now(),
-            status: 'Pending',
-            description: 'needed on March 25, 2020, 11:00am',
-            remarks: 'N/A',
-            penalty: 0,
-            onItemType: 'Equipment'
-        });
-        await reservation.save();
-        
-        var reservation = new Reservation({
-            title: 'Locker #30',
-            userID: 11826401,
-            reservationType: 'locker',
-            item: mongoose.Types.ObjectId('5e78b2bc9a0bc0057841790f'),
-            dateCreated: Date.now(),
-            status: 'To Pay',
-            description: 'Locker #101, Big Panel 1, Gokongwei 2/F',
-            remarks: 'Pay Php 70.00 at the office.',
-            penalty: 0,
-            onItemType: 'Locker'
-        });
-        await reservation.save();
-
-    } catch (err) {
-        console.log(err);
-    } */
 
     try {
         var activeReservations = await Reservation
@@ -125,14 +92,14 @@ exports.reservation_details = async function (req, res) {
             .find({ status: ['For Pickup', 'To Pay'] }).sort({pickupPayDate: -1});
 
         var activeLockers = await Reservation
-            .find({ status: ['On Rent', 'Uncleared'], reservationType: 'locker' });
+            .find({ status: ['On Rent', 'Uncleared'], onItemType: 'Locker' });
         var pastLockers = await Reservation
-            .find({ status: ['Denied', 'Returned'], reservationType: 'locker' });
+            .find({ status: ['Denied', 'Returned'], onItemType: 'Locker' });
 
         var activeEquipment = await Reservation
-            .find({ status: ['On Rent', 'Uncleared'], reservationType: 'equipment' });
+            .find({ status: ['On Rent', 'Uncleared'], onItemType: 'Equipment' });
         var pastEquipment = await Reservation
-            .find({ status: ['Denied', 'Returned'], reservationType: 'equipment' });
+            .find({ status: ['Denied', 'Returned'], onItemType: 'Equipment' });
 
     } catch (err) {
         console.log('ERROR' + err);
@@ -166,7 +133,7 @@ exports.reservation_update = async function (req, res) {
                     status = 'Pending'
                     break;
                 case 'status-manage-pickup-pay':
-                    status = (req.body.reservationType == 'locker') ? 'To Pay' : 'For Pickup';
+                    status = (req.body.onItemType == 'Locker') ? 'To Pay' : 'For Pickup';
                     break;
                 case 'status-manage-on-rent':
                     status = 'On Rent';
