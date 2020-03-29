@@ -76,23 +76,24 @@ exports.reserve_locker = async function (req, res) {
         var paneltype = panel.type[0].toUpperCase() + panel.type.slice(1);
         var lockerIndex = req.body.lockernumber - panel.lowerRange;
         var lockerid = panel.lockers[lockerIndex]._id;
-        
-        var descString = "Locker #" + req.body.lockernumber +", " + paneltype + " Panel #" + panel.number +
+
+        var titleString = "Locker #" + req.body.lockernumber;
+        var descString = titleString + ", " + paneltype + " Panel #" + panel.number +
                          ", " + panel.building + ", " + panel.level + "/F"; 
        
         var reservation = new Reservation({
-            userID: req.session.idNum, //TODO: place correct parameter (maybe from session?)
-            onItemType: 'Locker',
+            title: titleString,
+            userID: req.session.idNum,
             item: lockerid,
             status: 'Pending',
             description: descString,
             onItemType: 'Locker'
         });
-        res.send(reservation);
-        //await reservation.save();
+        await reservation.save();
     } catch (err) {
         console.log(err);
     }
+    res.redirect("/reservations");
 };
 
 exports.equipment = async function (req, res) {
@@ -119,20 +120,35 @@ exports.reserve_equipment = async function (req, res) {
         var reason = req.body.reason;
 
         var descString = equipment.name + ", " + reason;
+        var pickupDate = new Date();
+
+        do {
+            pickupDate.setDate(pickupDate.getDate()+1);
+        }   //0 is Sunday, 5 is Friday, 6 Saturday
+        while (pickupDate.getDay()==0 || pickupDate.getDay()==5 || pickupDate.getDay()==6);
+
+        switch(parseInt(req.body.borrowtime)) {
+            case 1: pickupDate.setHours(7,30,0); break;
+            case 2: pickupDate.setHours(9,15,0); break;
+            case 3: pickupDate.setHours(11,0,0); break;
+            case 4: pickupDate.setHours(12,45,0); break;
+            case 5: pickupDate.setHours(14,30,0); break;
+            case 6: pickupDate.setHours(16,15,0); break;
+            default: pickupDate.setHours(0,0,0);
+        }
 
         var reservation = new Reservation({
             title: equipment.name,
-            userID: req.session.idNum, 
-            reservationType: 'equipment',
+            userID: req.session.idNum,
             item: equipmentid, 
             status: 'Pending',
             description: descString,
-            onItemType: 'Equipment'
+            onItemType: 'Equipment',
+            pickupPayDate: pickupDate
         });
-        res.send(reservation);
         await reservation.save();
-        res.redirect("/reservations");
     } catch (err) {
         console.log(err);
     }
+    res.redirect("/reservations");
 };

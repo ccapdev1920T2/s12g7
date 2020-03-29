@@ -199,7 +199,7 @@
       $("#floor").val(flr);
 
       $("#submitLockerForm").click(function() {
-        var locker = $('.selected');
+        var locker = $('#panelAccordion').find('.selected');
         var panelid = locker.data('panelid');
         var lockernumber = locker.data('lockernumber');
 
