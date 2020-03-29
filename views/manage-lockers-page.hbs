@@ -109,7 +109,7 @@
                     <div class="row collapse {{#if @first}}show{{/if}}" data-parent="#panelAccordion"
                       id="panelCollapse{{number}}">
                       {{#each lockers}}
-                      <div class="col-lg-4 col-md-6 col-12 locker-container mb-4">
+                      <div class="col-lg-4 col-md-6 col-6 locker-container mb-4">
                         <div class="locker locker-status-manage-{{lockerstatus this}} d-flex align-items-center"
                           data-toggle="modal" data-target="#setStatusModal" data-lockernumber="{{lockernumber this}}"
                           data-panelid="{{../_id}}">
@@ -275,6 +275,8 @@
       var classList = button.attr('class').split(' ');
       $(statusIcon).addClass(classList[1]);
       var modal = $(this);
+
+      console.log(classList)
 
       modal.find('.modal-title').text('Locker #' + lockernumber + ' ');
       modal.find('.modal-title').append('<i class="locker-status-icon fas fa-circle ml-auto ' + classList[1] + '"></i>');

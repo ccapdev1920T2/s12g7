@@ -75,7 +75,7 @@
                           <div class="col-1 icon mr-2" id="remarks"></div>
                           {{remarks}}
                         </div>
-                        {{#if (status-pickup-pay status)}}{{#if (isLocker reservationType)}}{{#if pickupPayDate}}
+                        {{#if (status-pickup-pay status)}}{{#if (isLocker onItemType)}}{{#if pickupPayDate}}
                         <div class="d-flex align-items-center my-2">
                           <div class="col-1 icon mr-2" id="date"></div>
                           Payment Due: {{dateStr pickupPayDate}}

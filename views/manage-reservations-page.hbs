@@ -54,17 +54,17 @@
                       <div class="d-flex flex-row flex-nowrap" data-toggle="modal" data-target="#editReservationModal"
                         data-title="{{title}}" data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}"
                         data-status="{{status}}" data-description="{{description}}" data-remarks="{{remarks}}"
-                        data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}"
+                        data-penalty="{{penalty}}" data-type="{{onItemType}}" data-id="{{_id}}"
                         data-paymentdate="{{pickupPayDate}}">
                         <div class="col-1 icon mb-auto mt-1"
-                          id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
+                          id="{{#if (isLocker onItemType)}}locker{{else}}equipment{{/if}}"></div>
                         <div class="d-flex flex-fill flex-column mx-4">
                           <div>
                             {{dateStr dateCreated}}
                           </div>
                           <div class="font-weight-bold">{{userID}}</div>
                           <div>
-                            {{#if (isLocker reservationType)}}
+                            {{#if (isLocker onItemType)}}
                             <span class="font-weight-bold">{{description}}</span>
                             {{else}}
                             <span class="font-weight-bold">{{title}}</span>, {{description}}
@@ -90,14 +90,14 @@
                       <div class="d-flex flex-row flex-nowrap" data-toggle="modal" data-target="#editReservationModal"
                         data-title="{{title}}" data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}"
                         data-status="{{status}}" data-description="{{description}}" data-remarks="{{remarks}}"
-                        data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}"
+                        data-penalty="{{penalty}}" data-type="{{onItemType}}" data-id="{{_id}}"
                         data-paymentdate="{{pickupPayDate}}">
                         <div class="col-1 icon mb-auto mt-1"
-                          id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
+                          id="{{#if (isLocker onItemType)}}locker{{else}}equipment{{/if}}"></div>
                         <div class="d-flex flex-fill flex-column mx-4">
                           <div>
                             <div class="font-weight-bold">{{userID}}</div>
-                            {{#if (isLocker reservationType)}}
+                            {{#if (isLocker onItemType)}}
                             <span class="font-weight-bold">{{description}}</span>
                             {{else}}
                             <span class="font-weight-bold">{{title}}</span>, {{description}}
@@ -130,14 +130,14 @@
                   <div class="card-item" data-toggle="modal" data-target="#editReservationModal" data-title="{{title}}"
                     data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                     data-description="{{description}}" data-remarks="{{remarks}}" data-penalty="{{penalty}}"
-                    data-type="{{reservationType}}" data-id="{{_id}}" data-paymentdate="{{pickupPayDate}}">
+                    data-type="{{onItemType}}" data-id="{{_id}}" data-paymentdate="{{pickupPayDate}}">
                     <div class="d-flex flex-row flex-nowrap">
                       <div class="col-1 icon mb-auto mt-1"
-                        id="{{#if (isLocker reservationType)}}locker{{else}}equipment{{/if}}"></div>
+                        id="{{#if (isLocker onItemType)}}locker{{else}}equipment{{/if}}"></div>
                       <div class="d-flex flex-column mx-4">
                         <div class="font-weight-bold">{{userID}}</div>
                         <div>
-                          {{#if (isLocker reservationType)}}
+                          {{#if (isLocker onItemType)}}
                           {{description}}
                           {{else}}
                           {{title}}, {{description}}
@@ -148,7 +148,7 @@
                           Remarks: {{remarks}}
                         </div>
                         {{/if}}
-                        {{#if (isLocker reservationType)}}{{#if pickupPayDate}}
+                        {{#if (isLocker onItemType)}}{{#if pickupPayDate}}
                         <hr class="my-1">
                         <div>
                           Due: {{dateStr pickupPayDate}}
@@ -247,7 +247,7 @@
                                     data-title="{{title}}" data-userid="{{userID}}"
                                     data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                                     data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}"
+                                    data-penalty="{{penalty}}" data-type="{{onItemType}}" data-id="{{_id}}"
                                     data-paymentdate="{{pickupPayDate}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
@@ -323,7 +323,7 @@
                                     data-title="{{title}}" data-userid="{{userID}}"
                                     data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                                     data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}"
+                                    data-penalty="{{penalty}}" data-type="{{onItemType}}" data-id="{{_id}}"
                                     data-paymentdate="{{pickupPayDate}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
@@ -396,7 +396,7 @@
                                     data-title="{{title}}" data-userid="{{userID}}"
                                     data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                                     data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}"
+                                    data-penalty="{{penalty}}" data-type="{{onItemType}}" data-id="{{_id}}"
                                     data-paymentdate="{{pickupPayDate}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
@@ -471,7 +471,7 @@
                                     data-title="{{title}}" data-userid="{{userID}}"
                                     data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                                     data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{reservationType}}" data-id="{{_id}}"
+                                    data-penalty="{{penalty}}" data-type="{{onItemType}}" data-id="{{_id}}"
                                     data-paymentdate="{{pickupPayDate}}">
                                     <div class="icon" id="edit"></div>
                                   </a>
@@ -515,7 +515,7 @@
         </div>
         <form class="form-horizontal" method="post" action="/reservations/manage/update">
           <input type="hidden" id="reservationID" name="reservationID">
-          <input type="hidden" id="reservationType" name="reservationType">
+          <input type="hidden" id="onItemType" name="onItemType">
           <div class="modal-body col-lg-10 mx-auto">
             <div class="d-flex flex-column">
               <div class="font-weight-bold pl-2 mb-2" id="idNum"></div>
@@ -580,7 +580,7 @@
         </div>
         <form class="form-horizontal" method="post" action="/reservations/manage/update">
           <input type="hidden" id="approveReservationID" name="reservationID">
-          <input type="hidden" id="approveReservationType" name="reservationType">
+          <input type="hidden" id="approveReservationType" name="onItemType">
           <div class="modal-body col-lg-10 mx-auto">
             <div class="d-flex flex-column">
               <div class="font-weight-bold pl-2 mb-2" id="approveIDNum"></div>
@@ -646,7 +646,7 @@
         </div>
         <form class="form-horizontal" method="post" action="/reservations/manage/update">
           <input type="hidden" id="denyReservationID" name="reservationID">
-          <input type="hidden" id="denyReservationType" name="reservationType">
+          <input type="hidden" id="denyReservationType" name="onItemType">
           <div class="modal-body col-lg-10 mx-auto">
             <div class="d-flex flex-column">
               <div class="font-weight-bold pl-2 mb-2" id="denyIDNum"></div>
@@ -830,11 +830,11 @@
       $('#remarks').val(reservation.remarks);
       $('#penalty').val(reservation.penalty);
       $('#reservationID').val(reservation.id);
-      $('#reservationType').val(reservation.type);
+      $('#onItemType').val(reservation.type);
       $('#paymentDate').val(payDateString);
 
       var pickupPayText;
-      if (reservation.type == 'locker')
+      if (reservation.type == 'Locker')
         $('[value="status-manage-pickup-pay"]').text('To Pay')
       else
         $('[value="status-manage-pickup-pay"]').text('For Pickup')
