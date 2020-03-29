@@ -40,7 +40,6 @@ hbs.registerHelper('isLocker', (type) => {
 })
 
 exports.myReservations = async function (req, res) {
-
     try {
         var activeReservations = await Reservation
             .find({
@@ -71,7 +70,6 @@ exports.myReservations = async function (req, res) {
 };
 
 exports.reservation_details = async function (req, res) {
-
     var now = new Date();
     var dateToday = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
     var tomorrow = new Date(now);
@@ -122,7 +120,7 @@ exports.reservation_details = async function (req, res) {
     });
 }
 
-exports.reservations_get = async function(req, res) {
+exports.uncleared_get = async function(req, res) {
     console.log(req.query);
     try {
         var uncleared = await Reservation.find({userID: req.query.idNum, status: 'Uncleared'});

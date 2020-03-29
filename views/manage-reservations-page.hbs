@@ -769,7 +769,7 @@
       $('#approvePenaltyForm').css('display', 'none');
       $('#approveSelectForm').css('display', 'none');
 
-      if (reservation.type == 'locker')
+      if (reservation.type == 'Locker')
         $('#approvePaymentForm').css('display', 'flex');
       else
         $('#approvePaymentForm').css('display', 'none');
@@ -888,7 +888,7 @@
         else
           $('#penaltyForm').css('display', 'none');
 
-        if (status == 'status-manage-pickup-pay' && reservation.type == 'locker')
+        if (status == 'status-manage-pickup-pay' && reservation.type == 'Locker')
           $('#paymentForm').css('display', 'flex');
         else
           $('#paymentForm').css('display', 'none');
