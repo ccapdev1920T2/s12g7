@@ -122,6 +122,17 @@ exports.reservation_details = async function (req, res) {
     });
 }
 
+exports.reservations_get = async function(req, res) {
+    console.log(req.query);
+    try {
+        var uncleared = await Reservation.find({userID: req.query.idNum, status: 'Uncleared'});
+        if (uncleared)
+            res.send(uncleared);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 exports.reservation_update = async function (req, res) {
     try {
         var user = await User.findOne({ idNum: parseInt(req.session.idNum) });

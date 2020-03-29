@@ -6,6 +6,8 @@ const router = express.Router();
 router.get('/', reservations_controller.myReservations);
 
 router.get('/manage', reservations_controller.reservation_details);
+router.get('/manage/get-reservations', reservations_controller.reservations_get);
+
 // router.post('/manage', reservations_controller.reservation_create);
 
 router.post('/manage/update', reservations_controller.reservation_update);
