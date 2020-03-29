@@ -121,6 +121,7 @@ exports.reserve_equipment = async function (req, res) {
         var descString = equipment.name + ", " + reason;
 
         var reservation = new Reservation({
+            title: equipment.name,
             userID: req.session.idNum, 
             reservationType: 'equipment',
             item: equipmentid, 
@@ -129,6 +130,8 @@ exports.reserve_equipment = async function (req, res) {
             onItemType: 'Equipment'
         });
         res.send(reservation);
+        await reservation.save();
+        res.redirect("/reservations");
     } catch (err) {
         console.log(err);
     }
