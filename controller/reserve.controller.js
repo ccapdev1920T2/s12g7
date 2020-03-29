@@ -115,12 +115,15 @@ exports.equipment = async function (req, res) {
 exports.reserve_equipment = async function (req, res) {
     try {
         var equipment = await Equipment.findById(req.body.equipmentid);
-        var equipmentid = equipment._id;
+        var equipmentid = req.body.equipmentid;
+        var reason = req.body.reason;
+
+        var descString = equipment.name + ", " + reason;
 
         var reservation = new Reservation({
             userID: req.session.idNum, 
             reservationType: 'equipment',
-            item: equipmentid, //TODO:
+            item: equipmentid, 
             status: 'Pending',
             description: descString,
             onItemType: 'Equipment'
