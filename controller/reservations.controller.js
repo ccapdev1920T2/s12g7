@@ -13,7 +13,7 @@ const User = require('../model/user.model');
 });
  */
 
-hbs.registerHelper('dateStr', (date) => { return date.toDateString(); });
+hbs.registerHelper('dateStr', (date) => { console.log('str: ' + date); return date == null ? '' : date.toDateString(); });
 
 hbs.registerHelper('dateTimeToday', () => {
     const date = new Date();
@@ -77,6 +77,7 @@ exports.reservation_details = async function (req, res) {
     var dateTomorrow = tomorrow.getFullYear() + '-' + (tomorrow.getMonth() + 1) + '-' + tomorrow.getDate();
 
     try {
+        var resCt = await Reservation.find({ status: ['On Rent', 'Uncleared', 'Denied', 'Returned'] }).countDocuments();
         var pendingToday = await Reservation
             .find({ status: 'Pending' })
             .where('dateCreated').gte(dateToday).lt(dateTomorrow)
@@ -87,17 +88,7 @@ exports.reservation_details = async function (req, res) {
             .populate('item');
 
         var pickupPayToday = await Reservation
-            .find({ status: ['For Pickup', 'To Pay'] }).sort({pickupPayDate: -1});
-
-        var activeLockers = await Reservation
-            .find({ status: ['On Rent', 'Uncleared'], onItemType: 'Locker' });
-        var pastLockers = await Reservation
-            .find({ status: ['Denied', 'Returned'], onItemType: 'Locker' });
-
-        var activeEquipment = await Reservation
-            .find({ status: ['On Rent', 'Uncleared'], onItemType: 'Equipment' });
-        var pastEquipment = await Reservation
-            .find({ status: ['Denied', 'Returned'], onItemType: 'Equipment' });
+            .find({ status: ['For Pickup', 'To Pay'] }).sort({ pickupPayDate: -1 });
 
     } catch (err) {
         console.log('ERROR' + err);
@@ -113,17 +104,46 @@ exports.reservation_details = async function (req, res) {
         pendingToday: pendingToday,
         pendingEarlier: pendingEarlier,
         pickupPayToday: pickupPayToday,
-        activeLockers: activeLockers,
-        pastLockers: pastLockers,
-        activeEquipment: activeEquipment,
-        pastEquipment: pastEquipment
+        resCt: resCt
     });
 }
 
-exports.uncleared_get = async function(req, res) {
+exports.reservations_get = async function (req, res) {
     console.log(req.query);
     try {
-        var uncleared = await Reservation.find({userID: req.query.idNum, status: 'Uncleared'});
+
+        var page = req.query.page == '' ? 1 : req.query.page;
+        var reservations = new Object();
+
+        reservations.totalCt = await Reservation
+            .find({
+                status: ['On Rent', 'Uncleared', 'Denied', 'Returned'],
+                userID: { $regex: '[0-9]*' + req.query.idnum + '[0-9]*' }
+            })
+            .countDocuments();
+
+        reservations.items = await Reservation
+            .find({
+                status: ['On Rent', 'Uncleared', 'Denied', 'Returned'],
+                userID: { $regex: '[0-9]*' + req.query.idnum + '[0-9]*' }
+            })
+            .sort({ lastUpdated: -1 })
+            .skip((page - 1) * 10)
+            .limit(10);
+
+        if (reservations) {
+            res.send(reservations);
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.uncleared_get = async function (req, res) {
+    console.log(req.query);
+    try {
+        var uncleared = await Reservation.find({ userID: req.query.idNum, status: 'Uncleared' });
         if (uncleared)
             res.send(uncleared);
     } catch (error) {
@@ -157,18 +177,18 @@ exports.reservation_update = async function (req, res) {
                     status = 'Denied';
                     break;
             }
-    
+
             if (userIsAdmin(user))
                 await Reservation.findByIdAndUpdate(req.body.reservationID, {
                     status: status,
                     remarks: req.body.remarks,
-                    penalty: req.body.penalty,
+                    penalty: req.body.status == 'status-manage-uncleared' ? req.body.penalty : 0,
                     lastUpdated: Date.now(),
                     pickupPayDate: req.body.paymentDate
                 });
         }
 
-    } catch(err) { console.log(err); };
+    } catch (err) { console.log(err); };
 
     res.redirect('/reservations/manage');
 }

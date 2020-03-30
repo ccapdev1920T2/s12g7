@@ -42,3 +42,7 @@
 .pinned-card:hover .card-body::-webkit-scrollbar-thumb {
     background-color: #38b98a;
 }
+
+.card#otherResCard {
+    min-height: 70vh;
+}

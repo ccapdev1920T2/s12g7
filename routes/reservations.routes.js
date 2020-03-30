@@ -6,7 +6,8 @@ const router = express.Router();
 router.get('/', reservations_controller.myReservations);
 
 router.get('/manage', reservations_controller.reservation_details);
-router.get('/manage/get-reservations', reservations_controller.uncleared_get);
+router.get('/manage/uncleared', reservations_controller.uncleared_get);
+router.get('/manage/get-reservations', reservations_controller.reservations_get);
 
 // router.post('/manage', reservations_controller.reservation_create);
 
