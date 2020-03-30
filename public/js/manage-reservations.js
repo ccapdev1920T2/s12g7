@@ -288,7 +288,7 @@ $('#editReservationModal').on('show.bs.modal', (event) => {
   $('#idNum').text(reservation.userID);
   $('#dateCreated').text(reservation.dateCreated);
   $('#description').text(reservation.description);
-  $('#remarks').val(reservation.remarks);
+  $('#editRemarks').val(reservation.remarks);
   $('#penalty').val(reservation.penalty);
   $('#reservationID').val(reservation.id);
   $('#onItemType').val(reservation.type);
