@@ -175,6 +175,11 @@ hr {
     background-size: contain;
 }
 
+.icon#filter {
+    background: url(../static/icons/filter.png) center no-repeat;
+    background-size: contain;
+}
+
 /* 
 * Colors
 */
@@ -908,6 +913,7 @@ select.custom-select.form-control {
 }
 
 .select-selected {
+    position: relative;
     width: 100%;
     cursor: pointer;
     background-color: #eef5f3;
