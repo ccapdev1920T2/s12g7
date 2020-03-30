@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const reservationSchema = new mongoose.Schema({
     title: String,
-    userID: { type: Number, required: true },
+    userID: { type: String, required: true },
     item: { type: mongoose.Schema.Types.ObjectId, refPath: 'onItemType' },
     dateCreated: { type: Date, default: Date.now() },
     status: {

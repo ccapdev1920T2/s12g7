@@ -51,11 +51,11 @@
                   {{#each pendingEarlier}}
                   <div class="card-item">
                     <div class="d-flex flex-row flex-nowrap">
-                      <div class="d-flex flex-row flex-nowrap" data-toggle="modal" data-target="#editReservationModal"
-                        data-title="{{title}}" data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}"
-                        data-status="{{status}}" data-description="{{description}}" data-remarks="{{remarks}}"
-                        data-penalty="{{penalty}}" data-type="{{onItemType}}" data-id="{{_id}}"
-                        data-paymentdate="{{pickupPayDate}}">
+                      <div class="d-flex flex-row flex-nowrap flex-fill" data-toggle="modal"
+                        data-target="#editReservationModal" data-title="{{title}}" data-userid="{{userID}}"
+                        data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
+                        data-description="{{description}}" data-remarks="{{remarks}}" data-penalty="{{penalty}}"
+                        data-type="{{onItemType}}" data-id="{{_id}}" data-paymentdate="{{pickupPayDate}}">
                         <div class="col-1 icon mb-auto mt-1"
                           id="{{#if (isLocker onItemType)}}locker{{else}}equipment{{/if}}"></div>
                         <div class="d-flex flex-fill flex-column mx-4">
@@ -64,11 +64,7 @@
                           </div>
                           <div class="font-weight-bold">{{userID}}</div>
                           <div>
-                            {{#if (isLocker onItemType)}}
-                            <span class="font-weight-bold">{{description}}</span>
-                            {{else}}
-                            <span class="font-weight-bold">{{title}}</span>, {{description}}
-                            {{/if}}
+                            <span class="">{{description}}</span>
                           </div>
                         </div>
                       </div>
@@ -87,21 +83,17 @@
                   {{#each pendingToday}}
                   <div class="card-item">
                     <div class="d-flex flex-row flex-nowrap">
-                      <div class="d-flex flex-row flex-nowrap" data-toggle="modal" data-target="#editReservationModal"
-                        data-title="{{title}}" data-userid="{{userID}}" data-datecreated="{{dateStr dateCreated}}"
-                        data-status="{{status}}" data-description="{{description}}" data-remarks="{{remarks}}"
-                        data-penalty="{{penalty}}" data-type="{{onItemType}}" data-id="{{_id}}"
-                        data-paymentdate="{{pickupPayDate}}">
+                      <div class="d-flex flex-row flex-nowrap flex-fill" data-toggle="modal"
+                        data-target="#editReservationModal" data-title="{{title}}" data-userid="{{userID}}"
+                        data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
+                        data-description="{{description}}" data-remarks="{{remarks}}" data-penalty="{{penalty}}"
+                        data-type="{{onItemType}}" data-id="{{_id}}" data-paymentdate="{{pickupPayDate}}">
                         <div class="col-1 icon mb-auto mt-1"
                           id="{{#if (isLocker onItemType)}}locker{{else}}equipment{{/if}}"></div>
                         <div class="d-flex flex-fill flex-column mx-4">
                           <div>
                             <div class="font-weight-bold">{{userID}}</div>
-                            {{#if (isLocker onItemType)}}
-                            <span class="font-weight-bold">{{description}}</span>
-                            {{else}}
-                            <span class="font-weight-bold">{{title}}</span>, {{description}}
-                            {{/if}}
+                            <span class="">{{description}}</span>
                           </div>
                         </div>
                       </div>
@@ -137,11 +129,7 @@
                       <div class="d-flex flex-column mx-4">
                         <div class="font-weight-bold">{{userID}}</div>
                         <div>
-                          {{#if (isLocker onItemType)}}
                           {{description}}
-                          {{else}}
-                          {{title}}, {{description}}
-                          {{/if}}
                         </div>
                         {{#if remarks}}
                         <div>
@@ -163,59 +151,34 @@
             </div>
 
             <div class="col-12 mb-5">
-              <div class="card no-hover">
+              <div class="card no-hover" id="otherResCard">
                 <div class="card-body">
-                  <div class="col-12 mb-5 d-flex px-0">
-                    <ul class="nav nav-tabs">
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button"
-                          aria-haspopup="true" aria-expanded="false">Active</a>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item active" data-toggle="tab" href="#activeLockers">Lockers</a>
-                          <a class="dropdown-item" data-toggle="tab" href="#activeEquipment">Equipment</a>
-                        </div>
-                      </li>
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                          aria-haspopup="true" aria-expanded="false">Past</a>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item" data-toggle="tab" href="#pastLockers">Lockers</a>
-                          <a class="dropdown-item" data-toggle="tab" href="#pastEquipment">Equipment</a>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
 
                   <div class="col-12 px-0">
                     <div class="tab-content">
                       <div id="activeLockers" class="tab-pane active">
 
-                        <h5 class="mb-4">Locker rentals</h5>
+                        <h5 class="mb-4">Reservations</h5>
 
                         <div class="row">
                           <div class="col-md-6 input-group mb-2">
                             <div class="form-group form-inline my-auto">
-                              <input type="search" id="ALsearchBox" class="form-control" placeholder="Filter">
+                              <input type="search" id="searchBox" class="form-control" placeholder="ID Number">
                             </div>
                           </div>
-                          <div class="col-md-6 d-flex">
-                            <nav class="ml-md-auto" aria-label="Page navigation example">
-                              <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                          <div class="col-md-6 d-flex" style="overflow-x: auto;">
+                            <nav class="ml-md-auto">
+                              <ul class="pagination d-flex align-items-center" id="resPagination">
                               </ul>
                             </nav>
                           </div>
                         </div>
 
                         <div class="col-12 table-responsive px-0">
-                          {{#if activeLockers}}
                           <table class="table table-hover">
                             <thead class="">
                               <tr class="active head">
+                                <th></th>
                                 <th>ID number</th>
                                 <th>Date requested</th>
                                 <th>Description</th>
@@ -224,265 +187,10 @@
                                 <th></th>
                               </tr>
                             </thead>
-                            <tbody id="ALtable">
-                              {{#each activeLockers}}
-                              <tr>
-                                <td>{{userID}}</td>
-                                <td>{{dateStr dateCreated}}</td>
-                                <td>{{description}}</td>
-                                <td>Php {{penalty}}</td>
-                                <td>
-                                  <div class="badge badge-pill
-                                  {{#if (status-on-rent status)}}
-                                  status-on-rent
-                                  {{else}}
-                                  status-uncleared
-                                  {{/if}}
-                                  ">
-                                    {{status}}
-                                  </div>
-                                </td>
-                                <td>
-                                  <a class="table-link" data-toggle="modal" href="#editReservationModal"
-                                    data-title="{{title}}" data-userid="{{userID}}"
-                                    data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
-                                    data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{onItemType}}" data-id="{{_id}}"
-                                    data-paymentdate="{{pickupPayDate}}">
-                                    <div class="icon" id="edit"></div>
-                                  </a>
-                                </td>
-                              </tr>
-                              {{/each}}
+                            <tbody id="reservationsTable">
                             </tbody>
                           </table>
-                          {{else}}
-                          <div class="font-italic my-4 text-center">No active reservations</div>
-                          {{/if}}
-                        </div>
-                      </div>
-
-                      <div id="activeEquipment" class="tab-pane fade">
-
-                        <h5 class="mb-4">Equipment rentals</h5>
-
-                        <div class="row">
-                          <div class="col-md-6 input-group mb-2">
-                            <div class="form-group form-inline my-auto">
-                              <input type="search" id="AEsearchBox" class="form-control" placeholder="Filter">
-                            </div>
-                          </div>
-                          <div class="col-md-6 d-flex">
-                            <nav class="ml-md-auto" aria-label="Page navigation example">
-                              <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                              </ul>
-                            </nav>
-                          </div>
-                        </div>
-
-                        <div class="table-responsive px-0">
-                          {{#if activeEquipment}}
-                          <table class="table table-hover">
-                            <thead class="">
-                              <tr class="active">
-                                <th>ID number</th>
-                                <th>Date requested</th>
-                                <th>Equipment</th>
-                                <th>Description</th>
-                                <th>Penalty</th>
-                                <th>Status</th>
-                                <th></th>
-                              </tr>
-                            </thead>
-                            <tbody id="AEtable">
-                              {{#each activeEquipment}}
-                              <tr>
-                                <td>{{userID}}</td>
-                                <td>{{dateStr dateCreated}}</td>
-                                <td>{{title}}</td>
-                                <td>{{description}}</td>
-                                <td>Php {{penalty}}</td>
-                                <td>
-                                  <div class="badge badge-pill
-                                  {{#if (status-on-rent status)}}
-                                  status-on-rent
-                                  {{else}}
-                                  status-uncleared
-                                  {{/if}}
-                                  ">
-                                    {{status}}
-                                  </div>
-                                </td>
-                                <td>
-                                  <a class="table-link" data-toggle="modal" href="#editReservationModal"
-                                    data-title="{{title}}" data-userid="{{userID}}"
-                                    data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
-                                    data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{onItemType}}" data-id="{{_id}}"
-                                    data-paymentdate="{{pickupPayDate}}">
-                                    <div class="icon" id="edit"></div>
-                                  </a>
-                                </td>
-                              </tr>
-                              {{/each}}
-                            </tbody>
-                          </table>
-                          {{else}}
-                          <div class="font-italic my-4 text-center">No active reservations</div>
-                          {{/if}}
-                        </div>
-
-                      </div>
-
-                      <div id="pastLockers" class="tab-pane fade">
-
-                        <h5 class="mb-4">Locker rentals</h5>
-
-                        <div class="row">
-                          <div class="col-md-6 input-group mb-2">
-                            <div class="form-group form-inline my-auto">
-                              <input type="search" id="PLsearchBox" class="form-control" placeholder="Filter">
-                            </div>
-                          </div>
-                          <div class="col-md-6 d-flex">
-                            <nav class="ml-md-auto" aria-label="Page navigation example">
-                              <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                              </ul>
-                            </nav>
-                          </div>
-                        </div>
-
-                        <div class="table-responsive px-0">
-                          {{#if pastLockers}}
-                          <table class="table table-hover">
-                            <thead class="">
-                              <tr class="active">
-                                <th>ID number</th>
-                                <th>Date requested</th>
-                                <th>Description</th>
-                                <th>Status</th>
-                                <th></th>
-                              </tr>
-                            </thead>
-                            <tbody id="PLtable">
-                              {{#each pastLockers}}
-                              <tr>
-                                <td>{{userID}}</td>
-                                <td>{{dateStr dateCreated}}</td>
-                                <td>{{description}}</td>
-                                <td>
-                                  <div class="badge badge-pill
-                                  {{#if (status-denied status)}}
-                                  status-denied
-                                  {{else}}
-                                  status-returned
-                                  {{/if}}
-                                  ">
-                                    {{status}}
-                                  </div>
-                                </td>
-                                <td>
-                                  <a class="table-link" data-toggle="modal" href="#editReservationModal"
-                                    data-title="{{title}}" data-userid="{{userID}}"
-                                    data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
-                                    data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{onItemType}}" data-id="{{_id}}"
-                                    data-paymentdate="{{pickupPayDate}}">
-                                    <div class="icon" id="edit"></div>
-                                  </a>
-                                </td>
-                              </tr>
-                              {{/each}}
-                            </tbody>
-                          </table>
-                          {{else}}
-                          <div class="font-italic my-4 text-center">No past reservations</div>
-                          {{/if}}
-                        </div>
-
-                      </div>
-
-                      <div id="pastEquipment" class="tab-pane fade">
-
-                        <h5 class="mb-4">Equipment rentals</h5>
-
-                        <div class="row">
-                          <div class="col-md-6 input-group mb-2">
-                            <div class="form-group form-inline my-auto">
-                              <input type="search" id="PEsearchBox" class="form-control" placeholder="Filter">
-                            </div>
-                          </div>
-                          <div class="col-md-6 d-flex">
-                            <nav class="ml-md-auto" aria-label="Page navigation example">
-                              <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                              </ul>
-                            </nav>
-                          </div>
-                        </div>
-
-                        <div class="table-responsive px-0">
-                          {{#if pastEquipment}}
-                          <table class="table table-hover">
-                            <thead class="">
-                              <tr class="active">
-                                <th>ID number</th>
-                                <th>Date reserved</th>
-                                <th>Equipment</th>
-                                <th>Description</th>
-                                <th>Status</th>
-                                <th></th>
-                              </tr>
-                            </thead>
-                            <tbody id="PEtable">
-                              {{#each pastEquipment}}
-                              <tr>
-                                <td>{{userID}}</td>
-                                <td>{{dateStr dateCreated}}</td>
-                                <td>{{title}}</td>
-                                <td>{{description}}</td>
-                                <td>
-                                  <div class="badge badge-pill
-                                  {{#if (status-denied status)}}
-                                  status-denied
-                                  {{else}}
-                                  status-returned
-                                  {{/if}}
-                                  ">
-                                    {{status}}
-                                  </div>
-                                </td>
-                                <td>
-                                  <a class="table-link" data-toggle="modal" href="#editReservationModal"
-                                    data-title="{{title}}" data-userid="{{userID}}"
-                                    data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
-                                    data-description="{{description}}" data-remarks="{{remarks}}"
-                                    data-penalty="{{penalty}}" data-type="{{onItemType}}" data-id="{{_id}}"
-                                    data-paymentdate="{{pickupPayDate}}">
-                                    <div class="icon" id="edit"></div>
-                                  </a>
-                                </td>
-                              </tr>
-                              {{/each}}
-                            </tbody>
-                          </table>
-                          {{else}}
-                          <div class="font-italic my-4 text-center">No past reservations</div>
-                          {{/if}}
+                          {{!-- <div class="font-italic my-4 text-center">No active reservations</div> --}}
                         </div>
                       </div>
                     </div>
@@ -492,12 +200,9 @@
             </div>
           </div>
 
-          <footer class="py-5 pt-5 text-muted text-center text-small">
-            <p class="mb-1">De La Salle University - Manila</p>
-            <p class="mb-1">Pahiram Services</p>
-          </footer>
-
         </main>
+
+        {{> footer}}
       </div>
     </div>
   </div>
@@ -592,9 +297,13 @@
                 <div class="icon col-1 mr-2" id="date"></div>
                 <div class="" id="approveDateCreated"></div>
               </div>
-              <div class="d-flex flex-row align-items-center mb-4">
+              <div class="d-flex flex-row align-items-center">
                 <div class="icon col-1 mr-2" id="desc"></div>
                 <div class="" id="approveDescription"></div>
+              </div>
+              <div class="d-flex flex-row align-items-center mb-4">
+                <div class="icon col-1 mr-2" id="remarks"></div>
+                <div class="" id="apUnclearedError"></div>
               </div>
               <div class="form-group form-inline input-group" id="approveSelectForm">
                 <label for="status" class="col-lg-4 justify-content-start pl-2">Status:</label>
@@ -700,8 +409,7 @@
   </div>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-    crossorigin="anonymous"></script>
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
@@ -709,31 +417,159 @@
 
   <script>
     $(document).ready(function () {
-      $("#ALsearchBox").on("keyup", function () {
-        var value = $(this).val().toLowerCase();
-        $("#ALtable tr").filter(function () {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
+      var pagination;
+      var pageNum;
+      var pageStart;
+      var pageEnd;
+      var idNum = '';
+
+      $.get('/reservations/manage/get-reservations?page=&idnum=', function (data, status) {
+        pagination = Math.ceil(data.totalCt / 10);
+        pageNum = 1;
+        pageStart = 1;
+        pageEnd = pagination > 5 ? 5 : pagination;
+        displayPagination(pagination, pageStart, pageEnd, pageNum, idNum);
+        displayReservations(data.items);
       });
-      $("#AEsearchBox").on("keyup", function () {
-        var value = $(this).val().toLowerCase();
-        $("#AEtable tr").filter(function () {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-      });
-      $("#PLsearchBox").on("keyup", function () {
-        var value = $(this).val().toLowerCase();
-        $("#PLtable tr").filter(function () {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-      });
-      $("#PEsearchBox").on("keyup", function () {
-        var value = $(this).val().toLowerCase();
-        $("#PEtable tr").filter(function () {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+
+      $("#searchBox").on("keyup", function () {
+        idNum = $(this).val();
+        $.get('/reservations/manage/get-reservations' + '?page=&idnum=' + idNum, function (data, status) {
+          pagination = Math.ceil(data.totalCt / 10);
+          pageNum = 1;
+          pageStart = 1;
+          pageEnd = pagination > 5 ? 5 : pagination;
+          displayPagination(pagination, pageStart, pageEnd, pageNum, idNum)
+          displayReservations(data.items);
         });
       });
     });
+
+    function displayPagination(pagination, pageStart, pageEnd, pageNum, idNum) {
+      $('#resPagination .page-item').remove();
+      $('#resPagination').append(`
+        <li class="page-item">
+          <a class="page-link" href="#otherResCard" id="prevPage">
+            <div class="icon" id="arrow-left"/>
+          </a>
+        </li>
+      `);
+      for (var i = pageStart; i <= pageEnd; i++) {
+        console.log(i + 'vs' + pageNum);
+        $('#resPagination').append(
+          '<li class="page-item' + ((i == pageNum) ? ' active' : '') + '">' +
+            '<a class="page-link page-number" href="#otherResCard">' +
+              i +
+            '</a>' +
+          '</li>'
+        );
+      }
+      $('#resPagination').append(`
+        <li class="page-item">
+          <a class="page-link" href="#otherResCard" id="nextPage">
+            <div class="icon" id="arrow-right"/>
+          </a>
+        </li>
+      `);
+
+      $('#resPagination .page-link').click(function () {
+        var offset = 0;
+        if ($(this).attr('id') == 'nextPage')
+          offset = 1;
+        else if ($(this).attr('id') == 'prevPage')
+          offset = -1;
+        else if (pagination == 1)
+          offset = 0;
+        else
+          offset = $(this).text() - pageNum;
+
+        var selectedPageNum = pageNum + offset;
+
+        var maxPageShiftR = pagination - pageEnd;
+        var maxPageShiftL = pageStart - 1;
+
+        if (pageNum+offset >= 1 && pageNum+offset <= pagination && offset != 0) {
+          $.get('/reservations/manage/get-reservations?page=' + (pageNum+offset) + '&idnum=' + idNum, function (data, status) {
+            if (pageNum+offset >= 1 && pageNum+offset <= pagination) {
+              if (offset > 0 && offset <= maxPageShiftR && pageNum+offset > (pageStart+pageEnd)/2
+                  || offset < 0 && -1*offset <= maxPageShiftL && pageNum+offset < (pageStart+pageEnd)/2) {
+                pageStart += offset;
+                pageEnd += offset;
+              } else if (offset > 0 && offset > maxPageShiftR) {
+                pageStart += maxPageShiftR;
+                pageEnd += maxPageShiftR;
+              } else if (offset < 0 && -1*offset > maxPageShiftL) {
+                pageStart -= maxPageShiftL;
+                pageEnd -= maxPageShiftL;
+              }
+            }
+            pageNum += offset;
+            updatePagination(pageStart, pageEnd, pageNum)
+            displayReservations(data.items);
+          });
+        }
+      });
+    }
+
+    function updatePagination(pageStart, pageEnd, pageNum) {
+      console.log(pageStart + ',' + pageNum + ',' + pageEnd);
+      $('#resPagination .page-number').each(function (index, element) {
+        $(element).text(pageStart+index);
+        if ($(element).text() != pageNum)
+          $(element).parent().removeClass('active');
+        else
+          $(element).parent().addClass('active');
+      })
+    }
+
+    function displayReservations(reservations) {
+      $('#reservationsTable tr').remove();
+      reservations.forEach(function (reservation) {
+
+        var stat;
+        if (reservation.status == 'Uncleared')
+          stat = 'status-uncleared';
+        else if (reservation.status == 'On Rent')
+          stat = 'status-on-rent';
+        else if (reservation.status == 'Returned')
+          stat = 'status-returned';
+        else if (reservation.status == 'Denied')
+          stat = 'status-denied';
+
+        $('#reservationsTable').append(
+          '<tr>' +
+          '<td>' + 
+            '<div class="icon mr-2 col-1" id="' + ((reservation.onItemType == 'Locker') ? 'locker' : 'equipment') + '"/>' +
+          '</td>' +
+          '<td>' + reservation.userID + '</td>' +
+          '<td>' + (new Date(reservation.dateCreated)).toDateString() + '</td>' +
+          '<td>' + reservation.description + '</td>' +
+          '<td>' + (reservation.penalty > 0 ? 'Php ' + reservation.penalty : 'N/A') + '</td>' +
+          '<td>' +
+            '<div class="badge badge-pill ' + stat + '">' +
+              reservation.status + 
+            '</div>' +
+          '</td>' +
+          '<td>' + 
+            '<a class="table-link" data-toggle="modal" ' +
+                'data-title="' + reservation.title + '" ' + 
+                'data-userid="' + reservation.userID + '" ' + 
+                'data-datecreated="' + (new Date(reservation.dateCreated)).toDateString() + '" ' + 
+                'data-status="' + reservation.status + '" ' + 
+                'data-description="' + reservation.description + '" ' + 
+                'data-remarks="' + reservation.remarks + '" ' + 
+                'data-penalty="' + reservation.penalty + '" ' + 
+                'data-onItemType="' + reservation.onItemType + '" ' + 
+                'data-id="' + reservation._id + '" ' + 
+                'data-paymentdate="' + reservation.pickupPayDate + '" ' + 
+                'href="#editReservationModal">' + 
+              '<div class="icon" id="edit"/>' +
+            '</a>' + 
+          '</td>' +
+          '</tr>'
+        );
+      });
+    }
 
     $('#approveReservationModal').on('show.bs.modal', (event) => {
       var btn = $(event.relatedTarget).prev();
@@ -765,6 +601,14 @@
       $('#approveStatus').val('status-manage-pickup-pay');
       $('#approvePaymentDate').val(payDateString);
       $('#approveIDNum').text(reservation.userID);
+
+      $.get('/reservations/manage/uncleared?idNum=' + reservation.userID, function (data, status) {
+        console.log('data: ' + data);
+        if (jQuery.isEmptyObject(data))
+          $('#apUnclearedError').text('User has no uncleared reservations').removeClass('error-label');
+        else
+          $('#apUnclearedError').text('User has uncleared reservations').addClass('error-label');
+      });
 
       $('#approvePenaltyForm').css('display', 'none');
       $('#approveSelectForm').css('display', 'none');
@@ -818,13 +662,12 @@
         paymentDate: btn.data('paymentdate')
       }
 
-      $.get('/reservations/manage/get-reservations?idNum=' + reservation.userID, function(data, status) {
+      $.get('/reservations/manage/uncleared?idNum=' + reservation.userID, function (data, status) {
         console.log('data: ' + data);
         if (jQuery.isEmptyObject(data))
           $('#unclearedError').text('User has no uncleared reservations').removeClass('error-label');
         else
           $('#unclearedError').text('User has uncleared reservations').addClass('error-label');
-
       });
 
       var payDate = reservation.paymentDate == '' ? new Date() : new Date(reservation.paymentDate);
