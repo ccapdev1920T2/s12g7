@@ -1,10 +1,7 @@
 const hbs = require('hbs');
 const cron = require('node-cron');
-const mongoose = require('mongoose');
 
 const Reservation = require('../model/reservation.model');
-const Locker = require('../model/locker.model');
-const Equipment = require('../model/equipment.model');
 const User = require('../model/user.model');
 
 // TODO: update reservations based on time
@@ -77,7 +74,6 @@ exports.reservation_details = async function (req, res) {
     var dateTomorrow = tomorrow.getFullYear() + '-' + (tomorrow.getMonth() + 1) + '-' + tomorrow.getDate();
 
     try {
-        var resCt = await Reservation.find({ status: ['On Rent', 'Uncleared', 'Denied', 'Returned'] }).countDocuments();
         var pendingToday = await Reservation
             .find({ status: 'Pending' })
             .where('dateCreated').gte(dateToday).lt(dateTomorrow)
@@ -104,7 +100,6 @@ exports.reservation_details = async function (req, res) {
         pendingToday: pendingToday,
         pendingEarlier: pendingEarlier,
         pickupPayToday: pickupPayToday,
-        resCt: resCt
     });
 }
 
@@ -112,7 +107,7 @@ exports.reservations_get = async function (req, res) {
     try {
         var page = req.query.page == '' ? 1 : req.query.page;
         var reservations = new Object();
-        const itemsPerPage = 10;
+        const itemsPerPage = 5;
 
         var statuses = []
         switch (req.query.status) {

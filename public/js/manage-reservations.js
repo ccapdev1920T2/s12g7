@@ -5,7 +5,7 @@ $(document).ready(function () {
   var pageEnd;
   var idNum = '';
   var stat = 'all';
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
 
   $.get('/reservations/manage/get-reservations?page=&idnum=&status=all', function (data, status) {
     pagination = Math.ceil(data.totalCt / itemsPerPage);
@@ -47,6 +47,16 @@ $(document).ready(function () {
   });
 });
 
+$(document).ajaxStart(function () {
+  console.log('loading');
+  $('table').css('filter', 'opacity(0.3)');
+});
+
+$(document).ajaxComplete(function () {
+  console.log('loaded');
+  $('table').css('filter', 'opacity(1)');
+});
+
 function displayPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat) {
   $('#resPagination .page-item').remove();
   $('#resPagination').append(`
@@ -57,7 +67,6 @@ function displayPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat)
       </li>
     `);
   for (var i = pageStart; i <= pageEnd; i++) {
-    console.log(i + 'vs' + pageNum);
     $('#resPagination').append(
       '<li class="page-item' + ((i == pageNum) ? ' active' : '') + '">' +
       '<a class="page-link page-number" href="#otherResCard">' +
@@ -207,7 +216,6 @@ $('#approveReservationModal').on('show.bs.modal', (event) => {
   $('#approveIDNum').text(reservation.userID);
 
   $.get('/reservations/manage/uncleared?idNum=' + reservation.userID, function (data, status) {
-    console.log('data: ' + data);
     if (jQuery.isEmptyObject(data))
       $('#apUnclearedError').text('User has no uncleared reservations').removeClass('error-label');
     else
@@ -267,7 +275,6 @@ $('#editReservationModal').on('show.bs.modal', (event) => {
   }
 
   $.get('/reservations/manage/uncleared?idNum=' + reservation.userID, function (data, status) {
-    console.log('data: ' + data);
     if (jQuery.isEmptyObject(data))
       $('#unclearedError').text('User has no uncleared reservations').removeClass('error-label');
     else
@@ -278,8 +285,6 @@ $('#editReservationModal').on('show.bs.modal', (event) => {
   var payDateString = payDate.getFullYear() + '-'
     + ((payDate.getMonth() <= 8) ? '0' : '') + (payDate.getMonth() + 1) + '-'
     + ((payDate.getDate() <= 9) ? '0' : '') + payDate.getDate();
-
-  console.log(payDateString);
 
   $('#statusModalLabel').text(reservation.title);
   $('#idNum').text(reservation.userID);
