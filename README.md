@@ -4,7 +4,7 @@ A simple web app simulation of DLSU-USG's *Pahiram Locker* and DLSU-CSG's *Pahir
 
 ## Features
 * Login/register system (Google Sign-in integration)
-* Two user roles (student and admin)
+* Two user roles (student and student representative)
 * Edit profile information
 * Rental/reservation system for both locker and equipment
 * Locker and equipment management (*CRUD*) system for admins
