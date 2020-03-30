@@ -39,6 +39,7 @@
           </a>
         </li>
       </ul>
+      {{#if (isAdmin sb.type)}}
       <div class="nav-section-header">
         Manage
       </div>
@@ -68,6 +69,7 @@
           </a>
         </li>
       </ul>
+      {{/if}}
     </div>
 
     <div class="sign-out mt-5">

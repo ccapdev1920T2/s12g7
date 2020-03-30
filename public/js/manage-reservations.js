@@ -94,8 +94,6 @@ function displayPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat)
     else
       offset = $(this).text() - pageNum;
 
-    var selectedPageNum = pageNum + offset;
-
     var maxPageShiftR = pagination - pageEnd;
     var maxPageShiftL = pageStart - 1;
 
@@ -176,7 +174,7 @@ function displayReservations(reservations) {
               'data-id="' + reservation._id + '" ' +
               'data-paymentdate="' + reservation.pickupPayDate + '" ' +
               'href="#editReservationModal">' +
-            '<div class="icon" id="edit"/>' +
+            '<div class="icon col-1" title="Edit Reservation" id="edit"/>' +
           '</a>' +
         '</td>' +
       '</tr>'
@@ -344,8 +342,8 @@ $('#editReservationModal').on('show.bs.modal', (event) => {
       $('#paymentForm').css('display', 'flex');
     else
       $('#paymentForm').css('display', 'none');
-  })
+  });
 
   $('#status').change();
 
-})
+});

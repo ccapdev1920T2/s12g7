@@ -1,5 +1,11 @@
 const User = require('../model/user.model');
 const passport = require('passport');
+const hbs = require('hbs');
+
+hbs.registerHelper('isAdmin', (type) => {
+    console.log('type: ' + type);
+    return type == 'studentRep';
+});
 
 exports.home = function (req, res) {
 
@@ -20,7 +26,8 @@ exports.home = function (req, res) {
         sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
-            idNum: req.session.idNum
+            idNum: req.session.idNum,
+            type: req.session.type      
         }
     });
 };
@@ -31,7 +38,8 @@ exports.terms = function (req, res) {
         sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
-            idNum: req.session.idNum
+            idNum: req.session.idNum,
+            type: req.session.type      
         }
     });
 };
@@ -42,7 +50,8 @@ exports.about = function (req, res) {
         sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
-            idNum: req.session.idNum
+            idNum: req.session.idNum,
+            type: req.session.type      
         }
     });
 }
@@ -64,8 +73,10 @@ exports.callback_success = async function (req, res) {
         var user = await User.findOneAndUpdate(
             { email: req.session.passport.user.profile.emails[0].value },
             { dpURL: req.session.passport.user.profile.photos[0].value });
-        if (user)
+        if (user) {
             req.session.idNum = user.idNum;
+            req.session.type = user.type;
+        }
         else
             console.log('user cannot be accessed');
     } catch (err) {
@@ -114,6 +125,7 @@ exports.register_post = async function (req, res) {
     try {
         var user = await user.save();
         req.session.idNum = user.idNum;
+        req.session.type = user.type;
     } catch (err) {
         console.log('Error writing to db: ' + err);
     }
