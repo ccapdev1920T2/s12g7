@@ -67,7 +67,8 @@ app.use(function (req, res, next) {
         sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
-            idNum: req.session.idNum        
+            idNum: req.session.idNum,
+            type: req.session.type      
         }
     });
 })
