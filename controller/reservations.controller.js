@@ -109,27 +109,47 @@ exports.reservation_details = async function (req, res) {
 }
 
 exports.reservations_get = async function (req, res) {
-    console.log(req.query);
     try {
-
         var page = req.query.page == '' ? 1 : req.query.page;
         var reservations = new Object();
+        const itemsPerPage = 10;
+
+        var statuses = []
+        switch (req.query.status) {
+            case 'onrent':
+                statuses.push('On Rent');
+                break;
+            case 'uncleared':
+                statuses.push('Uncleared');
+                break;
+            case 'returned':
+                statuses.push('Returned');
+                break;
+            case 'denied':
+                statuses.push('Denied');
+                break;
+            default:
+                statuses.push('On Rent');
+                statuses.push('Uncleared');
+                statuses.push('Returned');
+                statuses.push('Denied');
+        }
 
         reservations.totalCt = await Reservation
             .find({
-                status: ['On Rent', 'Uncleared', 'Denied', 'Returned'],
+                status: statuses,
                 userID: { $regex: '[0-9]*' + req.query.idnum + '[0-9]*' }
             })
             .countDocuments();
 
         reservations.items = await Reservation
             .find({
-                status: ['On Rent', 'Uncleared', 'Denied', 'Returned'],
+                status: statuses,
                 userID: { $regex: '[0-9]*' + req.query.idnum + '[0-9]*' }
             })
             .sort({ lastUpdated: -1 })
-            .skip((page - 1) * 10)
-            .limit(10);
+            .skip((page - 1) * itemsPerPage)
+            .limit(itemsPerPage);
 
         if (reservations) {
             res.send(reservations);
