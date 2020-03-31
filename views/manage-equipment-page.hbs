@@ -53,12 +53,12 @@
                     <h5 class="card-title">{{name}}</h5>
                     <div class="card-text mb-3">
                       <div>
-                        <span class="card-text-label">On Rent: </span><span>0</span>
+                        <span class="card-text-label">On Rent: </span><span>{{onRent}}</span>
                       </div>
                     </div>
                   </div>
                   <div class="card-footer d-flex flex-row justify-content-between align-items-center">
-                    <span class="badge badge-pill">{{available}}/{{quantity}} available</span>
+                    <span class="badge badge-pill">{{subtract quantity onRent}}/{{quantity}} available</span>
                     <!--TODO: -->
                     <a data-toggle="modal" href="#editEquipmentModal" data-equipmentid="{{_id}}" data-equipmentname="{{name}}" data-equipmentquantity="{{quantity}}">
                       <div class="icon" id="edit-white"></div>
@@ -90,16 +90,16 @@
           <form class="form-horizontal col-lg-10 mx-auto" method="POST" action="/manage-equipment/"
             id="addEquipForm" enctype="multipart/form-data">
             <div class="form-group form-inline input-group">
-              <label for="equipment-name" class="col-lg-4 justify-content-start p-0">Name</label>
-              <input type="text" class="form-control mb-2 col-lg-8" placeholder="Enter equipment name" name="name" required>
+              <label for="equip-name" class="col-lg-4 justify-content-start p-0">Name</label>
+              <input id="equip-name" type="text" class="form-control mb-2 col-lg-8" placeholder="Enter equipment name" name="name" required>
             </div>
             <div class="form-group form-inline input-group">
-              <label for="equipment-ct" class="col-lg-4 justify-content-start p-0">Amount on stock</label>
-              <input type="number" class="form-control mb-2 col-lg-8" placeholder="Enter number of stocks" name="count" min="1" oninput="validity.valid||(value='');" required>
+              <label for="equip-ct" class="col-lg-4 justify-content-start p-0">Amount on stock</label>
+              <input id="equip-ct" type="number" class="form-control mb-2 col-lg-8" placeholder="Enter number of stocks" name="count" min="1" oninput="validity.valid||(value='');" required>
             </div>
             <div class="form-group form-inline input-group">
-              <label for="equipment-pic" class="col-lg-4 justify-content-start p-0">Image</label>
-              <input type="file" class="form-control-file mb-2 col-lg-8" name="equipmentImage" accept="image/*" required>
+              <label for="equip-pic" class="col-lg-4 justify-content-start p-0">Image</label>
+              <input id="equip-pic" type="file" class="form-control-file mb-2 col-lg-8" name="equipmentImage" accept="image/*" required>
             </div>
           </form>
         </div>
@@ -127,6 +127,12 @@
             <!--FIXME: -->
             <input type="hidden" name="equipmentid" id="editHiddenEquipID">
 
+            <div class="col-12" id="availableAlert">
+              <div class="alert alert-danger" role="alert">
+                <strong>Action unsuccessful!</strong> The quantity should not be less than the number of equipment on rent. 
+              </div>
+            </div>
+
             <div class="form-group form-inline input-group">
               <label for="equipment-name" class="col-lg-4 justify-content-start p-0">Name</label>
               <input type="text" class="form-control mb-2 col-lg-8" id="equipment-name" placeholder="Enter equipment name" name="name">
@@ -144,7 +150,7 @@
         <div class="modal-footer">
           <a class="btn btn-warning mr-auto" data-dismiss="modal" data-toggle="modal" href="#delEquipmentModal">Delete</a>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" form="editEquipForm">Save</button>
+          <button type="submit" class="btn btn-primary" id="editEquipButton">Save</button>
         </div>
       </div>
     </div>
@@ -155,7 +161,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="equipmentModalLabel">Delete Equipment</h5>
+          <h5 class="modal-title" id="equipmentModalLabel"></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -164,11 +170,16 @@
           <form method="POST" action="/manage-equipment/delete" id="delEquipForm">
             <input type="hidden" name="equipmentid" id="delHiddenEquipID">
           </form>
-          <h5>Do you really want to delete this equipment?</h5>
+          <h5 id="deleteHeader">Do you really want to delete this equipment?</h5>
+          <div class="col-12" id="onRentAlert">
+              <div class="alert alert-warning" role="alert">
+                <strong>Action unsuccessful!</strong> Equipment cannot be deleted while still on rent.
+              </div>
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" form="delEquipForm">Delete</button>
+          <button type="submit" class="btn btn-primary" id="deleteEquipButton">Delete</button>
         </div>
       </div>
     </div>
@@ -182,10 +193,41 @@
   <script type="text/javascript" src="/js/bootstrap.js"></script>
   <script type="text/javascript" src="/js/styles.js"></script>
   <script>
+    $(document).ready(function () {
+      $('#editEquipButton').click(function() {
+        $.get('/manage-equipment/onrent?equipmentid=' + $('#editHiddenEquipID').val(), function(data, status) {
+        var setQuantity = $('#equipment-ct').val();
+        if (setQuantity < data.onRent) {
+          $('#availableAlert').show();
+        }
+        else $('#editEquipForm').submit();
+        });
+      });
+
+      $('#deleteEquipButton').click(function() {
+        $.get('/manage-equipment/onrent?equipmentid=' + $('#editHiddenEquipID').val(), function(data, status) {
+          if (data.onRent != 0) {
+            $('#onRentAlert').show();
+            $('#deleteHeader').hide();
+            $('#delEquipmentModal').find('.modal-title').text('Deletion Failed');
+            $('#deleteEquipButton').hide();
+          }
+          else {
+            $('#delEquipForm').submit();
+          }
+        });
+      });
+
+    });
+
     $('#delEquipmentModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget);
       var equipmentID = button.data('equipmentid'); /*TODO:*/
       $('#delHiddenEquipID').val($('#editHiddenEquipID').val());
+      $('#onRentAlert').hide();
+      $('#deleteHeader').show();
+      $(this).find('.modal-title').text('Delete Equipment');
+      $('#deleteEquipButton').show();
     });
 
     $('#editEquipmentModal').on('show.bs.modal', function (event) {
@@ -200,7 +242,10 @@
       // show
       $('#equipment-name').val(equipmentName);
       $('#equipment-ct').val(equipmentQty);
+
+      $('#availableAlert').hide();
     });
+
   </script>
 </body>
 
