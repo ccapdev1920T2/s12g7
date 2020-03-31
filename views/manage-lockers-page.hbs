@@ -147,12 +147,14 @@
         </div>
         <div class="modal-body col-lg-10 mx-auto">
           <form class="form-horizontal" id="setStatusForm" method="POST" action="/manage-lockers/update">
-            <div class="form-group">
-              <label for="status">Select status:</label>
-              <select class="form-control" id="statusSelector" name="status">
-                <option value="vacant">Vacant</option>
-                <option value="broken">Broken</option>
-              </select>
+            <div class="form-group form-inline input-group">
+              <label class="col-lg-4 justify-content-start pl-2" for="status">Select status:</label>
+              <div class="col-lg-8 px-0">
+                <select class="form-control custom-select" id="statusSelector" name="status">
+                  <option value="vacant">Vacant</option>
+                  <option value="broken">Broken</option>
+                </select>
+              </div>
             </div>
             <input type="hidden" name="panelid" id="setStatusPanelId">
             <input type="hidden" name="lockernumber" id="setStatusLockerNumber">
@@ -162,7 +164,7 @@
           <p id="lessee"></p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary" form="setStatusForm" id="setStatusButton">Submit</button>
         </div>
       </div>
@@ -260,7 +262,7 @@
     crossorigin="anonymous"></script>
   <script type="text/javascript" src="../js/bootstrap.js"></script>
   <script type="text/javascript" src="../js/styles-locker.js"></script>
-  <script type="text/javascript" src="/js/manage-lockers.js"></script>
+  <script type="text/javascript" src="../js/manage-lockers.js"></script>
 
 
   <script type="text/javascript" src="../js/styles.js"></script>
