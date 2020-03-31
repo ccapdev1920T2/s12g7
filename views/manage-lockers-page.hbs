@@ -185,10 +185,12 @@
           <form class="form-horizontal" id="addPanelForm" action="/manage-lockers/" method="POST">
             <div class="form-group form-inline input-group">
               <label for="panelType" class="col-lg-4 justify-content-start">Type:</label>
-              <select class="form-control col-lg-8" id="panelType" name="type">
-                <option value="big">Big panel</option>
-                <option value="small">Small panel</option>
-              </select>
+              <div class="col-lg-8 px-0">
+                <select class="form-control custom-select" id="panelType" name="type">
+                  <option value="big">Big panel</option>
+                  <option value="small">Small panel</option>
+                </select>
+              </div>
             </div>
             <div class="form-group form-inline input-group">
               <label for="panelBldg" class="col-lg-4 justify-content-start">Building:</label>
