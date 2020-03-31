@@ -1,15 +1,16 @@
 const Panel = require('../model/panel.model');
 const Locker = require('../model/locker.model');
+const Reservation = require('../model/reservation.model');
+const User = require('../model/user.model');
 const hbs = require('hbs');
 
 hbs.registerHelper('lockernumber', function (str) { return JSON.parse(JSON.stringify(str)).number; });
 hbs.registerHelper('lockerstatus', function (str) { return JSON.parse(JSON.stringify(str)).status; });
+hbs.registerHelper('lockerid', function (str) { return JSON.parse(JSON.stringify(str))._id; });
 hbs.registerHelper('capitalizeFirst', function (text) { return text[0].toUpperCase() + text.slice(1); });
 
 hbs.registerHelper('lockerIsBig', (type) => { return type == 'big'; });
 hbs.registerHelper('notFirst', (index) => { return index != 0; });
-
-
 
 exports.panel_create = async function (req, res) {
 
@@ -152,3 +153,37 @@ exports.panel_delete = async function (req, res) {
     }
     res.redirect("/manage-lockers/?bldg=" + req.body.building + "&flr=" + req.body.level);
 }; 
+
+exports.lessee_get = async function (req, res) {
+    try {
+        var reservation = await Reservation.findOne({
+            item: req.query.lockerid, 
+            $or: [{status: 'Pending'}, {status: 'To Pay'}, {status: 'On Rent'}, {status: 'Uncleared'}]
+        });
+
+        var user = await User.findOne({idNum: parseInt(reservation.userID)});
+        
+        if (user)
+            res.send(user);
+        
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+exports.status_get = async function (req, res) {
+    try {
+        var deletable = true;
+        var panel = await Panel.findById(req.query.panelid).populate('lockers');
+        var lockers = panel.lockers;
+
+        for (var i = 0; i < lockers.length; i++) 
+            if (lockers[i].status == 'occupied' || lockers[i].status == 'uncleared')
+                deletable = false;
+
+        if (panel)
+            res.send(deletable);
+    } catch (err) {
+        console.log(err);
+    }
+};
