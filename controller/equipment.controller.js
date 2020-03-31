@@ -2,6 +2,9 @@ const Equipment = require('../model/equipment.model');
 const fs = require('fs');
 const path = require('path');
 const shortid = require('shortid');
+const hbs = require('hbs');
+
+hbs.registerHelper('subtract', function (a, b) { return a-b; });
 
 exports.createEquipment = function (req, res) {
 
@@ -22,7 +25,6 @@ exports.createEquipment = function (req, res) {
             let equipment = new Equipment({
                 name: req.body.name,
                 quantity: parseInt(req.body.count),
-                available: parseInt(req.body.count),
                 imageURL: relativeFilePath
             });
 
@@ -55,23 +57,11 @@ exports.viewAllEquipment = async function (req, res) {
     } catch (err) {
         console.log(err);
     }
-    /* Equipment.find({}, function (err, equipment) {
-        res.render('manage-equipment-page', {
-            active: { active_manage_equipment: true },
-            sidebarData: {
-                dp: req.session.passport.user.profile.photos[0].value,
-                name: req.session.passport.user.profile.displayName,
-                idNum: req.session.idNum
-            },
-            equipmentList: equipment
-        });
-    }); */
 };
 
 exports.updateEquipment = async function (req, res) {
     try {
         var equipment = await Equipment.findById(req.body.equipmentid);
-        console.log(equipment);
         if (req.body.name.trim().length != 0) { equipment.name = req.body.name; }
         if (!isNaN(parseInt(req.body.count))) { equipment.quantity = req.body.count; }
         if (req.file != null) {
@@ -111,4 +101,14 @@ exports.deleteEquipment = async function (req, res) {
         console.log(err);
     } 
     res.redirect("/manage-equipment/");
+};
+
+exports.onrent_get = async function (req, res) {
+    try {
+        var equipment = await Equipment.findById(req.query.equipmentid);
+        if (equipment)
+            res.send(equipment);
+    } catch (err) {
+        console.log(err);
+    }
 };
