@@ -20,7 +20,6 @@ exports.people_details = function (req, res) {
 exports.people_update = async function (req, res) {
 
     try {
-
         await User.findByIdAndUpdate(
             req.body.id,
             {
