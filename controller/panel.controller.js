@@ -161,7 +161,7 @@ exports.lessee_get = async function (req, res) {
             $or: [{status: 'Pending'}, {status: 'To Pay'}, {status: 'On Rent'}, {status: 'Uncleared'}]
         });
 
-        var user = await User.findOne({idNum: parseInt(reservation.userID)});
+        var user = await User.findOne({idNum: reservation.userID});
         
         if (user)
             res.send(user);

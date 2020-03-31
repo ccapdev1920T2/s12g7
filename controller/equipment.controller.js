@@ -8,14 +8,10 @@ hbs.registerHelper('subtract', function (a, b) { return a-b; });
 
 exports.createEquipment = function (req, res) {
 
-    console.log(req.file);
-
     const tempPath = req.file.path;
     const filename = shortid.generate() + '.png';
     const filePath = path.join(__dirname, '/../public/uploads/equipment-images', filename);
     const relativeFilePath = '/uploads/equipment-images/' + filename;
-
-    console.log('target: ' + filePath);
 
     fs.rename(tempPath, filePath, async function(err) {
         if (err) {
@@ -37,7 +33,6 @@ exports.createEquipment = function (req, res) {
         }
     });
 
-    // console.log(equipment);
 };
 
 exports.viewAllEquipment = async function (req, res) {

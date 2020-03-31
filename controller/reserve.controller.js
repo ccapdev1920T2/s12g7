@@ -185,7 +185,6 @@ async function has2ActiveEquipmentReservations(userID) {
             onItemType: 'Equipment',
             $or: [{status: 'Pending'}, {status: 'For Pickup'}, {status: 'On Rent'}, {status: 'Uncleared'}]
         }).countDocuments();
-        console.log(reservationCount);
     }
     catch (err) {
         console.log(err);
