@@ -23,4 +23,7 @@ router.post('/update', UserAuth.userIsAdmin, upload.single('equipmentImage'), eq
 // delete equipment
 router.post('/delete', UserAuth.userIsAdmin, equipmentController.deleteEquipment);
 
+// AJAX get request 
+router.get('/onrent', UserAuth.userIsAdmin, equipmentController.onrent_get);
+
 module.exports = router;
