@@ -34,7 +34,7 @@ $(document).ready(function () {
 
     modal.find('.modal-title').text('Locker #' + lockernumber + ' ');
     modal.find('.modal-title').append('<i class="locker-status-icon fas fa-circle ml-auto ' + classList[1] + '"></i>');
-    modal.find('#statusSelector').val(classList[1].slice(21));
+    modal.find('#statusSelector').val(classList[1].slice(21)).change();
 
     $("#setStatusPanelId").val(panelid);
     $("#setStatusLockerNumber").val(lockernumber);
