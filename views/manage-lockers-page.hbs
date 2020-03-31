@@ -112,7 +112,7 @@
                       <div class="col-lg-4 col-md-6 col-6 locker-container mb-4">
                         <div class="locker locker-status-manage-{{lockerstatus this}} d-flex align-items-center"
                           data-toggle="modal" data-target="#setStatusModal" data-lockernumber="{{lockernumber this}}"
-                          data-panelid="{{../_id}}">
+                          data-panelid="{{../_id}}" data-lockerid="{{lockerid this}}">
                           #{{lockernumber this}}
                           <i class="locker-status-icon fas fa-circle ml-auto"></i>
                         </div>
@@ -151,9 +151,7 @@
               <label for="status">Select status:</label>
               <select class="form-control" id="statusSelector" name="status">
                 <option value="vacant">Vacant</option>
-                <option value="occupied">Occupied</option>
                 <option value="broken">Broken</option>
-                <option value="uncleared">Uncleared</option>
               </select>
             </div>
             <input type="hidden" name="panelid" id="setStatusPanelId">
@@ -161,10 +159,11 @@
             <input type="hidden" name="building" id="setStatusBuilding">
             <input type="hidden" name="level" id="setStatusFloor">
           </form>
+          <p id="lessee"></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" form="setStatusForm">Submit</button>
+          <button type="submit" class="btn btn-primary" form="setStatusForm" id="setStatusButton">Submit</button>
         </div>
       </div>
     </div>
@@ -226,7 +225,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="panelModalLabel">Delete Panel</h5>
+          <h5 class="modal-title" id="panelModalLabel"></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -237,11 +236,18 @@
             <input type="hidden" name="building" id="deletePanelBuilding">
             <input type="hidden" name="level" id="deletePanelFloor">
           </form>
-          <h5>Do you really want to delete this panel?</h1>
+
+          <div class="col-12" id="panelAlert">
+            <div class="alert alert-warning" role="alert">
+              <strong>Action unsuccessful!</strong> Panel cannot be deleted as some lockers are still occupied. 
+            </div>
+          </div>
+
+          <h5 id="deleteHeader">Do you really want to delete this panel?</h1>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary" form="deletePanelForm">Delete</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="delPanelButton">Delete</button>
         </div>
       </div>
     </div>
@@ -254,84 +260,8 @@
     crossorigin="anonymous"></script>
   <script type="text/javascript" src="../js/bootstrap.js"></script>
   <script type="text/javascript" src="../js/styles-locker.js"></script>
+  <script type="text/javascript" src="/js/manage-lockers.js"></script>
 
-  <script>
-    $(document).ready(function () {
-      var url = new URL(document.location);
-      var params = url.searchParams;
-      var bldg = params.get("bldg");
-      var flr = params.get("flr");
-
-      $("#bldg").val(bldg);
-      $("#floor").val(flr);
-    });
-
-    $('#setStatusModal').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget); // Button that triggered the modal
-      var lockernumber = button.data('lockernumber'); // Extract info from data-* attributes
-      var panelid = button.data('panelid');
-      var statusIcon = button.find('.locker-status-icon');
-      var classList = button.attr('class').split(' ');
-      $(statusIcon).addClass(classList[1]);
-      var modal = $(this);
-
-      console.log(classList)
-
-      modal.find('.modal-title').text('Locker #' + lockernumber + ' ');
-      modal.find('.modal-title').append('<i class="locker-status-icon fas fa-circle ml-auto ' + classList[1] + '"></i>');
-      modal.find('#statusSelector').val(classList[1].slice(21));
-
-      $("#setStatusPanelId").val(panelid);
-      $("#setStatusLockerNumber").val(lockernumber);
-      $("#setStatusBuilding").val($("#bldg").val());
-      $("#setStatusFloor").val($("#floor").val());
-    });
-
-    $('#delPanelModal').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget); // Button that triggered the modal
-      var panelid = button.data('panelid');
-
-      $("#deletePanelId").val(panelid);
-      $("#deletePanelBuilding").val($("#bldg").val());
-      $("#deletePanelFloor").val($("#floor").val());
-    });
-
-    // Removes a query parameter
-    function removeParam(key, sourceURL) {
-      var rtn = sourceURL.split("?")[0],
-        param,
-        params_arr = [],
-        queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
-      if (queryString !== "") {
-        params_arr = queryString.split("&");
-        for (var i = params_arr.length - 1; i >= 0; i -= 1) {
-          param = params_arr[i].split("=")[0];
-          if (param === key) {
-            params_arr.splice(i, 1);
-          }
-        }
-        rtn = rtn + "?" + params_arr.join("&");
-      }
-      return rtn;
-    };
-
-    // Adds or updates a query parameter
-    function updateQueryStringParameter(key, value) {
-      var uri = window.location.href;
-      var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
-      var separator = uri.indexOf('?') !== -1 ? "&" : "?";
-      if (key == 'bldg') {
-        uri = removeParam('flr', uri);
-      }
-      if (uri.match(re)) {
-        window.location.href = uri.replace(re, '$1' + key + "=" + value + '$2');
-      }
-      else {
-        window.location.href = uri + separator + key + "=" + value;
-      }
-    };
-
-  </script>
 
   <script type="text/javascript" src="../js/styles.js"></script>
 </body>
