@@ -42,7 +42,7 @@
             <div class="col-lg-10 row align-items-end mx-auto px-0">
 
               {{#if status}}
-              <div class="col-12">
+              <div class="col-12 mb-4">
                 <div class="alert alert-danger" role="alert">
                   <strong>Note:</strong> You already have an active locker reservation. Form submission button is <i class="font-italic">disabled</i>. 
                 </div>
@@ -121,7 +121,7 @@
                 </div>
                 <div>
                   <a href="/reserve" class="btn btn-outline mr-4">Go back</a>                  
-                  <button type="button" id="submitLockerForm" class="btn btn-{{#if status}}dark" disabled {{else}}primary"{{/if}}>Submit</button>
+                  <button type="button" id="submitLockerForm" class="btn btn-{{#if status}}disabled" disabled {{else}}primary"{{/if}}>Submit</button>
                 </div>
               </div>
             </div>
