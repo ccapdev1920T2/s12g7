@@ -1,31 +1,50 @@
 const User = require('../model/user.model');
 
-exports.people_details = async function (req, res) {
+exports.people_details = function (req, res) {
 
+    var colleges = User.schema.path('college').enumValues;
+
+    res.render('manage-people-page', {
+        active: {active_manage_people: true},
+        sidebarData: {
+            dp: req.session.passport.user.profile.photos[0].value,
+            name: req.session.passport.user.profile.displayName,
+            idNum: req.session.idNum,
+            type: req.session.type      
+        },
+        colleges: colleges
+    });
+
+}
+
+exports.people_get = async function (req, res) {
     try {
-        var users = await User.find();
-        var colleges = User.schema.path('college').enumValues;
 
-        if (users) {
-            res.render('manage-people-page', {
-                active: {active_manage_people: true},
-                sidebarData: {
-                    dp: req.session.passport.user.profile.photos[0].value,
-                    name: req.session.passport.user.profile.displayName,
-                    idNum: req.session.idNum,
-                    type: req.session.type      
-                },
-                users: users,
-                colleges: colleges
-            });
+        console.log(req.query);
 
-        }
-        
+        var page = (req.query.page) == '' ? 1 : req.query.page;
+        const itemsPerPage = 1;
 
-    } catch(err) {
+        var people = new Object();
+
+        people.totalCt = await User
+            .find({idNum: { $regex: '[0-9]*' + req.query.idnum + '[0-9]*' }})
+            .countDocuments();
+
+        people.items = await User
+            .find({idNum: { $regex: '[0-9]*' + req.query.idnum + '[0-9]*' }})
+            .sort('lastname')
+            .skip((page - 1) * itemsPerPage)
+            .limit(itemsPerPage);
+
+        console.log(people.items);
+
+        if (people)
+            res.send(people);
+
+    } catch (err) {
         console.log(err);
     }
-
 }
 
 exports.profile_details = async function (req, res) {
@@ -46,7 +65,7 @@ exports.profile_details = async function (req, res) {
             else
                 res.redirect('/404');
         } else {
-            console.log('user cannot be accessed');
+            console.log('profile: user cannot be accessed');
             res.redirect('/');
         }
     } catch (err) {

@@ -12,7 +12,9 @@ $(document).ready(function () {
     pageNum = 1;
     pageStart = 1;
     pageEnd = pagination > 5 ? 5 : pagination;
-    displayPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat);
+    removePagination();
+    if (data.totalCt > itemsPerPage)
+      setupPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat);
     displayReservations(data.items);
   });
 
@@ -26,7 +28,9 @@ $(document).ready(function () {
       pageNum = 1;
       pageStart = 1;
       pageEnd = pagination > 5 ? 5 : pagination;
-      displayPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat)
+      removePagination();
+      if (data.totalCt > itemsPerPage)
+        setupPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat)
       displayReservations(data.items);
     });
   });
@@ -41,7 +45,9 @@ $(document).ready(function () {
       pageNum = 1;
       pageStart = 1;
       pageEnd = pagination > 5 ? 5 : pagination;
-      displayPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat)
+      removePagination();
+      if (data.totalCt > itemsPerPage)
+        setupPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat)
       displayReservations(data.items);
     });
   });
@@ -57,8 +63,11 @@ $(document).ajaxComplete(function () {
   $('table').css('filter', 'opacity(1)');
 });
 
-function displayPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat) {
+function removePagination() {
   $('#resPagination .page-item').remove();
+}
+
+function setupPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat) {
   $('#resPagination').append(`
       <li class="page-item">
         <a class="page-link" href="#otherResCard" id="prevPage">
@@ -69,9 +78,9 @@ function displayPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat)
   for (var i = pageStart; i <= pageEnd; i++) {
     $('#resPagination').append(
       '<li class="page-item' + ((i == pageNum) ? ' active' : '') + '">' +
-      '<a class="page-link page-number" href="#otherResCard">' +
-      i +
-      '</a>' +
+        '<a class="page-link page-number" href="#otherResCard">' +
+          i +
+        '</a>' +
       '</li>'
     );
   }
@@ -135,6 +144,14 @@ function updatePagination(pageStart, pageEnd, pageNum) {
 
 function displayReservations(reservations) {
   $('#reservationsTable tr').remove();
+  $('.empty-note').remove();
+
+  if (reservations.length == 0) {
+    $('#otherResCard .card-body').append(
+      '<div class="empty-note text-center font-italic">' + 'Nothing to display' + '</div>'
+    );
+  }
+
   reservations.forEach(function (reservation) {
 
     var stat;

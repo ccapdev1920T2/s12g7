@@ -3,7 +3,6 @@ const passport = require('passport');
 const hbs = require('hbs');
 
 hbs.registerHelper('isAdmin', (type) => {
-    console.log('type: ' + type);
     return type == 'studentRep';
 });
 
