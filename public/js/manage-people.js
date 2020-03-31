@@ -4,7 +4,7 @@ $(document).ready(function () {
   var pageStart;
   var pageEnd;
   var idNum = '';
-  const itemsPerPage = 1;
+  const itemsPerPage = 10;
 
   $.get('/profile/manage/get-people?page=&idnum=', function (data, status) {
     pagination = Math.ceil(data.totalCt / itemsPerPage);
@@ -35,6 +35,31 @@ $(document).ready(function () {
   });
 });
 
+$('#editProfileModal').on('show.bs.modal', (event) => {
+
+  var btn = $(event.relatedTarget);
+  var person = {
+    id: btn.data('id'),
+    firstName: btn.data('fname'),
+    lastName: btn.data('lname'),
+    idNum: btn.data('idnum'),
+    college: btn.data('college'),
+    degProg: btn.data('degprog'),
+    contactNum: btn.data('mobile')
+  }
+
+  $('#editProfileModalLabel').text('Edit Profile: ' + person.firstName + ' ' + person.lastName);
+  $('#firstName').val(person.firstName);
+  $('#lastName').val(person.lastName);
+  $('#idNum').val(person.idNum);
+  $('#college').val(person.college);
+  $('#college').change();
+  $('#degProg').val(person.degProg);
+  $('#mobile').val(person.contactNum);
+  $('#id').val(person.id);
+});
+
+
 function displayPeople(pips) {
   $('#peopleTable tbody *').remove();
   $('.empty-note').remove();
@@ -45,8 +70,6 @@ function displayPeople(pips) {
     );
   }
   pips.forEach(function (person) {
-
-    console.log('person: ' + person);
     $('#peopleTable tbody').append(
       '<tr>' +
       '<td><div class="profile-icon" style="background-image: url(' + person.dpURL + ');"></div></td>' +
@@ -54,9 +77,17 @@ function displayPeople(pips) {
       '<td>' + person.lastName + ', ' + person.firstName + '</td>' +
       '<td>' + person.contactNum + '</td>' +
       '<td>' +
-      '<a class="table-link" data-toggle="modal" href="#editProfileModal">' +
-      '<div class="icon" id="edit"></div>' +
-      '</a>' +
+        '<a class="table-link" data-toggle="modal" '+
+            'data-fname="' + person.firstName + '" ' +
+            'data-lname="' + person.lastName + '" ' +
+            'data-idnum="' + person.idNum + '" ' +
+            'data-college="' + person.college + '" ' +
+            'data-degprog="' + person.degreeProg + '" ' +
+            'data-mobile="' + person.contactNum + '" ' +
+            'data-id="' + person._id + '" ' +
+            'href="#editProfileModal">' +
+          '<div class="icon" id="edit"></div>' +
+        '</a>' +
       '</td>'
     );
   });

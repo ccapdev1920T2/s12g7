@@ -17,13 +17,33 @@ exports.people_details = function (req, res) {
 
 }
 
-exports.people_get = async function (req, res) {
+exports.people_update = async function (req, res) {
+
     try {
 
-        console.log(req.query);
+        await User.findByIdAndUpdate(
+            req.body.id,
+            {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                idNum: req.body.idNum,
+                college: req.body.college,
+                degreeProg: req.body.degProg,
+                contactNum: req.body.mobile
+            }
+        );
 
+    } catch (err) {
+        console.log(err);
+    }
+    
+    res.redirect('/profile/manage');
+}
+
+exports.people_get = async function (req, res) {
+    try {
         var page = (req.query.page) == '' ? 1 : req.query.page;
-        const itemsPerPage = 1;
+        const itemsPerPage = 10;
 
         var people = new Object();
 
@@ -36,8 +56,6 @@ exports.people_get = async function (req, res) {
             .sort('lastname')
             .skip((page - 1) * itemsPerPage)
             .limit(itemsPerPage);
-
-        console.log(people.items);
 
         if (people)
             res.send(people);

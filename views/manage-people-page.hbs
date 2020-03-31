@@ -86,7 +86,8 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form class="form-horizontal" method="post" action="/reservations/manage/update">
+            <form class="form-horizontal" method="post" action="/profile/manage">
+              <input type="hidden" name="id" id="id">
               <div class="modal-body col-lg-10 mx-auto">
                 <div class="d-flex flex-column">
                   <div class="form-group form-inline input-group">
@@ -109,7 +110,7 @@
                     <div class="col-lg-8 px-0">
                       <select class="form-control custom-select" name="college" id="college">
                         {{#each colleges}}
-                        <option value="{{@index}}">{{this}}</option>
+                        <option value="{{this}}">{{this}}</option>
                         {{/each}}
                       </select>
                     </div>
