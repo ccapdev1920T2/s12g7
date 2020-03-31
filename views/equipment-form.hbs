@@ -40,6 +40,13 @@
             <h1 class="mb-5 col-12">Rent equipment</h1>
 
             <div class="col-lg-10 row align-items-end mx-auto px-0">
+              {{#if status}}
+              <div class="col-12">
+                <div class="alert alert-danger" role="alert">
+                  <strong>Note:</strong> You already have 2 active equipment reservations. Form submission button is <i class="font-italic">disabled</i>. 
+                </div>
+              </div>
+              {{/if}}
 
               <div class="form-group-container col-lg-12">
                 <div class="form-group form-card equipment-types pb-4">
@@ -97,8 +104,8 @@
                   </label>
                 </div>
                 <div>
-                  <a href="/reserve" class="btn btn-outline mr-4">Go back</a>
-                  <button class="btn btn-primary" type="button" id="submitEquipmentForm">Submit</button>
+                  <a href="/reserve" class="btn btn-outline mr-4">Go back</a>        
+                  <button type="button" id="submitEquipmentForm" class="btn btn-{{#if status}}dark" disabled {{else}}primary"{{/if}}>Submit</button>
                 </div>
               </div>
             </div>
