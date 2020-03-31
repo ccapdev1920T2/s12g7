@@ -1,13 +1,16 @@
 const Equipment = require('../model/equipment.model');
 const Panel = require('../model/panel.model');
 const Reservation = require('../model/reservation.model');
+const Locker = require('../model/locker.model');
 
 exports.locker = async function (req, res) {
+
     if (req.query.bldg != null && req.query.flr != null) {
         try {
             var panel = await Panel.find({ building: req.query.bldg, level: req.query.flr }).populate('lockers');
             var panel_floor = await Panel.find({ building: req.query.bldg }).distinct('level').populate('lockers');
             var panel_building = await Panel.find().distinct('building').populate('lockers');
+            var active_reservation = await hasActiveLockerReservation(req.session.idNum);
 
             res.render('locker-form', {
                 active: { active_index: true },
@@ -19,7 +22,8 @@ exports.locker = async function (req, res) {
                 },
                 panel_buildings: panel_building,
                 panel_floors: panel_floor.sort(),
-                panels: panel
+                panels: panel,
+                status: active_reservation
             });
         }
         catch (err) {
@@ -92,6 +96,7 @@ exports.reserve_locker = async function (req, res) {
             onItemType: 'Locker'
         });
         await reservation.save();
+        await Locker.findByIdAndUpdate(lockerid, {status: 'occupied'});
     } catch (err) {
         console.log(err);
     }
@@ -100,7 +105,8 @@ exports.reserve_locker = async function (req, res) {
 
 exports.equipment = async function (req, res) {
     try {
-        equipment = await Equipment.find({});
+        equipment = await Equipment.find({ $where: function(){return this.quantity-this.onRent != 0;}});
+        var active_reservation = await has2ActiveEquipmentReservations(req.session.idNum);
         res.render('equipment-form', {
             active: { active_index: true },
             sidebarData: {
@@ -109,7 +115,8 @@ exports.equipment = async function (req, res) {
                 idNum: req.session.idNum,
                 type: req.session.type      
             },
-            equipmentList: equipment
+            equipmentList: equipment,
+            status: active_reservation
         });
     } catch (err) {
         console.log(err);
@@ -150,8 +157,38 @@ exports.reserve_equipment = async function (req, res) {
             pickupPayDate: pickupDate
         });
         await reservation.save();
+        await Equipment.findByIdAndUpdate(equipmentid, {$inc: {onRent: 1}});
     } catch (err) {
         console.log(err);
     }
     res.redirect("/reservations");
+};
+
+async function hasActiveLockerReservation(userID) {
+    try {
+        var exists = await Reservation.exists({
+            userID: userID, 
+            onItemType: 'Locker',
+            $or: [{status: 'Pending'}, {status: 'To Pay'}, {status: 'On Rent'}, {status: 'Uncleared'}]
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+    return exists;
+};
+
+async function has2ActiveEquipmentReservations(userID) {
+    try {
+        var reservationCount = await Reservation.find({
+            userID: userID,
+            onItemType: 'Equipment',
+            $or: [{status: 'Pending'}, {status: 'For Pickup'}, {status: 'On Rent'}, {status: 'Uncleared'}]
+        }).countDocuments();
+        console.log(reservationCount);
+    }
+    catch (err) {
+        console.log(err);
+    }
+    return reservationCount == 2;
 };
