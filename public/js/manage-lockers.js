@@ -48,6 +48,7 @@ $(document).ready(function () {
 
       $.get('/manage-lockers/lessee?lockerid=' + lockerid, function(data, status) {
         var user = "("+ data.idNum+ ") " + data.firstName + " " + data.lastName;
+        console.log(user);
         $('#lessee').text("Occupied by:  " + user);
       });
     }
