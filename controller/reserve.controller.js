@@ -134,7 +134,7 @@ exports.reserve_equipment = async function (req, res) {
 
         do {
             pickupDate.setDate(pickupDate.getDate()+1);
-        }   //0 is Sunday, 5 is Friday, 6 Saturday
+        }   //0 is Sunday, 5 is Friday, 6 Saturday FIXME:
         while (pickupDate.getDay()==0 || pickupDate.getDay()==5 || pickupDate.getDay()==6);
 
         switch(parseInt(req.body.borrowtime)) {
