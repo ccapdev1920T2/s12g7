@@ -11,6 +11,6 @@ router.get('/manage/uncleared', UserAuth.userIsAdmin, reservations_controller.un
 router.get('/manage/get-reservations', UserAuth.userIsAdmin, reservations_controller.reservations_get);
 
 router.post('/manage/update', UserAuth.userIsAdmin, reservations_controller.reservation_update);
-router.post('/manage/delete', UserAuth.userIsAdmin, reservations_controller.reservation_delete);
+router.post('/manage/delete', reservations_controller.reservation_delete);
 
 module.exports = router;
