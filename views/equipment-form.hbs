@@ -8,7 +8,7 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
-
+  
   <!-- Custom Styles -->
   <link href="/css/styles.css" rel="stylesheet">
   <link href="/css/styles-equipment.css" rel="stylesheet">
@@ -71,7 +71,8 @@
                 <div class="form-group form-card select-form">
                   <label class="d-block" for="borrow-date">Date needed</label>
                   {{!-- TODO: Present only the next 5 schooldays from the server --}}
-                  <input type="text" class="form-control form-lg" id="borrow-date" value="March 30, 2020" disabled>
+                  {{!-- <input type="text" class="form-control form-lg" id="borrow-date" value="March 30, 2020" disabled> --}}
+                  <input type="text" class="form-control form-lg" id="borrow-date" disabled>
                 </div>
               </div>
 
@@ -79,12 +80,12 @@
                 <div class="form-group form-card select-form">
                   <label class="d-block" for="borrow-time">Time needed</label>
                   <select class="form-control custom-select select-lg" id="borrow-time" name="borrowtime">
-                    <option value="1">7:30am</option>
-                    <option value="2">9:15am</option>
-                    <option value="3">11:00am</option>
-                    <option value="4">12:45pm</option>
-                    <option value="5">2:30pm</option>
-                    <option value="6">4:15pm</option>
+                    <option value="1">7:30 am</option>
+                    <option value="2">9:15 am</option>
+                    <option value="3">11:00 am</option>
+                    <option value="4">12:45 pm</option>
+                    <option value="5">2:30 pm</option>
+                    <option value="6">4:15 pm</option>
                   </select>
                 </div>
               </div>
@@ -165,8 +166,19 @@
   <script type="text/javascript" src="/js/bootstrap.js"></script>
   <script type="text/javascript" src="/js/styles.js"></script>
   <script type="text/javascript" src="/js/styles-equipment.js"></script>
+  
   <script>
   $(document).ready(function () {
+
+      var borrowDate = new Date();
+      var options = { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric'};
+      
+      do {
+          borrowDate.setDate(borrowDate.getDate()+1);
+      }
+      while (borrowDate.getDay() == 0 || borrowDate.getDay() == 6); 
+      $("#borrow-date").val(borrowDate.toLocaleDateString("en-US", options));
+      
       $("#submitEquipmentForm").click(function() {
         var equipment = $('button.active');
         var equipmentid = equipment.data('equipmentid');

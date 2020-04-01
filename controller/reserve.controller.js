@@ -131,11 +131,13 @@ exports.reserve_equipment = async function (req, res) {
 
         var descString = equipment.name + ", " + reason;
         var pickupDate = new Date();
-
+        console.log(pickupDate);
+        console.log(pickupDate.toLocaleTimeString());
         do {
             pickupDate.setDate(pickupDate.getDate()+1);
+            console.log(pickupDate);
         }   //0 is Sunday, 5 is Friday, 6 Saturday
-        while (pickupDate.getDay()==0 || pickupDate.getDay()==5 || pickupDate.getDay()==6);
+        while (pickupDate.getDay()==0 || pickupDate.getDay()==6);
 
         switch(parseInt(req.body.borrowtime)) {
             case 1: pickupDate.setHours(7,30,0); break;
@@ -146,7 +148,7 @@ exports.reserve_equipment = async function (req, res) {
             case 6: pickupDate.setHours(16,15,0); break;
             default: pickupDate.setHours(0,0,0);
         }
-
+        
         var reservation = new Reservation({
             title: equipment.name,
             userID: req.session.idNum,
