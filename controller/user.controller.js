@@ -9,7 +9,6 @@ exports.people_details = function (req, res) {
         sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
-            idNum: req.session.idNum,
             type: req.session.type      
         },
         colleges: colleges
@@ -66,21 +65,17 @@ exports.people_get = async function (req, res) {
 
 exports.profile_details = async function (req, res) {
     try {
-        var user = await User.findOne({ idNum: req.params.idNum });
+        var user = await User.findOne({ idNum: req.session.idNum });
         if (user) {
-            if (user.idNum == req.session.idNum) // user is the same as logged in user
-                res.render('profile-page', {
-                    active: { active_profile: true },
-                    sidebarData: {
-                        dp: req.session.passport.user.profile.photos[0].value,
-                        name: req.session.passport.user.profile.displayName,
-                        idNum: req.session.idNum,
-                        type: req.session.type      
-                    },
-                    user: user
-                });
-            else
-                res.redirect('/404');
+            res.render('profile-page', {
+                active: { active_profile: true },
+                sidebarData: {
+                    dp: req.session.passport.user.profile.photos[0].value,
+                    name: req.session.passport.user.profile.displayName,
+                    type: req.session.type      
+                },
+                user: user
+            });
         } else {
             console.log('profile: user cannot be accessed');
             res.redirect('/');
@@ -93,10 +88,10 @@ exports.profile_details = async function (req, res) {
 
 exports.profile_update = async function (req, res) {
     try {
-        const filter = { idNum: req.params.idNum };
+        const filter = { idNum: req.session.idNum };
         const update = { contactNum: req.body.phone };
         await User.findOneAndUpdate(filter, update);
-        res.redirect('/profile/' + req.session.idNum);
+        res.redirect('/profile');
     } catch (err) {
         console.log(err);
     }
