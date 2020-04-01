@@ -3,6 +3,8 @@ const cron = require('node-cron');
 
 const Reservation = require('../model/reservation.model');
 const User = require('../model/user.model');
+const Equipment = require('../model/equipment.model');
+const Locker = require('../model/locker.model');
 
 // TODO: update reservations based on time
 /* cron.schedule('* * * * *', () => {
@@ -215,8 +217,15 @@ exports.reservation_delete = async function (req, res) {
         var reservation = await Reservation.findById(req.body.reservationID);
         var user = await User.findOne({ idNum: req.session.idNum });
 
-        if ((reservation.userID == req.session.idNum && isCancellable(reservation)) || userIsAdmin(user))
+        if ((reservation.userID == req.session.idNum && isCancellable(reservation)) || userIsAdmin(user)) {
+
+            if (reservation.onItemType == 'Equipment') {
+                await Equipment.findByIdAndUpdate(reservation.item, {$inc: {onRent: -1}});
+            } else {
+                await Locker.findByIdAndUpdate(reservation.item, {status: 'vacant'});
+            }
             await Reservation.findByIdAndDelete(reservation._id);
+        }        
     } catch (err) { console.log(err); };
     res.redirect('/reservations');
 };
