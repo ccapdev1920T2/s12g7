@@ -178,7 +178,7 @@ exports.reservation_update = async function (req, res) {
             var status;
             switch (req.body.status) {
                 case 'status-manage-pending':
-                    status = 'Pending'
+                    status = 'Pending';
                     break;
                 case 'status-manage-pickup-pay':
                     status = (req.body.onItemType == 'Locker') ? 'To Pay' : 'For Pickup';
@@ -188,12 +188,16 @@ exports.reservation_update = async function (req, res) {
                     break;
                 case 'status-manage-returned':
                     status = 'Returned';
+                    if (req.body.onItemType == 'Locker') {await Locker.findByIdAndUpdate(reservation.item, {status: 'vacant'});}
+                    else {await Equipment.findByIdAndUpdate(reservation.item, {$inc: {onRent: -1}});}
                     break;
                 case 'status-manage-uncleared':
                     status = 'Uncleared';
                     break;
                 case 'status-manage-denied':
                     status = 'Denied';
+                    if (req.body.onItemType == 'Locker') {await Locker.findByIdAndUpdate(reservation.item, {status: 'vacant'});}
+                    else {await Equipment.findByIdAndUpdate(reservation.item, {$inc: {onRent: -1}});}
                     break;
             }
 
