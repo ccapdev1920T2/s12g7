@@ -55,6 +55,9 @@
               <div id="activeRequests" class="tab-pane active">
                 <div class="row">
 
+                  {{#unless activeRes}}
+                  <div class="font-italic mx-auto my-5">No active reservations</div>
+                  {{/unless}}
                   {{#each activeRes}}
                   <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="card equal-height">
@@ -120,6 +123,9 @@
               <div id="pastRequests" class="tab-pane fade">
                 <div class="row">
 
+                  {{#unless pastRes}}
+                  <div class="font-italic mx-auto my-5">No past reservations</div>
+                  {{/unless}}
                   {{#each pastRes}}
                   <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="card equal-height">

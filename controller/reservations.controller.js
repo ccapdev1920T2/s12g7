@@ -6,13 +6,23 @@ const User = require('../model/user.model');
 const Equipment = require('../model/equipment.model');
 const Locker = require('../model/locker.model');
 
-// TODO: update reservations based on time
-/* cron.schedule('* * * * *', () => {
-    console.log('running a task every minute');
-});
- */
+// Every 6:30pm, mark all unretuned equipment as uncleared 
+cron.schedule('0 30 18 * * *', async function () {
+    try {
+        await Reservation
+            .updateMany(
+                { onItemType: 'Equipment', status: 'On Rent' },
+                { status: 'Uncleared', lastUpdated: Date.now(), remarks: 'You have not returned the equipment.' }
+            );
 
-hbs.registerHelper('dateStr', (date) => { console.log('str: ' + date); return date == null ? '' : date.toDateString(); });
+    } catch (err) {
+        console.log(err);
+    }
+
+});
+
+
+hbs.registerHelper('dateStr', (date) => { return date == null ? '' : date.toDateString(); });
 
 hbs.registerHelper('dateTimeToday', () => {
     const date = new Date();
@@ -215,8 +225,6 @@ exports.reservation_delete = async function (req, res) {
         var reservation = await Reservation.findById(req.body.reservationID);
         var user = await User.findOne({ idNum: req.session.idNum });        
 
-        console.log(req.body);
-
         if (userIsAdmin(user) || (reservation.userID == req.session.idNum && isCancellable(reservation))) {
 
             if (reservation.onItemType == 'Equipment') {
@@ -227,8 +235,6 @@ exports.reservation_delete = async function (req, res) {
             await Reservation.findByIdAndDelete(reservation._id);
         }        
     } catch (err) { console.log(err); };
-
-    console.log(req.body.prevPath);
 
     if (req.body.prevPath == 'manageReservations')
         res.redirect('/reservations/manage');
