@@ -8,6 +8,10 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+  
+ <!--  Flatpicker Styles  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/material_green.css">
 
   <!-- Custom Styles -->
   <link href="/css/styles.css" rel="stylesheet">
@@ -70,8 +74,7 @@
               <div class="form-group-container col-lg-6">
                 <div class="form-group form-card select-form">
                   <label class="d-block" for="borrow-date">Date needed</label>
-                  {{!-- TODO: Present only the next 5 schooldays from the server --}}
-                  <input type="text" class="form-control form-lg" id="borrow-date" value="March 30, 2020" disabled>
+                  <input type="text" class="form-control form-lg" id="borrow-date" placeholder="mm/dd/yyyy">
                 </div>
               </div>
 
@@ -79,12 +82,12 @@
                 <div class="form-group form-card select-form">
                   <label class="d-block" for="borrow-time">Time needed</label>
                   <select class="form-control custom-select select-lg" id="borrow-time" name="borrowtime">
-                    <option value="1">7:30am</option>
-                    <option value="2">9:15am</option>
-                    <option value="3">11:00am</option>
-                    <option value="4">12:45pm</option>
-                    <option value="5">2:30pm</option>
-                    <option value="6">4:15pm</option>
+                    <option value="1">7:30 am</option>
+                    <option value="2">9:15 am</option>
+                    <option value="3">11:00 am</option>
+                    <option value="4">12:45 pm</option>
+                    <option value="5">2:30 pm</option>
+                    <option value="6">4:15 pm</option>
                   </select>
                 </div>
               </div>
@@ -162,11 +165,26 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
+  <!--  Flatpickr  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
   <script type="text/javascript" src="/js/bootstrap.js"></script>
   <script type="text/javascript" src="/js/styles.js"></script>
   <script type="text/javascript" src="/js/styles-equipment.js"></script>
+  
   <script>
   $(document).ready(function () {
+      $("#borrow-date").flatpickr({
+        enableTime: false,
+        dateFormat: "F d, Y",
+        "disable": [
+            function(date) {
+              return (date.getDay() === 0 || date.getDay() === 6);  // disable weekends
+            }
+        ],
+        "locale": {
+            "firstDayOfWeek": 1 // set start day of week to Monday
+        }
+      });
       $("#submitEquipmentForm").click(function() {
         var equipment = $('button.active');
         var equipmentid = equipment.data('equipmentid');
