@@ -171,12 +171,13 @@
   $(document).ready(function () {
 
       var borrowDate = new Date();
+      var day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
       do {
           borrowDate.setDate(borrowDate.getDate()+1);
       }
       while (borrowDate.getDay() == 0 || borrowDate.getDay() == 6); 
-      $("#borrow-date").val(borrowDate); 
+      $("#borrow-date").val(day[borrowDate.getDay()] + " " + borrowDate.toLocaleDateString('en-US')); 
 
       $("#submitEquipmentForm").click(function() {
         var equipment = $('button.active');
