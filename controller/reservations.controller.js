@@ -6,13 +6,40 @@ const User = require('../model/user.model');
 const Equipment = require('../model/equipment.model');
 const Locker = require('../model/locker.model');
 
+const EQUIPMENT_PENALTY_INITIAL = 50;
+const EQUIPMENT_PENALTY_INCREMENT = 20;
+
 // Every 6:30pm, mark all unretuned equipment as uncleared 
-cron.schedule('0 30 18 * * *', async function () {
+cron.schedule('0 12 0 * * *', async function () {
+
     try {
+        // set unreturned equipment as uncleared
         await Reservation
             .updateMany(
-                { onItemType: 'Equipment', status: 'On Rent' },
-                { status: 'Uncleared', lastUpdated: Date.now(), remarks: 'You have not returned the equipment.' }
+                {
+                    onItemType: 'Equipment',
+                    status: 'On Rent',
+                },
+                {
+                    status: 'Uncleared',
+                    lastUpdated: Date.now(),
+                    remarks: 'You have not returned the equipment.',
+                    penalty: EQUIPMENT_PENALTY_INITIAL
+                }
+            );
+
+        // for already uncleared equipment, increment penalty by 20
+        await Reservation
+            .updateMany(
+                {
+                    onItemType: 'Equipment',
+                    status: 'Uncleared',
+                },
+                {
+                    lastUpdated: Date.now(),
+                    remarks: 'You have not returned the equipment.',
+                    $inc: { penalty: EQUIPMENT_PENALTY_INCREMENT }
+                }
             );
 
     } catch (err) {
@@ -67,7 +94,7 @@ exports.myReservations = async function (req, res) {
             sidebarData: {
                 dp: req.session.passport.user.profile.photos[0].value,
                 name: req.session.passport.user.profile.displayName,
-                type: req.session.type      
+                type: req.session.type
             },
             activeRes: activeReservations,
             pastRes: pastReservations,
@@ -107,7 +134,7 @@ exports.reservation_details = async function (req, res) {
         sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
-            type: req.session.type      
+            type: req.session.type
         },
         pendingToday: pendingToday,
         pendingEarlier: pendingEarlier,
@@ -196,16 +223,16 @@ exports.reservation_update = async function (req, res) {
                     break;
                 case 'status-manage-returned':
                     status = 'Returned';
-                    if (req.body.onItemType == 'Locker') {await Locker.findByIdAndUpdate(reservation.item, {status: 'vacant'});}
-                    else {await Equipment.findByIdAndUpdate(reservation.item, {$inc: {onRent: -1}});}
+                    if (req.body.onItemType == 'Locker') { await Locker.findByIdAndUpdate(reservation.item, { status: 'vacant' }); }
+                    else { await Equipment.findByIdAndUpdate(reservation.item, { $inc: { onRent: -1 } }); }
                     break;
                 case 'status-manage-uncleared':
                     status = 'Uncleared';
                     break;
                 case 'status-manage-denied':
                     status = 'Denied';
-                    if (req.body.onItemType == 'Locker') {await Locker.findByIdAndUpdate(reservation.item, {status: 'vacant'});}
-                    else {await Equipment.findByIdAndUpdate(reservation.item, {$inc: {onRent: -1}});}
+                    if (req.body.onItemType == 'Locker') { await Locker.findByIdAndUpdate(reservation.item, { status: 'vacant' }); }
+                    else { await Equipment.findByIdAndUpdate(reservation.item, { $inc: { onRent: -1 } }); }
                     break;
             }
 
@@ -227,17 +254,17 @@ exports.reservation_update = async function (req, res) {
 exports.reservation_delete = async function (req, res) {
     try {
         var reservation = await Reservation.findById(req.body.reservationID);
-        var user = await User.findOne({ idNum: req.session.idNum });        
+        var user = await User.findOne({ idNum: req.session.idNum });
 
         if (userIsAdmin(user) || (reservation.userID == req.session.idNum && isCancellable(reservation))) {
 
             if (reservation.onItemType == 'Equipment') {
-                await Equipment.findByIdAndUpdate(reservation.item, {$inc: {onRent: -1}});
+                await Equipment.findByIdAndUpdate(reservation.item, { $inc: { onRent: -1 } });
             } else {
-                await Locker.findByIdAndUpdate(reservation.item, {status: 'vacant'});
+                await Locker.findByIdAndUpdate(reservation.item, { status: 'vacant' });
             }
             await Reservation.findByIdAndDelete(reservation._id);
-        }        
+        }
     } catch (err) { console.log(err); };
 
     if (req.body.prevPath == 'manageReservations')
