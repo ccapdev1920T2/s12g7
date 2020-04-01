@@ -76,25 +76,37 @@ exports.locker = async function (req, res) {
 
 exports.reserve_locker = async function (req, res) {
     try {
-        var panel = await Panel.findById(req.body.panelid);
-        var paneltype = panel.type[0].toUpperCase() + panel.type.slice(1);
-        var lockerIndex = req.body.lockernumber - panel.lowerRange;
-        var lockerid = panel.lockers[lockerIndex]._id;
+        var invalid = await hasActiveLockerReservation(req.session.idNum); 
+        if (!invalid) {
+            var panel = await Panel.findById(req.body.panelid);
+            var paneltype = panel.type[0].toUpperCase() + panel.type.slice(1);
+            var lockerIndex = req.body.lockernumber - panel.lowerRange;
+            var lockerid = panel.lockers[lockerIndex]._id;
 
-        var titleString = "Locker #" + req.body.lockernumber;
-        var descString = titleString + ", " + paneltype + " Panel #" + panel.number +
-                         ", " + panel.building + ", " + panel.level + "/F"; 
-       
-        var reservation = new Reservation({
-            title: titleString,
-            userID: req.session.idNum,
-            item: lockerid,
-            status: 'Pending',
-            description: descString,
-            onItemType: 'Locker'
-        });
-        await reservation.save();
-        await Locker.findByIdAndUpdate(lockerid, {status: 'occupied'});
+            var titleString = "Locker #" + req.body.lockernumber;
+            var descString = titleString + ", " + paneltype + " Panel #" + panel.number +
+                            ", " + panel.building + ", " + panel.level + "/F"; 
+        
+            var reservation = new Reservation({
+                title: titleString,
+                userID: req.session.idNum,
+                item: lockerid,
+                status: 'Pending',
+                description: descString,
+                onItemType: 'Locker'
+            });
+            var validLocker = await isLockerVacant(lockerid);
+            if (validLocker) {
+                await reservation.save();
+                await Locker.findByIdAndUpdate(lockerid, {status: 'occupied'});
+            }
+            else {
+                console.log("Reservation unsuccessful. Locker is occupied.")
+            }            
+        }
+        else {
+            console.log("Locker reservation disabled.");
+        }
     } catch (err) {
         console.log(err);
     }
@@ -122,38 +134,42 @@ exports.equipment = async function (req, res) {
 
 exports.reserve_equipment = async function (req, res) {
     try {
-        var equipment = await Equipment.findById(req.body.equipmentid);
-        var equipmentid = req.body.equipmentid;
-        var reason = req.body.reason;
+        var invalid = await has2ActiveEquipmentReservations(req.session.idNum);
+        if (!invalid) {
+            var equipment = await Equipment.findById(req.body.equipmentid);
+            var equipmentid = req.body.equipmentid;
+            var reason = req.body.reason;
+            var pickupDate = new Date();
+            do {
+                pickupDate.setDate(pickupDate.getDate()+1);                
+            }   //0 is Sunday,6 Saturday
+            while (pickupDate.getDay()==0 || pickupDate.getDay()==6);
 
-        var descString = equipment.name + ", " + reason;
-        var pickupDate = new Date();
-        do {
-            pickupDate.setDate(pickupDate.getDate()+1);
-        }   //0 is Sunday, 5 is Friday, 6 Saturday
-        while (pickupDate.getDay()==0 || pickupDate.getDay()==6);
-
-        switch(parseInt(req.body.borrowtime)) {
-            case 1: pickupDate.setHours(7,30,0); break;
-            case 2: pickupDate.setHours(9,15,0); break;
-            case 3: pickupDate.setHours(11,0,0); break;
-            case 4: pickupDate.setHours(12,45,0); break;
-            case 5: pickupDate.setHours(14,30,0); break;
-            case 6: pickupDate.setHours(16,15,0); break;
-            default: pickupDate.setHours(0,0,0);
+            switch(parseInt(req.body.borrowtime)) {
+                case 1: pickupDate.setHours(7,30,0); break;
+                case 2: pickupDate.setHours(9,15,0); break;
+                case 3: pickupDate.setHours(11,0,0); break;
+                case 4: pickupDate.setHours(12,45,0); break;
+                case 5: pickupDate.setHours(14,30,0); break;
+                case 6: pickupDate.setHours(16,15,0); break;
+                default: pickupDate.setHours(0,0,0);
+            }
+            var descString = equipment.name+ ", " + pickupDate.toLocaleString('en-US') + ", " + reason;
+            var reservation = new Reservation({
+                title: equipment.name,
+                userID: req.session.idNum,
+                item: equipmentid, 
+                status: 'Pending',
+                description: descString,
+                onItemType: 'Equipment',
+                pickupPayDate: pickupDate
+            });
+            await reservation.save();
+            await Equipment.findByIdAndUpdate(equipmentid, {$inc: {onRent: 1}});
         }
-        
-        var reservation = new Reservation({
-            title: equipment.name,
-            userID: req.session.idNum,
-            item: equipmentid, 
-            status: 'Pending',
-            description: descString,
-            onItemType: 'Equipment',
-            pickupPayDate: pickupDate
-        });
-        await reservation.save();
-        await Equipment.findByIdAndUpdate(equipmentid, {$inc: {onRent: 1}});
+        else {
+            console.log("Equipment reservation disabled.");
+        }
     } catch (err) {
         console.log(err);
     }
@@ -186,4 +202,14 @@ async function has2ActiveEquipmentReservations(userID) {
         console.log(err);
     }
     return reservationCount == 2;
+};
+
+async function isLockerVacant(lockerid) {
+    try {
+        var locker = await Locker.findById(lockerid);
+    }
+    catch (err) {
+        console.log(err);
+    }
+    return locker.status =='vacant';
 };
