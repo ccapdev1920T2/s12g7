@@ -170,13 +170,13 @@
   <script>
   $(document).ready(function () {
 
-      var borrowDate = new Date('April 3, 2020');
+      var borrowDate = new Date();
 
-        do {
-            borrowDate.setDate(borrowDate.getDate()+1);
-        }
-        while (borrowDate.getDay() == 0 || borrowDate.getDay() == 6); 
-        $("#borrow-date").val(borrowDate); 
+      do {
+          borrowDate.setDate(borrowDate.getDate()+1);
+      }
+      while (borrowDate.getDay() == 0 || borrowDate.getDay() == 6); 
+      $("#borrow-date").val(borrowDate); 
 
       $("#submitEquipmentForm").click(function() {
         var equipment = $('button.active');
