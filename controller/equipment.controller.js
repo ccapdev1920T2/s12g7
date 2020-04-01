@@ -44,7 +44,6 @@ exports.viewAllEquipment = async function (req, res) {
             sidebarData: {
                 dp: req.session.passport.user.profile.photos[0].value,
                 name: req.session.passport.user.profile.displayName,
-                idNum: req.session.idNum,
                 type: req.session.type
             },
             equipmentList: equipment
