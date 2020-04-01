@@ -171,14 +171,14 @@
   $(document).ready(function () {
 
       var borrowDate = new Date();
-      var day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
+      var options = { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric'};
+      
       do {
           borrowDate.setDate(borrowDate.getDate()+1);
       }
       while (borrowDate.getDay() == 0 || borrowDate.getDay() == 6); 
-      $("#borrow-date").val(day[borrowDate.getDay()] + " " + borrowDate.toLocaleDateString('en-US')); 
-
+      $("#borrow-date").val(borrowDate.toLocaleDateString("en-US", options));
+      
       $("#submitEquipmentForm").click(function() {
         var equipment = $('button.active');
         var equipmentid = equipment.data('equipmentid');
