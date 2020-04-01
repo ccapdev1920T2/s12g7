@@ -9,10 +9,6 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
   
- <!--  Flatpicker Styles  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/material_green.css">
-
   <!-- Custom Styles -->
   <link href="/css/styles.css" rel="stylesheet">
   <link href="/css/styles-equipment.css" rel="stylesheet">
@@ -74,7 +70,9 @@
               <div class="form-group-container col-lg-6">
                 <div class="form-group form-card select-form">
                   <label class="d-block" for="borrow-date">Date needed</label>
-                  <input type="text" class="form-control form-lg" id="borrow-date" placeholder="mm/dd/yyyy">
+                  {{!-- TODO: Present only the next 5 schooldays from the server --}}
+                  {{!-- <input type="text" class="form-control form-lg" id="borrow-date" value="March 30, 2020" disabled> --}}
+                  <input type="text" class="form-control form-lg" id="borrow-date" disabled>
                 </div>
               </div>
 
@@ -165,26 +163,21 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
-  <!--  Flatpickr  -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
   <script type="text/javascript" src="/js/bootstrap.js"></script>
   <script type="text/javascript" src="/js/styles.js"></script>
   <script type="text/javascript" src="/js/styles-equipment.js"></script>
   
   <script>
   $(document).ready(function () {
-      $("#borrow-date").flatpickr({
-        enableTime: false,
-        dateFormat: "F d, Y",
-        "disable": [
-            function(date) {
-              return (date.getDay() === 0 || date.getDay() === 6);  // disable weekends
-            }
-        ],
-        "locale": {
-            "firstDayOfWeek": 1 // set start day of week to Monday
+
+      var borrowDate = new Date();
+
+        do {
+            borrowDate.setDate(borrowDate.getDate()+1);
         }
-      });
+        while (borrowDate.getDay() == 0 || borrowDate.getDay() == 5 || borrowDate.getDay() == 6); 
+        $("#borrow-date").val(borrowDate.toString("MM/dd/yyyy")); {{!-- FIXME: --}}
+
       $("#submitEquipmentForm").click(function() {
         var equipment = $('button.active');
         var equipmentid = equipment.data('equipmentid');
