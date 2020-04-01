@@ -272,8 +272,36 @@
             </div>
           </div>
           <div class="modal-footer">
+            <a class="btn btn-warning mr-auto" data-dismiss="modal" data-toggle="modal"
+              href="#delReservationModal">Delete</a>
             <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
             <input type="submit" class="btn btn-primary" id="statusSubmit" value="Update">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="delReservationModal" tabindex="-1" role="dialog" aria-labelledby="reservationModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="reservationModalLabel">Delete Reservation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="POST" action="/reservations/manage/delete" id="delReservationForm">
+          <div class="modal-body col-lg-10 mx-auto">
+            <input type="hidden" name="prevPath" id="prevPath">
+            <input type="hidden" name="reservationID" id="delReservationID">
+            <h5 id="deleteHeader">Would you like to delete this reservation?</h5>
+            <p>Note: Users will not be notified on deleted reservations.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="deleteReservationBtn">Delete</button>
           </div>
         </form>
       </div>

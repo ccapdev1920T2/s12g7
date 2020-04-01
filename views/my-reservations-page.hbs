@@ -188,6 +188,7 @@
         <form id="cancelReservationForm" action="/reservations/manage/delete" method="POST">
           <div class="modal-body col-lg-10 mx-auto">
             <input type="hidden" id="reservationID" name="reservationID">
+            <input type="hidden" name="prevPath" id="prevPath">
             <h5>Do you really want to cancel your reservation?</h1>
             <p>Cancelled requests will be permanently deleted.</p>
           </div>
@@ -212,6 +213,7 @@
     $('#cancelReservationModal').on('show.bs.modal', (event) => {
       var cancelBtn = $(event.relatedTarget);
       $('#reservationID').val(cancelBtn.data('reservationid'));
+      $('#prevPath').val('myReservations');
     });
   </script>
 
