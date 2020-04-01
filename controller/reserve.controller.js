@@ -78,7 +78,7 @@ exports.locker = async function (req, res) {
 
 exports.reserve_locker = async function (req, res) {
     try {
-        var invalid = await hasActiveLockerReservation(req.session.idNum);
+        var invalid = await hasActiveLockerReservation(req.session.idNum); 
         if (!invalid) {
             var panel = await Panel.findById(req.body.panelid);
             var paneltype = panel.type[0].toUpperCase() + panel.type.slice(1);
@@ -97,8 +97,14 @@ exports.reserve_locker = async function (req, res) {
                 description: descString,
                 onItemType: 'Locker'
             });
-            await reservation.save();
-            await Locker.findByIdAndUpdate(lockerid, {status: 'occupied'});
+            var validLocker = await isLockerVacant(lockerid);
+            if (validLocker) {
+                await reservation.save();
+                await Locker.findByIdAndUpdate(lockerid, {status: 'occupied'});
+            }
+            else {
+                console.log("Reservation unsuccessful. Locker is occupied.")
+            }            
         }
         else {
             console.log("Locker reservation disabled.");
@@ -199,4 +205,14 @@ async function has2ActiveEquipmentReservations(userID) {
         console.log(err);
     }
     return reservationCount == 2;
+};
+
+async function isLockerVacant(lockerid) {
+    try {
+        var locker = await Locker.findById(lockerid);
+    }
+    catch (err) {
+        console.log(err);
+    }
+    return locker.status =='vacant';
 };

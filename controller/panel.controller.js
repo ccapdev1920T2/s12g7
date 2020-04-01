@@ -131,8 +131,14 @@ exports.panel_update = async function (req, res) {
         var panel = await Panel.findById(req.body.panelid);
         if (panel) {
             var lockerIndex = req.body.lockernumber - panel.lowerRange;
-            await Locker.findByIdAndUpdate(panel.lockers[lockerIndex]._id, { status: req.body.status });
-            await panel.save();
+            var lockerid = panel.lockers[lockerIndex]._id;
+            var editable = await isLockerVacantBroken(lockerid);
+            if (editable) {
+                await Locker.findByIdAndUpdate(lockerid, { status: req.body.status });
+            }
+            else {
+                console.log('Locker status cannot be updated.');
+            }
         } else {
             console.log('Panel cannot be accessed');
         }
@@ -160,12 +166,10 @@ exports.lessee_get = async function (req, res) {
             item: req.query.lockerid, 
             $or: [{status: 'Pending'}, {status: 'To Pay'}, {status: 'On Rent'}, {status: 'Uncleared'}]
         });
-
         var user = await User.findOne({idNum: reservation.userID});
-        
+
         if (user)
             res.send(user);
-        
     } catch (err) {
         console.log(err);
     }
@@ -186,4 +190,14 @@ exports.status_get = async function (req, res) {
     } catch (err) {
         console.log(err);
     }
+};
+
+async function isLockerVacantBroken(lockerid) {
+    try {
+        var locker = await Locker.findById(lockerid);
+    }
+    catch (err) {
+        console.log(err);
+    }
+    return locker.status =='vacant' || locker.status == 'broken';
 };
