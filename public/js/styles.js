@@ -12,7 +12,6 @@ $(document).ready(function () {
                #window,
                #wall2,
                #wall1`).addClass('locker-anim');
-            console.log('hovered');
         }, function () {
             $(`#human-locker, 
                #human-equipment,
@@ -40,7 +39,6 @@ $(document).ready(function () {
                #window,
                #wall2,
                #wall1`).addClass('equipment-anim');
-            console.log('hovered');
         }, function () {
             $(`#human-locker, 
                #human-equipment,

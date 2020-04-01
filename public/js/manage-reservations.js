@@ -20,46 +20,44 @@ $(document).ready(function () {
 
   $("#statusFilter").on("change", function () {
     stat = $(this).val().split('-')[1];
-    $.get('/reservations/manage/get-reservations' 
-        + '?page=&idnum=' + idNum 
-        + '&status=' + stat, 
-        function (data, status) {
-      pagination = Math.ceil(data.totalCt / itemsPerPage);
-      pageNum = 1;
-      pageStart = 1;
-      pageEnd = pagination > 5 ? 5 : pagination;
-      removePagination();
-      if (data.totalCt > itemsPerPage)
-        setupPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat)
-      displayReservations(data.items);
-    });
+    $.get('/reservations/manage/get-reservations'
+      + '?page=&idnum=' + idNum
+      + '&status=' + stat,
+      function (data, status) {
+        pagination = Math.ceil(data.totalCt / itemsPerPage);
+        pageNum = 1;
+        pageStart = 1;
+        pageEnd = pagination > 5 ? 5 : pagination;
+        removePagination();
+        if (data.totalCt > itemsPerPage)
+          setupPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat)
+        displayReservations(data.items);
+      });
   });
 
   $("#searchBox").on("keyup", function () {
     idNum = $(this).val();
-    $.get('/reservations/manage/get-reservations' 
-        + '?page=&idnum=' + idNum 
-        + '&status=' + stat, 
-        function (data, status) {
-      pagination = Math.ceil(data.totalCt / itemsPerPage);
-      pageNum = 1;
-      pageStart = 1;
-      pageEnd = pagination > 5 ? 5 : pagination;
-      removePagination();
-      if (data.totalCt > itemsPerPage)
-        setupPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat)
-      displayReservations(data.items);
-    });
+    $.get('/reservations/manage/get-reservations'
+      + '?page=&idnum=' + idNum
+      + '&status=' + stat,
+      function (data, status) {
+        pagination = Math.ceil(data.totalCt / itemsPerPage);
+        pageNum = 1;
+        pageStart = 1;
+        pageEnd = pagination > 5 ? 5 : pagination;
+        removePagination();
+        if (data.totalCt > itemsPerPage)
+          setupPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat)
+        displayReservations(data.items);
+      });
   });
 });
 
 $(document).ajaxStart(function () {
-  console.log('loading');
   $('table').css('filter', 'opacity(0.3)');
 });
 
 $(document).ajaxComplete(function () {
-  console.log('loaded');
   $('table').css('filter', 'opacity(1)');
 });
 
@@ -78,9 +76,9 @@ function setupPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat) {
   for (var i = pageStart; i <= pageEnd; i++) {
     $('#resPagination').append(
       '<li class="page-item' + ((i == pageNum) ? ' active' : '') + '">' +
-        '<a class="page-link page-number" href="#otherResCard">' +
-          i +
-        '</a>' +
+      '<a class="page-link page-number" href="#otherResCard">' +
+      i +
+      '</a>' +
       '</li>'
     );
   }
@@ -107,27 +105,27 @@ function setupPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat) {
     var maxPageShiftL = pageStart - 1;
 
     if (pageNum + offset >= 1 && pageNum + offset <= pagination && offset != 0) {
-      $.get('/reservations/manage/get-reservations?page=' 
-          + (pageNum + offset) 
-          + '&idnum=' + idNum
-          + '&status=' + stat, function (data, status) {
-        if (pageNum + offset >= 1 && pageNum + offset <= pagination) {
-          if (offset > 0 && offset <= maxPageShiftR && pageNum + offset > (pageStart + pageEnd) / 2
-            || offset < 0 && -1 * offset <= maxPageShiftL && pageNum + offset < (pageStart + pageEnd) / 2) {
-            pageStart += offset;
-            pageEnd += offset;
-          } else if (offset > 0 && offset > maxPageShiftR) {
-            pageStart += maxPageShiftR;
-            pageEnd += maxPageShiftR;
-          } else if (offset < 0 && -1 * offset > maxPageShiftL) {
-            pageStart -= maxPageShiftL;
-            pageEnd -= maxPageShiftL;
+      $.get('/reservations/manage/get-reservations?page='
+        + (pageNum + offset)
+        + '&idnum=' + idNum
+        + '&status=' + stat, function (data, status) {
+          if (pageNum + offset >= 1 && pageNum + offset <= pagination) {
+            if (offset > 0 && offset <= maxPageShiftR && pageNum + offset > (pageStart + pageEnd) / 2
+              || offset < 0 && -1 * offset <= maxPageShiftL && pageNum + offset < (pageStart + pageEnd) / 2) {
+              pageStart += offset;
+              pageEnd += offset;
+            } else if (offset > 0 && offset > maxPageShiftR) {
+              pageStart += maxPageShiftR;
+              pageEnd += maxPageShiftR;
+            } else if (offset < 0 && -1 * offset > maxPageShiftL) {
+              pageStart -= maxPageShiftL;
+              pageEnd -= maxPageShiftL;
+            }
           }
-        }
-        pageNum += offset;
-        updatePagination(pageStart, pageEnd, pageNum)
-        displayReservations(data.items);
-      });
+          pageNum += offset;
+          updatePagination(pageStart, pageEnd, pageNum)
+          displayReservations(data.items);
+        });
     }
   });
 }
@@ -166,38 +164,43 @@ function displayReservations(reservations) {
 
     $('#reservationsTable').append(
       '<tr>' +
-        '<td>' +
-          '<div class="icon mr-2 col-1" id="' + ((reservation.onItemType == 'Locker') ? 'locker' : 'equipment') + '"/>' +
-        '</td>' +
-        '<td>' + reservation.userID + '</td>' +
-        '<td>' + (new Date(reservation.dateCreated)).toDateString() + '</td>' +
-        '<td>' + reservation.description + '</td>' +
-        '<td>' + (reservation.penalty > 0 ? 'Php ' + reservation.penalty : 'N/A') + '</td>' +
-        '<td>' +
-          '<div class="badge badge-pill ' + stat + '">' +
-            reservation.status +
-          '</div>' +
-        '</td>' +
-        '<td>' +
-          '<a class="table-link" data-toggle="modal" ' +
-              'data-title="' + reservation.title + '" ' +
-              'data-userid="' + reservation.userID + '" ' +
-              'data-datecreated="' + (new Date(reservation.dateCreated)).toDateString() + '" ' +
-              'data-status="' + reservation.status + '" ' +
-              'data-description="' + reservation.description + '" ' +
-              'data-remarks="' + reservation.remarks + '" ' +
-              'data-penalty="' + reservation.penalty + '" ' +
-              'data-onItemType="' + reservation.onItemType + '" ' +
-              'data-id="' + reservation._id + '" ' +
-              'data-paymentdate="' + reservation.pickupPayDate + '" ' +
-              'href="#editReservationModal">' +
-            '<div class="icon col-1" title="Edit Reservation" id="edit"/>' +
-          '</a>' +
-        '</td>' +
+      '<td>' +
+      '<div class="icon mr-2 col-1" id="' + ((reservation.onItemType == 'Locker') ? 'locker' : 'equipment') + '"/>' +
+      '</td>' +
+      '<td>' + reservation.userID + '</td>' +
+      '<td>' + (new Date(reservation.dateCreated)).toDateString() + '</td>' +
+      '<td>' + reservation.description + '</td>' +
+      '<td>' + (reservation.penalty > 0 ? 'Php ' + reservation.penalty : 'N/A') + '</td>' +
+      '<td>' +
+      '<div class="badge badge-pill ' + stat + '">' +
+      reservation.status +
+      '</div>' +
+      '</td>' +
+      '<td>' +
+      '<a class="table-link" data-toggle="modal" ' +
+      'data-title="' + reservation.title + '" ' +
+      'data-userid="' + reservation.userID + '" ' +
+      'data-datecreated="' + (new Date(reservation.dateCreated)).toDateString() + '" ' +
+      'data-status="' + reservation.status + '" ' +
+      'data-description="' + reservation.description + '" ' +
+      'data-remarks="' + reservation.remarks + '" ' +
+      'data-penalty="' + reservation.penalty + '" ' +
+      'data-onItemType="' + reservation.onItemType + '" ' +
+      'data-id="' + reservation._id + '" ' +
+      'data-paymentdate="' + reservation.pickupPayDate + '" ' +
+      'href="#editReservationModal">' +
+      '<div class="icon col-1" title="Edit Reservation" id="edit"/>' +
+      '</a>' +
+      '</td>' +
       '</tr>'
     );
   });
 }
+
+$('#delReservationModal').on('show.bs.modal', (event) => {
+  $('#delReservationID').val($('#reservationID').val());
+  $('#prevPath').val('manageReservations');
+});
 
 $('#approveReservationModal').on('show.bs.modal', (event) => {
   var btn = $(event.relatedTarget).prev();

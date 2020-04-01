@@ -90,7 +90,7 @@ exports.reservation_details = async function (req, res) {
             .find({ status: ['For Pickup', 'To Pay'] }).sort({ pickupPayDate: -1 });
 
     } catch (err) {
-        console.log('ERROR' + err);
+        console.log(err);
     }
 
     res.render('manage-reservations-page', {
@@ -215,9 +215,11 @@ exports.reservation_update = async function (req, res) {
 exports.reservation_delete = async function (req, res) {
     try {
         var reservation = await Reservation.findById(req.body.reservationID);
-        var user = await User.findOne({ idNum: req.session.idNum });
+        var user = await User.findOne({ idNum: req.session.idNum });        
 
-        if ((reservation.userID == req.session.idNum && isCancellable(reservation)) || userIsAdmin(user)) {
+        console.log(req.body);
+
+        if (userIsAdmin(user) || (reservation.userID == req.session.idNum && isCancellable(reservation))) {
 
             if (reservation.onItemType == 'Equipment') {
                 await Equipment.findByIdAndUpdate(reservation.item, {$inc: {onRent: -1}});
@@ -227,7 +229,13 @@ exports.reservation_delete = async function (req, res) {
             await Reservation.findByIdAndDelete(reservation._id);
         }        
     } catch (err) { console.log(err); };
-    res.redirect('/reservations');
+
+    console.log(req.body.prevPath);
+
+    if (req.body.prevPath == 'manageReservations')
+        res.redirect('/reservations/manage');
+    else
+        res.redirect('/reservations');
 };
 
 function isCancellable(reservation) {
