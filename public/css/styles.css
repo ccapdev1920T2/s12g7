@@ -250,6 +250,13 @@ h1, h2, h3, h4, h5 {
     border-color: #f3d4d0;
 }
 
+.alert-warning {
+    color: #70591a;
+    background-color: #ffefc1;
+    border-color: #ffefc1;
+}
+
+
 /* 
 * Buttons
 */
