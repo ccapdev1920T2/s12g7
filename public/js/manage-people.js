@@ -90,9 +90,9 @@ function displayPeople(pips) {
       '<td>' + person.contactNum + '</td>' +
       '<td class="d-flex align-items-center justify-content-end">' +
         ((person.type == 'student') ? 
-          '<a class="table-link btn btn-outline mr-4" data-toggle="modal" data-id="' + person._id + '" href="#promoteModal">Promote</a>' : 
-          '<a class="table-link btn btn-outline mr-4" data-toggle="modal" data-id="' + person._id + '" href="#demoteModal">Demote</a>') +
-        '<a class="table-link" data-toggle="modal" '+
+          '<a class="table-link btn btn-secondary mr-4" data-toggle="modal" data-id="' + person._id + '" href="#promoteModal">Promote</a>' : 
+          '<a class="table-link btn btn-warning mr-4" data-toggle="modal" data-id="' + person._id + '" href="#demoteModal">Demote</a>') +
+        '<a class="table-link mr-2" data-toggle="modal" '+
             'data-fname="' + person.firstName + '" ' +
             'data-lname="' + person.lastName + '" ' +
             'data-idnum="' + person.idNum + '" ' +
