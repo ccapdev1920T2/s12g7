@@ -154,7 +154,7 @@ exports.reserve_equipment = async function (req, res) {
                 case 6: pickupDate.setHours(16,15,0); break;
                 default: pickupDate.setHours(0,0,0);
             }
-            var descString = equipment.name+ ", " + pickupDate.toLocaleString('en-US') + ", " + reason;
+            var descString = reason + ", " + "on " + pickupDate.toLocaleString('en-US');
             var reservation = new Reservation({
                 title: equipment.name,
                 userID: req.session.idNum,
