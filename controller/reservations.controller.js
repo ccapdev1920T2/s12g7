@@ -207,12 +207,12 @@ exports.uncleared_get = async function (req, res) {
 exports.reservation_update = async function (req, res) {
     try {
         var user = await User.findOne({ idNum: parseInt(req.session.idNum) });
-        var reservation = await Reservation.findById(req.body.reservationID);
 
-        console.log(req.body)
+        console.log(req.body);
 
-        if (user && reservation) {
+        if (user) {
             var status;
+            var reservation = await Reservation.findById(req.body.reservationID);
             switch (req.body.status) {
                 case 'status-manage-pending':
                     status = 'Pending';
