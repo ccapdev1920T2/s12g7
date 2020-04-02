@@ -8,6 +8,16 @@ $(document).ready(function () {
     $("#floor").val(flr);
   });
 
+  $('#markUnclearedButton').click(function(){
+    var confirm = $('#confirmation').val();
+    if (confirm == 'locker') {
+      $('#markUnclearedForm').submit();
+    }
+    else {
+      $('#confirmation').css('border-color', 'red');
+    }
+  });
+
   $('#delPanelButton').click(function(){
     $.get('/manage-lockers/status?panelid=' + $("#deletePanelId").val(), function(data, status) {
       if (data) {
@@ -71,6 +81,11 @@ $(document).ready(function () {
     $('#panelAlert').hide();
     $('#deleteHeader').show();
     $('#delPanelButton').show();
+  });
+
+  $('#markUnclearedModal').on('show.bs.modal', function (event) {
+    $("#confirmation").val("");
+    $('#confirmation').css('border-color', '');
   });
 
   // Removes a query parameter
