@@ -220,6 +220,10 @@
 
     });
 
+    $('#addEquipmentModal').on('show.bs.modal', function (event) {
+      $('#addEquipForm').trigger("reset");
+    });
+
     $('#delEquipmentModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget);
       var equipmentID = button.data('equipmentid'); /*TODO:*/
