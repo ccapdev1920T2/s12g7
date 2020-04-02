@@ -192,8 +192,14 @@ exports.status_get = async function (req, res) {
 
 exports.panel_unclear = async function (req, res) {
     try {
-        var lockers = await Locker.updateMany({status: 'occupied'}, { status : 'uncleared'});
-        var reservations = await Reservation.updateMany({status: 'On Rent', onItemType: 'Locker'}, {status: 'Uncleared'});
+        await Locker.updateMany(
+            {status: 'occupied'}, 
+            { status : 'uncleared'}
+        );
+        await Reservation.updateMany(
+            {status: 'On Rent', onItemType: 'Locker'}, 
+            {status: 'Uncleared', penalty: 200}
+        );
     } catch (err) {
         console.log(err);
     }
