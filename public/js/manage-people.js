@@ -87,7 +87,7 @@ function displayPeople(pips) {
       '<td>' + person.idNum + '</td>' +
       '<td>' + person.lastName + ', ' + person.firstName + '</td>' +
       '<td>' + person.type + '</td>' +
-      '<td>' + person.contactNum + '</td>' +
+      '<td>+63' + person.contactNum + '</td>' +
       '<td class="d-flex align-items-center justify-content-end">' +
         ((person.type == 'student') ? 
           '<a class="table-link btn btn-secondary mr-4" data-toggle="modal" data-id="' + person._id + '" href="#promoteModal">Promote</a>' : 
