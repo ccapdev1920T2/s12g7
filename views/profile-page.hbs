@@ -74,7 +74,7 @@
                         </tr>
                         <tr>
                           <th scope="row">Mobile number</th>
-                          <td>{{user.contactNum}}</td>
+                          <td>+63{{user.contactNum}}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -105,7 +105,10 @@
           <div class="modal-body col-lg-10 mx-auto">
             <div class="form-group form-inline input-group">
               <label for="phone" class="col-lg-4 justify-content-start">Mobile Number:</label>
-              <input type="tel" class="form-control col-lg-8" name="phone" id="phone" value="{{user.contactNum}}" required>
+              <div class="input-group-prepend">
+                <span class="input-group-text">+63</span>
+              </div>
+              <input type="tel" class="form-control col-lg-8" name="phone" id="phone" value="{{user.contactNum}}" pattern="[0-9]{10}" required>
             </div>
           </div>
           <div class="modal-footer">

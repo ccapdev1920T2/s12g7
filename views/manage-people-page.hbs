@@ -121,7 +121,10 @@
                 </div>
                 <div class="form-group form-inline input-group">
                   <label for="mobile" class="col-lg-4 justify-content-start pl-2">Mobile number</label>
-                  <input type="tel" class="form-control col-lg-8" name="mobile" id="mobile" required>
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">+63</span>
+                  </div>
+                  <input type="tel" pattern="[0-9]{10}" class="form-control col-lg-8" name="mobile" id="mobile" required>
                 </div>
 
               </div>
