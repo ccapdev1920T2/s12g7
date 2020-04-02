@@ -658,13 +658,13 @@ tr {
     padding: 4px 0 4px 4px;
 }
 
-.table.table-hover tr .table-link .icon {
+.table.table-hover tr .table-link {
     opacity: 0;
     transition: 0.2s ease;
     font-size: 1.1rem;
 }
 
-.table.table-hover tr:not(.head):hover .table-link .icon {
+.table.table-hover tr:not(.head):hover .table-link {
     opacity: 1;
 }
 

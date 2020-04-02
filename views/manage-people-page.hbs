@@ -60,6 +60,7 @@
                       <th></th>
                       <th>ID number</th>
                       <th>Name</th>
+                      <th>Type</th>
                       <th>Mobile Number</th>
                       <th></th>
                     </tr>
@@ -76,68 +77,114 @@
         {{> footer}}
       </div>
 
-      <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog"
-        aria-labelledby="editProfileModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="editProfileModalLabel"></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form class="form-horizontal" method="post" action="/profile/manage">
-              <input type="hidden" name="id" id="id">
-              <div class="modal-body col-lg-10 mx-auto">
-                <div class="d-flex flex-column">
-                  <div class="form-group form-inline input-group">
-                    <label for="firstName" class="col-lg-4 justify-content-start pl-2">First Name</label>
-                    <input type="text" class="form-control col-lg-8" name="firstName"
-                      id="firstName" required>
-                  </div>
-                  <div class="form-group form-inline input-group">
-                    <label for="lastName" class="col-lg-4 justify-content-start pl-2">Last Name</label>
-                    <input type="text" class="form-control col-lg-8" name="lastName"
-                      id="lastName" required>
-                  </div>
-                  <div class="form-group form-inline input-group">
-                    <label for="idNum" class="col-lg-4 justify-content-start pl-2">ID Number</label>
-                    <input type="number" class="form-control col-lg-8" name="idNum"
-                      id="idNum" required>
-                  </div>
-                  <div class="form-group form-inline input-group">
-                    <label for="college" class="col-lg-4 justify-content-start pl-2">College</label>
-                    <div class="col-lg-8 px-0">
-                      <select class="form-control custom-select" name="college" id="college">
-                        {{#each colleges}}
-                        <option value="{{this}}">{{this}}</option>
-                        {{/each}}
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group form-inline input-group">
-                    <label for="degProg" class="col-lg-4 justify-content-start pl-2">Degree Program</label>
-                    <input type="text" class="form-control col-lg-8" name="degProg"
-                      id="degProg" required>
-                  </div>
-                  <div class="form-group form-inline input-group">
-                    <label for="mobile" class="col-lg-4 justify-content-start pl-2">Mobile number</label>
-                    <input type="tel" class="form-control col-lg-8" name="mobile"
-                      id="mobile" required>
-                  </div>
-                  
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
-                <input type="submit" class="btn btn-primary" id="approveStatusSubmit" value="Update">
-              </div>
-            </form>
+    </div>
+
+    <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editProfileModalLabel"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
+          <form class="form-horizontal" method="post" action="/profile/manage">
+            <input type="hidden" name="id" id="id">
+            <div class="modal-body col-lg-10 mx-auto">
+              <div class="d-flex flex-column">
+                <div class="form-group form-inline input-group">
+                  <label for="firstName" class="col-lg-4 justify-content-start pl-2">First Name</label>
+                  <input type="text" class="form-control col-lg-8" name="firstName" id="firstName" required>
+                </div>
+                <div class="form-group form-inline input-group">
+                  <label for="lastName" class="col-lg-4 justify-content-start pl-2">Last Name</label>
+                  <input type="text" class="form-control col-lg-8" name="lastName" id="lastName" required>
+                </div>
+                <div class="form-group form-inline input-group">
+                  <label for="idNum" class="col-lg-4 justify-content-start pl-2">ID Number</label>
+                  <input type="number" class="form-control col-lg-8" name="idNum" id="idNum" required>
+                </div>
+                <div class="form-group form-inline input-group">
+                  <label for="college" class="col-lg-4 justify-content-start pl-2">College</label>
+                  <div class="col-lg-8 px-0">
+                    <select class="form-control custom-select" name="college" id="college">
+                      {{#each colleges}}
+                      <option value="{{this}}">{{this}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group form-inline input-group">
+                  <label for="degProg" class="col-lg-4 justify-content-start pl-2">Degree Program</label>
+                  <input type="text" class="form-control col-lg-8" name="degProg" id="degProg" required>
+                </div>
+                <div class="form-group form-inline input-group">
+                  <label for="mobile" class="col-lg-4 justify-content-start pl-2">Mobile number</label>
+                  <input type="tel" class="form-control col-lg-8" name="mobile" id="mobile" required>
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-primary" id="approveStatusSubmit" value="Update">
+            </div>
+          </form>
         </div>
       </div>
-
     </div>
+
+    <div class="modal fade" id="promoteModal" tabindex="-1" role="dialog" aria-labelledby="promoteModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="promoteModalLabel">Promote User</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form method="POST" action="/profile/manage/promote" id="promoteUserForm">
+            <div class="modal-body col-lg-10 mx-auto">
+              <input type="hidden" name="userID" id="promoteUserID">
+              <h5>Would you like to promote this user to student representative?</h5>
+              <p>Note: Student representatives can manage lockers, equipment, users, and reservations.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary" id="promoteUserBtn">Promote</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="demoteModal" tabindex="-1" role="dialog" aria-labelledby="demoteModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="demoteModalLabel">Demote User</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form method="POST" action="/profile/manage/demote" id="demoteUserForm">
+            <div class="modal-body col-lg-10 mx-auto">
+              <input type="hidden" name="userID" id="demoteUserID">
+              <h5>Would you like to demote this user to student representative?</h5>
+              <p>Note: User will lose administrative privileges.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-warning" id="demoteUserBtn">Demote</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
