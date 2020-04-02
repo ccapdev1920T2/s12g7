@@ -188,7 +188,7 @@ function displayReservations(reservations) {
       'data-description="' + reservation.description + '" ' +
       'data-remarks="' + reservation.remarks + '" ' +
       'data-penalty="' + reservation.penalty + '" ' +
-      'data-onItemType="' + reservation.onItemType + '" ' +
+      'data-type="' + reservation.onItemType + '" ' +
       'data-id="' + reservation._id + '" ' +
       'data-paymentdate="' + reservation.pickupPayDate + '" ' +
       'href="#editReservationModal">' +
@@ -294,6 +294,9 @@ $('#editReservationModal').on('show.bs.modal', (event) => {
     type: btn.data('type'),
     paymentDate: btn.data('paymentdate')
   }
+
+  console.log('reservation');
+  console.log(btn.data('type'));
 
   $.get('/reservations/manage/uncleared?idNum=' + reservation.userID, function (data, status) {
     if (jQuery.isEmptyObject(data))
