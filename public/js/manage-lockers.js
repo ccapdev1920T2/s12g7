@@ -85,6 +85,23 @@ $(document).ready(function () {
 
   $('#addPanelModal').on('show.bs.modal', function (event) {
     $("#addPanelForm").trigger("reset");
+    $('#lowerRange').css('border-color', '');
+    $('#upperRange').css('border-color', '');
+    $('#rangeAlert').hide();
+  });
+
+  $('#addPanelSubmit').click(function(){
+    var lr = $('#lowerRange').val();
+    var hr = $('#upperRange').val();
+    var lo = parseInt(lr);
+    var hi = parseInt(hr);
+
+    if (lo > hi) {
+      $('#rangeAlert').show();
+      $('#lowerRange').css('border-color', 'red');
+      $('#upperRange').css('border-color', 'red');
+    }
+    else $('#addPanelForm').submit();
   });
 
   $('#markUnclearedModal').on('show.bs.modal', function (event) {

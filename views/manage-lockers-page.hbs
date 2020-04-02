@@ -193,6 +193,9 @@
         </div>
         <div class="modal-body col-lg-10 mx-auto">
           <form class="form-horizontal" id="addPanelForm" action="/manage-lockers/" method="POST">
+          <div class="alert alert-danger" role="alert" id="rangeAlert">
+            Locker range should strictly follow <strong>smallest</strong> to <strong>largest</strong> number.
+          </div>
             <div class="form-group form-inline input-group">
               <label for="panelType" class="col-lg-4 justify-content-start">Type:</label>
               <div class="col-lg-8 px-0">
@@ -204,7 +207,7 @@
             </div>
             <div class="form-group form-inline input-group">
               <label for="panelBldg" class="col-lg-4 justify-content-start">Building:</label>
-              <input type="text" class="form-control col-lg-8" id="panelBldg" list="bldgList" name="building" />
+              <input type="text" class="form-control col-lg-8" id="panelBldg" list="bldgList" name="building"/>
               <datalist id="bldgList">
                 {{#each panel_buildings}}
                 <option value="{{this}}"> {{this}} </option>
@@ -228,7 +231,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" form="addPanelForm">Submit</button>
+          <button type="submit" class="btn btn-primary" id="addPanelSubmit">Submit</button>
         </div>
       </div>
     </div>
