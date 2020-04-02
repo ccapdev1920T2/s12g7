@@ -251,11 +251,38 @@
             </div>
           </div>
 
-          <h5 id="deleteHeader">Do you really want to delete this panel?</h1>
+          <h5 id="deleteHeader">Do you really want to delete this panel?</h5>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary" id="delPanelButton">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="markUnclearedModal" tabindex="-1" role="dialog" aria-labelledby="unclearedModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="unclearedModalLabel">Mark Uncleared</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body col-lg-10 mx-auto">
+          <h5>Mark all occupied locker as uncleared.</h5>
+          <p><strong>Type "<i class="font-italic">locker</i>" to confirm.</strong></p>
+          <form id="markUnclearedForm" method="POST" action="/manage-lockers/unclear">
+            <div class="form-group form-inline input-group">
+              <input type="text" class="form-control col-lg-8" id="confirmation"/>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="markUnclearedButton">Confirm</button>
         </div>
       </div>
     </div>
