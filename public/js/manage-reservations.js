@@ -169,7 +169,10 @@ function displayReservations(reservations) {
       '</td>' +
       '<td>' + reservation.userID + '</td>' +
       '<td>' + (new Date(reservation.dateCreated)).toDateString() + '</td>' +
-      '<td>' + reservation.description + '</td>' +
+      '<td>' + 
+        ((reservation.onItemType == 'Equipment') ? reservation.title + '; ' : '') +
+        reservation.description + 
+      '</td>' +
       '<td>' + (reservation.penalty > 0 ? 'Php ' + reservation.penalty : 'N/A') + '</td>' +
       '<td>' +
       '<div class="badge badge-pill ' + stat + '">' +
