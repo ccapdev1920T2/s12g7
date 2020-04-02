@@ -59,6 +59,17 @@ $('#editProfileModal').on('show.bs.modal', (event) => {
   $('#id').val(person.id);
 });
 
+$('#promoteModal').on('show.bs.modal', (event) => {
+  var btn = $(event.relatedTarget);
+  id = btn.data('id');
+  $('#promoteUserID').val(id);
+});
+
+$('#demoteModal').on('show.bs.modal', (event) => {
+  var btn = $(event.relatedTarget);
+  id = btn.data('id');
+  $('#demoteUserID').val(id);
+});
 
 function displayPeople(pips) {
   $('#peopleTable tbody *').remove();
@@ -72,11 +83,15 @@ function displayPeople(pips) {
   pips.forEach(function (person) {
     $('#peopleTable tbody').append(
       '<tr>' +
-      '<td><div class="profile-icon" style="background-image: url(' + person.dpURL + ');"></div></td>' +
+      '<td><div class="profile-icon" style="background-image: url(\''+ person.dpURL +'\');"></div></td>' +
       '<td>' + person.idNum + '</td>' +
       '<td>' + person.lastName + ', ' + person.firstName + '</td>' +
+      '<td>' + person.type + '</td>' +
       '<td>' + person.contactNum + '</td>' +
-      '<td>' +
+      '<td class="d-flex align-items-center justify-content-end">' +
+        ((person.type == 'student') ? 
+          '<a class="table-link btn btn-outline mr-4" data-toggle="modal" data-id="' + person._id + '" href="#promoteModal">Promote</a>' : 
+          '<a class="table-link btn btn-outline mr-4" data-toggle="modal" data-id="' + person._id + '" href="#demoteModal">Demote</a>') +
         '<a class="table-link" data-toggle="modal" '+
             'data-fname="' + person.firstName + '" ' +
             'data-lname="' + person.lastName + '" ' +

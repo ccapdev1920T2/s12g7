@@ -5,11 +5,11 @@ exports.people_details = function (req, res) {
     var colleges = User.schema.path('college').enumValues;
 
     res.render('manage-people-page', {
-        active: {active_manage_people: true},
+        active: { active_manage_people: true },
         sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
-            type: req.session.type      
+            type: req.session.type
         },
         colleges: colleges
     });
@@ -34,7 +34,7 @@ exports.people_update = async function (req, res) {
     } catch (err) {
         console.log(err);
     }
-    
+
     res.redirect('/profile/manage');
 }
 
@@ -46,11 +46,11 @@ exports.people_get = async function (req, res) {
         var people = new Object();
 
         people.totalCt = await User
-            .find({idNum: { $regex: '[0-9]*' + req.query.idnum + '[0-9]*' }})
+            .find({ idNum: { $regex: '[0-9]*' + req.query.idnum + '[0-9]*' } })
             .countDocuments();
 
         people.items = await User
-            .find({idNum: { $regex: '[0-9]*' + req.query.idnum + '[0-9]*' }})
+            .find({ idNum: { $regex: '[0-9]*' + req.query.idnum + '[0-9]*' } })
             .sort('lastname')
             .skip((page - 1) * itemsPerPage)
             .limit(itemsPerPage);
@@ -72,7 +72,7 @@ exports.profile_details = async function (req, res) {
                 sidebarData: {
                     dp: req.session.passport.user.profile.photos[0].value,
                     name: req.session.passport.user.profile.displayName,
-                    type: req.session.type      
+                    type: req.session.type
                 },
                 user: user
             });
@@ -95,4 +95,28 @@ exports.profile_update = async function (req, res) {
     } catch (err) {
         console.log(err);
     }
+}
+
+exports.people_promote = async function (req, res) {
+    try {
+        await User.findByIdAndUpdate(
+            { _id: req.body.userID },
+            { type: 'studentRep' }
+        );
+    } catch (err) { 
+        console.log(err);
+    }
+    res.redirect('/profile/manage');
+}
+
+exports.people_demote = async function (req, res) {
+    try {
+        await User.findByIdAndUpdate(
+            { _id: req.body.userID },
+            { type: 'student' }
+        );
+    } catch (err) { 
+        console.log(err);
+    }
+    res.redirect('/profile/manage');
 }

@@ -105,29 +105,35 @@ exports.register_get = async function (req, res) {
 exports.register_post = async function (req, res) {
 
     try {
-
         var count = await User.countDocuments();
-        var user = new User({
-            firstName: req.session.passport.user.profile.name.givenName,
-            lastName: req.session.passport.user.profile.name.familyName,
-            email: req.session.passport.user.profile.emails[0].value,
-            idNum: req.body.idNum,
-            college: User.schema.path('college').enumValues[req.body.college],
-            degreeProg: req.body.degProg,
-            contactNum: req.body.phone,
-            type: (count == 0 ? 'studentRep' : 'student'),
-            dpURL: req.session.passport.user.profile.photos[0].value
-        });
 
-        var user = await user.save();
+        var usersWithSameIDNumCt = await User.countDocuments({idNum: req.body.idNum});
+        if (usersWithSameIDNumCt > 0)
+            res.redirect('/');
+        else {
+            var user = new User({
+                firstName: req.session.passport.user.profile.name.givenName,
+                lastName: req.session.passport.user.profile.name.familyName,
+                email: req.session.passport.user.profile.emails[0].value,
+                idNum: req.body.idNum,
+                college: User.schema.path('college').enumValues[req.body.college],
+                degreeProg: req.body.degProg,
+                contactNum: req.body.phone,
+                type: (count == 0 ? 'studentRep' : 'student'),
+                dpURL: req.session.passport.user.profile.photos[0].value
+            });
+    
+            var user = await user.save();
+    
+            req.session.idNum = user.idNum;
+            req.session.type = user.type;
 
-        req.session.idNum = user.idNum;
-        req.session.type = user.type;
-        
+            res.redirect('/');
+        }
     } catch (err) {
         console.log('Error writing to db: ' + err);
+        res.redirect('/');
     }
-    res.redirect('/');
 };
 
 exports.login = function (req, res) {
