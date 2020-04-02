@@ -211,6 +211,7 @@ exports.reservation_update = async function (req, res) {
 
         if (user) {
             var status;
+            var reservation = await Reservation.findById(req.body.reservationID);
             switch (req.body.status) {
                 case 'status-manage-pending':
                     status = 'Pending';
@@ -223,16 +224,20 @@ exports.reservation_update = async function (req, res) {
                     break;
                 case 'status-manage-returned':
                     status = 'Returned';
-                    if (req.body.onItemType == 'Locker') { await Locker.findByIdAndUpdate(reservation.item, { status: 'vacant' }); }
-                    else { await Equipment.findByIdAndUpdate(reservation.item, { $inc: { onRent: -1 } }); }
+                    if(reservation) {
+                        if (req.body.onItemType == 'Locker') { await Locker.findByIdAndUpdate(reservation.item, { status: 'vacant' }); }
+                        else { await Equipment.findByIdAndUpdate(reservation.item, { $inc: { onRent: -1 } }); }
+                    }
                     break;
                 case 'status-manage-uncleared':
                     status = 'Uncleared';
                     break;
                 case 'status-manage-denied':
                     status = 'Denied';
-                    if (req.body.onItemType == 'Locker') { await Locker.findByIdAndUpdate(reservation.item, { status: 'vacant' }); }
-                    else { await Equipment.findByIdAndUpdate(reservation.item, { $inc: { onRent: -1 } }); }
+                    if (reservation) {
+                        if (req.body.onItemType == 'Locker') { await Locker.findByIdAndUpdate(reservation.item, { status: 'vacant' }); }
+                        else { await Equipment.findByIdAndUpdate(reservation.item, { $inc: { onRent: -1 } }); }
+                    }
                     break;
             }
 
@@ -245,7 +250,6 @@ exports.reservation_update = async function (req, res) {
                     pickupPayDate: req.body.paymentDate
                 });
         }
-
     } catch (err) { console.log(err); };
 
     res.redirect('/reservations/manage');

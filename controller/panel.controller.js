@@ -190,6 +190,16 @@ exports.status_get = async function (req, res) {
     }
 };
 
+exports.panel_unclear = async function (req, res) {
+    try {
+        var lockers = await Locker.updateMany({status: 'occupied'}, { status : 'uncleared'});
+        var reservations = await Reservation.updateMany({status: 'On Rent', onItemType: 'Locker'}, {status: 'Uncleared'});
+    } catch (err) {
+        console.log(err);
+    }
+    res.redirect('/manage-lockers/');
+};
+
 async function isLockerVacantBroken(lockerid) {
     try {
         var locker = await Locker.findById(lockerid);
