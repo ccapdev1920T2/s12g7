@@ -48,6 +48,7 @@
               </a>
             </div>
 
+            {{#if panels}}
             <div class="col-lg-10 row align-items-end mx-auto px-0">
 
               <div class="form-group-container col-lg-8">
@@ -128,6 +129,11 @@
                 </div>
               </div>
             </div>
+            {{else}}
+            <div class="font-italic d-flex mx-auto mt-5">
+              There are no panels listed. Add a new panel by clicking the button above.
+            </div>
+            {{/if}}
           </form>
 
 
