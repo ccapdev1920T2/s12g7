@@ -11,5 +11,6 @@ router.get('/lessee', UserAuth.userIsAdmin, panel_controller.lessee_get);
 router.get('/status', UserAuth.userIsAdmin, panel_controller.status_get);
 router.post('/update', UserAuth.userIsAdmin, panel_controller.panel_update);
 router.post('/delete', UserAuth.userIsAdmin, panel_controller.panel_delete);
+router.post('/unclear', UserAuth.userIsAdmin, panel_controller.panel_unclear);
 
 module.exports = router
