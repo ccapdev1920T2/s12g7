@@ -36,10 +36,14 @@
         <main role="main" class="pt-3 px-4">
           <form class="form row px-0 col-lg-10 align-items-end mx-auto" action="POST">
 
-            <div class="col-12 d-flex flex-wrap justify-content-between mb-5">
+            <div class="col-12 d-flex flex-wrap mb-5">
               <h1 class="mb-4">Manage lockers</h1>
+              <a id="markUncleared" data-toggle="modal" href="#markUnclearedModal"
+                class="btn btn-warning mb-auto d-flex align-items-center ml-auto mr-4 pl-3">
+                <div class="icon mr-2" id="penalty-white"></div> Mark uncleared
+              </a>
               <a id="addPanel" data-toggle="modal" href="#addPanelModal"
-                class="btn btn-primary mb-auto d-flex align-items-center">
+                class="btn btn-primary mb-auto d-flex align-items-center pl-3">
                 <div class="icon mr-2" id="add"></div> Add panel
               </a>
             </div>

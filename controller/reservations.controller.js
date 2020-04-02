@@ -13,6 +13,20 @@ const EQUIPMENT_PENALTY_INCREMENT = 20;
 cron.schedule('0 12 0 * * *', async function () {
 
     try {
+        // for already uncleared equipment, increment penalty by 20
+        await Reservation
+            .updateMany(
+                {
+                    onItemType: 'Equipment',
+                    status: 'Uncleared',
+                },
+                {
+                    lastUpdated: Date.now(),
+                    remarks: 'You have not returned the equipment.',
+                    $inc: { penalty: EQUIPMENT_PENALTY_INCREMENT }
+                }
+            );
+
         // set unreturned equipment as uncleared
         await Reservation
             .updateMany(
@@ -25,20 +39,6 @@ cron.schedule('0 12 0 * * *', async function () {
                     lastUpdated: Date.now(),
                     remarks: 'You have not returned the equipment.',
                     penalty: EQUIPMENT_PENALTY_INITIAL
-                }
-            );
-
-        // for already uncleared equipment, increment penalty by 20
-        await Reservation
-            .updateMany(
-                {
-                    onItemType: 'Equipment',
-                    status: 'Uncleared',
-                },
-                {
-                    lastUpdated: Date.now(),
-                    remarks: 'You have not returned the equipment.',
-                    $inc: { penalty: EQUIPMENT_PENALTY_INCREMENT }
                 }
             );
 

@@ -130,6 +130,12 @@ hr {
     background-size: contain;
 }
 
+.icon#penalty-white {
+    background: url(../static/icons/penalty-white.png) center no-repeat;
+    background-size: contain;
+}
+
+
 .icon#locker {
     background: url(../static/icons/locker.png) center no-repeat;
     background-size: contain;
@@ -261,7 +267,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .btn:active, .btn:focus {
-    transform: translateY(0);
+    transform: translateY(0) !important;
     transition: ease 0.15s;
     box-shadow: none !important;
 }
@@ -353,11 +359,18 @@ h1, h2, h3, h4, h5 {
 .btn-warning {
     color: #fff;
     background-color: #e65946;
+    border: solid #e65946 1px;
 }
 
 .btn-warning:hover {
     color: #fff;
     background-color: #f36957;
+    border-color: #f36957;
+}
+
+.btn-warning:active, .btn-warning:focus {
+    color: #fff !important;
+    background-color: #e65946 !important;
 }
 
 .btn-disabled {
