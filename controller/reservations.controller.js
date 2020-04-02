@@ -215,28 +215,68 @@ exports.reservation_update = async function (req, res) {
             switch (req.body.status) {
                 case 'status-manage-pending':
                     status = 'Pending';
+                    if (reservation) {
+                        if (req.body.onItemType == 'Locker') { await Locker.findByIdAndUpdate(reservation.item, { status: 'occupied' }); }
+                        else { 
+                            if (reservation.status == 'Denied' || reservation.status == 'Returned') {
+                                await Equipment.findByIdAndUpdate(reservation.item, { $inc: { onRent: 1 } });
+                            }
+                        }
+                    }
                     break;
                 case 'status-manage-pickup-pay':
                     status = (req.body.onItemType == 'Locker') ? 'To Pay' : 'For Pickup';
+                    if (reservation) {
+                        if (req.body.onItemType == 'Locker') { await Locker.findByIdAndUpdate(reservation.item, { status: 'occupied' }); }
+                        else { 
+                            if (reservation.status == 'Denied' || reservation.status == 'Returned') {
+                                await Equipment.findByIdAndUpdate(reservation.item, { $inc: { onRent: 1 } });
+                            }
+                        }
+                    }
                     break;
                 case 'status-manage-on-rent':
                     status = 'On Rent';
+                    if (reservation) {
+                        if (req.body.onItemType == 'Locker') { await Locker.findByIdAndUpdate(reservation.item, { status: 'occupied' }); }
+                        else { 
+                            if (reservation.status == 'Denied' || reservation.status == 'Returned') {
+                                await Equipment.findByIdAndUpdate(reservation.item, { $inc: { onRent: 1 } });
+                            }
+                        }
+                    }
                     break;
                 case 'status-manage-returned':
                     status = 'Returned';
                     if(reservation) {
                         if (req.body.onItemType == 'Locker') { await Locker.findByIdAndUpdate(reservation.item, { status: 'vacant' }); }
-                        else { await Equipment.findByIdAndUpdate(reservation.item, { $inc: { onRent: -1 } }); }
+                        else { 
+                            if (reservation.status != 'Denied' && reservation.status != 'Returned') {
+                                await Equipment.findByIdAndUpdate(reservation.item, { $inc: { onRent: -1 } });
+                            }
+                        }
                     }
                     break;
                 case 'status-manage-uncleared':
                     status = 'Uncleared';
+                    if (reservation) {
+                        if (req.body.onItemType == 'Locker') { await Locker.findByIdAndUpdate(reservation.item, { status: 'uncleared' }); }
+                        else { 
+                            if (reservation.status == 'Denied' || reservation.status == 'Returned') {
+                                await Equipment.findByIdAndUpdate(reservation.item, { $inc: { onRent: 1 } });
+                            }
+                        }
+                    }
                     break;
                 case 'status-manage-denied':
                     status = 'Denied';
                     if (reservation) {
                         if (req.body.onItemType == 'Locker') { await Locker.findByIdAndUpdate(reservation.item, { status: 'vacant' }); }
-                        else { await Equipment.findByIdAndUpdate(reservation.item, { $inc: { onRent: -1 } }); }
+                        else { 
+                            if (reservation.status != 'Denied' && reservation.status != 'Returned') {
+                                await Equipment.findByIdAndUpdate(reservation.item, { $inc: { onRent: -1 } });
+                            }
+                        }
                     }
                     break;
             }
