@@ -39,6 +39,7 @@
 
             <h1 class="mb-5 col-12">Rent equipment</h1>
 
+            {{#if equipmentList}}
             <div class="col-lg-10 row align-items-end mx-auto px-0">
               {{#if status}}
               <div class="col-12 mb-4">
@@ -110,6 +111,11 @@
                 </div>
               </div>
             </div>
+            {{else}}
+            <div class="font-italic d-flex mx-auto mt-5">
+              There are no available equipment yet.
+            </div>
+            {{/if}}
             <input type="hidden" name="equipmentid" id="equipmentid">
           </form>
 

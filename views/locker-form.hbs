@@ -39,6 +39,8 @@
 
             <h1 class="mb-5 col-12">Reserve a locker</h1>
 
+
+            {{#if panels}}
             <div class="col-lg-10 row align-items-end mx-auto px-0">
 
               {{#if status}}
@@ -125,6 +127,11 @@
                 </div>
               </div>
             </div>
+            {{else}}
+            <div class="font-italic d-flex mx-auto mt-5">
+              There are no available panels yet.
+            </div>
+            {{/if}}
 
             <input type="hidden" name="panelid" id="panelid">
             <input type="hidden" name="lockernumber" id="lockernumber">
