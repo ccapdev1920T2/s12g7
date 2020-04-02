@@ -209,6 +209,8 @@ exports.reservation_update = async function (req, res) {
         var user = await User.findOne({ idNum: parseInt(req.session.idNum) });
         var reservation = await Reservation.findById(req.body.reservationID);
 
+        console.log(req.body)
+
         if (user && reservation) {
             var status;
             switch (req.body.status) {
