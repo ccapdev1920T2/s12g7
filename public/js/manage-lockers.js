@@ -83,6 +83,10 @@ $(document).ready(function () {
     $('#delPanelButton').show();
   });
 
+  $('#addPanelModal').on('show.bs.modal', function (event) {
+    $("#addPanelForm").trigger("reset");
+  });
+
   $('#markUnclearedModal').on('show.bs.modal', function (event) {
     $("#confirmation").val("");
     $('#confirmation').css('border-color', '');
