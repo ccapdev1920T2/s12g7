@@ -88,6 +88,7 @@ $(document).ready(function () {
     $('#lowerRange').css('border-color', '');
     $('#upperRange').css('border-color', '');
     $('#rangeAlert').hide();
+    $('#formAlert').hide();
   });
 
   $('#addPanelSubmit').click(function(){
@@ -95,13 +96,24 @@ $(document).ready(function () {
     var hr = $('#upperRange').val();
     var lo = parseInt(lr);
     var hi = parseInt(hr);
+    var bldg = $('#panelBldg').val();
+    var flr = $('#panelFloor').val();
 
-    if (lo > hi) {
-      $('#rangeAlert').show();
-      $('#lowerRange').css('border-color', 'red');
-      $('#upperRange').css('border-color', 'red');
+    if (lr.trim() == '' || hr.trim() == '' || bldg.trim() == '' || flr.trim() == '') {
+      $('#formAlert').show();
+      $('#rangeAlert').hide();
+      $('#lowerRange').css('border-color', '');
+      $('#upperRange').css('border-color', '');
     }
-    else $('#addPanelForm').submit();
+    else {
+      if (lo > hi) {
+        $('#formAlert').hide();
+        $('#rangeAlert').show();
+        $('#lowerRange').css('border-color', 'red');
+        $('#upperRange').css('border-color', 'red');
+      }
+      else $('#addPanelForm').submit();
+    }
   });
 
   $('#markUnclearedModal').on('show.bs.modal', function (event) {
