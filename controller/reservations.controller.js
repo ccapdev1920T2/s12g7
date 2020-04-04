@@ -303,9 +303,12 @@ exports.reservation_delete = async function (req, res) {
 
         if (userIsAdmin(user) || (reservation.userID == req.session.idNum && isCancellable(reservation))) {
 
-            if (reservation.onItemType == 'Equipment') {
+            if (reservation.onItemType == 'Equipment' 
+                    && (reservation.status == 'On Rent'
+                        || reservation.status == 'For Pickup'
+                        || reservation.status == 'Pending')) {
                 await Equipment.findByIdAndUpdate(reservation.item, { $inc: { onRent: -1 } });
-            } else {
+            } else if (reservation.onItemType == 'Locker') {
                 await Locker.findByIdAndUpdate(reservation.item, { status: 'vacant' });
             }
             await Reservation.findByIdAndDelete(reservation._id);
