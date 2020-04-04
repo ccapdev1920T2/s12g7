@@ -59,7 +59,9 @@ exports.updateEquipment = async function (req, res) {
         if (req.body.name.trim().length != 0) { equipment.name = req.body.name; }
         if (!isNaN(parseInt(req.body.count))) { equipment.quantity = req.body.count; }
         if (req.file != null) {
-            fs.unlinkSync(path.join(__dirname, '/../public', equipment.imageURL));
+
+            if (fs.existsSync(path.join(__dirname, '/../public', equipment.imageURL)))
+                fs.unlinkSync(path.join(__dirname, '/../public', equipment.imageURL));
 
             const tempPath = req.file.path;
             const filename = shortid.generate() + '.png';
