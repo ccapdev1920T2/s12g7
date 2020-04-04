@@ -115,7 +115,15 @@ exports.reserve_locker = async function (req, res) {
 
 exports.equipment = async function (req, res) {
     try {
-        equipment = await Equipment.find({ $where: function(){return this.quantity-this.onRent != 0;}});
+        equipment = await Equipment.find({});
+
+        for (var i = 0; i < equipment.length; i++) {
+            if (equipment[i].quantity - equipment[i].onRent == 0) {
+                equipment.splice(i, 1);
+                i--;
+            }
+        }
+        
         var active_reservation = await has2ActiveEquipmentReservations(req.session.idNum);
         res.render('equipment-form', {
             active: { active_index: true },
