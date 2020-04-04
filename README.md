@@ -43,6 +43,9 @@ node index.js
 2. Access the [localhost](http://localhost:3000).
 3. Log in using your DLSU Google account. First time users will be redirected to the register page and will be asked to complete the user's information. The first user who registers automatically becomes a student representative.
 
+## Important Notes
+* When creating an equipment, the student representative has the freedom to choose any image they want to describe the equipment. However, it is advised to design equipment images with design consistency in mind. For instance, the image has to have an aspect ratio of 1:1 to better work with the card layout the developers had in mind when designing the web app. To better visualize the images, the developers have created three sample images for extension cords, VGA cables, and LAN cables that match the web app's design language. The files are accessible on the same project folder at: ```./public/static/equipment-types/```
+
 ## Authors
 - Badulis, Keith Gabriel
 - Gagan, Isser Troy
