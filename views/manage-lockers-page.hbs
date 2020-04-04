@@ -284,11 +284,16 @@
           </button>
         </div>
         <div class="modal-body col-lg-10 mx-auto">
-          <h5>Mark all occupied locker as uncleared.</h5>
+          <h5>Mark all rented lockers as uncleared</h5>
+          <p>
+            All lockers that are currently being rented will be marked as uncleared.
+            Use this option only if all users have not yet returned their lockers past the deadline.
+            The appropriate penalties will be posted on their end.
+          </p>
           <p>Type '<i class="font-italic font-weight-bold">locker</i> ' to confirm.</p>
           <form id="markUnclearedForm" method="POST" action="/manage-lockers/unclear">
             <div class="form-group form-inline input-group">
-              <input type="text" class="form-control col-lg-8" id="confirmation"/>
+              <input type="text" class="form-control" id="confirmation"/>
             </div>
           </form>
         </div>

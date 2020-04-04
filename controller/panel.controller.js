@@ -195,14 +195,24 @@ exports.status_get = async function (req, res) {
 
 exports.panel_unclear = async function (req, res) {
     try {
-        await Locker.updateMany(
-            { status: 'occupied' },
-            { status: 'uncleared' }
-        );
         await Reservation.updateMany(
             { status: 'On Rent', onItemType: 'Locker' },
             { status: 'Uncleared', penalty: 200 }
         );
+
+        var unclearedResLockers = await Reservation
+            .find({status: 'Uncleared', onItemType: 'Locker'})
+            .select('item')
+
+        if (unclearedResLockers) {
+            var unclearedLockers = unclearedResLockers.map(r => r.item)
+            
+            await Locker.updateMany(
+                {_id: {$in: unclearedLockers}},
+                {status: 'uncleared'}
+            )
+        }
+
     } catch (err) {
         console.log(err);
     }
