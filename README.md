@@ -3,11 +3,16 @@
 A simple web app simulation of DLSU-USG's *Pahiram Locker* and DLSU-CSG's *Pahiram Services*. Features a rental system for lockers and equipment such as umbrellas, extension cords, VGA and HDMI cables, and markers. 
 
 ## Features
-* Login/register system (Google Sign-in integration)
+* Users may log in and register via their DLSU Google accounts
 * Two user roles (student and student representative)
-* Edit profile information
-* Rental/reservation system for both locker and equipment
-* Locker and equipment management (*CRUD*) system for admins
+* Students may edit their profile (contact number. To edit other info, the user has to approach the student representative).
+* Students may reserve lockers and equipment (subject to Pahiram Services' terms and conditions).
+* Students may view reservations made, and cancel ones that are on their initial stages when they change their minds.
+* Students may view the terms and conditions of Pahiram Services.
+* Student representatives may manage lockers (i.e. add new panels from specified locations, view panels and their respective lessees, mark broken lockers, and delete vacant panels).
+* Student representatives may manage equipment (i.e. add new equipment, update equipment availability, view a list of all equipment, and delete equipment).
+* Student representatives may manage all types of reservations (e.g. view all reservations and respond to them by changing their statuses and attaching remarks, as well as charging penalties for uncleared reservations).
+* Student representatives may manage people (view all users, update their important profile information such as ID number and name, promote students to student representatives, and demote student representatives to students).
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -19,25 +24,32 @@ Node.js
 Node Package Manager (NPM)
 Git *(optional)
 ```
-### Installing
+### Installation and Setup
 1. Clone repository
 ```
 git clone https://github.com/ccapdev1920T2/s12g7.git
 ```
-2. Install npm packages (command prompt)
+2. Install all npm packages used by typing the following command in the terminal:
 ```
 npm install
 ```
+**NOTE:** Google OAuth 2.0 has been used to authenticate and authorize DLSU users. Due to privacy reasons, the OAuth client ID and secret key have been removed from the source code. These credentials, along with the setup instructions, will be privately sent to the instructor instead for checking.
+
 ### Running
-Run server (access at *localhost:3000*)
+1. Run the server by typing in the command:
 ```
 node index.js
 ```
+2. Access the [localhost](http://localhost:3000).
+3. Log in using your DLSU Google account. First time users will be redirected to the register page and will be asked to complete the user's information. The first user who registers automatically becomes a student representative.
+
+## Important Notes
+* When creating an equipment, the student representative has the freedom to choose any image they want to describe the equipment. However, it is advised to design equipment images with design consistency in mind. For instance, the image has to have an aspect ratio of 1:1 to better work with the card layout the developers had in mind when designing the web app. To better visualize the images, the developers have created three sample images for extension cords, VGA cables, and LAN cables that match the web app's design language. The files are accessible on the same project folder at: ```./public/static/equipment-types/```
+
 ## Authors
 - Badulis, Keith Gabriel
 - Gagan, Isser Troy
 - Matias, Maria Angela Mikaela
 
 ## Acknowledgements
-- [Font Awesome](https://fontawesome.com)
-- Sir Arren for inspiration xDDDddD
+- Sir Arren for patiently teaching us
