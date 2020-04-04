@@ -28,7 +28,7 @@ git clone https://github.com/ccapdev1920T2/s12g7.git
 ```
 npm install
 ```
-NOTE: Google OAuth 2.0 has been used to authenticate and authorize DLSU users. Due to privacy reasons, the OAuth client ID and secret key have been removed from the source code. These credentials, along with the setup instructions, will be privately sent to the instructor instead for checking.
+**NOTE:** Google OAuth 2.0 has been used to authenticate and authorize DLSU users. Due to privacy reasons, the OAuth client ID and secret key have been removed from the source code. These credentials, along with the setup instructions, will be privately sent to the instructor instead for checking.
 ### Running
 Run server (access at *localhost:3000*)
 ```
