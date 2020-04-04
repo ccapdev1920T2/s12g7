@@ -19,15 +19,16 @@ Node.js
 Node Package Manager (NPM)
 Git *(optional)
 ```
-### Installing
+### Installation and Setup
 1. Clone repository
 ```
 git clone https://github.com/ccapdev1920T2/s12g7.git
 ```
-2. Install npm packages (command prompt)
+2. Install all npm packages used by typing the following command in the terminal:
 ```
 npm install
 ```
+NOTE: Google OAuth 2.0 has been used to authenticate and authorize DLSU users. Due to privacy reasons, the OAuth client ID and secret key have been removed from the source code. These credentials, along with the setup instructions, will be privately sent to the instructor instead for checking.
 ### Running
 Run server (access at *localhost:3000*)
 ```
@@ -39,5 +40,4 @@ node index.js
 - Matias, Maria Angela Mikaela
 
 ## Acknowledgements
-- [Font Awesome](https://fontawesome.com)
-- Sir Arren for inspiration xDDDddD
+- Sir Arren for patiently teaching us
