@@ -83,8 +83,6 @@ $(document).ready(function () {
     $('#delPanelButton').show();
   });
 
-<<<<<<< HEAD
-=======
   $('#addPanelModal').on('show.bs.modal', function (event) {
     $("#addPanelForm").trigger("reset");
     $('#lowerRange').css('border-color', '');
@@ -118,7 +116,6 @@ $(document).ready(function () {
     }
   });
 
->>>>>>> e71e862143542b90744b615d66f7fe36fb683992
   $('#markUnclearedModal').on('show.bs.modal', function (event) {
     $("#confirmation").val("");
     $('#confirmation').css('border-color', '');

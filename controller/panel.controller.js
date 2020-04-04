@@ -69,7 +69,7 @@ exports.panel_details = async function (req, res) {
                     sidebarData: {
                         dp: req.session.passport.user.profile.photos[0].value,
                         name: req.session.passport.user.profile.displayName,
-                        type: req.session.type      
+                        type: req.session.type
                     },
                     panel_buildings: panel_building,
                     panel_floors: panel_floor.sort(),
@@ -116,7 +116,7 @@ exports.panel_details = async function (req, res) {
                     sidebarData: {
                         dp: req.session.passport.user.profile.photos[0].value,
                         name: req.session.passport.user.profile.displayName,
-                        type: req.session.type      
+                        type: req.session.type
                     }
                 });
             }
@@ -159,15 +159,15 @@ exports.panel_delete = async function (req, res) {
         console.log(err);
     }
     res.redirect("/manage-lockers/?bldg=" + req.body.building + "&flr=" + req.body.level);
-}; 
+};
 
 exports.lessee_get = async function (req, res) {
     try {
         var reservation = await Reservation.findOne({
-            item: req.query.lockerid, 
-            $or: [{status: 'Pending'}, {status: 'To Pay'}, {status: 'On Rent'}, {status: 'Uncleared'}]
+            item: req.query.lockerid,
+            $or: [{ status: 'Pending' }, { status: 'To Pay' }, { status: 'On Rent' }, { status: 'Uncleared' }]
         });
-        var user = await User.findOne({idNum: reservation.userID});
+        var user = await User.findOne({ idNum: reservation.userID });
 
         if (user)
             res.send(user);
@@ -182,7 +182,7 @@ exports.status_get = async function (req, res) {
         var panel = await Panel.findById(req.query.panelid).populate('lockers');
         var lockers = panel.lockers;
 
-        for (var i = 0; i < lockers.length; i++) 
+        for (var i = 0; i < lockers.length; i++)
             if (lockers[i].status == 'occupied' || lockers[i].status == 'uncleared')
                 deletable = false;
 
@@ -196,12 +196,12 @@ exports.status_get = async function (req, res) {
 exports.panel_unclear = async function (req, res) {
     try {
         await Locker.updateMany(
-            {status: 'occupied'}, 
-            { status : 'uncleared'}
+            { status: 'occupied' },
+            { status: 'uncleared' }
         );
         await Reservation.updateMany(
-            {status: 'On Rent', onItemType: 'Locker'}, 
-            {status: 'Uncleared', penalty: 200}
+            { status: 'On Rent', onItemType: 'Locker' },
+            { status: 'Uncleared', penalty: 200 }
         );
     } catch (err) {
         console.log(err);
@@ -216,5 +216,5 @@ async function isLockerVacantBroken(lockerid) {
     catch (err) {
         console.log(err);
     }
-    return locker.status =='vacant' || locker.status == 'broken';
+    return locker.status == 'vacant' || locker.status == 'broken';
 };
