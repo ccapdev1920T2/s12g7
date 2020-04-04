@@ -63,17 +63,20 @@ exports.panel_details = async function (req, res) {
             var panel_floor = await Panel.find({ building: req.query.bldg }).distinct('level').populate('lockers');
             var panel_building = await Panel.find().distinct('building').populate('lockers');
 
-            res.render('manage-lockers-page', {
-                active: { active_manage_lockers: true },
-                sidebarData: {
-                    dp: req.session.passport.user.profile.photos[0].value,
-                    name: req.session.passport.user.profile.displayName,
-                    type: req.session.type      
-                },
-                panel_buildings: panel_building,
-                panel_floors: panel_floor.sort(),
-                panels: panel
-            });
+            if (panel.length) {
+                res.render('manage-lockers-page', {
+                    active: { active_manage_lockers: true },
+                    sidebarData: {
+                        dp: req.session.passport.user.profile.photos[0].value,
+                        name: req.session.passport.user.profile.displayName,
+                        type: req.session.type      
+                    },
+                    panel_buildings: panel_building,
+                    panel_floors: panel_floor.sort(),
+                    panels: panel
+                });
+            }
+            else res.redirect("/manage-lockers/?bldg=" + req.query.bldg);
         }
         catch (err) {
             console.log(err);

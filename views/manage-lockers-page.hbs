@@ -193,6 +193,15 @@
         </div>
         <div class="modal-body col-lg-10 mx-auto">
           <form class="form-horizontal" id="addPanelForm" action="/manage-lockers/" method="POST">
+<<<<<<< HEAD
+=======
+          <div class="alert alert-danger" role="alert" id="rangeAlert">
+            Locker range should strictly follow <strong>smallest</strong> to <strong>largest</strong> number.
+          </div>
+          <div class="alert alert-warning" role="alert" id="formAlert">
+            Please fill up all the blank fields.
+          </div>
+>>>>>>> e71e862143542b90744b615d66f7fe36fb683992
             <div class="form-group form-inline input-group">
               <label for="panelType" class="col-lg-4 justify-content-start">Type:</label>
               <div class="col-lg-8 px-0">
@@ -204,7 +213,11 @@
             </div>
             <div class="form-group form-inline input-group">
               <label for="panelBldg" class="col-lg-4 justify-content-start">Building:</label>
+<<<<<<< HEAD
               <input type="text" class="form-control col-lg-8" id="panelBldg" list="bldgList" name="building" />
+=======
+              <input type="text" class="form-control col-lg-8" id="panelBldg" list="bldgList" name="building"/>
+>>>>>>> e71e862143542b90744b615d66f7fe36fb683992
               <datalist id="bldgList">
                 {{#each panel_buildings}}
                 <option value="{{this}}"> {{this}} </option>
@@ -228,7 +241,11 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+<<<<<<< HEAD
           <button type="submit" class="btn btn-primary" form="addPanelForm">Submit</button>
+=======
+          <button type="submit" class="btn btn-primary" id="addPanelSubmit">Submit</button>
+>>>>>>> e71e862143542b90744b615d66f7fe36fb683992
         </div>
       </div>
     </div>
@@ -240,6 +257,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="panelModalLabel"></h5>
+<<<<<<< HEAD
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -273,6 +291,57 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="unclearedModalLabel">Mark Uncleared</h5>
+=======
+>>>>>>> e71e862143542b90744b615d66f7fe36fb683992
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body col-lg-10 mx-auto">
+<<<<<<< HEAD
+          <h5>Mark all occupied locker as uncleared.</h5>
+          <p><strong>Type "<i class="font-italic">locker</i>" to confirm.</strong></p>
+          <form id="markUnclearedForm" method="POST" action="/manage-lockers/unclear">
+            <div class="form-group form-inline input-group">
+              <input type="text" class="form-control col-lg-8" id="confirmation"/>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="markUnclearedButton">Confirm</button>
+=======
+          <form id="deletePanelForm" action="/manage-lockers/delete" method="POST">
+            <input type="hidden" name="panelid" id="deletePanelId">
+            <input type="hidden" name="building" id="deletePanelBuilding">
+            <input type="hidden" name="level" id="deletePanelFloor">
+          </form>
+
+          <div class="col-12" id="panelAlert">
+            <div class="alert alert-warning" role="alert">
+              <strong>Action unsuccessful!</strong> Panel cannot be deleted as some lockers are still occupied. 
+            </div>
+          </div>
+
+          <h5 id="deleteHeader">Do you really want to delete this panel?</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="delPanelButton">Delete</button>
+>>>>>>> e71e862143542b90744b615d66f7fe36fb683992
+        </div>
+      </div>
+    </div>
+  </div>
+
+<<<<<<< HEAD
+=======
+  <div class="modal fade" id="markUnclearedModal" tabindex="-1" role="dialog" aria-labelledby="unclearedModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="unclearedModalLabel">Mark Uncleared</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -294,6 +363,7 @@
     </div>
   </div>
 
+>>>>>>> e71e862143542b90744b615d66f7fe36fb683992
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
