@@ -201,7 +201,9 @@
   <script>
     $(document).ready(function () {
       $('#editEquipButton').click(function() {
-        $.get('/manage-equipment/onrent?equipmentid=' + $('#editHiddenEquipID').val(), function(data, status) {
+        $.get('/manage-equipment/onrent', 
+        {equipmentid: $('#editHiddenEquipID').val()},
+        function(data, status) {
         var setQuantity = $('#equipment-ct').val();
         if (setQuantity < data.onRent) {
           $('#availableAlert').show();
@@ -211,7 +213,9 @@
       });
 
       $('#deleteEquipButton').click(function() {
-        $.get('/manage-equipment/onrent?equipmentid=' + $('#editHiddenEquipID').val(), function(data, status) {
+        $.get('/manage-equipment/onrent', 
+          {equipmentid: $('#editHiddenEquipID').val()},
+          function(data, status) {
           if (data.onRent != 0) {
             $('#onRentAlert').show();
             $('#deleteHeader').hide();

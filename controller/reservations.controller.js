@@ -144,7 +144,6 @@ exports.reservation_details = async function (req, res) {
 
 exports.reservations_get = async function (req, res) {
     try {
-        var page = req.query.page == '' ? 1 : req.query.page;
         var reservations = new Object();
         const itemsPerPage = 5;
 
@@ -182,7 +181,7 @@ exports.reservations_get = async function (req, res) {
                 userID: { $regex: '[0-9]*' + req.query.idnum + '[0-9]*' }
             })
             .sort({ lastUpdated: -1 })
-            .skip((page - 1) * itemsPerPage)
+            .skip((req.query.page - 1) * itemsPerPage)
             .limit(itemsPerPage);
 
         if (reservations) {
@@ -196,7 +195,7 @@ exports.reservations_get = async function (req, res) {
 
 exports.uncleared_get = async function (req, res) {
     try {
-        var uncleared = await Reservation.find({ userID: req.query.idNum, status: 'Uncleared' });
+        var uncleared = await Reservation.find({ userID: req.query.idnum, status: 'Uncleared' });
         if (uncleared)
             res.send(uncleared);
     } catch (error) {
