@@ -3,6 +3,7 @@
 A simple web app simulation of DLSU-USG's *Pahiram Locker* and DLSU-CSG's *Pahiram Services*. Features a rental system for lockers and equipment such as umbrellas, extension cords, VGA and HDMI cables, and markers. 
 
 ## Features
+* The web app is designed to be responsive. This means that all pages and features are easily accessible across any platform, from desktops to mobile phones.
 * Users may log in and register via their DLSU Google accounts
 * Two user roles (student and student representative)
 * Students may edit their profile (contact number. To edit other info, the user has to approach the student representative).
