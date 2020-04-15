@@ -3,36 +3,40 @@ const fs = require('fs');
 const path = require('path');
 const shortid = require('shortid');
 const hbs = require('hbs');
+const { validationResult } = require('express-validator');
 
 hbs.registerHelper('subtract', function (a, b) { return a-b; });
 
 exports.createEquipment = function (req, res) {
 
-    const tempPath = req.file.path;
-    const filename = shortid.generate() + '.png';
-    const filePath = path.join(__dirname, '/../public/uploads/equipment-images', filename);
-    const relativeFilePath = '/uploads/equipment-images/' + filename;
+    var errors = validationResult(req);
 
-    fs.rename(tempPath, filePath, async function(err) {
-        if (err) {
-            console.log(err);
-            res.redirect('/manage-equipment/');
-        } else {
-            let equipment = new Equipment({
-                name: req.body.name,
-                quantity: parseInt(req.body.count),
-                imageURL: relativeFilePath
-            });
-
-            try {
-                await equipment.save();
-            } catch(err) {
+    if (errors.isEmpty()) {
+        const tempPath = req.file.path;
+        const filename = shortid.generate() + '.png';
+        const filePath = path.join(__dirname, '/../public/uploads/equipment-images', filename);
+        const relativeFilePath = '/uploads/equipment-images/' + filename;
+    
+        fs.rename(tempPath, filePath, async function(err) {
+            if (err) {
                 console.log(err);
+                res.redirect('/manage-equipment/');
+            } else {
+                let equipment = new Equipment({
+                    name: req.body.name,
+                    quantity: parseInt(req.body.count),
+                    imageURL: relativeFilePath
+                });
+    
+                try {
+                    await equipment.save();
+                } catch(err) {
+                    console.log(err);
+                }
+                res.redirect("/manage-equipment/");
             }
-            res.redirect("/manage-equipment/");
-        }
-    });
-
+        });
+    }
 };
 
 exports.viewAllEquipment = async function (req, res) {
@@ -54,38 +58,43 @@ exports.viewAllEquipment = async function (req, res) {
 };
 
 exports.updateEquipment = async function (req, res) {
-    try {
-        var equipment = await Equipment.findById(req.body.equipmentid);
-        if (req.body.name.trim().length != 0) { equipment.name = req.body.name; }
-        if (!isNaN(parseInt(req.body.count))) { equipment.quantity = req.body.count; }
-        if (req.file != null) {
 
-            if (fs.existsSync(path.join(__dirname, '/../public', equipment.imageURL)))
-                fs.unlinkSync(path.join(__dirname, '/../public', equipment.imageURL));
+    var errors = validationResult(req);
 
-            const tempPath = req.file.path;
-            const filename = shortid.generate() + '.png';
-            const filePath = path.join(__dirname, '/../public/uploads/equipment-images', filename);
-            const relativeFilePath = '/uploads/equipment-images/' + filename;
-
-            fs.rename(tempPath, filePath, async function(err) {
-                if (err) console.log(err);
-                else equipment.imageURL = relativeFilePath;
-                try {
-                    await equipment.save();
-                }
-                catch (err) {
-                    console.log('Error updating db: ' + err);
-                }
-            });
-        }
-        else {
-            await equipment.save();
-        }
-    } catch (err) {
-        console.log('Error updating db: ' + err);
-    }              
-    res.redirect("/manage-equipment/");
+    if (errors.isEmpty()) {
+        try {
+            var equipment = await Equipment.findById(req.body.equipmentid);
+            if (req.body.name.trim().length != 0) { equipment.name = req.body.name; }
+            if (!isNaN(parseInt(req.body.count))) { equipment.quantity = req.body.count; }
+            if (req.file != null) {
+    
+                if (fs.existsSync(path.join(__dirname, '/../public', equipment.imageURL)))
+                    fs.unlinkSync(path.join(__dirname, '/../public', equipment.imageURL));
+    
+                const tempPath = req.file.path;
+                const filename = shortid.generate() + '.png';
+                const filePath = path.join(__dirname, '/../public/uploads/equipment-images', filename);
+                const relativeFilePath = '/uploads/equipment-images/' + filename;
+    
+                fs.rename(tempPath, filePath, async function(err) {
+                    if (err) console.log(err);
+                    else equipment.imageURL = relativeFilePath;
+                    try {
+                        await equipment.save();
+                    }
+                    catch (err) {
+                        console.log('Error updating db: ' + err);
+                    }
+                });
+            }
+            else {
+                await equipment.save();
+            }
+        } catch (err) {
+            console.log('Error updating db: ' + err);
+        }              
+        res.redirect("/manage-equipment/");
+    }
 };
 
 exports.deleteEquipment = async function (req, res) { 
