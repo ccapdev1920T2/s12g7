@@ -6,35 +6,34 @@ $(document).ready(function () {
 
     $("#bldg").val(bldg);
     $("#floor").val(flr);
-
-    function isFilled() {
-      var lRange = validator.trim($('#lowerRange').val());
-      var uRange = validator.trim($('#upperRange').val());
-      var bldg = validator.trim($('#panelBldg').val());
-      var flr = validator.trim($('#panelFloor').val());
-
-      var lRangeEmpty = validator.isEmpty(lRange);
-      var uRangeEmpty = validator.isEmpty(uRange);
-      var bldgEmpty = validator.isEmpty(bldg);
-      var flrEmpty = validator.isEmpty(flr);
-
-      return !lRangeEmpty && !uRangeEmpty && !bldgEmpty && !flrEmpty;
-    }
-
-    function isValidRange() {
-      var lRange = validator.trim($('#lowerRange').val());
-      var uRange = validator.trim($('#upperRange').val());
-
-      if (validator.isInt(lRange) && validator.isInt(uRange)) {
-        var lower = parseInt(lRange);
-        var upper = parseInt(uRange);
-
-        return upper >= lower;
-      }
-      else return false;
-    }
-
   });
+
+  function isFilled() {
+    var lRange = validator.trim($('#lowerRange').val());
+    var uRange = validator.trim($('#upperRange').val());
+    var bldg = validator.trim($('#panelBldg').val());
+    var flr = validator.trim($('#panelFloor').val());
+
+    var lRangeEmpty = validator.isEmpty(lRange);
+    var uRangeEmpty = validator.isEmpty(uRange);
+    var bldgEmpty = validator.isEmpty(bldg);
+    var flrEmpty = validator.isEmpty(flr);
+
+    return !lRangeEmpty && !uRangeEmpty && !bldgEmpty && !flrEmpty;
+  }
+
+  function isValidRange() {
+    var lRange = validator.trim($('#lowerRange').val());
+    var uRange = validator.trim($('#upperRange').val());
+
+    if (validator.isInt(lRange) && validator.isInt(uRange)) {
+      var lower = validator.toInt(lRange);
+      var upper = validator.toInt(uRange);
+
+      return upper >= lower;
+    }
+    else return false;
+  }
 
   $('#markUnclearedButton').click(function(){
     var confirm = $('#confirmation').val();
@@ -125,7 +124,7 @@ $(document).ready(function () {
 
   $('#addPanelSubmit').click(function(){
     if (isFilled()) {
-      if (isValidRange) {
+      if (isValidRange()) {
         $('#addPanelForm').submit();
       }
       else {
