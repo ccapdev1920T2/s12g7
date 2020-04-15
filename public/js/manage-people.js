@@ -6,7 +6,7 @@ $(document).ready(function () {
   var idNum = '';
   const itemsPerPage = 10;
 
-  $.get('/profile/manage/get-people?page=&idnum=', function (data, status) {
+  $.get('/profile/manage/get-people', {page: 1, idnum: ''}, function (data, status) {
     pagination = Math.ceil(data.totalCt / itemsPerPage);
     pageNum = 1;
     pageStart = 1;
@@ -20,8 +20,8 @@ $(document).ready(function () {
 
   $("#searchBox").on("keyup", function () {
     idNum = $(this).val();
-    $.get('/profile/manage/get-people' 
-        + '?page=&idnum=' + idNum, 
+    $.get('/profile/manage/get-people', 
+        {page: 1, idnum: idNum},
         function (data, status) {
       pagination = Math.ceil(data.totalCt / itemsPerPage);
       pageNum = 1;
@@ -33,6 +33,14 @@ $(document).ready(function () {
       displayPeople(data.items);
     });
   });
+});
+
+$(document).ajaxStart(function () {
+  $('table').css('filter', 'opacity(0.3)');
+});
+
+$(document).ajaxComplete(function () {
+  $('table').css('filter', 'opacity(1)');
 });
 
 $('#editProfileModal').on('show.bs.modal', (event) => {
@@ -152,9 +160,9 @@ function setupPagination(pagination, pageStart, pageEnd, pageNum, idNum) {
     var maxPageShiftL = pageStart - 1;
 
     if (pageNum + offset >= 1 && pageNum + offset <= pagination && offset != 0) {
-      $.get('/profile/manage/get-people?' +
-        'page=' + (pageNum + offset) +
-        '&idnum=' + idNum, function (data, status) {
+      $.get('/profile/manage/get-people',
+        {page: pageNum + offset, idnum: idNum},
+        function (data, status) {
           if (pageNum + offset >= 1 && pageNum + offset <= pagination) {
             if (offset > 0 && offset <= maxPageShiftR && pageNum + offset > (pageStart + pageEnd) / 2
               || offset < 0 && -1 * offset <= maxPageShiftL && pageNum + offset < (pageStart + pageEnd) / 2) {

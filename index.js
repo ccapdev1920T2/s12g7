@@ -47,7 +47,7 @@ const panel = require('./routes/panel.routes');
 const equipment = require('./routes/equipment.routes');
 
 // Connecting to the db
-mongoose.connect('mongodb://rootuser:p%40ssword@pahiram-shard-00-00-eypip.mongodb.net:27017,pahiram-shard-00-01-eypip.mongodb.net:27017,pahiram-shard-00-02-eypip.mongodb.net:27017/test?ssl=true&replicaSet=pahiram-shard-0&authSource=admin&retryWrites=true&w=majority',
+mongoose.connect('mongodb://user:p%40ssword@cluster0-shard-00-00-kuvqr.mongodb.net:27017,cluster0-shard-00-01-kuvqr.mongodb.net:27017,cluster0-shard-00-02-kuvqr.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority',
     { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false }
 ).catch(err => {
     console.log('Error connecting to the db: ' + err);

@@ -19,7 +19,9 @@ $(document).ready(function () {
   });
 
   $('#delPanelButton').click(function(){
-    $.get('/manage-lockers/status?panelid=' + $("#deletePanelId").val(), function(data, status) {
+    $.get('/manage-lockers/status', 
+      {panelid: $("#deletePanelId").val()},
+      function(data, status) {
       if (data) {
         $('#deletePanelForm').submit();
       }
@@ -56,7 +58,9 @@ $(document).ready(function () {
       $('#setStatusForm').hide();
       $('#setStatusButton').hide();
 
-      $.get('/manage-lockers/lessee?lockerid=' + lockerid, function(data, status) {
+      $.get('/manage-lockers/lessee', 
+        {lockerid: lockerid},
+        function(data, status) {
         var user = data.idNum+ " - " + data.firstName + " " + data.lastName;
         $('#lessee').text("Occupied by:  " + user);
       });

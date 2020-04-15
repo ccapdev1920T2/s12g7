@@ -7,7 +7,9 @@ $(document).ready(function () {
   var stat = 'all';
   const itemsPerPage = 5;
 
-  $.get('/reservations/manage/get-reservations?page=&idnum=&status=all', function (data, status) {
+  $.get('/reservations/manage/get-reservations',
+    {page: 1, idnum: '', status: 'all'},
+    function (data, status) {
     pagination = Math.ceil(data.totalCt / itemsPerPage);
     pageNum = 1;
     pageStart = 1;
@@ -20,9 +22,8 @@ $(document).ready(function () {
 
   $("#statusFilter").on("change", function () {
     stat = $(this).val().split('-')[1];
-    $.get('/reservations/manage/get-reservations'
-      + '?page=&idnum=' + idNum
-      + '&status=' + stat,
+    $.get('/reservations/manage/get-reservations',
+      {page: 1, idnum: idNum, status: stat},
       function (data, status) {
         pagination = Math.ceil(data.totalCt / itemsPerPage);
         pageNum = 1;
@@ -37,9 +38,8 @@ $(document).ready(function () {
 
   $("#searchBox").on("keyup", function () {
     idNum = $(this).val();
-    $.get('/reservations/manage/get-reservations'
-      + '?page=&idnum=' + idNum
-      + '&status=' + stat,
+    $.get('/reservations/manage/get-reservations',
+      {page: 1, idnum: idNum, status: stat},
       function (data, status) {
         pagination = Math.ceil(data.totalCt / itemsPerPage);
         pageNum = 1;
@@ -105,10 +105,9 @@ function setupPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat) {
     var maxPageShiftL = pageStart - 1;
 
     if (pageNum + offset >= 1 && pageNum + offset <= pagination && offset != 0) {
-      $.get('/reservations/manage/get-reservations?page='
-        + (pageNum + offset)
-        + '&idnum=' + idNum
-        + '&status=' + stat, function (data, status) {
+      $.get('/reservations/manage/get-reservations',
+        {page: pageNum + offset, idnum: idNum, status: stat}, 
+        function (data, status) {
           if (pageNum + offset >= 1 && pageNum + offset <= pagination) {
             if (offset > 0 && offset <= maxPageShiftR && pageNum + offset > (pageStart + pageEnd) / 2
               || offset < 0 && -1 * offset <= maxPageShiftL && pageNum + offset < (pageStart + pageEnd) / 2) {
@@ -236,7 +235,9 @@ $('#approveReservationModal').on('show.bs.modal', (event) => {
   $('#approvePaymentDate').val(payDateString);
   $('#approveIDNum').text(reservation.userID);
 
-  $.get('/reservations/manage/uncleared?idNum=' + reservation.userID, function (data, status) {
+  $.get('/reservations/manage/uncleared', 
+    {idnum: reservation.userID},
+    function (data, status) {
     if (jQuery.isEmptyObject(data))
       $('#apUnclearedError').text('User has no uncleared reservations').removeClass('error-label');
     else
@@ -298,7 +299,7 @@ $('#editReservationModal').on('show.bs.modal', (event) => {
   console.log('reservation');
   console.log(btn.data('type'));
 
-  $.get('/reservations/manage/uncleared?idNum=' + reservation.userID, function (data, status) {
+  $.get('/reservations/manage/uncleared', {idnum: reservation.userID},  function (data, status) {
     if (jQuery.isEmptyObject(data))
       $('#unclearedError').text('User has no uncleared reservations').removeClass('error-label');
     else

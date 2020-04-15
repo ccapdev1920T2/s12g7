@@ -40,7 +40,6 @@ exports.people_update = async function (req, res) {
 
 exports.people_get = async function (req, res) {
     try {
-        var page = (req.query.page) == '' ? 1 : req.query.page;
         const itemsPerPage = 10;
 
         var people = new Object();
@@ -52,7 +51,7 @@ exports.people_get = async function (req, res) {
         people.items = await User
             .find({ idNum: { $regex: '[0-9]*' + req.query.idnum + '[0-9]*' } })
             .sort('lastname')
-            .skip((page - 1) * itemsPerPage)
+            .skip((req.query.page - 1) * itemsPerPage)
             .limit(itemsPerPage);
 
         if (people)
