@@ -3,6 +3,7 @@ const Locker = require('../model/locker.model');
 const Reservation = require('../model/reservation.model');
 const User = require('../model/user.model');
 const hbs = require('hbs');
+const { validationResult } = require('express-validator');
 
 hbs.registerHelper('lockernumber', function (str) { return JSON.parse(JSON.stringify(str)).number; });
 hbs.registerHelper('lockerstatus', function (str) { return JSON.parse(JSON.stringify(str)).status; });
@@ -14,44 +15,47 @@ hbs.registerHelper('notFirst', (index) => { return index != 0; });
 
 exports.panel_create = async function (req, res) {
 
-    try {
-        var panel_number = await Panel
-            .find({ building: req.body.building, level: req.body.level, type: req.body.type })
-            .distinct('number')
-            .sort();
+    var errors = validationResult(req);
+    
+    if (errors.isEmpty()) {
+        try {
+            var panel_number = await Panel
+                .find({ building: req.body.building, level: req.body.level, type: req.body.type })
+                .distinct('number')
+                .sort();
 
-        var missingPanelNumber = 1;
-        for (var i = 0; i < panel_number.length; i++) {
-            if (missingPanelNumber != panel_number[i]) {
-                break;
+            var missingPanelNumber = 1;
+            for (var i = 0; i < panel_number.length; i++) {
+                if (missingPanelNumber != panel_number[i]) {
+                    break;
+                }
+                missingPanelNumber++;
             }
-            missingPanelNumber++;
+
+            var locker_array = [];
+            for (var i = parseInt(req.body.lowerRange); i <= parseInt(req.body.upperRange); i++) {
+                var locker = new Locker({ number: i, status: 'vacant' })
+                await locker.save();
+                locker_array.push(locker._id);
+            }
+
+            var panel = new Panel({
+                number: missingPanelNumber,
+                type: req.body.type,
+                building: req.body.building,
+                level: req.body.level,
+                lockers: locker_array,
+                lowerRange: req.body.lowerRange,
+                upperRange: req.body.upperRange
+            });
+
+            await panel.save();
         }
-
-        var locker_array = [];
-        for (var i = parseInt(req.body.lowerRange); i <= parseInt(req.body.upperRange); i++) {
-            var locker = new Locker({ number: i, status: 'vacant' })
-            await locker.save();
-            locker_array.push(locker._id);
+        catch (err) {
+            console.log(err);
         }
-
-        var panel = new Panel({
-            number: missingPanelNumber,
-            type: req.body.type,
-            building: req.body.building,
-            level: req.body.level,
-            lockers: locker_array,
-            lowerRange: req.body.lowerRange,
-            upperRange: req.body.upperRange
-        });
-
-        await panel.save();
+        res.redirect("/manage-lockers/?bldg=" + req.body.building + "&flr=" + req.body.level);
     }
-    catch (err) {
-        console.log(err);
-    }
-
-    res.redirect("/manage-lockers/?bldg=" + req.body.building + "&flr=" + req.body.level);
 };
 
 exports.panel_details = async function (req, res) {

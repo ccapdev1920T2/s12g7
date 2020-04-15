@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const UserAuth = require('../user-middleware');
+const validation = require('../helpers/validation.js');
 
 const equipmentController = require('../controller/equipment.controller');
 
@@ -12,13 +13,13 @@ const upload = multer({
 });
 
 // create
-router.post('/', UserAuth.userIsAdmin, upload.single('equipmentImage'), equipmentController.createEquipment);
+router.post('/', UserAuth.userIsAdmin, upload.single('equipmentImage'), validation.addOrUpdateEquipmentValidation(), equipmentController.createEquipment);
 
 // view all equipment
 router.get('/', UserAuth.userIsAdmin, equipmentController.viewAllEquipment);
 
 // update equipment
-router.post('/update', UserAuth.userIsAdmin, upload.single('equipmentImage'), equipmentController.updateEquipment);
+router.post('/update', UserAuth.userIsAdmin, upload.single('equipmentImage'), validation.addOrUpdateEquipmentValidation(), equipmentController.updateEquipment);
 
 // delete equipment
 router.post('/delete', UserAuth.userIsAdmin, equipmentController.deleteEquipment);
