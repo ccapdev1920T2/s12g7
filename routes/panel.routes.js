@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const UserAuth = require('../user-middleware');
-
+const validation = require('../helpers/validation.js');
 
 const panel_controller = require('../controller/panel.controller');
 
-router.post('/', UserAuth.userIsAdmin, panel_controller.panel_create);
+router.post('/', UserAuth.userIsAdmin, validation.addPanelValidation(), panel_controller.panel_create);
 router.get('/', UserAuth.userIsAdmin, panel_controller.panel_details);
 router.get('/lessee', UserAuth.userIsAdmin, panel_controller.lessee_get);
 router.get('/status', UserAuth.userIsAdmin, panel_controller.status_get);

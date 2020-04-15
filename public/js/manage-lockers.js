@@ -8,6 +8,33 @@ $(document).ready(function () {
     $("#floor").val(flr);
   });
 
+  function isFilled() {
+    var lRange = validator.trim($('#lowerRange').val());
+    var uRange = validator.trim($('#upperRange').val());
+    var bldg = validator.trim($('#panelBldg').val());
+    var flr = validator.trim($('#panelFloor').val());
+
+    var lRangeEmpty = validator.isEmpty(lRange);
+    var uRangeEmpty = validator.isEmpty(uRange);
+    var bldgEmpty = validator.isEmpty(bldg);
+    var flrEmpty = validator.isEmpty(flr);
+
+    return !lRangeEmpty && !uRangeEmpty && !bldgEmpty && !flrEmpty;
+  }
+
+  function isValidRange() {
+    var lRange = validator.trim($('#lowerRange').val());
+    var uRange = validator.trim($('#upperRange').val());
+
+    if (validator.isInt(lRange) && validator.isInt(uRange)) {
+      var lower = validator.toInt(lRange);
+      var upper = validator.toInt(uRange);
+
+      return upper >= lower;
+    }
+    else return false;
+  }
+
   $('#markUnclearedButton').click(function(){
     var confirm = $('#confirmation').val();
     if (confirm == 'locker') {
@@ -96,28 +123,23 @@ $(document).ready(function () {
   });
 
   $('#addPanelSubmit').click(function(){
-    var lr = $('#lowerRange').val();
-    var hr = $('#upperRange').val();
-    var lo = parseInt(lr);
-    var hi = parseInt(hr);
-    var bldg = $('#panelBldg').val();
-    var flr = $('#panelFloor').val();
-
-    if (lr.trim() == '' || hr.trim() == '' || bldg.trim() == '' || flr.trim() == '') {
-      $('#formAlert').show();
-      $('#rangeAlert').hide();
-      $('#lowerRange').css('border-color', '');
-      $('#upperRange').css('border-color', '');
-    }
-    else {
-      if (lo > hi) {
+    if (isFilled()) {
+      if (isValidRange()) {
+        $('#addPanelForm').submit();
+      }
+      else {
         $('#formAlert').hide();
         $('#rangeAlert').show();
         $('#lowerRange').css('border-color', 'red');
         $('#upperRange').css('border-color', 'red');
       }
-      else $('#addPanelForm').submit();
     }
+    else {
+      $('#formAlert').show();
+      $('#rangeAlert').hide();
+      $('#lowerRange').css('border-color', '');
+      $('#upperRange').css('border-color', '');
+    }    
   });
 
   $('#markUnclearedModal').on('show.bs.modal', function (event) {
