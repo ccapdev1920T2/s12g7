@@ -22,5 +22,7 @@ router.get('/login', index_controller.login);
 
 router.get('/logout', UserAuth.userIsLoggedIn, UserAuth.userIsNew, index_controller.logout);
 
+router.get('/get-id', index_controller.id_get);
+router.get('/get-phone', index_controller.phone_get);
 
 module.exports = router;

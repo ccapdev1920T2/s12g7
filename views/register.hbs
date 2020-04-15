@@ -40,13 +40,14 @@
       <div class="content col-md-7 d-flex align-items-center">
         <div class="row my-5">
           <h1 class="col-lg-8 mx-auto mb-2">Complete your registration</h1>
-          <p class="col-lg-8 mx-auto mb-5">Please make sure to provide the correct information.</p>
+          <p class="col-lg-8 mx-auto mb-5">Please provide the correct information.</p>
           <form class="col-lg-8 mx-auto row px-0" action="/register" method="post">
-            <div class="form-group col-lg-4">
+            <div class="form-group col-lg-5">
               <label for="idnum">ID Number</label>
               <input type="number" class="form-control" id="idnum" name="idNum" required>
+              <p class="error-label text-sm ml-2" id="idNumError">{{idNumError}}</p>
             </div>
-            <div class="form-group col-lg-8">
+            <div class="form-group col-lg-7">
               <label for="email">Email Address</label>
               <input type="email" class="form-control" id="email" value="{{email}}" name="email" disabled>
             </div>
@@ -57,10 +58,12 @@
                   <option value="{{@index}}">{{this}}</option>
                 {{/each}}
               </select>
+              <p class="error-label text-sm ml-2" id="idNumError"></p>
             </div>
-            <div class="form-group col-lg-7">
+            <div class="form-group col-lg-7 mb-5">
               <label for="degProg">Degree Program</label>
               <input type="text" class="form-control" id="degProg" name="degProg" required>
+              <p class="error-label text-sm ml-2" id="degProgError">{{degProgError}}</p>
             </div>
             <div class="form-group col-lg-5 mb-5">
               <label for="phone">Mobile Number</label>
@@ -69,9 +72,10 @@
                   <span class="input-group-text">+63</span>
                 </div>
                 <input type="tel" class="form-control" pattern="[0-9]{10}" id="phone" name="phone" required>
+                <p class="error-label text-sm ml-2" id="phoneError">{{phoneError}}</p>
               </div>
             </div>
-            <input type="submit" class="btn btn-secondary btn-round btn-lg mx-auto" value="Sign up">
+            <input type="submit" id="signUpBtn" class="btn btn-secondary btn-round btn-lg mx-auto" value="Sign up" disabled>
           </form>
         </div>
       </div>
@@ -84,6 +88,8 @@
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
   <script type="text/javascript" src="/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/validator.min.js"></script>
+  <script type="text/javascript" src="/js/register.js"></script>
   <script type="text/javascript" src="/js/styles.js"></script>
 </body>
 

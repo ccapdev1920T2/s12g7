@@ -77,6 +77,11 @@ hr {
     color: #e65946;
 }
 
+.text-sm {
+    height: 10px;
+    font-size: smaller;
+}
+
 /* 
 =============== COMPONENTS ===============
 */
@@ -385,6 +390,18 @@ h1, h2, h3, h4, h5 {
     background-color: #e7f1ed;
     color: #3f3f3f;
     border: solid #838383 1px;
+}
+
+.btn:disabled {
+    background-color: #e7f1ed;
+    color: #3f3f3f !important;
+    border: solid #838383 1px;
+}
+
+.btn:disabled:hover {
+    cursor: default;
+    transform: translateY(0);
+    box-shadow: none;
 }
 
 /* 

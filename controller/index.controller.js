@@ -148,3 +148,21 @@ exports.logout = function (req, res) {
     req.session = null;
     res.redirect('/');
 };
+
+exports.id_get = async function (req, res) {
+    try {
+        var user = await User.findOne({idNum: req.query.idNum});
+        res.send(user);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+exports.phone_get = async function (req, res) {
+    try {
+        var phone = await User.findOne({contactNum: req.query.phone});
+        res.send(phone);
+    } catch (err) {
+        console.log(err);
+    }
+}
