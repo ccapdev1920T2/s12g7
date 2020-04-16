@@ -100,7 +100,8 @@ exports.updateEquipment = async function (req, res) {
 exports.deleteEquipment = async function (req, res) { 
     try {
         var equipment = await Equipment.findById(req.body.equipmentid);
-        fs.unlinkSync(path.join(__dirname, '/../public', equipment.imageURL));
+        if (fs.existsSync(path.join(__dirname, '/../public', equipment.imageURL)))
+            fs.unlinkSync(path.join(__dirname, '/../public', equipment.imageURL));
         await Equipment.findByIdAndDelete(req.body.equipmentid);
     } catch (err) {
         console.log(err);

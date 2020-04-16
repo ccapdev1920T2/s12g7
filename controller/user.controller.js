@@ -100,7 +100,6 @@ exports.profile_update = async function (req, res) {
             }
         }
             
-
         res.redirect('/profile');
     } catch (err) {
         console.log(err);
