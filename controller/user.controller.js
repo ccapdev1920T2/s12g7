@@ -1,5 +1,7 @@
 const User = require('../model/user.model');
 
+const { validationResult } = require('express-validator');
+
 exports.people_details = function (req, res) {
 
     var colleges = User.schema.path('college').enumValues;
@@ -87,9 +89,18 @@ exports.profile_details = async function (req, res) {
 
 exports.profile_update = async function (req, res) {
     try {
-        const filter = { idNum: req.session.idNum };
-        const update = { contactNum: req.body.phone };
-        await User.findOneAndUpdate(filter, update);
+        var errors = validationResult(req);
+        if (errors.isEmpty()) {
+            var sameContactNum = await User.countDocuments(
+                {contactNum: req.body.phone}).where('idNum').ne(req.body.idNum);
+            if (sameContactNum == 0) {
+                const filter = { idNum: req.body.idNum };
+                const update = { contactNum: req.body.phone };
+                await User.findOneAndUpdate(filter, update);
+            }
+        }
+            
+
         res.redirect('/profile');
     } catch (err) {
         console.log(err);

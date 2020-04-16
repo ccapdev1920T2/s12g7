@@ -189,7 +189,12 @@ exports.id_get = async function (req, res) {
 
 exports.phone_get = async function (req, res) {
     try {
-        var phone = await User.findOne({contactNum: req.query.phone});
+        var phone;
+        if (req.query.idNum)
+            phone = await User.findOne({contactNum: req.query.phone}).where('idNum').ne(req.query.idNum);
+        else
+            phone = await User.findOne({contactNum: req.query.phone});
+
         res.send(phone);
     } catch (err) {
         console.log(err);

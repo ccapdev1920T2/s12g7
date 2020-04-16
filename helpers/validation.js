@@ -35,13 +35,21 @@ const validation = {
             check('degProg', 'Degree program cannot be empty').notEmpty(),
             check('phone', 'Phone cannot be empty').notEmpty(),
             check('phone', 'Invalid phone number')
-                .isLength({min: 10, max: 10}),
-            check('phone', 'Invalid phone number')
+                .isLength({min: 10, max: 10})
                 .isNumeric({no_symbols: true})
         ];
         return validation;
-    }
+    },
 
+    editProfileValidation: function () {
+        var validation = [
+            check('phone', 'Phone cannot be empty').notEmpty(),
+            check('phone', 'Invalid phone number')
+                .isLength({min: 10, max: 10})
+                .isNumeric({no_symbols: true})
+        ]
+        return validation;
+    }
 }
 
 module.exports = validation;
