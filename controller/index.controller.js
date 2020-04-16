@@ -2,6 +2,8 @@ const User = require('../model/user.model');
 const passport = require('passport');
 const hbs = require('hbs');
 
+const { validationResult } = require('express-validator');
+
 hbs.registerHelper('isAdmin', (type) => {
     return type == 'studentRep';
 });
@@ -105,31 +107,58 @@ exports.register_get = async function (req, res) {
 exports.register_post = async function (req, res) {
 
     try {
-        var count = await User.countDocuments();
+        var errors = validationResult(req);
+        var colleges = User.schema.path('college').enumValues;
 
-        var usersWithSameIDNumCt = await User.countDocuments({idNum: req.body.idNum});
-        if (usersWithSameIDNumCt > 0)
-            res.redirect('/');
-        else {
-            var user = new User({
-                firstName: req.session.passport.user.profile.name.givenName,
-                lastName: req.session.passport.user.profile.name.familyName,
-                email: req.session.passport.user.profile.emails[0].value,
-                idNum: req.body.idNum,
-                college: User.schema.path('college').enumValues[req.body.college],
-                degreeProg: req.body.degProg,
-                contactNum: req.body.phone,
-                type: (count == 0 ? 'studentRep' : 'student'),
-                dpURL: req.session.passport.user.profile.photos[0].value
+        if (!errors.isEmpty()) {
+            errors = errors.errors;
+
+            var errorLabels = {};
+            for(i = 0; i < errors.length; i++)
+                errorLabels[errors[i].param + 'Error'] = errors[i].msg;
+
+            res.render('register', {
+                errLabels: errorLabels,
+                colleges: colleges, 
+                email: req.session.passport.user.profile.emails[0].value
             });
+        } else {    
+            var sameIDNum = await User.countDocuments({idNum: req.body.idNum});
+            var sameContactNum = await User.countDocuments({contactNum: req.body.phone});
+            if (sameIDNum > 0 || sameContactNum > 0) {
+                var errorLabels = {};
+                if (sameIDNum > 0)
+                    errorLabels['idNumError'] = 'ID number already taken.'
+                if (sameContactNum > 0)
+                    errorLabels['phoneError'] = 'Phone number already taken.'
+                res.render('register', {
+                    errLabels: errorLabels,
+                    colleges: colleges,
+                    email: req.session.passport.user.profile.emails[0].value
+                });
+            } else {
+                var count = await User.countDocuments();
+                var user = new User({
+                    firstName: req.session.passport.user.profile.name.givenName,
+                    lastName: req.session.passport.user.profile.name.familyName,
+                    email: req.session.passport.user.profile.emails[0].value,
+                    idNum: req.body.idNum,
+                    college: User.schema.path('college').enumValues[req.body.college],
+                    degreeProg: req.body.degProg,
+                    contactNum: req.body.phone,
+                    type: (count == 0 ? 'studentRep' : 'student'),
+                    dpURL: req.session.passport.user.profile.photos[0].value
+                });
+        
+                var user = await user.save();
+        
+                req.session.idNum = user.idNum;
+                req.session.type = user.type;
     
-            var user = await user.save();
-    
-            req.session.idNum = user.idNum;
-            req.session.type = user.type;
-
-            res.redirect('/');
+                res.redirect('/');
+            }
         }
+
     } catch (err) {
         console.log('Error writing to db: ' + err);
         res.redirect('/');
