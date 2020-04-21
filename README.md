@@ -1,6 +1,8 @@
 # Pahiram Services (s12g7)
 
-A simple web app simulation of DLSU-USG's *Pahiram Locker* and DLSU-CSG's *Pahiram Services*. Features a rental system for lockers and equipment such as umbrellas, extension cords, VGA and HDMI cables, and markers. 
+A simple web app simulation of DLSU-USG's *Pahiram Locker* and DLSU-CSG's *Pahiram Services*. Features a rental system for lockers and equipment such as umbrellas, extension cords, VGA and HDMI cables, and markers.
+
+Access the deployed webapp through this [link](https://pahiram-services.herokuapp.com/).
 
 ## Features
 * The web app is designed to be responsive. This means that all pages and features are easily accessible across any platform, from desktops to mobile phones.
@@ -14,6 +16,7 @@ A simple web app simulation of DLSU-USG's *Pahiram Locker* and DLSU-CSG's *Pahir
 * Student representatives may manage equipment (i.e. add new equipment, update equipment availability, view a list of all equipment, and delete equipment).
 * Student representatives may manage all types of reservations (e.g. view all reservations and respond to them by changing their statuses and attaching remarks, as well as charging penalties for uncleared reservations).
 * Student representatives may manage people (view all users, update their important profile information such as ID number and name, promote students to student representatives, and demote student representatives to students).
+* For unreturned equipment past 6pm, the appropriate penalties are automatically applied.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
