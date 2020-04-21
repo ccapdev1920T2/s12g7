@@ -9,9 +9,9 @@ module.exports = function (passport) {
     });
     passport.use(new GoogleStrategy(
         {
-            clientID: '***REMOVED***',
-            clientSecret: '***REMOVED***',
-            callbackURL: 'http://localhost:3000/auth/google/callback',
+            clientID: process.env.GOOGLE_AUTH_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET,
+            callbackURL: 'https://pahiram-services.herokuapp.com/auth/google/callback',
         },
         function (token, refreshToken, profile, done) {
             return done(null, {

@@ -56,12 +56,12 @@ i.status-manage-occupied {
 
 .locker.status-manage-uncleared i,
 i.status-manage-uncleared {
-    color: rgb(224, 223, 112);
+    color: #e0df70;
 }
 
 .locker.status-manage-broken i,
 i.status-manage-broken {
-    color: rgb(221, 221, 221);
+    color: #dddddd;
 }
 
 .label-legend {

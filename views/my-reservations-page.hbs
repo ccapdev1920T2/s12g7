@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 
   <!-- Custom Styles -->
   <link href="/css/styles.css" rel="stylesheet">
@@ -15,12 +15,8 @@
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
-
   <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
-
-  <!-- FontAwesome -->
-  <script src="https://kit.fontawesome.com/9d250896cd.js" crossorigin="anonymous"></script>
 
   <title>My Reservations</title>
   <link rel="icon" href="/static/logo.png">
@@ -64,24 +60,24 @@
                       <h5 class="card-header">{{title}}</h5>
                       <div class="card-body">
                         <div class="d-flex align-items-center mb-2">
-                          <div class="col-1 icon mr-2" id="date"></div>
+                          <div class="col-1 icon mr-2 pr-3" id="date"></div>
                           {{dateStr dateCreated}}
                         </div>
                         <hr>
                         <div class="d-flex align-items-center my-2">
-                          <div class="col-1 icon mr-2" id="desc"></div>
+                          <div class="col-1 icon mr-2 pr-3" id="desc"></div>
                           {{description}}
                         </div>
                         {{#if (hasRemarks remarks)}}
                         <hr>
                         <div class="d-flex align-items-center my-2">
-                          <div class="col-1 icon mr-2" id="remarks"></div>
+                          <div class="col-1 icon mr-2 pr-3" id="remarks"></div>
                           {{remarks}}
                         </div>
                         {{#if (status-pickup-pay status)}}{{#if (isLocker onItemType)}}{{#if pickupPayDate}}
                         <hr>
                         <div class="d-flex align-items-center my-2">
-                          <div class="col-1 icon mr-2" id="date"></div>
+                          <div class="col-1 icon mr-2 pr-3" id="date"></div>
                           Payment Due: {{dateStr pickupPayDate}}
                         </div>
                         {{/if}}{{/if}}{{/if}}
@@ -89,7 +85,7 @@
                         {{#if (hasPenalty penalty)}}
                         <hr>
                         <div class="d-flex align-items-center my-2">
-                          <div class="col-1 icon mr-2" id="penalty"></div>
+                          <div class="col-1 icon mr-2 pr-3" id="penalty"></div>
                           Penalty: Php {{penalty}}
                         </div>
                         {{/if}}
@@ -107,7 +103,7 @@
                           ">
                         {{#if (cancellable status)}}
                         <a class="cancel-anchor" title="Cancel Reservation" data-reservationid="{{_id}}" data-toggle="modal" data-target="#cancelReservationModal">
-                          <div class="icon" id="cancel" style="height: 2rem; width: 2rem"></div>
+                          <div class="icon white" id="cancel"></div>
                         </a>
                         {{/if}}
                         <span class="badge badge-pill ml-auto">{{status}}</span>
@@ -133,25 +129,25 @@
                       <h5 class="card-header">{{title}}</h5>
                       <div class="card-body">
                         <div class="d-flex align-items-center mb-2">
-                          <div class="col-1 icon mr-2" id="date"></div>
+                          <div class="col-1 icon mr-2 pr-3" id="date"></div>
                           {{dateStr dateCreated}}
                         </div>
                         <hr>
                         <div class="d-flex align-items-center my-2">
-                          <div class="col-1 icon mr-2" id="desc"></div>
+                          <div class="col-1 icon mr-2 pr-3" id="desc"></div>
                           {{description}}
                         </div>
                         <hr>
                         {{#if remarks}}
                         <div class="d-flex align-items-center my-2">
-                          <div class="col-1 icon mr-2" id="remarks"></div>
+                          <div class="col-1 icon mr-2 pr-3" id="remarks"></div>
                           {{remarks}}
                         </div>
                         {{/if}}
                         {{#if (hasPenalty penalty)}}
                         <hr>
                         <div class="d-flex align-items-center my-2">
-                          <div class="col-1 icon mr-2" id="penalty"></div>
+                          <div class="col-1 icon mr-2 pr-3" id="penalty"></div>
                           Penalty: Php {{penalty}}
                         </div>
                         {{/if}}
@@ -213,9 +209,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="/js/styles.js"></script>
-
   <script>
     $('#cancelReservationModal').on('show.bs.modal', (event) => {
       var cancelBtn = $(event.relatedTarget);

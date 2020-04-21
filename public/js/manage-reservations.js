@@ -191,7 +191,7 @@ function displayReservations(reservations) {
       'data-id="' + reservation._id + '" ' +
       'data-paymentdate="' + reservation.pickupPayDate + '" ' +
       'href="#editReservationModal">' +
-      '<div class="icon col-1" title="Edit Reservation" id="edit"/>' +
+      '<div class="icon col-1 pr-3 table-link" title="Edit Reservation" id="edit"/>' +
       '</a>' +
       '</td>' +
       '</tr>'
@@ -235,14 +235,29 @@ $('#approveReservationModal').on('show.bs.modal', (event) => {
   $('#approvePaymentDate').val(payDateString);
   $('#approveIDNum').text(reservation.userID);
 
-  $.get('/reservations/manage/uncleared', 
+  $('#apUnclearedError').text('Loading...').removeClass('error-label');
+  $('#approveUserInfo').text('Loading...');
+
+
+  $.get('/reservations/manage/get-uncleared', 
     {idnum: reservation.userID},
-    function (data, status) {
-    if (jQuery.isEmptyObject(data))
-      $('#apUnclearedError').text('User has no uncleared reservations').removeClass('error-label');
-    else
-      $('#apUnclearedError').text('User has uncleared reservations').addClass('error-label');
-  });
+    function (data) {
+      if (jQuery.isEmptyObject(data))
+        $('#apUnclearedError').text('User has no uncleared reservations').removeClass('error-label');
+      else
+        $('#apUnclearedError').text('User has uncleared reservations').addClass('error-label');
+    }
+  );
+
+  $.get('/reservations/manage/get-user', 
+    {idnum: reservation.userID},  
+    function (data) {
+      console.log('data')
+      console.log(data)
+      if (data)
+        $('#approveUserInfo').text(data);
+    }
+  );
 
   $('#approvePenaltyForm').css('display', 'none');
   $('#approveSelectForm').css('display', 'none');
@@ -296,15 +311,26 @@ $('#editReservationModal').on('show.bs.modal', (event) => {
     paymentDate: btn.data('paymentdate')
   }
 
-  console.log('reservation');
-  console.log(btn.data('type'));
+  $('#unclearedError').text('Loading...').removeClass('error-label');
+  $('#userInfo').text('Loading...');
 
-  $.get('/reservations/manage/uncleared', {idnum: reservation.userID},  function (data, status) {
-    if (jQuery.isEmptyObject(data))
-      $('#unclearedError').text('User has no uncleared reservations').removeClass('error-label');
-    else
-      $('#unclearedError').text('User has uncleared reservations').addClass('error-label');
-  });
+  $.get('/reservations/manage/get-uncleared', 
+    {idnum: reservation.userID},  
+    function (data) {
+      if (jQuery.isEmptyObject(data))
+        $('#unclearedError').text('User has no uncleared reservations').removeClass('error-label');
+      else
+        $('#unclearedError').text('User has uncleared reservations').addClass('error-label');
+    }
+  );
+
+  $.get('/reservations/manage/get-user', 
+    {idnum: reservation.userID},  
+    function (data) {
+      if (data)
+        $('#userInfo').text(data);
+    }
+  );
 
   var payDate = reservation.paymentDate == '' ? new Date() : new Date(reservation.paymentDate);
   var payDateString = payDate.getFullYear() + '-'

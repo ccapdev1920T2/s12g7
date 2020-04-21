@@ -193,6 +193,18 @@ exports.reservations_get = async function (req, res) {
     }
 }
 
+exports.user_get = async function (req, res) {
+    try {
+        var user = await User.findOne({ idNum: req.query.idnum });
+        console.log('user')
+        console.log(user)
+        if (user)
+            res.send(user.firstName + ' ' + user.lastName);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 exports.uncleared_get = async function (req, res) {
     try {
         var uncleared = await Reservation.find({ userID: req.query.idnum, status: 'Uncleared' });

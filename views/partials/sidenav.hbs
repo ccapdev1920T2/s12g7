@@ -8,7 +8,7 @@
           </a>
         </div>
         <button class="btn nav-btn ml-auto">
-          <i class="fas fa-bars"></i>
+          <div class="icon" id="hamburger"></div>
         </button>
       </div>
       <div class="{{#if act.active_profile}}active{{/if}} profile-container mb-4">
@@ -22,19 +22,19 @@
             href="/reserve">Rent & Reserve</a></li>
         <li class="nav-item">
           <a class="{{#if act.active_my_reservations}}active{{/if}} nav-link" href="/reservations">
-            <img class="icon mr-2" id="ic-my-reservations" src="/static/icons/{{#if act.active_my_reservations}}active-my-reservations.png{{else}}my-reservations.png{{/if}}">
+            <div class="icon mr-2 {{#if act.active_my_reservations}}white{{/if}}" id="reservations"></div>
             My Reservations
           </a>
         </li>
         <li class="nav-item">
           <a class="{{#if act.active_terms}}active{{/if}} nav-link" href="/terms">
-            <img class="icon mr-2" id="ic-my-reservations" src="/static/icons/{{#if act.active_terms}}active-terms.png{{else}}terms.png{{/if}}">
+            <div class="icon mr-2 {{#if act.active_terms}}white{{/if}}" id="terms"></div>
             Terms 
           </a>
         </li>
         <li class="nav-item">
           <a class="{{#if act.active_about_us}}active{{/if}} nav-link" href="/about">
-            <img class="icon mr-2" id="ic-my-reservations" src="/static/icons/{{#if act.active_about_us}}active-about.png{{else}}about.png{{/if}}">
+            <div class="icon mr-2 {{#if act.active_about_us}}white{{/if}}" id="about"></div>
             About Us 
           </a>
         </li>
@@ -46,25 +46,25 @@
       <ul class="nav flex-column">
         <li class="nav-item">
           <a class="{{#if act.active_manage_reservations}}active{{/if}} nav-link" href="/reservations/manage">
-            <img class="icon mr-2" id="ic-my-reservations" src="/static/icons/{{#if act.active_manage_reservations}}active-manage-reservations.png{{else}}manage-reservations.png{{/if}}">
+            <div class="icon mr-2 {{#if act.active_manage_reservations}}white{{/if}}" id="manage-reservations"></div>
             Reservations 
           </a>
         </li>
         <li class="nav-item">
           <a class="{{#if act.active_manage_lockers}}active{{/if}} nav-link" href="/manage-lockers">
-            <img class="icon mr-2" id="ic-my-reservations" src="/static/icons/{{#if act.active_manage_lockers}}active-manage-lockers.png{{else}}manage-lockers.png{{/if}}">
+            <div class="icon mr-2 {{#if act.active_manage_lockers}}white{{/if}}" id="manage-lockers"></div>
             Lockers 
           </a>
         </li>
         <li class="nav-item">
           <a class="{{#if act.active_manage_equipment}}active{{/if}} nav-link" href="/manage-equipment">  
-            <img class="icon mr-2" id="ic-my-reservations" src="/static/icons/{{#if act.active_manage_equipment}}active-manage-equipment.png{{else}}manage-equipment.png{{/if}}">
+            <div class="icon mr-2 {{#if act.active_manage_equipment}}white{{/if}}" id="manage-equipment"></div>
             Equipment 
           </a>
         </li>
         <li class="nav-item">
           <a class="{{#if act.active_manage_people}}active{{/if}} nav-link" href="/profile/manage">  
-            <img class="icon mr-2" id="ic-my-reservations" src="/static/icons/{{#if act.active_manage_people}}active-profile.png{{else}}profile.png{{/if}}">
+            <div class="icon mr-2 {{#if act.active_manage_people}}white{{/if}}" id="profile"></div>
             People 
           </a>
         </li>
@@ -74,7 +74,8 @@
 
     <div class="sign-out mt-5">
       <a class="d-flex align-items-center" href="/logout">
-        <img class="icon mr-2" src="/static/icons/signout.png">
+        <div class="icon mr-2" id="signout"></div>
+        {{!-- <img class="icon mr-2" src="/static/icons/signout.png"> --}}
         Sign Out
       </a>
     </div>

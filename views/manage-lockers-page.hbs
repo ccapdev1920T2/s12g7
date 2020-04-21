@@ -18,9 +18,6 @@
   <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
 
-  <!-- FontAwesome -->
-  <script src="https://kit.fontawesome.com/9d250896cd.js" crossorigin="anonymous"></script>
-
   <script src="/js/validator.min.js" type="text/javascript"></script>
 
   <title>Manage Lockers</title>
@@ -42,11 +39,11 @@
               <h1 class="mb-4">Manage lockers</h1>
               <a id="markUncleared" data-toggle="modal" href="#markUnclearedModal"
                 class="btn btn-warning mb-auto d-flex align-items-center ml-auto mr-4 pl-3">
-                <div class="icon mr-2" id="penalty-white"></div> Mark uncleared
+                <div class="icon mr-2 white" id="penalty"></div> Mark uncleared
               </a>
               <a id="addPanel" data-toggle="modal" href="#addPanelModal"
                 class="btn btn-primary mb-auto d-flex align-items-center pl-3">
-                <div class="icon mr-2" id="add"></div> Add panel
+                <div class="icon mr-2 white" id="add"></div> Add panel
               </a>
             </div>
 
@@ -82,17 +79,17 @@
                   <label class="form-control-placeholder col-12">Manage lockers</label>
                   <div class="label-legend">
                     <div class="row">
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                        <i class="locker-status-vacant fas fa-circle ml-auto mr-2"></i> vacant
+                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 d-flex align-items-center">
+                        <div class="icon mr-2" id="locker-vacant"></div> vacant
                       </div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                        <i class="locker-status-occupied fas fa-circle ml-auto mr-2"></i> occupied
+                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 d-flex align-items-center">
+                        <div class="icon mr-2" id="locker-occupied"></div> occupied
                       </div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                        <i class="locker-status-broken fas fa-circle ml-auto mr-2"></i> broken
+                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 d-flex align-items-center">
+                        <div class="icon mr-2" id="locker-broken"></div> broken
                       </div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                        <i class="locker-status-uncleared fas fa-circle ml-auto mr-2"></i> uncleared
+                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 d-flex align-items-center">
+                        <div class="icon mr-2" id="locker-uncleared"></div> uncleared
                       </div>
                     </div>
                   </div>
@@ -121,7 +118,8 @@
                           data-toggle="modal" data-target="#setStatusModal" data-lockernumber="{{lockernumber this}}"
                           data-panelid="{{../_id}}" data-lockerid="{{lockerid this}}">
                           #{{lockernumber this}}
-                          <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                          <div class="icon ml-auto" id="locker-{{lockerstatus this}}"></div>
+                          {{!-- <i class="locker-status-icon fas fa-circle ml-auto"></i> --}}
                         </div>
                       </div>
                       {{/each}}
@@ -137,13 +135,9 @@
             </div>
             {{/if}}
           </form>
-
-
         </main>
         {{> footer}}
       </div>
-
-
     </div>
   </div>
 
@@ -152,12 +146,16 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="statusModalLabel">Locker #</h5>
+          <h5 class="modal-title d-flex align-items-center" id="statusModalLabel"></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body col-lg-10 mx-auto">
+          <div class="d-flex flex-row align-items-center" id="lessee-container">
+            <div class="icon col-1 mr-2" id="profile"></div>
+            <div class="" id="lessee">Loading...</div>
+          </div>
           <form class="form-horizontal" id="setStatusForm" method="POST" action="/manage-lockers/update">
             <div class="form-group form-inline input-group">
               <label class="col-lg-4 justify-content-start pl-2" for="status">Select status:</label>
@@ -173,7 +171,7 @@
             <input type="hidden" name="building" id="setStatusBuilding">
             <input type="hidden" name="level" id="setStatusFloor">
           </form>
-          <h6 id="lessee"></h6>
+          {{!-- <h5 id="lessee"></h5> --}}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
@@ -259,7 +257,7 @@
             <input type="hidden" name="level" id="deletePanelFloor">
           </form>
 
-          <div class="col-12" id="panelAlert">
+          <div class="col-12 px-0" id="panelAlert">
             <div class="alert alert-warning" role="alert">
               <strong>Action unsuccessful!</strong> Panel cannot be deleted as some lockers are still occupied. 
             </div>
@@ -312,7 +310,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="/js/styles-locker.js"></script>
   <script type="text/javascript" src="/js/manage-lockers.js"></script>
 

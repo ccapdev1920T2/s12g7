@@ -91,104 +91,140 @@ hr {
 */
 
 .icon {
-    height: 1.75rem;
-    width: 1.75rem;
+    background: url(../static/icons/spritesheet.png);
+    height: 24px;
+    width: 24px;
+    min-width: 24px;
+    max-width: 24px;
+    padding: 0 !important;
 }
 
-.icon#add {
-    background: url(../static/icons/add.png) center no-repeat;
-    background-size: contain;
+.icon.white {
+    filter: grayscale(1) brightness(10);
 }
 
-.icon#delete {
-    background: url(../static/icons/delete.png) center no-repeat;
-    background-size: contain;
+.icon#terms {
+    background-position: 0px 0px;
 }
 
-.icon#edit {
-    background: url(../static/icons/edit.png) center no-repeat;
-    background-size: contain;
+.icon#about {
+    background-position: -24px 0px; 
 }
 
-.icon#edit-white {
-    background: url(../static/icons/edit-white.png) center no-repeat;
-    background-size: contain;
+.icon#manage-lockers {
+    background-position: -48px 0px;
+}
+
+.icon#reservations {
+    background-position: -72px 0px;
+}
+
+.icon#manage-reservations {
+    background-position: 0px -24px;
+}
+
+.icon#manage-equipment {
+    background-position: -24px -24px; 
+}
+
+.icon#signout {
+    background-position: -48px -24px;
 }
 
 .icon#date {
-    background: url(../static/icons/date.png) center no-repeat;
-    background-size: contain;
+    background-position: -72px -24px;
 }
 
 .icon#desc {
-    background: url(../static/icons/desc.png) center no-repeat;
-    background-size: contain;
+    background-position: 0px -48px;
 }
 
 .icon#remarks {
-    background: url(../static/icons/remarks.png) center no-repeat;
-    background-size: contain;
+    background-position: -24px -48px; 
 }
 
 .icon#penalty {
-    background: url(../static/icons/penalty.png) center no-repeat;
-    background-size: contain;
+    background-position: -48px -48px;
 }
 
-.icon#penalty-white {
-    background: url(../static/icons/penalty-white.png) center no-repeat;
-    background-size: contain;
+.icon#add {
+    background-position: -72px -48px;
 }
 
+.icon#delete {
+    background-position: 0px -72px;
+}
+
+.icon#edit {
+    background-position: -24px -72px; 
+}
 
 .icon#locker {
-    background: url(../static/icons/locker.png) center no-repeat;
-    background-size: contain;
+    background-position: -48px -72px;
 }
 
 .icon#equipment {
-    background: url(../static/icons/equipment.png) center no-repeat;
-    background-size: contain;
+    background-position: -72px -72px;
 }
 
 .icon#accept {
-    background: url(../static/icons/accept.png) center no-repeat;
-    background-size: contain;
+    background-position: 0px -96px;
 }
 
 .icon#deny {
-    background: url(../static/icons/deny.png) center no-repeat;
-    background-size: contain;
-}
-
-.icon#cancel {
-    background: url(../static/icons/cancel.png) center no-repeat;
-    background-size: contain;
-}
-
-.icon#big {
-    background: url(../static/icons/big.png) center no-repeat;
-    background-size: contain;
-}
-
-.icon#small {
-    background: url(../static/icons/small.png) center no-repeat;
-    background-size: contain;
+    background-position: -24px -96px; 
 }
 
 .icon#arrow-left {
-    background: url(../static/icons/arrow-left.png) center no-repeat;
-    background-size: contain;
+    background-position: -48px -96px;
 }
 
 .icon#arrow-right {
-    background: url(../static/icons/arrow-right.png) center no-repeat;
-    background-size: contain;
+    background-position: -72px -96px;
 }
 
 .icon#filter {
-    background: url(../static/icons/filter.png) center no-repeat;
-    background-size: contain;
+    background-position: 0px -120px;
+}
+
+.icon#arrow-down {
+    background-position: -24px -120px; 
+}
+
+.icon#profile {
+    background-position: -48px -120px;
+}
+
+.icon#cancel {
+    background-position: -72px -120px;
+}
+
+.icon#small {
+    background-position: 0px -144px;
+}
+
+.icon#big {
+    background-position: -24px -144px;
+}
+
+.icon#hamburger {
+    background-position: -48px -144px;
+}
+
+.icon#locker-vacant, .icon.locker-status-manage-vacant {
+    background-position: -72px -144px;
+}
+
+.icon#locker-uncleared, .icon.locker-status-manage-uncleared {
+    background-position: 0px -168px;
+}
+
+.icon#locker-occupied, .icon.locker-status-manage-occupied {
+    background-position: -24px -168px;
+}
+
+.icon#locker-broken, .icon.locker-status-manage-broken {
+    background-position: -48px -168px;
 }
 
 /* 
@@ -650,7 +686,7 @@ table.table {
 
 .table:not(.table-borderless) td {
     border-top: solid #e7f1ed 1px !important;
-    border-bottom: solid #e7f1ed 1px !important;
+    /* border-bottom: solid #e7f1ed 1px !important; */
     padding: 16px 8px !important;
     vertical-align: middle;
 }
@@ -963,8 +999,8 @@ select.custom-select.form-control {
 .select-selected:after {
     content: "";
     display: block;
-    background: url(../static/icons/arrow-down.png) center no-repeat;
-    background-size: contain;
+    background: url(../static/icons/spritesheet.png);
+    background-position: -24px -120px;
     position: absolute;
     right: 16px;
     bottom: 10px;
@@ -1168,10 +1204,10 @@ select.custom-select.form-control {
     margin: 0px 28px 8px 28px;
 }
 
-.sidebar .icon {
+/* .sidebar .icon {
     height: 1.5rem;
     width: 1.5rem;
-}
+} */
 
 .nav-btn {
     background-color: transparent;
@@ -1188,9 +1224,9 @@ select.custom-select.form-control {
 }
 
 .nav-btn:hover {
-    transform: translateY(0);
-    box-shadow: none;
-    background-color: transparent;
+    transform: translateY(0) !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
 }
 
 /* 

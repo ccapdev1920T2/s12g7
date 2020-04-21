@@ -10,6 +10,8 @@ hbs.registerHelper('isAdmin', (type) => {
 
 exports.home = function (req, res) {
 
+    console.log('home');
+
     /* var reservation = new Reservation({
         userID: 11826401,
         reservationType: 'locker',
@@ -27,7 +29,7 @@ exports.home = function (req, res) {
         sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
-            type: req.session.type      
+            type: req.session.type
         }
     });
 };
@@ -38,7 +40,7 @@ exports.terms = function (req, res) {
         sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
-            type: req.session.type      
+            type: req.session.type
         }
     });
 };
@@ -49,7 +51,7 @@ exports.about = function (req, res) {
         sidebarData: {
             dp: req.session.passport.user.profile.photos[0].value,
             name: req.session.passport.user.profile.displayName,
-            type: req.session.type      
+            type: req.session.type
         }
     });
 }
@@ -110,33 +112,10 @@ exports.register_post = async function (req, res) {
         var errors = validationResult(req);
         var colleges = User.schema.path('college').enumValues;
 
-        if (!errors.isEmpty()) {
-            errors = errors.errors;
-
-            var errorLabels = {};
-            for(i = 0; i < errors.length; i++)
-                errorLabels[errors[i].param + 'Error'] = errors[i].msg;
-
-            res.render('register', {
-                errLabels: errorLabels,
-                colleges: colleges, 
-                email: req.session.passport.user.profile.emails[0].value
-            });
-        } else {    
-            var sameIDNum = await User.countDocuments({idNum: req.body.idNum});
-            var sameContactNum = await User.countDocuments({contactNum: req.body.phone});
-            if (sameIDNum > 0 || sameContactNum > 0) {
-                var errorLabels = {};
-                if (sameIDNum > 0)
-                    errorLabels['idNumError'] = 'ID number already taken.'
-                if (sameContactNum > 0)
-                    errorLabels['phoneError'] = 'Phone number already taken.'
-                res.render('register', {
-                    errLabels: errorLabels,
-                    colleges: colleges,
-                    email: req.session.passport.user.profile.emails[0].value
-                });
-            } else {
+        if (errors.isEmpty()) {
+            var sameIDNum = await User.countDocuments({ idNum: req.body.idNum });
+            var sameContactNum = await User.countDocuments({ contactNum: req.body.phone });
+            if (sameIDNum == 0 && sameContactNum == 0) {
                 var count = await User.countDocuments();
                 var user = new User({
                     firstName: req.session.passport.user.profile.name.givenName,
@@ -149,14 +128,37 @@ exports.register_post = async function (req, res) {
                     type: (count == 0 ? 'studentRep' : 'student'),
                     dpURL: req.session.passport.user.profile.photos[0].value
                 });
-        
+
                 var user = await user.save();
-        
+
                 req.session.idNum = user.idNum;
                 req.session.type = user.type;
-    
+
                 res.redirect('/');
+            } else {
+                var errorLabels = {};
+                if (sameIDNum > 0)
+                    errorLabels['idNumError'] = 'ID number already taken.'
+                if (sameContactNum > 0)
+                    errorLabels['phoneError'] = 'Phone number already taken.'
+                res.render('register', {
+                    errLabels: errorLabels,
+                    colleges: colleges,
+                    email: req.session.passport.user.profile.emails[0].value
+                });
             }
+        } else {
+            errors = errors.errors;
+
+            var errorLabels = {};
+            for (i = 0; i < errors.length; i++)
+                errorLabels[errors[i].param + 'Error'] = errors[i].msg;
+
+            res.render('register', {
+                errLabels: errorLabels,
+                colleges: colleges,
+                email: req.session.passport.user.profile.emails[0].value
+            });
         }
 
     } catch (err) {
@@ -180,7 +182,7 @@ exports.logout = function (req, res) {
 
 exports.id_get = async function (req, res) {
     try {
-        var user = await User.findOne({idNum: req.query.idNum});
+        var user = await User.findOne({ idNum: req.query.idNum });
         res.send(user);
     } catch (err) {
         console.log(err);
@@ -191,9 +193,9 @@ exports.phone_get = async function (req, res) {
     try {
         var phone;
         if (req.query.idNum)
-            phone = await User.findOne({contactNum: req.query.phone}).where('idNum').ne(req.query.idNum);
+            phone = await User.findOne({ contactNum: req.query.phone }).where('idNum').ne(req.query.idNum);
         else
-            phone = await User.findOne({contactNum: req.query.phone});
+            phone = await User.findOne({ contactNum: req.query.phone });
 
         res.send(phone);
     } catch (err) {

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 
   <!-- Custom Styles -->
   <link href="/css/styles.css" rel="stylesheet">
@@ -19,8 +19,7 @@
   <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
 
-  <!-- FontAwesome -->
-  <script src="https://kit.fontawesome.com/9d250896cd.js" crossorigin="anonymous"></script>
+   
 
   <title>Rent a Locker</title>
   <link rel="icon" href="/static/logo.png">
@@ -78,24 +77,24 @@
                   <label class="form-control-placeholder col-12">Choose a locker</label>
                   <div class="label-legend">
                     <div class="row">
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                        <i class="locker-status-vacant fas fa-circle ml-auto mr-2"></i> vacant
+                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 d-flex align-items-center">
+                        <div class="icon mr-2" id="locker-vacant"></div> vacant
                       </div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                        <i class="locker-status-occupied fas fa-circle ml-auto mr-2"></i> occupied
-                    </div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                        <i class="locker-status-broken fas fa-circle ml-auto mr-2"></i> broken
-                    </div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                        <i class="locker-status-uncleared fas fa-circle ml-auto mr-2"></i> uncleared
-                    </div>
+                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 d-flex align-items-center">
+                        <div class="icon mr-2" id="locker-occupied"></div> occupied
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 d-flex align-items-center">
+                        <div class="icon mr-2" id="locker-broken"></div> broken
+                      </div>
+                      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 d-flex align-items-center">
+                        <div class="icon mr-2" id="locker-uncleared"></div> uncleared
+                      </div>
                     </div>
                   </div>
                   <div class="row mx-auto panel accordion" id="panelAccordion">
                   {{#each panels}}
                     <a class="col-12 panel-label d-flex align-items-center {{#if (notFirst @index)}}collapsed{{/if}}" data-toggle="collapse" href="#panelCollapse{{number}}" role="button" aria-expanded="false" aria-controls="panelCollapse">
-                      <div class="icon mr-2" id="{{#if (lockerIsBig type)}}big{{else}}small{{/if}}" style="height: 2rem; width: 2rem"></div>
+                      {{!-- <div class="icon mr-2" id="{{#if (lockerIsBig type)}}big{{else}}small{{/if}}" style="height: 2rem; width: 2rem"></div> --}}
                       {{capitalizeFirst type}} Panel {{number}} ({{lowerRange}}-{{upperRange}})
                     </a>
                     <div class="row collapse {{#if @first}}show{{/if}}" data-parent="#panelAccordion" id="panelCollapse{{number}}">
@@ -104,7 +103,8 @@
                         <div class="locker locker-status-{{lockerstatus this}} d-flex align-items-center" 
                             data-lockernumber="{{lockernumber this}}" data-panelid="{{../_id}}">
                           #{{lockernumber this}}
-                          <i class="locker-status-icon fas fa-circle ml-auto"></i>
+                          <div class="icon ml-auto" id="locker-{{lockerstatus this}}"></div>
+                          {{!-- <i class="locker-status-icon fas fa-circle ml-auto"></i> --}}
                         </div>
                       </div>
                       {{/each}}
@@ -200,7 +200,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="/js/styles-locker.js"></script>
 
   <script>

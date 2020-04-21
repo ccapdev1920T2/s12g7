@@ -10,6 +10,10 @@ $(document).ready(function () {
     $('#phone').keyup(function () {
         validateField($('#phone'), 'Phone', $('#phoneError'));
     });
+
+    $('form').on('submit', function () {
+        $(this).find('input[type="submit"]').prop('disabled',true);
+    })
 });
 
 function validateField(activeField, fieldName, errorLabel) {

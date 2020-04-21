@@ -115,3 +115,4 @@ $('#editEquipmentModal').on('show.bs.modal', function (event) {
     $('#formUpdateAlert').hide();
     $('#availableAlert').hide();
 });
+

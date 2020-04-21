@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 
   <!-- Custom Styles -->
   <link href="/css/styles.css" rel="stylesheet">
@@ -19,8 +19,7 @@
   <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
 
-  <!-- FontAwesome -->
-  <script src="https://kit.fontawesome.com/9d250896cd.js" crossorigin="anonymous"></script>
+   
 
   <title>Manage Reservations</title>
   <link rel="icon" href="/static/logo.png">
@@ -51,7 +50,7 @@
                   {{#each pendingEarlier}}
                   <div class="card-item">
                     <div class="d-flex flex-row flex-nowrap">
-                      <div class="d-flex flex-row flex-nowrap flex-fill" data-toggle="modal"
+                      <div class="d-flex flex-row flex-nowrap flex-fill col-10 px-0" data-toggle="modal"
                         data-target="#editReservationModal" data-title="{{title}}" data-userid="{{userID}}"
                         data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                         data-description="{{description}}" data-remarks="{{remarks}}" data-penalty="{{penalty}}"
@@ -72,9 +71,9 @@
                           </div>
                         </div>
                       </div>
-                      <a class="col-1 icon my-auto response" data-toggle="modal" data-target="#approveReservationModal"
+                      <a class="icon my-auto response" data-toggle="modal" data-target="#approveReservationModal"
                         id="accept"></a>
-                      <a class="col-1 icon my-auto response" data-toggle="modal" data-target="#denyReservationModal"
+                      <a class="icon my-auto response" data-toggle="modal" data-target="#denyReservationModal"
                         id="deny" href="#" title="Deny"></a>
                     </div>
                   </div>
@@ -87,7 +86,7 @@
                   {{#each pendingToday}}
                   <div class="card-item">
                     <div class="d-flex flex-row flex-nowrap">
-                      <div class="d-flex flex-row flex-nowrap flex-fill" data-toggle="modal"
+                      <div class="d-flex flex-row flex-nowrap flex-fill col-10 px-0" data-toggle="modal"
                         data-target="#editReservationModal" data-title="{{title}}" data-userid="{{userID}}"
                         data-datecreated="{{dateStr dateCreated}}" data-status="{{status}}"
                         data-description="{{description}}" data-remarks="{{remarks}}" data-penalty="{{penalty}}"
@@ -105,9 +104,9 @@
                           </div>
                         </div>
                       </div>
-                      <a class="col-1 icon my-auto response" data-toggle="modal" data-target="#approveReservationModal"
+                      <a class="icon my-auto response" data-toggle="modal" data-target="#approveReservationModal"
                         id="accept"></a>
-                      <a class="col-1 icon my-auto response" data-toggle="modal" data-target="#denyReservationModal"
+                      <a class="icon my-auto response" data-toggle="modal" data-target="#denyReservationModal"
                         id="deny" href="#" title="Deny"></a>
                     </div>
                   </div>
@@ -132,7 +131,7 @@
                     data-description="{{description}}" data-remarks="{{remarks}}" data-penalty="{{penalty}}"
                     data-type="{{onItemType}}" data-id="{{_id}}" data-paymentdate="{{pickupPayDate}}">
                     <div class="d-flex flex-row flex-nowrap">
-                      <div class="col-1 icon mb-auto mt-1"
+                      <div class="col-1 icon mb-auto mt-1 pr-3"
                         id="{{#if (isLocker onItemType)}}locker{{else}}equipment{{/if}}"></div>
                       <div class="d-flex flex-column mx-4">
                         <div class="font-weight-bold">{{userID}}</div>
@@ -241,16 +240,20 @@
             <div class="d-flex flex-column">
               <div class="font-weight-bold pl-2 mb-2" id="idNum"></div>
               <div class="d-flex flex-row align-items-center">
-                <div class="icon col-1 mr-2" id="date"></div>
+                <div class="icon col-1 mr-2 pr-3" id="profile"></div>
+                <div class="" id="userInfo">Loading...</div>
+              </div>
+              <div class="d-flex flex-row align-items-center">
+                <div class="icon col-1 mr-2 pr-3" id="date"></div>
                 <div class="" id="dateCreated"></div>
               </div>
               <div class="d-flex flex-row align-items-center">
-                <div class="icon col-1 mr-2" id="desc"></div>
+                <div class="icon col-1 mr-2 pr-3" id="desc"></div>
                 <div class="" id="description"></div>
               </div>
               <div class="d-flex flex-row align-items-center mb-4">
-                <div class="icon col-1 mr-2" id="remarks"></div>
-                <div class="" id="unclearedError"></div>
+                <div class="icon col-1 mr-2 pr-3" id="remarks"></div>
+                <div class="" id="unclearedError">Loading...</div>
               </div>
               <div class="form-group form-inline input-group">
                 <label for="status" class="col-lg-4 justify-content-start pl-2">Status:</label>
@@ -338,16 +341,20 @@
             <div class="d-flex flex-column">
               <div class="font-weight-bold pl-2 mb-2" id="approveIDNum"></div>
               <div class="d-flex flex-row align-items-center">
-                <div class="icon col-1 mr-2" id="date"></div>
+                <div class="icon col-1 mr-2 pr-3" id="profile"></div>
+                <div class="" id="approveUserInfo">Loading...</div>
+              </div>
+              <div class="d-flex flex-row align-items-center">
+                <div class="icon col-1 mr-2 pr-3" id="date"></div>
                 <div class="" id="approveDateCreated"></div>
               </div>
               <div class="d-flex flex-row align-items-center">
-                <div class="icon col-1 mr-2" id="desc"></div>
+                <div class="icon col-1 mr-2 pr-3" id="desc"></div>
                 <div class="" id="approveDescription"></div>
               </div>
               <div class="d-flex flex-row align-items-center mb-4">
-                <div class="icon col-1 mr-2" id="remarks"></div>
-                <div class="" id="apUnclearedError"></div>
+                <div class="icon col-1 mr-2 pr-3" id="remarks"></div>
+                <div class="" id="apUnclearedError">Loading...</div>
               </div>
               <div class="form-group form-inline input-group" id="approveSelectForm">
                 <label for="status" class="col-lg-4 justify-content-start pl-2">Status:</label>
@@ -408,11 +415,11 @@
             <div class="d-flex flex-column">
               <div class="font-weight-bold pl-2 mb-2" id="denyIDNum"></div>
               <div class="d-flex flex-row align-items-center">
-                <div class="icon col-1 mr-2" id="date"></div>
+                <div class="icon col-1 mr-2 pr-3" id="date"></div>
                 <div class="" id="denyDateCreated"></div>
               </div>
               <div class="d-flex flex-row align-items-center mb-4">
-                <div class="icon col-1 mr-2" id="desc"></div>
+                <div class="icon col-1 mr-2 pr-3" id="desc"></div>
                 <div class="" id="denyDescription"></div>
               </div>
               <div class="form-group form-inline input-group" id="denySelectForm">
@@ -457,7 +464,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="/js/manage-reservations.js"></script>
   <script type="text/javascript" src="/js/styles.js"></script>
 </body>

@@ -7,7 +7,7 @@ module.exports.userIsLoggedIn = function(req, res, next) {
 }
 
 module.exports.userIsNew = async function(req, res, next) {
-    const User = require('./model/user.model');
+    const User = require('../model/user.model');
 
     try {
         var user = await User.findOne({'email': req.session.passport.user.profile.emails[0].value});
@@ -22,7 +22,12 @@ module.exports.userIsNew = async function(req, res, next) {
 }
 
 module.exports.userIsAdmin = async function(req, res, next) {
-    const User = require('./model/user.model');
+    if (req.session.type == 'studentRep')
+        next();
+    else
+        res.redirect('/404');
+
+    /* const User = require('../model/user.model');
 
     try {
         var user = await User.findOne({'email': req.session.passport.user.profile.emails[0].value});
@@ -33,5 +38,5 @@ module.exports.userIsAdmin = async function(req, res, next) {
     } catch(err) {
         console.log(err);
         res.redirect('/404');
-    }
+    } */
 }

@@ -36,7 +36,7 @@ app.use(cookieSession({
 app.use(cookieParser());
 
 // My middleware
-const UserAuth = require('./user-middleware');
+const UserAuth = require('./helpers/user-validation');
 
 // Routes
 const index = require('./routes/index.routes');
@@ -72,6 +72,6 @@ app.use(function (req, res, next) {
     });
 })
 
-app.listen(port, function () {
+app.listen(process.env.PORT || port, function () {
     console.log('Listening at port ' + port);
 });

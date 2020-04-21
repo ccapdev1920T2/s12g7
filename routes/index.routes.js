@@ -1,6 +1,6 @@
 const index_controller = require('../controller/index.controller');
 
-const UserAuth = require('../user-middleware');
+const UserAuth = require('../helpers/user-validation');
 
 const express = require('express');
 const router = express.Router();

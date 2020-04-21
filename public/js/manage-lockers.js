@@ -6,6 +6,10 @@ $(document).ready(function () {
 
     $("#bldg").val(bldg);
     $("#floor").val(flr);
+
+    $('form').on('submit', function () {
+        $('.modal').find('button[type="submit"]').prop('disabled',true);
+    })
   });
 
   function isFilled() {
@@ -71,8 +75,21 @@ $(document).ready(function () {
     $(statusIcon).addClass(classList[1]);
     var modal = $(this);
 
-    modal.find('.modal-title').text('Locker #' + lockernumber + ' ');
-    modal.find('.modal-title').append('<i class="locker-status-icon fas fa-circle ml-auto ' + classList[1] + '"></i>');
+    var lockerStatus = '';
+    if (classList[1] == 'locker-status-manage-vacant')
+      lockerStatus = 'Vacant'
+    else if (classList[1] == 'locker-status-manage-occupied')
+      lockerStatus = 'Occupied'
+    else if (classList[1] == 'locker-status-manage-broken')
+      lockerStatus = 'Broken'
+    else if (classList[1] == 'locker-status-manage-uncleared')
+      lockerStatus = 'Uncleared'
+
+
+    modal.find('.modal-title').text('');
+    modal.find('.modal-title').append('<div class="icon mr-2 ' + classList[1] + '"></div>');
+    modal.find('.modal-title').append(' Locker #' + lockernumber + ': ');
+    modal.find('.modal-title').append(lockerStatus);
     modal.find('#statusSelector').val(classList[1].slice(21)).change();
 
     $("#setStatusPanelId").val(panelid);
@@ -84,17 +101,22 @@ $(document).ready(function () {
     if (classList[1].slice(21) == 'occupied' || classList[1].slice(21) == 'uncleared') {
       $('#setStatusForm').hide();
       $('#setStatusButton').hide();
+      $('#lessee-container').show();
+      $('#lessee-container *').show();
+      $('#lessee').text('Loading...');
 
       $.get('/manage-lockers/lessee', 
         {lockerid: lockerid},
-        function(data, status) {
-        var user = data.idNum+ " - " + data.firstName + " " + data.lastName;
-        $('#lessee').text("Occupied by:  " + user);
-      });
-    }
-    else {
+        function(data) {
+          var user = data.idNum + " - " + data.firstName + " " + data.lastName;
+          $('#lessee').text("Occupied by:  " + user);
+        }
+      );
+    } else {
       $('#setStatusForm').show();
       $('#setStatusButton').show();
+      $('#lessee-container').hide();
+      $('#lessee-container *').hide();
     }
   });
 
