@@ -1,5 +1,4 @@
 # Pahiram Services (s12g7)
-
 A simple web app simulation of DLSU-USG's *Pahiram Locker* and DLSU-CSG's *Pahiram Services*. Features a rental system for lockers and equipment such as umbrellas, extension cords, VGA and HDMI cables, and markers.
 
 ## Features
