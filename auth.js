@@ -11,7 +11,7 @@ module.exports = function (passport) {
         {
             clientID: process.env.GOOGLE_AUTH_CLIENT_ID,
             clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET,
-            callbackURL: 'https://pahiram-services.herokuapp.com/auth/google/callback',
+            callbackURL: process.env.GOOGLE_AUTH_CALLBACK_URL,
         },
         function (token, refreshToken, profile, done) {
             return done(null, {

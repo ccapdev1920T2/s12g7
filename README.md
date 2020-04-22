@@ -2,8 +2,6 @@
 
 A simple web app simulation of DLSU-USG's *Pahiram Locker* and DLSU-CSG's *Pahiram Services*. Features a rental system for lockers and equipment such as umbrellas, extension cords, VGA and HDMI cables, and markers.
 
-Access the deployed webapp through this [link](https://pahiram-services.herokuapp.com/).
-
 ## Features
 * The web app is designed to be responsive. This means that all pages and features are easily accessible across any platform, from desktops to mobile phones.
 * Users may log in and register via their DLSU Google accounts
@@ -17,6 +15,9 @@ Access the deployed webapp through this [link](https://pahiram-services.herokuap
 * Student representatives may manage all types of reservations (e.g. view all reservations and respond to them by changing their statuses and attaching remarks, as well as charging penalties for uncleared reservations).
 * Student representatives may manage people (view all users, update their important profile information such as ID number and name, promote students to student representatives, and demote student representatives to students).
 * For unreturned equipment past 6pm, the appropriate penalties are automatically applied.
+
+## Accessing the Deployed Web App
+The web app can now be accessed through this [link](https://pahiram-services.herokuapp.com/). If you want to access the app through your local machine, follow the instructions on the next sections.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -37,18 +38,25 @@ git clone https://github.com/ccapdev1920T2/s12g7.git
 ```
 npm install
 ```
-**NOTE:** Google OAuth 2.0 has been used to authenticate and authorize DLSU users. Due to privacy reasons, the OAuth client ID and secret key have been removed from the source code. These credentials, along with the setup instructions, will be privately sent to the instructor instead for checking.
+3. Set up the environment variables. Google OAuth 2.0 has been used to authenticate and authorize DLSU users. User uploads (i.e. equipment images) are stored in an AWS S3 bucket. The Google OAuth2.0 and AWS S3 credentials are stored as environment variables due to security reasons in the deployment process. To set up the environment variables on the local machine, a separate file, '''.env''', is privately sent to the professor. This file must be placed at the root directory of the project before starting it.
 
 ### Running
 1. Run the server by typing in the command:
 ```
 node index.js
 ```
-2. Access the [localhost](http://localhost:3000).
-3. Log in using your DLSU Google account. First time users will be redirected to the register page and will be asked to complete the user's information. The first user who registers automatically becomes a student representative.
+2. Access the [localhost](http://localhost:3000). Users who have not yet logged in will be redirected to the log in page.
+![Log in page](/readme_imgs/login.jpg)
+3. Log in using your DLSU Google account. First time users will be redirected to the register page and will be asked to complete the user's information. 
+![Register page](/readme_imgs/register.jpg)
+The first user who registers automatically becomes a student representative.
+4. The user is now ready to use the web app. Students can only access limited features in the app, 
+![Student](/readme_imgs/home-student.jpg)
+while student representatives are given administrative privileges to all features.
+![Student](/readme_imgs/home-studentrep.jpg)
 
 ## Important Notes
-* When creating an equipment, the student representative has the freedom to choose any image they want to describe the equipment. However, it is advised to design equipment images with design consistency in mind. For instance, the image has to have an aspect ratio of 1:1 to better work with the card layout the developers had in mind when designing the web app. To better visualize the images, the developers have created three sample images for extension cords, VGA cables, and LAN cables that match the web app's design language. The files are accessible on the same project folder at: ```./public/static/equipment-types/```
+* When creating an equipment, the student representative has the freedom to choose any image they want to describe the equipment. However, it is advised to design equipment images with design consistency in mind. For instance, the image has to have an aspect ratio of 1:1 to better work with the card layout the developers had in mind when designing the web app. To better visualize the images, the developers have created nine sample images that match the web app's design language. The files are accessible on the same project folder at: ```./public/static/equipment-types/```
 
 ## Authors
 - Badulis, Keith Gabriel

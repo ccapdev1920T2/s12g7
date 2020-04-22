@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const port = 3000;
 const app = express();
 
+require('dotenv').config()
+
 // Handlebars
 app.set('view engine', 'hbs');
 
@@ -73,5 +75,6 @@ app.use(function (req, res, next) {
 })
 
 app.listen(process.env.PORT || port, function () {
+    console.log('Google Auth Callback URL: ' + process.env.GOOGLE_AUTH_CALLBACK_URL)
     console.log('Listening at port ' + port);
 });
