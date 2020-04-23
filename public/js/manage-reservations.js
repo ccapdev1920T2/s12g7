@@ -55,6 +55,7 @@ $(document).ready(function () {
 
 $(document).ajaxStart(function () {
   $('table').css('filter', 'opacity(0.3)');
+  $('.page-link').css('pointer-events', 'none');
 });
 
 $(document).ajaxComplete(function () {
@@ -63,6 +64,7 @@ $(document).ajaxComplete(function () {
 
 function removePagination() {
   $('#resPagination .page-item').remove();
+  $('.page-link').css('pointer-events', 'auto');
 }
 
 function setupPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat) {

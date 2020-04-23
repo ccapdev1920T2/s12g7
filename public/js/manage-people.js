@@ -37,10 +37,12 @@ $(document).ready(function () {
 
 $(document).ajaxStart(function () {
   $('table').css('filter', 'opacity(0.3)');
+  $('.page-link').css('pointer-events', 'none');
 });
 
 $(document).ajaxComplete(function () {
   $('table').css('filter', 'opacity(1)');
+  $('.page-link').css('pointer-events', 'auto');
 });
 
 $('#editProfileModal').on('show.bs.modal', (event) => {
