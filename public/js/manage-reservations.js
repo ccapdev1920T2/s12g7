@@ -60,11 +60,11 @@ $(document).ajaxStart(function () {
 
 $(document).ajaxComplete(function () {
   $('table').css('filter', 'opacity(1)');
+  $('.page-link').css('pointer-events', 'auto');
 });
 
 function removePagination() {
   $('#resPagination .page-item').remove();
-  $('.page-link').css('pointer-events', 'auto');
 }
 
 function setupPagination(pagination, pageStart, pageEnd, pageNum, idNum, stat) {
