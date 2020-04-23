@@ -56,11 +56,13 @@ $(document).ready(function () {
 $(document).ajaxStart(function () {
   $('table').css('filter', 'opacity(0.3)');
   $('.page-link').css('pointer-events', 'none');
+  $('.page-link').css('filter', 'opacity(0.3)');
 });
 
 $(document).ajaxComplete(function () {
   $('table').css('filter', 'opacity(1)');
   $('.page-link').css('pointer-events', 'auto');
+  $('.page-link').css('filter', 'opacity(1)');
 });
 
 function removePagination() {
