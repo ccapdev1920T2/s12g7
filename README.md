@@ -79,7 +79,7 @@ Git *(optional)
     ```
     npm install
     ```
-3. Set up the environment variables. Google OAuth 2.0 has been used to authenticate and authorize DLSU users. User uploads (i.e. equipment images) are stored in an AWS S3 bucket. The Google OAuth2.0 and AWS S3 credentials are stored as environment variables due to security reasons in the deployment process. To set up the environment variables on the local machine, a separate file, '''.env''', is privately sent to the professor. This file must be placed at the root directory of the project before starting it.
+3. Set up the environment variables. Google OAuth 2.0 has been used to authenticate and authorize DLSU users. User uploads (i.e. equipment images) are stored in an AWS S3 bucket. The Google OAuth2.0 and AWS S3 credentials are stored as environment variables due to security reasons in the deployment process. To set up the environment variables on the local machine, a separate file, ```.env```, is privately sent to the professor. This file must be placed at the root directory of the project before starting it.
 
 ### Running
 1. Run the server by typing in the command:
