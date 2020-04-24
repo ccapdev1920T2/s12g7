@@ -72,13 +72,13 @@ Git *(optional)
 ```
 ### Installation and Setup
 1. Clone repository
-  ```
-  git clone https://github.com/ccapdev1920T2/s12g7.git
-  ```
+    ```
+    git clone https://github.com/ccapdev1920T2/s12g7.git
+    ```
 2. Install all npm packages used by typing the following command in the terminal:
-  ```
-  npm install
-  ```
+    ```
+    npm install
+    ```
 3. Set up the environment variables. Google OAuth 2.0 has been used to authenticate and authorize DLSU users. User uploads (i.e. equipment images) are stored in an AWS S3 bucket. The Google OAuth2.0 and AWS S3 credentials are stored as environment variables due to security reasons in the deployment process. To set up the environment variables on the local machine, a separate file, '''.env''', is privately sent to the professor. This file must be placed at the root directory of the project before starting it.
 
 ### Running
