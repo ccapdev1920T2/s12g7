@@ -8,21 +8,26 @@ A simple web app simulation of DLSU-USG's *Pahiram Locker* and DLSU-CSG's *Pahir
   
 * Users may log in and register via their DLSU Google accounts
   
-  ![Log in page](/readme_imgs/login.jpg)
   ![Sign in via Google](/readme_imgs/signin.jpg)
 
-* Two user roles (student and student representative)
+* There are two user roles: student
   
   ![Student Home](/readme_imgs/home-student.jpg)
+  
+  and student representative.
+  
   ![Student Rep Home](/readme_imgs/home-studentrep.jpg)
 
 * Students may edit their profile (contact number. To edit other info, the user has to approach the student representative).
   
   ![Edit Profile](/readme_imgs/edit-profile.jpg)
 
-* Students may reserve lockers and equipment (subject to Pahiram Services' terms and conditions).
+* Students may reserve lockers 
 
   ![Reserve a locker](/readme_imgs/reserve-locker.jpg)
+  
+  and equipment (subject to Pahiram Services' terms and conditions).
+
   ![Reserve equipment](/readme_imgs/reserve-equipment.jpg)
 
 * Students may view reservations made, and cancel ones that are on their initial stages when they change their minds.
