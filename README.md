@@ -78,26 +78,26 @@ Git *(optional)
 
 ### Running
 1. Run the server by typing in the command:
-  ```
-  node index.js
-  ```
+    ```
+    node index.js
+    ```
 2. Access the [localhost](http://localhost:3000). Users who have not yet logged in will be redirected to the log in page.
 
-  ![Log in page](/readme_imgs/login.jpg)
+    ![Log in page](/readme_imgs/login.jpg)
   
 3. Log in using your DLSU Google account. First time users will be redirected to the register page and will be asked to complete the user's information. 
 
-  ![Register page](/readme_imgs/register.jpg)
-  
-  The first user who registers automatically becomes a student representative
+    ![Register page](/readme_imgs/register.jpg)
+
+    The first user who registers automatically becomes a student representative
 
 4. The user is now ready to use the web app. Students can only access limited features in the app, 
 
-  ![Student](/readme_imgs/home-student.jpg)
-  
-  while student representatives are given administrative privileges to all features
+    ![Student](/readme_imgs/home-student.jpg)
 
-  ![Student](/readme_imgs/home-studentrep.jpg)
+    while student representatives are given administrative privileges to all features
+
+    ![Student](/readme_imgs/home-studentrep.jpg)
 
 ## Important Notes
 * When creating an equipment, the student representative has the freedom to choose any image they want to describe the equipment. However, it is advised to design equipment images with design consistency in mind. For instance, the image has to have an aspect ratio of 1:1 to better work with the card layout the developers had in mind when designing the web app. To better visualize the images, the developers have created nine sample images that match the web app's design language. The files are accessible on the same project folder at: ```./public/static/equipment-types/```
