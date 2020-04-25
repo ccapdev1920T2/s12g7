@@ -26,7 +26,7 @@ A simple web app simulation of DLSU-USG's *Pahiram Locker* and DLSU-CSG's *Pahir
 
   ![Reserve a locker](/readme_imgs/reserve-locker.jpg)
   
-  Students may also reserve equipment (subject to Pahiram Services' terms and conditions). They may only rent two equipment at a given day.
+  Students may also reserve equipment (subject to Pahiram Services' terms and conditions). They may only rent up to two equipment at a given day.
 
   ![Reserve equipment](/readme_imgs/reserve-equipment.jpg)
 
