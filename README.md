@@ -6,27 +6,27 @@ A simple web app simulation of DLSU-USG's *Pahiram Locker* and DLSU-CSG's *Pahir
   
   ![Mobile version](/readme_imgs/reserve-mobile.jpg) ![Mobile version](/readme_imgs/sidebar-mobile.jpg)
   
-* Users may log in and register via their DLSU Google accounts
+* Users may log in and register via their DLSU Google accounts.
   
   ![Sign in via Google](/readme_imgs/signin.jpg)
 
-* There are two user roles: student
+* There are two user roles. Students can make locker and equipment reservations.
   
   ![Student Home](/readme_imgs/home-student.jpg)
   
-  and student representative.
+  Student respresentatives are the administrators of the app.
   
   ![Student Rep Home](/readme_imgs/home-studentrep.jpg)
 
-* Students may edit their profile (contact number. To edit other info, the user has to approach the student representative).
+* Students may view and edit their contact number. To edit other information, the user has to approach the student representative.
   
   ![Edit Profile](/readme_imgs/edit-profile.jpg)
 
-* Students may reserve lockers 
+* Students may reserve lockers, from all buildings and floors, that are available for rent. Students may only rent one locker at a time.
 
   ![Reserve a locker](/readme_imgs/reserve-locker.jpg)
   
-  and equipment (subject to Pahiram Services' terms and conditions).
+  Students may also reserve equipment (subject to Pahiram Services' terms and conditions). They may only rent two equipment at a given day.
 
   ![Reserve equipment](/readme_imgs/reserve-equipment.jpg)
 
@@ -34,7 +34,7 @@ A simple web app simulation of DLSU-USG's *Pahiram Locker* and DLSU-CSG's *Pahir
 
   ![Manage reservations](/readme_imgs/my-reservations.jpg)
 
-* Students may view the terms and conditions of Pahiram Services.
+* Students may view the terms and conditions of Pahiram Services. They are also constantly reminded of the service's terms when making a reservation.
 
   ![Terms](/readme_imgs/terms.jpg)
 
@@ -49,6 +49,7 @@ A simple web app simulation of DLSU-USG's *Pahiram Locker* and DLSU-CSG's *Pahir
 * Student representatives may manage all types of reservations (e.g. view all reservations and respond to them by changing their statuses and attaching remarks, as well as charging penalties for uncleared reservations).
 
   ![Manage reservations](/readme_imgs/manage-reservations.jpg)
+  
   ![Manage reservations](/readme_imgs/edit-reservation.jpg)
 
 * Student representatives may manage people (view all users, update their important profile information such as ID number and name, promote students to student representatives, and demote student representatives to students).
@@ -58,18 +59,18 @@ A simple web app simulation of DLSU-USG's *Pahiram Locker* and DLSU-CSG's *Pahir
 * For unreturned equipment past 6pm, the appropriate penalties are automatically applied.
 
 ## Accessing the Deployed Web App
-The web app can now be accessed through this [link](https://pahiram-services.herokuapp.com/). If you want to access the app through your local machine, follow the instructions on the next sections.
+The web app can now be accessed online through this [link](https://pahiram-services.herokuapp.com/). If you want to access the app through your local machine, follow the instructions on the next sections.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 ```
-MongoDB server
 Node.js
 Node Package Manager (NPM)
-Git *(optional)
+Git (optional)
 ```
+
 ### Installation and Setup
 1. Clone repository
     ```
