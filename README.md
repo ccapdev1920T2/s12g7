@@ -18,7 +18,7 @@ A simple web app simulation of DLSU-USG's *Pahiram Locker* and DLSU-CSG's *Pahir
   
   ![Student Rep Home](/readme_imgs/home-studentrep.jpg)
 
-* Students may view and edit their contact number. To edit other information, the user has to approach the student representative.
+* Students may view their profile and edit their contact number. To update other information, the user has to approach the student representative.
   
   ![Edit Profile](/readme_imgs/edit-profile.jpg)
 
